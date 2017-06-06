@@ -1,0 +1,53 @@
+@import "_constants";
+
+/******************************************************************************
+ *** Functions definition
+ ******************************************************************************/
+@mixin clearfix {
+    zoom: 1;
+    &:before, &:after {
+        content: "\0020";
+        display: block;
+        height: 0px; 
+        overflow: hidden;
+        visibility: hidden;
+        width: 0px;
+    }
+    &:after {
+        clear: both;
+    }
+}
+@mixin col($n, $i) {
+    float: left;
+    @if #{$i} != #{$n} {
+        margin-right: $gutters;
+    }
+    width: #{(($page - ($margins * 2) - $gutters * ($n - 1)) / $n) * $i + (($i - 1) * $gutters)};  
+}
+@mixin offset($i) {
+    margin-left: ($column_width + $gutter_width) * $i + $gutter_width;
+}
+
+
+/******************************************************************************
+ *** Columns definition
+ ******************************************************************************/
+@each $i in $columns {
+    .cs#{$i}{
+        overflow: hidden;  
+        margin: 0 auto;
+        @include clearfix;
+        @for $j from 1 through $i {
+            .c#{$j} { @include col($i, $j); }
+        }
+        .ce{ margin-right: 0px; }
+    }
+}
+.clear{  
+    clear: both;
+    display: block;
+    height: 0px;
+    overflow: hidden;
+    visibility: hidden;
+    width: 0px;
+}

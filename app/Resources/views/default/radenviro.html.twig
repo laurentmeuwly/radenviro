@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+		<link rel="stylesheet" type="text/css" href="{{ asset('css/_reset.css') }}" />
+      	<link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}" />
+      	<link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap-theme.min.css') }}" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/font-awesome-4.6.3.min.css') }}" />
+        <link rel="stylesheet" href="{{ asset('css/radenviro.css') }}" />
+  
+{% endblock %}
+
+
+{% block javascripts %}
+	<script type="text/javascript" src="{{asset('js/jquery-3.2.0.min.js')}}"></script>
+  	<script type="text/javascript" src="{{asset('js/bootstrap.min.js')}}"></script>
+  	
+  	<script type="text/javascript" src="{{asset('js/application.js')}}"></script>
+  	<script type="text/javascript" src="{{asset('js/main.js')}}"></script>
+{% endblock %}
+  
+  
+{% block body %}
+	<div class="container">
+	
+		<div class="col-lg-12">
+		<div id="header">
+          <div class="right-top">{{ 'application.header.administration'|trans }}</div>
+          <div class="right-middle">{{ 'application.header.office'|trans }}</div>
+          <div class="right-bottom">{{ 'application.header.division'|trans }}</div>
+          <div class="title">
+            {{ 'application.header.title'|trans }}<br/>
+            <span class="website">
+              <a href="http://www.radenviro.ch">www.radenviro.ch</a>
+            </span>
+          </div>
+          <div id="menu">
+            {% include 'menu.html' %}
+          </div>
+        </div>
+        </div>
+			
+		<div>&nbsp;</div>
+			
+		<div class="col-lg-6">
+			{% include '_map.html.twig' %}
+		</div>
+		
+		<div class="col-lg-4">
+            {% include '_legend.html.twig' %}
+        </div>
+     
+    
+   	</div>
+{% endblock %}

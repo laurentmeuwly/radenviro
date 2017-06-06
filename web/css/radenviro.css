@@ -1,0 +1,263 @@
+
+h4{
+    font-size: 1.3em;
+    font-style: italic;
+    line-height: 1.2em;
+    margin-bottom: 0.5em;
+}
+
+
+div.content{
+        min-height: 10px;
+}
+
+div.section{
+    padding: 0.5em;
+}
+div.sep{
+    background-color: #016798;
+    height: 1px;
+    margin: 0.5em 0px;
+}
+   
+
+
+/**
+ * icon
+ **/
+
+
+div.map div.content{
+        overflow: hidden;
+        padding: 15px;
+        position: relative;
+}
+
+div.content-wrap{
+height: 290px;
+position: relative;
+width: 100%;
+}
+img{
+    height: 100%;
+    position: absolute;
+    
+}
+ 
+
+#header{
+    background: #ffffff url(/images/bg-header.jpg) no-repeat;
+}
+.right-top{
+    line-height: 25px;
+    padding-right: 10px;
+    text-align: right;
+}
+.right-middle{
+    color: #ffffff;
+    line-height: 25px;
+    padding-right: 10px;
+    text-align: right;
+}
+.right-bottom{
+    line-height: 25px;
+    padding-right: 10px;
+    text-align: right;
+}
+
+.title{
+    float: right;
+    font-size: 24px;
+    height: 40px;
+    line-height: 0.55em;
+    margin-top: 35px;
+    padding-right: 10px;
+    text-align: center;
+
+    .website {
+        a{
+            color: #000000;
+            font-size: 14px;
+            text-decoration: none;
+        }
+    }
+}         
+           
+           
+           
+
+.nav-tabs{
+  background-color:#C8D3DB;
+}
+
+.nav-tabs > li > a{
+  border-radius: 0px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+.nav-tabs > li > a:hover{
+  background-color: #3D515F !important;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    color:#fff;
+    border:1px solid black;
+}
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:focus,
+.nav-tabs > li.active > a:hover{
+    background-color: #016798 !important;
+    color:#fff;
+    border:1px solid #016798;
+}
+
+.tab-pane {
+	border:solid 1px #016798;
+	background-color: #fff;
+	padding:5px;
+}
+ 
+ 
+ 
+ 
+ 
+            
+/******************************************************************************
+*** Menu definition
+******************************************************************************/
+#menu{
+    clear: both;
+    margin-bottom: 20px;
+    .menu-item{
+        a{
+            @include highlight;
+            
+            display: block;
+            font-size: 1.4em;
+            font-weight: bold;
+            padding: 0.4em 0px;
+            text-align: center;
+            text-decoration: none;
+            
+            &:hover{
+                background-color: $highlight-color;
+                border: 2px solid $highlight-border-color;
+                color: $highlight-background-color;
+                padding: 2px 0px;
+            }
+        }
+    }
+}
+
+.menu-item a {
+            
+            display: block;
+            font-size: 1.4em;
+            font-weight: bold;
+            padding: 0.4em 0px;
+            text-align: center;
+            text-decoration: none;
+}
+            
+.menu-item a :hover{
+                background-color: $highlight-color;
+                border: 2px solid $highlight-border-color;
+                color: $highlight-background-color;
+                padding: 2px 0px;
+            }
+    
+
+/******************************************************************************
+*** Language bar definition
+******************************************************************************/
+#lang{
+    float: right;
+    margin-top: 2px;
+    padding: 0.5em 1em 0.5em 0;
+    
+    a{
+        color: $highlight-background-color;
+        text-decoration: none;
+        &:hover, &.active{
+            text-decoration: underline;
+        }
+    }
+}
+
+
+/******************************************************************************
+*** Element definition
+******************************************************************************/
+div.box{
+    border: 1px solid #016798;
+    border-radius: 5px;
+}
+
+div.box div.header{
+        background-color: #016798;
+    	color: #ffffff;
+        
+        font-size: 1.1em;
+        padding: 0.5em 0.5em;
+}
+    
+div.box div.content{
+        min-height: 10px;
+}
+        
+div.box div.content div.section{
+            padding: 0.5em;
+        }
+div.box div.content div.sep{
+            background-color: #016798;
+            height: 1px;
+            margin: 0.5em 0px;
+        }
+    
+    
+div.box .box-with-tabs{
+        border: none;
+}
+        
+.box-with-tabs div.header{
+            background: none;
+            overflow: hidden;
+            padding: 0px;
+}
+
+.box-with-tabs div.header div.htab{
+                background-color: #016798;
+    			color: #ffffff;
+    			border-top-left-radius: 5px;
+                border-top-right-radius: 5px;
+                cursor: pointer;
+                float: left;
+                height: 25px;
+                line-height: 25px;
+                margin-right: 2px;
+                opacity: 0.5;
+                padding: 0px 20px 0px 10px;
+}
+
+
+div.htab .active{
+                    opacity: 1;
+                }
+
+div.htab :hover{
+                    opacity: 1;
+                }
+            
+.box-with-tabs div.content{
+            border: 1px solid #016798;
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+}
+
+.box-with-tabs div.ctab{
+                display: none;
+}
+                
+div.ctab .active{
+                    display: block;
+                }
+           

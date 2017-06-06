@@ -1,0 +1,92 @@
+# src/AppBundle/Resources/config/admin.yml
+
+services:
+    app.admin.legend:
+        class: AppBundle\Admin\LegendAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Legend" }
+        arguments:
+            - ~
+            - AppBundle\Entity\Legend
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle]]
+            
+    app.admin.automaticNetwork:
+        class: AppBundle\Admin\AutomaticNetworkAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Automatic Network" }
+        arguments:
+            - ~
+            - AppBundle\Entity\AutomaticNetwork
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle]]
+    
+    app.admin.automaticNetworkStation:
+        class: AppBundle\Admin\AutomaticNetworkStationAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Automatic Network Station" }
+        arguments:
+            - ~
+            - AppBundle\Entity\AutomaticNetworkStation
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle]]
+            
+    app.admin.station:
+        class: AppBundle\Admin\StationAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Station" }
+        arguments:
+            - ~
+            - AppBundle\Entity\Station
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle]]
+   
+    app.admin.stationType:
+        class: AppBundle\Admin\StationTypeAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Station type" }
+        arguments:
+            - ~
+            - AppBundle\Entity\StationType
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle]]
+   
+    app.admin.networkCategory:
+        class: AppBundle\Admin\NetworkCategoryAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Network category" }
+        arguments:
+            - ~
+            - AppBundle\Entity\NetworkCategory
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle]]
+            
+    app.admin.network:
+        class: AppBundle\Admin\NetworkAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Network" }
+        arguments:
+            - ~
+            - AppBundle\Entity\Network
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle]]
+            
+    app.admin.nuclide:
+        class: AppBundle\Admin\NuclideAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Nuclide" }
+        arguments:
+            - ~
+            - AppBundle\Entity\Nuclide
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle]]
+            
+    

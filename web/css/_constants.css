@@ -1,0 +1,31 @@
+/******************************************************************************
+ *** Sizes definition
+ ******************************************************************************/
+$content: 1200px;
+$margins: 15px;
+$gutters: 20px;
+$page: ($content + $gutters + (($margins - $gutters) * 2));
+$columns: 5,10,15;
+
+/******************************************************************************
+ *** Colors definition
+ ******************************************************************************/
+$highlight-background-color: #016798;
+$highlight-border-color: #016798;
+$highlight-color: #ffffff;
+@mixin highlight{
+    background-color: $highlight-background-color;
+    color: $highlight-color;
+}
+$header-background-color: #016798;
+$header-color: #ffffff;
+@mixin header{
+    background-color: $header-background-color;
+    color: $header-color;
+}
+
+/******************************************************************************
+ *** Font definition
+ ******************************************************************************/
+$font-family: arial, verdana, sans-serif;
+$font-size: 12px;

@@ -1,0 +1,42 @@
+<div class="c2">
+    <div class="box map">
+      <div class="header">{{ 'main.map.maps of radioactivity measurements'|trans }}</div>
+      <div class="content">
+        <div class="content-wrap">
+          <img src="{{ asset('images/switzerland.png') }}" data-src="{{ asset('images/switzerland.png') }}" alt="" id="switzerland" />
+          <img src="" alt="" id="switzerland_zoom" />
+          <div id="zoom_closebtn"></div>
+        </div>
+      </div>
+    </div>
+    <div class="table map-table" id="handler_5_last_result" style="visibility:visible;">
+      <div class="header">
+        <%= t('label.analyzed environment') -%>: <span id="nature_5_last_result"></span><br/>
+        <%= t('label.isotope') -%>: <select class="nuclides" id="nuclides_5_last_result" data-refresh="<%= url_for(:controller => :measures, :action => :data, :type => :nuclide) -%>">
+          <option value=""></option>
+        </select>
+      </div>
+      <div class="content">
+        <table class="datagrid" id="datagrid_5_last_result" data-url="<%= url_for(:controller => :measures, :action => :data, :type => :table, :rp => 5, :sortorder => 'desc', :format => 'short') -%>" data-params="<%=  
+        hash_to_javascript({
+            :height => 'auto',
+            :minheight => 100, 
+            :resizable => false, 
+            :showToggleBtn => true, 
+            :striped => true,
+            :url => ''
+          }) 
+               -%>">
+          <thead>
+            <tr>
+              <th class="date" data-sortable="0">date</th>
+              <th class="value td-right" data-sortable="0">resultat</th>
+              <th class="error td-right" data-sortable="0">incertitude</th>
+              <th class="unit" data-sortable="0">unité</th>
+              <th class="station" data-sortable="0">station</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+    </div>
+  </div>

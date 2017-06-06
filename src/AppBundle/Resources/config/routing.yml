@@ -1,0 +1,4 @@
+map:
+    defaults: { _controller: "AppBundle:Default:map" }
+    methods:  GET
+    path:   /

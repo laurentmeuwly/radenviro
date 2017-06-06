@@ -1,0 +1,193 @@
+activerecord:
+  models:
+    networks: networks
+    user: user
+  attributes:
+    legend:
+      nuclides: isotopes
+      station_without_network: no network
+    site:
+      coordinates: latitude / longitude
+    automatic_network_station:
+      coordinates: latitude / longitude
+    station:
+      coordinates: latitude / longitude
+      zooms:
+        1d: 1d
+        1m: 1m
+        1y: 1y
+        10y: 10y
+        2w: 2w
+        3m: 3m
+        5y: 5y
+        6m: 6m
+        7d: 7d
+        default: normal zoom
+    user:
+      avatar: avatar
+      email: E-mail
+      fullname: full name
+      group: group
+      infos:
+        avatar_help: "The picture will be resized to 32x32, 64x64 and 128x128"
+        avatar_info: "Maximum weight: 2MB / recommended size 128x128"
+      last_connexion: last connection
+      password: password
+      password_confirmation: confirm password
+      remove_avatar: delete picture
+  titles:
+    category:
+      edit: edit category
+      main: administration of categories
+      datas: category data
+    legend:
+      add: add legend
+      edit: edit legend
+      main: legend administration
+      datas: legend data
+    network:
+      edit: edit network
+      main: network administration
+      datas: network data
+    nuclide:
+      edit: edit isotopes
+      main: isotope administration
+      datas: isotope data
+    page:
+      edit: edit page
+      main: page administration
+      datas: page data
+    site:
+      add: add site
+      edit: edit site
+      main: site administration
+      datas: site data
+    automatic_network_station:
+      add: add station
+      edit: edit station
+      main: automatic network administration
+      datas: station data
+    station:
+      edit: edit station
+      main: station administration
+      datas: station data
+    user:
+      add: add user
+      edit: edit user
+      main: user administration
+      datas: user data
+admin:
+  action:
+    add: add
+    apply: apply
+    cancel: cancel
+    close: close
+    delete: delete
+    display: show
+    edit: edit
+    hide: hide
+    reset: reset
+    search: search
+    show: show
+    sort: 
+      down: in decreasing order
+      up: in increasing order
+  confirm:
+    delete: Are you sure to delete this element?
+  dashboard:
+    title: dashboard
+  side:
+    user:
+      logout: logout
+      profile: profile
+      salutations: Hello
+      title: administrator
+  table:
+    actions: actions
+    entries_found: found entries
+application:
+  foph: foph
+  header:
+    administration: Federal administration EDI
+    division: radiation protection
+    office: Federal office of public health BAG
+    title: Environmental Radioactivity Group
+  news: news
+  none: none
+  selectall_or_unselectall: select all / unselect all
+authentication:
+  change password: change my password
+  error:
+    email: Enter your email address!
+    email invalid: Enter a valid email address!
+    new password: Enter a new password!
+    new password confirmation: Confirm new password!
+    new password confirmation invalid: The passwords do not match!
+    password: Enter your password!
+  field:
+    email: email address
+    new password: new password
+    new password confirmation: confirm new password
+    password: password
+    remember_me: remember me
+  form:
+    change password: change password
+    login: login
+    lost password: Forgot your password?
+  mail:
+    after_link: If you did not ask for a new password, ignore this mail. Your password remains unchanged.
+    before_link: Someone asked to change your password. To confirm this change, please click the following link. 
+    link: Change my password
+    salutations: Hello,
+    signature: Federal office of public health
+  message:
+    checking credentials: Linking...
+    lost password: Wenn Sie sich an Ihr Kennwort nicht mehr erinnern können, untengenannte Felder mit Ihrer e-Mail Adresse erfüllen wollen und werden wir Ihnen ein Neues senden.
+    sending credentials: Versand des Kennwortes...
+    sending new password: Änderung des Kennwortes...
+  reset password: zurücksetzen des Passwortes
+  sign in: Sich einloggen
+label:
+  all: Alle
+  analyzed environment: Analyzed environment
+  analyzed environments: Analyzed environments
+  automatic networks: Automatic networks
+  detection limit: Detection limit
+  download: Download
+  export:
+    title: Data export
+    description: Export data in xlsx or csv. Please select the filter.
+  graph: Graph
+  isotope: Isotope
+  measured values: Measured values
+  range:
+    start: from
+    end: until
+  station: Station
+  table: Table
+  zooms:
+    1d: 1d
+    1m: 1m
+    1y: 1y
+    10y: 10y
+    2w: 2w
+    3m: 3M
+    5y: 5y
+    6m: 6M
+    7d: 7T
+    title: Zooms
+  search results: Results of the search
+main:
+  map:
+    advanced search: Adveanced search
+    map legend: Map legend
+    maps of radioactivity measurements: Maps of radioactivity measurements
+menus:
+  automatic_networks: Automatic networks
+  informations: Information
+  map: Data access
+  radair: RADAIR
+  radon: RADON
+  welcome: News
+  who: Who
+  back_to_map: Back to the map

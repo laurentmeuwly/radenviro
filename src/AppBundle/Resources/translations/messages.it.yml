@@ -1,0 +1,193 @@
+activerecord:
+  models:
+    networks: Reti
+    user: User
+  attributes:
+    legend:
+      nuclides: Isotopi
+      station_without_network: Senza rete
+    site:
+      coordinates: Latitudine / Longitudine
+    automatic_network_station:
+      coordinates: Latitudine / Longitudine
+    station:
+      coordinates: Latitudine / Longitudine
+      zooms:
+        1d: 1g
+        1m: 1m
+        1y: 1a
+        10y: 10a
+        2w: 2s
+        3m: 3m
+        5y: 5a
+        6m: 6m
+        7d: 7g
+        default: Zoom per difetto
+    user:
+      avatar: Avatar
+      email: E-mail
+      fullname: Nome completo
+      group: Gruppo
+      infos:
+        avatar_help: "L'immagine va a essere tagliata in 32x32, 64x64 e 128x128"
+        avatar_info: "Misura massimale: 2MB / Dimensione racommendate 128x128"
+      last_connexion: Ultima connezione
+      password: Password
+      password_confirmation: Confermazione del password
+      remove_avatar: Sopprimere l'immagine
+  titles:
+    category:
+      edit: Edizione di una categoria
+      main: Gestione delle categorie
+      datas: Dati della categoria
+    legend:
+      add: Creazione di una categoria
+      edit: Edizione di una leggenda
+      main: Gestione delle leggende
+      datas: Dati della leggenda
+    network:
+      edit: Edizione di una rete
+      main: Gestione delle rete
+      datas: Dati della rete
+    nuclide:
+      edit: Edizione di un isotopo
+      main: Gestione degli isotopi
+      datas: Date dell'isotopo
+    pagina:
+      edit: Edizione di una pagina
+      main: Gestione delle pagine
+      datas: Date della pagina
+    site:
+      add: Creazione di un sito
+      edit: Edizione di un sito
+      main: Gestione dei siti
+      datas: Date del sito
+    automatic_network_station:
+      add: Creazione di una stazione
+      edit: Edizione di una stazione
+      main: Gestione delle reti automatiche
+      datas: Date della stazione
+    station:
+      edit: Edizione di una stazione
+      main: Gestione delle stazioni
+      datas: Dati della stazione
+    user:
+      add: Creazione dell'user
+      edit: Edizione dell'user
+      main: Gestione degli users
+      datas: Dati user
+admin:
+  action:
+    add: Aggiungere
+    apply: Applicare
+    cancel: Cancellare
+    close: Chiudere
+    delete: Sopprimere
+    display: Visualizzare
+    edit: Editare
+    hide: Nascondere
+    reset: Reinitializzare
+    search: Ricercare
+    show: Mostrare
+    sort:
+      down: Salire nell'ordine
+      up: Scendere nell'ordine
+  confirm:
+    delete: E sicuro di cancellare quest'elemento?
+  dashboard:
+    title: Panello di commando
+  side:
+    user:
+      logout: Sconnettersi
+      profile: Profilo
+      salutations: Buongiorno
+      title: Administratore
+  table:
+    actions: Azioni
+    entries_found: Entrate trovate
+application:
+  foph: UFSP
+  header:
+    administration: Administrazione federale Dipartimento federale dell'interno DFI 
+    division: Divisione Radioprotezione
+    office: Ufficio federale della sanità pubblica UFSP
+    title: Radioattività de l'ambiente
+  news: Attualità
+  none: Niente
+  selectall_or_unselectall: Selezionare tutto / Deselezionare tutto
+authentication:
+  change password: Modificare il password
+  error:
+    email: Deve introdurre il e-mail!
+    email invalid: Deve introdurre un indirizzo e-mail valido!
+    new password: Deve introdurre un nuovo password!
+    new password confirmation: Deve confermare il suo nuovo password!
+    new password confirmation invalid: I password introdotti non sono identichi!
+    password: Deve introdurre il suo password!
+  field:
+    email: Indirizzo e-mail
+    new password: Nuovo password
+    new password confirmation: Confermazione
+    password: Password
+    remember_me: Matenere la connezione
+  form:
+    change password: Nuovo password
+    login: Connezione
+    lost password: Password non ricordato?
+  mail:
+    after_link: Se non a fatto questa domanda, la prega di ignorare quest'e-mail. Il suo password non sarà cambiato.
+    before_link: Qualcuno a richiesto un cambiamento di password, per confermare questo cambiamento la prega di cliccare sul seguento link. 
+    link: Modificare il password
+    salutations: Buongiorno,
+    signature: Ufficio federale della sanità pubblica
+  message:
+    checking credentials: Connezione...
+    lost password: Se non si può ricordare il suo password, la prega di riempire i campi seguenti con il suo indirizzo e-mail e la manderiamo un nuovo. 
+    sending credentials: Invio del password...
+    sending new password: Modificazione del password...
+  reset password: Reinitializzare il password
+  sign in: Connetersi
+label:
+  all: Tutto
+  analyzed environment: Ambiente analizzato
+  analyzed environments: Ambienti analizzati
+  automatic networks: Rete automatiche
+  detection limit: Limite rilevamento
+  download: Scaricare
+  export:
+    title: Esportazione dei Dati
+    description: Exportation dei Dati al formato xlsx oppure csv, la prega di scegliere il filtro.
+  graph: Grafico
+  isotope: Isotope
+  measured values: Valori misurati
+  range:
+    start: De
+    end: fino a
+  station: Stazione
+  table: Tavolo
+  zooms:
+    1d: 1g
+    1m: 1m
+    1y: 1a
+    10y: 10a
+    2w: 2s
+    3m: 3m
+    5y: 5a
+    6m: 6m
+    7d: 7g
+    title: Zooms
+  search results: Risultato della vostra ricerca
+main:
+  map:
+    advanced search: Ricerca avanzata
+    map legend: leggenda de la carta
+    maps of radioactivity measurements: Carte delle misuri di radioaattività
+menus:
+  automatic_networks: rete automatiche
+  informations: Informazioni
+  map: Accesso ai dati
+  radair: RADAIR
+  radon: RADON
+  welcome: Attualità 
+  who: Chi misura
+  back_to_map: Torna alla mappa

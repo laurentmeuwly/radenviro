@@ -1,0 +1,199 @@
+/******************************************************************************
+    *** Measure table definition
+******************************************************************************/
+#content div.measures-table{
+    table{
+        width: 100%;
+        
+        th.date{
+            width: 7%;
+        }
+        th.value{
+            width: 8%;
+        }
+        th.error{
+            width: 8%;
+        }
+        th.unit{
+            width: 6%;
+        }
+        th.station{
+            width: 15%;
+        }
+        th.type{
+            width: 8%;
+        }
+    }
+}
+
+/******************************************************************************
+    *** Measure graph definition
+******************************************************************************/
+#content div.measures-graph{
+    div.filter{
+        overflow: hidden;
+        
+        div.title{
+            float: left;
+            font-size: 1.2em;
+            font-weight: bold;
+            width: 300px;
+        }
+        
+        div.infos{
+            font-size: 1.1em;
+            line-height: 1.2em;
+            margin-left: 310px;
+            label{
+                font-weight: bold;
+            }
+        }
+    }
+    
+    div.graph{
+        margin-top: 0.5em;
+    }
+    
+    div.graph-tooltip{
+        padding: 15px;
+        div.date{
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        div.data{
+            font-size: 1.1em;
+        }
+    }
+    #measures-graph-dashboard{
+        border-top: 1px solid #cccccc;
+        margin-top: 10px;
+        padding-top: 10px;
+        position: relative;
+        
+        #measures-graph-header{
+            overflow: hidden;
+            #measures-graph-dates{
+                float: right;
+                margin-right: 5%;
+                input{
+                    padding: 0px 5px;
+                    width: 65px;
+                }
+            }
+            #measures-graph-zooms{
+                float: left;
+                margin-left: 5%;
+                button{
+                    margin: 0px 3px;
+                    &:hover,
+                    &.current{
+                        box-shadow: 0px 0px 3px #666666;
+                    }
+                }
+            }
+        }
+        
+        #measures-graph-legends{
+            position: absolute;
+            right: 415px;
+            top: 10px;
+            z-index: 100;
+            ul{
+                list-style: disc;
+                li{
+                    font-size: 30px;
+                    line-height: 11px;
+                    margin-bottom: 5px;
+                    overflow: hidde;
+                    span{
+                        color: #000000;
+                        display: block;
+                        float: left;
+                        white-space: nowrap;
+                    }
+                    &.green{
+                        color: #008000;
+                    }
+                    &.orange{
+                        color: #FFA500;
+                    }
+                }
+            }
+        }
+    }
+}
+
+/******************************************************************************
+    *** Measure download definition
+******************************************************************************/
+
+#content div.measures-download{
+    div.header{
+        background-color: #016798;
+        color: white;
+        font-size: 1.1em;
+        font-weight: bold;
+        line-height: 1.2em;
+        padding: 0.5em;
+    }
+    div.content{
+        padding: 40px 20px;
+        
+        div.filter{
+            margin-bottom: 10px;
+            label{
+                display: inline-block;
+                font-weight: bold;
+                text-transform: uppercase;
+                width: 125px;
+            }
+            input{
+                padding: 0px 5px;
+                width: 65px;
+            }
+        }
+    }
+}
+
+
+/******************************************************************************
+    *** Measure advanced search definition
+******************************************************************************/
+#content div.advsearch{
+    select{
+        max-width: 100%;
+    }
+    .advsearch_stations{
+        display: none;
+        select{
+            display: none;
+        }
+    }
+}
+
+/******************************************************************************
+    *** Single measure display
+******************************************************************************/
+#content #single-measure div.measures-graph{
+    #measures-graph-dashboard{
+        border: none ;
+        margin: 0px;
+    }
+}
+
+#content .box.measures .content{
+    position: relative;
+    .shortcuts{
+        position: absolute;
+        right: 15px;
+        top: 16px;
+        a{
+            color: #ffffff;
+	    display: inline-block;
+            font-weight: bold;
+            padding: 0 10px;
+	    text-decoration: none;
+        }
+    }
+}

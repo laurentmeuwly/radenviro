@@ -1,0 +1,200 @@
+activerecord:
+  models:
+    networks: Réseaux
+    user: Utilisateur
+  attributes:
+    automatic_network_station:
+      coordinates: Latitude / Longitude
+    legend:
+      nuclides: Isotopes
+      station_without_network: Sans réseau
+    site:
+      coordinates: Latitude / Longitude
+      map: Carte
+      zoom: Zoom
+    station:
+      coordinates: Latitude / Longitude
+      zooms:
+        1d: 1j
+        1m: 1m
+        1y: 1a
+        10y: 10a
+        2w: 2s
+        3m: 3m
+        5y: 5a
+        6m: 6m
+        7d: 7j
+        default: Zoom par défaut
+    user:
+      avatar: Avatar
+      email: E-mail
+      fullname: Nom complet
+      group: Groupe
+      infos:
+        avatar_help: "L'image va être retaillé en 32x32, 64x64 et 128x128"
+        avatar_info: "Taille maximale: 2MB / Dimensions recommandées 128x128"
+      last_connexion: Dernière connexion
+      password: Mot de passe
+      password_confirmation: Confirmation de mot de passe
+      remove_avatar: Supprimer l'image
+  titles:
+    category:
+      edit: Edition d'une catégorie
+      main: Gestion des catégories
+      datas: Données de la catégorie
+    legend:
+      add: Création d'une légende
+      edit: Edition d'une légende
+      main: Gestion des légendes
+      datas: Données de la légende
+    map_zoom:
+      add: Création d'une zone de zoom
+      datas: Données d'une zone de zoom
+      edit: Edition d'une zone de zoom
+      main: Gestion des zones de zoom
+    network:
+      edit: Edition d'un réseau
+      main: Gestion des réseaux
+      datas: Données du réseau
+    nuclide:
+      edit: Edition d'un isotope
+      main: Gestion des isotopes
+      datas: Données de l'isotope
+    page:
+      edit: Edition d'une page
+      main: Gestion des pages
+      datas: Données de la page
+    site:
+      add: Création d'un site
+      edit: Edition d'un site
+      main: Gestion des sites
+      datas: Données du site
+    automatic_network_station:
+      add: Création d'une station
+      edit: Edition d'une station
+      main: Gestion des réseaux automatiques
+      datas: Données de la station
+    station:
+      edit: Edition d'une station
+      main: Gestion des stations
+      datas: Données de la station
+    user:
+      add: Création d'un utilisateur
+      edit: Edition d'utilisateur
+      main: Gestion des utilisateurs
+      datas: Données utilisateurs
+admin:
+  action:
+    add: Ajouter
+    apply: Appliquer
+    cancel: Annuler
+    close: Fermer
+    delete: Supprimer
+    display: Afficher
+    edit: Éditer
+    hide: Cacher
+    reset: Réinitialiser
+    search: Rechercher
+    show: Voir
+    sort:
+      down: Décendre dans l'ordre
+      up: Avancer dans l'ordre
+  confirm:
+    delete: Êtes-vous sûr de vouloir supprimer cet élément?
+  dashboard:
+    title: Tableau de bord
+  side:
+    user:
+      logout: Déconnexion
+      profile: Profil
+      salutations: Bonjour
+      title: Administrateur
+  table:
+    actions: Actions
+    entries_found: entrées trouvées
+application:
+  foph: OFSP
+  header:
+    administration: Administration fédérale Département fédéral de l'intérieur DFI
+    division: Division Radioprotection
+    office: Office fédéral de la santé publique OFSP
+    title: Radioactivité de l'environnement
+  news: Actualités
+  none: Aucun
+  selectall_or_unselectall: Tout selectionner / tout déselectionner
+authentication:
+  change password: Modifier mon mot de passe
+  error:
+    email: Vous devez saisir votre adresse e-mail!
+    email invalid: Vous devez saisir une adresse e-mail valide!
+    new password: Vous devez saisir un nouveau mot de passe!
+    new password confirmation: Vous devez confirmer votre nouveau mot de passe!
+    new password confirmation invalid: Les deux mots de passe saisis ne sont pas identique!
+    password: Vous devez saisir votre mot de passe!
+  field:
+    email: Adresse e-mail
+    new password: Nouveau mot de passe
+    new password confirmation: Confirmation
+    password: Mot de passe
+    remember_me: Maintenir la connexion
+  form:
+    change password: Nouveau mot de passe
+    login: Connexion
+    lost password: Mot de passe perdu?
+  mail:
+    after_link: Si vous n'avez pas fait cette demande, veuillez ignorer cet e-mail. Votre mot de passe restera inchangé.
+    before_link: Quelqu'un a demander un changement de mot de passe, pour confirmer ce changement veuillez cliquer sur le lien ci-dessous. 
+    link: Modifier mon mot de passe
+    salutations: Bonjour,
+    signature: Office férérale de la santé publique
+  message:
+    checking credentials: Connexion...
+    lost password: Si vous ne pouvez plus vous rapeller de votre mot de passe, veuillez remplir le champs ci-dessous avec votre adresse e-mail et nous vous enverrons un nouveau.
+    sending credentials: Envoi du mot de passe...
+    sending new password: Modification du mot de passe...
+  reset password: Réinitialiser votre mot de passe
+  sign in: Se connecter
+label:
+  all: Tous
+  analyzed environment: Milieu analysé
+  analyzed environments: Milieux analysés
+  automatic networks: Réseaux automatiques
+  detection limit: Limite de détection
+  download: Téléchargement
+  export:
+    title: Exportation des données
+    description: Exportation des données au format xlsx ou csv, veuillez choisir le filtre désiré.
+  graph: Graphique
+  isotope: Isotope
+  measured values: Valeurs mesurées
+  range:
+    start: De
+    end: à
+  station: Station
+  table: Tableau
+  zooms:
+    1d: 1j
+    1m: 1m
+    1y: 1a
+    10y: 10a
+    2w: 2s
+    3m: 3m
+    5y: 5a
+    6m: 6m
+    7d: 7j
+    title: Zooms
+  search results: Résultat de votre recherche
+main:
+  map:
+    advanced search: Recherche avancée
+    map legend: Légende de la carte
+    maps of radioactivity measurements: Cartes des de la radioactivité
+menus:
+  automatic_networks: Réseaux automatiques
+  informations: Informations
+  map: Accès aux données
+  radair: RADAIR
+  radon: RADON
+  welcome: Actualités
+  who: Qui mesure
+  back_to_map: Retour à la carte

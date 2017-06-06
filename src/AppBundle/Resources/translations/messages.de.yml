@@ -1,0 +1,193 @@
+activerecord:
+  models:
+    networks: Netzwerke
+    user: Benutzer
+  attributes:
+    legend:
+      nuclides: Isotope
+      station_without_network: ohne Netzwerk
+    site:
+      coordinates: Breitengrad / Längengrad
+    automatic_network_station:
+      coordinates: Breitengrad / Längengrad
+    station:
+      coordinates: Breitengrad / Längengrad
+      zooms:
+        1d: 1T
+        1m: 1M
+        1y: 1J
+        10y: 10J
+        2w: 2W
+        3m: 3M
+        5y: 5J
+        6m: 6M
+        7d: 7T
+        default: Standard-Zoom
+    user:
+      avatar: Avatar
+      email: E-mail
+      fullname: Vollständiger Name
+      group: Gruppe
+      infos:
+        avatar_help: "Das Bild wird in 32x32, 64x64 und 128x128 skaliert sein"
+        avatar_info: "Maximale Grösse: 2MB / Empfohlene Dimensionen 128x128"
+      last_connexion: Letzte Verbindung
+      password: Kennwort
+      password_confirmation: Bestätigung des Kennworts
+      remove_avatar: Das Bild löschen
+  titles:
+    category:
+      edit: Ändern einer Kategorie
+      main: Verwaltung der Kategorien
+      datas: Daten der Kategorie
+    legend:
+      add: Anpassen einer Bildlegende
+      edit: Ändern eines Bildlegende
+      main: Verwaltung der Bildlegende
+      datas: Daten der Bildlegende
+    network:
+      edit: Ändern eines Netzwerkes
+      main: Verwaltung des Netzwerkes
+      datas: Daten des Netzwerkes
+    nuclide:
+      edit: Ändern eines Isotope
+      main: Verwaltung des Isotopes
+      datas: Daten des Isotope
+    page:
+      edit: Ändern einer Seite
+      main: Verwaltung der Seiten
+      datas: Daten der Seite
+    site:
+      add: Hinzufügen eines Standortes
+      edit: Ändern eines Standortes
+      main: Verwaltung der Standorte
+      datas: Daten der Standorte
+    automatic_network_station:
+      add: Hinzufügen einer Station
+      edit: Ändern einer Station
+      main: Verwaltung der automatischen Netzwerke
+      datas: Daten der Station
+    station:
+      edit: Ändern einer Station
+      main: Verwaltung der Stationen
+      datas: Daten der Station
+    user:
+      add: Hinzufügen eines Benutzers
+      edit: Ändern von Benutzern
+      main: Verwaltung der Benutzer
+      datas: Daten der Benutzer
+admin:
+  action:
+    add: Hinzufügen
+    apply: Anwenden
+    cancel: Annulieren
+    close: Schliessen
+    delete: Löschen
+    display: Darstellen
+    edit: Editieren
+    hide: Verbergen
+    reset: Reinitialisen
+    search: Suchen
+    show: Sehen
+    sort:
+      down: In absteigender Ordnung
+      up: In aufsteigender Ordnung
+  confirm:
+    delete: Sind Sie sicher, dieses Element löschen zu wollen?
+  dashboard:
+    title: Dashboard
+  side:
+    user:
+      logout: Logout
+      profile: Profil
+      salutations: Guten Tag
+      title: Administrator
+  table:
+    actions: Aktion
+    entries_found: Gefundene Einträge
+application:
+  foph: BAG
+  header:
+    administration: Bundesverwaltung Eidgenössisches Departement des Innern EDI
+    division: Abteilung Strahlenschutz
+    office: Bundesamt für Gesundheit BAG
+    title: Umweltradioaktivität
+  news: Aktuell
+  none: Keiner
+  selectall_or_unselectall: Alles auswählen / nichts auswählen
+authentication:
+  change password: Mein Passwort ändern
+  error:
+    email: Sie sollen Ihre e-Mail Adresse erfassen!
+    email invalid: Sie sollen eine gültige e-Mail Adresse erfassen!
+    new password: Sie sollen ein neues Passwort erfassen!
+    new password confirmation: Sie sollen Ihr neues Passwort bestätigen!
+    new password confirmation invalid: Die beiden erfassten Kennwörter sind nicht identisch!
+    password: Sie sollen Ihr Passwort erfassen!
+  field:
+    email: E-Mail Adresse
+    new password: Neues Passwort
+    new password confirmation: Bestätigung
+    password: Passwort
+    remember_me: Die Verbindung aufrechterhalten
+  form:
+    change password: Neues Passwort
+    login: Verbindung
+    lost password: Verlorenes Passwort?
+  mail:
+    after_link: Wenn Sie keine Anfrage zur Passwort-Änderung gemacht haben, können Sie diese E-Mail ignorieren. Ihr Kennwort wird unverändert bleiben.
+    before_link: Jemand hat eine Veränderung des Passwort verlangt, um diese Veränderung zu bestätigen, klicken Sie bitte auf den untenstehenden Link .
+    link: Mein Passwort ändern
+    salutations: Guten Tag,
+    signature: Bundesamt für Gesundheit
+  message:
+    checking credentials: Verbindung...
+    lost password: Wenn Sie sich an Ihr Passwort nicht mehr erinnern können, füllen Sie unten Ihre e-Mail Adresse aus und wir werden Ihnen ein neues senden.
+    sending credentials: Versand des Passwortes...
+    sending new password: Änderung des Passwortes...
+  reset password: zurücksetzen des Passwortes
+  sign in: einloggen
+label:
+  all: Alle
+  analyzed environment: Analysierte Umgebung
+  analyzed environments: Analysierte Umgebungen
+  automatic networks: Automatische Netzwerke
+  detection limit: Nachweisgrenze
+  download: Herunterladen
+  export:
+    title: Export der Daten
+    description: Export der Daten im xlsx Format oder csv, wählen Sie den gewünschten Filter bitte.
+  graph: Grafik
+  isotope: Isotop
+  measured values: Messwerte
+  range:
+    start: von
+    end: bis
+  station: Station
+  table: Tabelle
+  zooms:
+    1d: 1T
+    1m: 1M
+    1y: 1J
+    10y: 10J
+    2w: 2W
+    3m: 3M
+    5y: 5J
+    6m: 6M
+    7d: 7T
+    title: Zooms
+  search results: Ergebnis Ihrer Suche
+main:
+  map:
+    advanced search: Ausführliche Suche
+    map legend: Beschreibung der Karte
+    maps of radioactivity measurements: Karten der Radioaktivitätswerte
+menus:
+  automatic_networks: Automatische Netzwerke
+  informations: Informationen
+  map: Zugang zu den Daten 
+  radair: RADAIR
+  radon: RADON
+  welcome: Aktuell
+  who: Wer misst
+  back_to_map: Zurück zur Karte

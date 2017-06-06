@@ -1,0 +1,179 @@
+<div class="cs5">
+  <div class="c2">
+    <div class="box map">
+      <div class="header"><%= t('main.map.maps of radioactivity measurements') -%></div>
+      <div class="content">
+        <div class="content-wrap">
+          <img src="/assets/switzerland.png" data-src="/assets/switzerland.png?_t=<%= Time.new.to_time.to_i -%>" alt="" id="switzerland" />
+          <img src="" alt="" id="switzerland_zoom" />
+          <div id="zoom_closebtn"></div>
+        </div>
+      </div>
+    </div>
+    <div class="table map-table" id="handler_5_last_result" style="visibility:hidden;">
+      <div class="header">
+        <%= t('label.analyzed environment') -%>: <span id="nature_5_last_result"></span><br/>
+        <%= t('label.isotope') -%>: <select class="nuclides" id="nuclides_5_last_result" data-refresh="<%= url_for(:controller => :measures, :action => :data, :type => :nuclide) -%>">
+          <option value=""></option>
+        </select>
+      </div>
+      <div class="content">
+        <table class="datagrid" id="datagrid_5_last_result" data-url="<%= url_for(:controller => :measures, :action => :data, :type => :table, :rp => 5, :sortorder => 'desc', :format => 'short') -%>" data-params="<%=  
+        hash_to_javascript({
+            :height => 'auto',
+            :minheight => 100, 
+            :resizable => false, 
+            :showToggleBtn => true, 
+            :striped => true,
+            :url => ''
+          }) 
+               -%>">
+          <thead>
+            <tr>
+              <th class="date" data-sortable="0">date</th>
+              <th class="value td-right" data-sortable="0">resultat</th>
+              <th class="error td-right" data-sortable="0">incertitude</th>
+              <th class="unit" data-sortable="0">unité</th>
+              <th class="station" data-sortable="0">station</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="c2">
+    <div class="box map-legend box-with-tabs">
+      <div class="header">
+        <div class="htab active"><%= t('main.map.map legend') -%></div>
+      </div>
+      <div class="content">
+        <div class="ctab active">
+          <div class="section samples" >
+            <h4><%= t('label.analyzed environments') -%></h4>
+            <ul>
+              <% @legends.each do |legend| -%>
+                <% cache ["map#{I18n.locale}", legend.cache_key(:map, true)] do -%>
+                  <li>
+                    <input type="checkbox" id="legend_<%= legend.id -%>" value="" name="categorie[]" data-legend="<%= legend.id -%>" data-nature="<%= legend.name -%>" title="<%= legend.name -%>"/>
+                    <label for="legend_<%= legend.id -%>"><span class="icon legend" id="icon_legend_<%= legend.id -%>" style="color:<%= legend.color %>;"></span><%= legend.name -%></label>
+                    <% legend.stations.each do |station| -%>
+                      <% if station.has_coordinates -%>
+                        <span class="location samples" id="location_sample_<%= station.id -%>" style="display:none;" data-icon="icon_legend_<%= legend.id -%>" data-latitude="<%= station.latitude -%>" data-longitude="<%= station.longitude -%>" data-link="<%= url_for :controller => :measures, :id => station.id -%>">
+                          <span class="title"><%= station.name -%></span>
+                          <span class="text">
+                            <ul>
+                              <% station.last_results_by_nuclide(legend.nuclides.first).each do |result| -%>
+                                <li style="font-size: 0.8em;">
+                                  <%= l result.measurement.referenceDate, :format => "%d.%m.%Y" -%>:&nbsp;
+                                  <%= result.nuclide.name %>,&nbsp;
+                                  <%= (result.limited ? '&lt;&nbsp;' : '').html_safe + ("%.1e" % result.value).to_s -%>&nbsp;
+                                  <%= ('&#177; ' + ("%.1e" % result.error).to_s + '&nbsp;').html_safe unless result.error.nil? || result.error == 0 -%>
+                                  <%= result.unit.name -%>
+                                </li>
+                              <% end -%>
+                            </ul><br/>
+                            <%= station.description.html_safe -%>
+                          </span>
+                        </span>
+                      <% end -%>
+                    <% end -%>
+                  </li>
+                <% end -%>
+              <% end -%>
+              <li>
+                <input type="checkbox" id="legend_selectall" class="selectall" value="" name="none" />
+                <label for="legend_selectall"><%= t 'application.selectall_or_unselectall' %></label>
+              </li>
+            </ul>
+            <div class="zooms">
+              <% @zooms.each do |zoom| -%>
+                <div class="zoomarea" data-latitude="<%= zoom.latitude -%>" data-nlatitude="<%= zoom.nlatitude -%>" data-slatitude="<%= zoom.slatitude -%>" data-longitude="<%= zoom.longitude -%>" data-elongitude="<%= zoom.elongitude -%>" data-wlongitude="<%= zoom.wlongitude -%>" data-zoom="<%= zoom.zoom -%>" ></div>
+              <% end -%>
+            </div>
+          </div>
+          <div class="sep"></div>
+          <div class="section sites">
+            <h4>Sites</h4>
+            <ul>
+              <li>
+                <input type="radio" value="" id="sitetype_none" name="sitetype" />
+                <label for="sitetype_none"><%= t 'application.none' %></label>
+              </li>
+              <% @siteTypes.each do |sitetype| -%>
+                <% cache ["map#{I18n.locale}", sitetype.cache_key(:map, true)] do -%>
+                  <li>
+                    <input type="radio" id="sitetype_<%= sitetype.id -%>" value="" name="sitetype" />
+                    <label for="sitetype_<%= sitetype.id -%>"><span class="icon sitetype" id="icon_sitetype_<%= sitetype.id -%>" style="color:<%= sitetype.color %>;"></span><%= sitetype.name -%></label>
+                    <% sitetype.sites.visible.each do |site| -%>    
+                      <span class="location sites location_site_<%= site.id -%>" id="location_site_<%= site.id -%>" style="display:none;" data-icon="icon_sitetype_<%= sitetype.id -%>" data-parent="<%= sitetype.id -%>" data-id="<%= site.id -%>" data-latitude="<%= site.latitude -%>" data-nlatitude="<%= site.nlatitude -%>" data-slatitude="<%= site.slatitude -%>" data-longitude="<%= site.longitude -%>" data-elongitude="<%= site.elongitude -%>" data-wlongitude="<%= site.wlongitude -%>" data-zoom="<%= site.zoom -%>" >
+                        <span class="title"><%= site.name -%></span>
+                        <span class="text"><%= site.description.html_safe -%></span>
+                        <span class="sublocations"> 
+                          <% site.stations.each do |station| -%>
+                            <% if station.has_coordinates -%>
+                              <span class="sublocation sites" style="display:none;" data-icon="icon_<%= station.legends.length > 0 ? "legend_#{station.legends.first.id}" : "sitetype_#{sitetype.id}" -%>" data-latitude="<%= station.latitude-%>" data-longitude="<%= station.longitude -%>" data-link="<%= url_for :controller => :measures, :id => station.id -%>">
+                                <span class="title"><%= station.name -%></span>
+                                <span class="text">
+                                  <% if station.legends.length > 0 %>
+                                    <ul>
+                                      <% station.last_results_by_nuclide(station.legends.first.nuclides.first).each do |result| -%>
+                                        <li style="font-size: 0.8em;">
+                                          <%= l result.measurement.referenceDate, :format => "%d.%m.%Y" -%>:&nbsp;
+                                          <%= result.nuclide.name %>,&nbsp;
+                                          <%= (result.limited ? '&lt;&nbsp;' : '').html_safe + ("%.1e" % result.value).to_s -%>&nbsp;
+                                          <%= ('&#177; ' + ("%.1e" % result.error).to_s + '&nbsp;').html_safe unless result.error.nil? || result.error == 0 -%>
+                                          <%= result.unit.name -%>
+                                        </li>
+                                      <% end -%>
+                                    </ul><br/>
+                                  <% end -%>
+                                  <%= station.description.html_safe -%>
+                                </span>
+                              </span>
+                            <% end -%>
+                          <% end -%>
+                        </span>
+                      </span>
+                    <% end -%>
+                  </li>
+                <% end -%>
+              <% end -%>
+            </ul>
+            <% @siteTypes.each.with_index do |sitetype, index| -%>
+              <select id="sitetype_<%= sitetype.id -%>_sites" class="select-<%= index -%>" style="display: none;">
+                <option value="all"><%= t 'label.all' -%></option>
+                <% sitetype.sites.visible.each do |site| -%>    
+                  <option value="<%= site.id -%>" id="site_<%= site.id -%>"><%= site.name -%></option>
+                <% end -%>
+              </select>
+            <% end -%>
+          </div>
+          <div class="sep"></div>
+          <div class="section automatic_network_stations">
+            <h4><%= t('label.automatic networks') -%></h4>
+            <ul>
+              <li>
+                <input type="radio" value="" id="automatic_network_none" name="automatic_network" />
+                <label for="automatic_network_none"><%= t 'application.none' %></label>
+              </li>
+              <% @automaticNetworks.each do |network| -%>
+                <% cache ["map#{I18n.locale}", network.cache_key(:map, true)] do -%>
+                  <li>
+                    <input type="radio" id="automatic_network_<%= network.id -%>" value="" name="automatic_network" />
+                    <label for="automatic_network_<%= network.id -%>"><span class="icon network" id="icon_network_<%= network.id -%>" style="color:<%= network.color %>;"></span><%= network.name -%></label>
+                    <% network.stations.visible.each do |station| -%>    
+                      <span class="location automatic_network_stations location_automatic_network_station_<%= station.id -%>" style="display:none;" data-icon="icon_network_<%= network.id -%>" data-id="<%= station.id %>" data-latitude="<%= station.latitude -%>" data-longitude="<%= station.longitude -%>" data-link="<%= network.url -%>" data-link-target="_blank">
+                        <span class="title"><%= station.name -%></span>
+                        <span class="text"><%= station.description.html_safe -%></span>
+                      </span>
+                    <% end -%>
+                  </li>
+                <% end -%>
+              <% end -%>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

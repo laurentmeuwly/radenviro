@@ -1,0 +1,15 @@
+div.ticker-handler{
+    overflow: hidden;
+    position: relative;
+}
+div.ticker-handler-horizontal{
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+}
+div.ticker-handler-horizontal div.ticker-element{
+    float: left;
+}
+div.ticker-handler-horizontal ul li{
+    display: inline;
+}

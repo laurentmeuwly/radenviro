@@ -1,0 +1,281 @@
+/*
+* Application CSS
+*
+*= require "jquery.ui"
+*= require "jquery.qtip.min"
+*= require "jquery.ticker"
+*= require "jquery.flexigrid.min"
+*= require "grid"
+*= require_self
+*= depend_on "_constants"
+*= depend_on "_reset"
+*/
+@import "reset";
+@import "_constants";
+
+/******************************************************************************
+*** General definition
+******************************************************************************/
+body{
+    background: url('/assets/bg-body.jpg') repeat-x;
+    text-align: center;
+    &.simple{
+        background: none;
+    }
+}
+body{
+    font-family: $font-family;
+    font-size: $font-size;
+    table,
+    input,
+    textarea,
+    p, span, div{
+        font-family: $font-family;
+        font-size: $font-size;
+    }
+}
+#page-margins{
+    margin: auto;
+    min-height: 500px;
+    text-align: left;
+    width: $page;
+    
+    #page{
+        padding: 0px $margins;
+        
+        #header{
+            background: #ffffff url(/assets/bg-header.jpg) no-repeat;
+            .right-top{
+                line-height: 25px;
+                padding-right: 10px;
+                text-align: right;
+            }
+            .right-middle{
+                color: #ffffff;
+                line-height: 25px;
+                padding-right: 10px;
+                text-align: right;
+            }
+            .right-bottom{
+                line-height: 25px;
+                padding-right: 10px;
+                text-align: right;
+            }
+            .title{
+                float: right;
+                font-size: 24px;
+                height: 40px;
+                line-height: 0.55em;
+                margin-top: 35px;
+                padding-right: 10px;
+                text-align: center;
+                .website{
+                    a{
+                        color: #000000;
+                        font-size: 14px;
+                        text-decoration: none;
+                    }
+                }
+            }
+            .bottom{
+                @include highlight;
+                margin-top: 2px;
+                overflow: hidden;
+            }      
+        }
+        
+        #content{
+            margin-top: 5px;
+        }
+    }
+}
+#content{
+    text-align: left;
+}
+h1{
+    font-size: 2.0em;
+    font-weight: bold;
+    line-height: 1.2em;
+    margin-bottom: 1em;
+}
+h3{
+    font-size: 1.3em;
+    font-weight: bold;
+    line-height: 1.2em;
+    margin-bottom: 0.5em;
+}
+h4{
+    font-size: 1.3em;
+    font-style: italic;
+    line-height: 1.2em;
+    margin-bottom: 0.5em;
+}
+
+.td-right{
+    text-align: right;
+}
+.tabs{
+    visibility: hidden;
+}
+
+/******************************************************************************
+*** Menu definition
+******************************************************************************/
+#menu{
+    clear: both;
+    margin-bottom: 20px;
+    .menu-item{
+        a{
+            @include highlight;
+            
+            display: block;
+            font-size: 1.4em;
+            font-weight: bold;
+            padding: 0.4em 0px;
+            text-align: center;
+            text-decoration: none;
+            
+            &:hover{
+                background-color: $highlight-color;
+                border: 2px solid $highlight-border-color;
+                color: $highlight-background-color;
+                padding: 2px 0px;
+            }
+        }
+    }
+}
+
+/******************************************************************************
+*** Breadcrumb definition
+******************************************************************************/
+#breadcrumb{
+    float: left;
+    padding: 0.5em 1em;
+    
+    a{
+        color: $highlight-color;
+        text-decoration: none;
+        &:hover{
+            text-decoration: underline;
+        }
+    }
+    
+    span{
+        padding: 0px 2px;
+    }
+}
+/******************************************************************************
+*** Language bar definition
+******************************************************************************/
+#lang{
+    float: right;
+    margin-top: 2px;
+    padding: 0.5em 1em 0.5em 0;
+    
+    a{
+        color: $highlight-background-color;
+        text-decoration: none;
+        &:hover, &.active{
+            text-decoration: underline;
+        }
+    }
+}
+
+/******************************************************************************
+*** Footer definition
+******************************************************************************/
+#footer{
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    margin-top: 1em; 
+    overflow: hidden;
+    padding: 0.5em;
+    
+    .header{
+        float: left;
+        font-weight: bold;
+        margin-right: 0.5em;
+    }
+    
+    .ticker{
+        li{
+            margin-right: 10px;
+        }
+    }
+}
+
+/******************************************************************************
+*** Element definition
+******************************************************************************/
+div.box{
+    border: 1px solid $highlight-border-color;
+    border-radius: 5px;
+    
+    div.header{
+        @include highlight;
+        
+        font-size: 1.1em;
+        padding: 0.5em 0.5em;
+    }
+    
+    div.content{
+        min-height: 10px;
+        
+        div.section{
+            padding: 0.5em;
+        }
+        div.sep{
+            background-color: $highlight-background-color;
+            height: 1px;
+            margin: 0.5em 0px;
+        }
+    }
+    
+    &.box-with-tabs{
+        border: none;
+        div.header{
+            background: none;
+            overflow: hidden;
+            padding: 0px;
+            div.htab{
+                @include highlight;
+                border-top-left-radius: 5px;
+                border-top-right-radius: 5px;
+                cursor: pointer;
+                float: left;
+                height: 25px;
+                line-height: 25px;
+                margin-right: 2px;
+                opacity: 0.5;
+                padding: 0px 20px 0px 10px;
+                &.active{
+                    opacity: 1;
+                }
+                &:hover{
+                    opacity: 1;
+                }
+            }
+        }
+        div.content{
+            border: 1px solid $highlight-border-color;
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+            div.ctab{
+                display: none;
+                &.active{
+                    display: block;
+                }
+            }
+        }
+    }
+}
+div.table{
+    div.header{
+        @include header;
+        
+        font-size: 1.1em;
+        font-weight: bold;
+        line-height: 1.2em;
+        padding: 0.5em 0.5em;
+    }
+}
