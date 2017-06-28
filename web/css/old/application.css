@@ -1,0 +1,1145 @@
+/*!
+ * jQuery UI CSS Framework 1.8.19
+ *
+ * Copyright 2012, AUTHORS.txt (http://jqueryui.com/about)
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://jquery.org/license
+ *
+ * http://docs.jquery.com/UI/Theming/API
+ */
+
+/* Layout helpers
+----------------------------------*/
+
+.ui-helper-hidden { display: none; }
+.ui-helper-hidden-accessible { position: absolute !important; clip: rect(1px 1px 1px 1px); clip: rect(1px,1px,1px,1px); }
+.ui-helper-reset { margin: 0; padding: 0; border: 0; outline: 0; line-height: 1.3; text-decoration: none; font-size: 100%; list-style: none; }
+.ui-helper-clearfix:before, .ui-helper-clearfix:after { content: ""; display: table; }
+.ui-helper-clearfix:after { clear: both; }
+.ui-helper-clearfix { zoom: 1; }
+.ui-helper-zfix { width: 100%; height: 100%; top: 0; left: 0; position: absolute; opacity: 0; filter:Alpha(Opacity=0); }
+
+
+/* Interaction Cues
+----------------------------------*/
+.ui-state-disabled { cursor: default !important; }
+
+
+/* Icons
+----------------------------------*/
+
+/* states and images */
+.ui-icon { display: block; text-indent: -99999px; overflow: hidden; background-repeat: no-repeat; }
+
+
+/* Misc visuals
+----------------------------------*/
+
+/* Overlays */
+.ui-widget-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+
+
+/*!
+ * jQuery UI CSS Framework 1.8.19
+ *
+ * Copyright 2012, AUTHORS.txt (http://jqueryui.com/about)
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://jquery.org/license
+ *
+ * http://docs.jquery.com/UI/Theming/API
+ *
+ * To view and modify this theme, visit http://jqueryui.com/themeroller/?ffDefault=arial,verdana,sans-serif&fwDefault=bold&fsDefault=1.1em&cornerRadius=3px&bgColorHeader=016798&bgTextureHeader=12_gloss_wave.png&bgImgOpacityHeader=55&borderColorHeader=016798&fcHeader=ffffff&iconColorHeader=d8e7f3&bgColorContent=fcfdfd&bgTextureContent=06_inset_hard.png&bgImgOpacityContent=100&borderColorContent=a6c9e2&fcContent=222222&iconColorContent=016798&bgColorDefault=dfeffc&bgTextureDefault=02_glass.png&bgImgOpacityDefault=85&borderColorDefault=c5dbec&fcDefault=016798&iconColorDefault=6da8d5&bgColorHover=d0e5f5&bgTextureHover=02_glass.png&bgImgOpacityHover=75&borderColorHover=6da8d5&fcHover=016798&iconColorHover=016798&bgColorActive=f5f8f9&bgTextureActive=06_inset_hard.png&bgImgOpacityActive=100&borderColorActive=016798&fcActive=6da8d5&iconColorActive=6da8d5&bgColorHighlight=6da8d5&bgTextureHighlight=01_flat.png&bgImgOpacityHighlight=55&borderColorHighlight=6da8d5&fcHighlight=000000&iconColorHighlight=2e83ff&bgColorError=fef1ec&bgTextureError=02_glass.png&bgImgOpacityError=95&borderColorError=cd0a0a&fcError=cd0a0a&iconColorError=cd0a0a&bgColorOverlay=aaaaaa&bgTextureOverlay=01_flat.png&bgImgOpacityOverlay=0&opacityOverlay=30&bgColorShadow=aaaaaa&bgTextureShadow=01_flat.png&bgImgOpacityShadow=0&opacityShadow=30&thicknessShadow=8px&offsetTopShadow=-8px&offsetLeftShadow=-8px&cornerRadiusShadow=8px
+ */
+
+
+/* Component containers
+----------------------------------*/
+.ui-widget { font-family: arial,verdana,sans-serif; font-size: 1.1em; }
+.ui-widget .ui-widget { font-size: 1em; }
+.ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button { font-family: arial,verdana,sans-serif; font-size: 1em; }
+.ui-widget-content { border: 1px solid #a6c9e2; background: #fcfdfd url(/assets/jquery.ui/ui-bg_inset-hard_100_fcfdfd_1x100.png) 50% bottom repeat-x; color: #222222; }
+.ui-widget-content a { color: #222222; }
+.ui-widget-header { border: 1px solid #016798; background: #016798 url(/assets/jquery.ui/ui-bg_gloss-wave_55_016798_500x100.png) 50% 50% repeat-x; color: #ffffff; font-weight: bold; }
+.ui-widget-header a { color: #ffffff; }
+
+/* Interaction states
+----------------------------------*/
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default { border: 1px solid #c5dbec; background: #dfeffc url(/assets/jquery.ui/ui-bg_glass_85_dfeffc_1x400.png) 50% 50% repeat-x; font-weight: bold; color: #016798; }
+.ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited { color: #016798; text-decoration: none; }
+.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus { border: 1px solid #6da8d5; background: #d0e5f5 url(/assets/jquery.ui/ui-bg_glass_75_d0e5f5_1x400.png) 50% 50% repeat-x; font-weight: bold; color: #016798; }
+.ui-state-hover a, .ui-state-hover a:hover { color: #016798; text-decoration: none; }
+.ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active { border: 1px solid #016798; background: #f5f8f9 url(/assets/jquery.ui/ui-bg_inset-hard_100_f5f8f9_1x100.png) 50% 50% repeat-x; font-weight: bold; color: #6da8d5; }
+.ui-state-active a, .ui-state-active a:link, .ui-state-active a:visited { color: #6da8d5; text-decoration: none; }
+.ui-widget :active { outline: none; }
+
+/* Interaction Cues
+----------------------------------*/
+.ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight  {border: 1px solid #6da8d5; background: #6da8d5 url(/assets/jquery.ui/ui-bg_flat_55_6da8d5_40x100.png) 50% 50% repeat-x; color: #000000; }
+.ui-state-highlight a, .ui-widget-content .ui-state-highlight a,.ui-widget-header .ui-state-highlight a { color: #000000; }
+.ui-state-error, .ui-widget-content .ui-state-error, .ui-widget-header .ui-state-error {border: 1px solid #cd0a0a; background: #fef1ec url(/assets/jquery.ui/ui-bg_glass_95_fef1ec_1x400.png) 50% 50% repeat-x; color: #cd0a0a; }
+.ui-state-error a, .ui-widget-content .ui-state-error a, .ui-widget-header .ui-state-error a { color: #cd0a0a; }
+.ui-state-error-text, .ui-widget-content .ui-state-error-text, .ui-widget-header .ui-state-error-text { color: #cd0a0a; }
+.ui-priority-primary, .ui-widget-content .ui-priority-primary, .ui-widget-header .ui-priority-primary { font-weight: bold; }
+.ui-priority-secondary, .ui-widget-content .ui-priority-secondary,  .ui-widget-header .ui-priority-secondary { opacity: .7; filter:Alpha(Opacity=70); font-weight: normal; }
+.ui-state-disabled, .ui-widget-content .ui-state-disabled, .ui-widget-header .ui-state-disabled { opacity: .35; filter:Alpha(Opacity=35); background-image: none; }
+
+/* Icons
+----------------------------------*/
+
+/* states and images */
+.ui-icon { width: 16px; height: 16px; background-image: url(/assets/jquery.ui/ui-icons_016798_256x240.png); }
+.ui-widget-content .ui-icon {background-image: url(/assets/jquery.ui/ui-icons_016798_256x240.png); }
+.ui-widget-header .ui-icon {background-image: url(/assets/jquery.ui/ui-icons_d8e7f3_256x240.png); }
+.ui-state-default .ui-icon { background-image: url(/assets/jquery.ui/ui-icons_6da8d5_256x240.png); }
+.ui-state-hover .ui-icon, .ui-state-focus .ui-icon {background-image: url(/assets/jquery.ui/ui-icons_016798_256x240.png); }
+.ui-state-active .ui-icon {background-image: url(/assets/jquery.ui/ui-icons_6da8d5_256x240.png); }
+.ui-state-highlight .ui-icon {background-image: url(/assets/jquery.ui/ui-icons_2e83ff_256x240.png); }
+.ui-state-error .ui-icon, .ui-state-error-text .ui-icon {background-image: url(/assets/jquery.ui/ui-icons_cd0a0a_256x240.png); }
+
+/* positioning */
+.ui-icon-carat-1-n { background-position: 0 0; }
+.ui-icon-carat-1-ne { background-position: -16px 0; }
+.ui-icon-carat-1-e { background-position: -32px 0; }
+.ui-icon-carat-1-se { background-position: -48px 0; }
+.ui-icon-carat-1-s { background-position: -64px 0; }
+.ui-icon-carat-1-sw { background-position: -80px 0; }
+.ui-icon-carat-1-w { background-position: -96px 0; }
+.ui-icon-carat-1-nw { background-position: -112px 0; }
+.ui-icon-carat-2-n-s { background-position: -128px 0; }
+.ui-icon-carat-2-e-w { background-position: -144px 0; }
+.ui-icon-triangle-1-n { background-position: 0 -16px; }
+.ui-icon-triangle-1-ne { background-position: -16px -16px; }
+.ui-icon-triangle-1-e { background-position: -32px -16px; }
+.ui-icon-triangle-1-se { background-position: -48px -16px; }
+.ui-icon-triangle-1-s { background-position: -64px -16px; }
+.ui-icon-triangle-1-sw { background-position: -80px -16px; }
+.ui-icon-triangle-1-w { background-position: -96px -16px; }
+.ui-icon-triangle-1-nw { background-position: -112px -16px; }
+.ui-icon-triangle-2-n-s { background-position: -128px -16px; }
+.ui-icon-triangle-2-e-w { background-position: -144px -16px; }
+.ui-icon-arrow-1-n { background-position: 0 -32px; }
+.ui-icon-arrow-1-ne { background-position: -16px -32px; }
+.ui-icon-arrow-1-e { background-position: -32px -32px; }
+.ui-icon-arrow-1-se { background-position: -48px -32px; }
+.ui-icon-arrow-1-s { background-position: -64px -32px; }
+.ui-icon-arrow-1-sw { background-position: -80px -32px; }
+.ui-icon-arrow-1-w { background-position: -96px -32px; }
+.ui-icon-arrow-1-nw { background-position: -112px -32px; }
+.ui-icon-arrow-2-n-s { background-position: -128px -32px; }
+.ui-icon-arrow-2-ne-sw { background-position: -144px -32px; }
+.ui-icon-arrow-2-e-w { background-position: -160px -32px; }
+.ui-icon-arrow-2-se-nw { background-position: -176px -32px; }
+.ui-icon-arrowstop-1-n { background-position: -192px -32px; }
+.ui-icon-arrowstop-1-e { background-position: -208px -32px; }
+.ui-icon-arrowstop-1-s { background-position: -224px -32px; }
+.ui-icon-arrowstop-1-w { background-position: -240px -32px; }
+.ui-icon-arrowthick-1-n { background-position: 0 -48px; }
+.ui-icon-arrowthick-1-ne { background-position: -16px -48px; }
+.ui-icon-arrowthick-1-e { background-position: -32px -48px; }
+.ui-icon-arrowthick-1-se { background-position: -48px -48px; }
+.ui-icon-arrowthick-1-s { background-position: -64px -48px; }
+.ui-icon-arrowthick-1-sw { background-position: -80px -48px; }
+.ui-icon-arrowthick-1-w { background-position: -96px -48px; }
+.ui-icon-arrowthick-1-nw { background-position: -112px -48px; }
+.ui-icon-arrowthick-2-n-s { background-position: -128px -48px; }
+.ui-icon-arrowthick-2-ne-sw { background-position: -144px -48px; }
+.ui-icon-arrowthick-2-e-w { background-position: -160px -48px; }
+.ui-icon-arrowthick-2-se-nw { background-position: -176px -48px; }
+.ui-icon-arrowthickstop-1-n { background-position: -192px -48px; }
+.ui-icon-arrowthickstop-1-e { background-position: -208px -48px; }
+.ui-icon-arrowthickstop-1-s { background-position: -224px -48px; }
+.ui-icon-arrowthickstop-1-w { background-position: -240px -48px; }
+.ui-icon-arrowreturnthick-1-w { background-position: 0 -64px; }
+.ui-icon-arrowreturnthick-1-n { background-position: -16px -64px; }
+.ui-icon-arrowreturnthick-1-e { background-position: -32px -64px; }
+.ui-icon-arrowreturnthick-1-s { background-position: -48px -64px; }
+.ui-icon-arrowreturn-1-w { background-position: -64px -64px; }
+.ui-icon-arrowreturn-1-n { background-position: -80px -64px; }
+.ui-icon-arrowreturn-1-e { background-position: -96px -64px; }
+.ui-icon-arrowreturn-1-s { background-position: -112px -64px; }
+.ui-icon-arrowrefresh-1-w { background-position: -128px -64px; }
+.ui-icon-arrowrefresh-1-n { background-position: -144px -64px; }
+.ui-icon-arrowrefresh-1-e { background-position: -160px -64px; }
+.ui-icon-arrowrefresh-1-s { background-position: -176px -64px; }
+.ui-icon-arrow-4 { background-position: 0 -80px; }
+.ui-icon-arrow-4-diag { background-position: -16px -80px; }
+.ui-icon-extlink { background-position: -32px -80px; }
+.ui-icon-newwin { background-position: -48px -80px; }
+.ui-icon-refresh { background-position: -64px -80px; }
+.ui-icon-shuffle { background-position: -80px -80px; }
+.ui-icon-transfer-e-w { background-position: -96px -80px; }
+.ui-icon-transferthick-e-w { background-position: -112px -80px; }
+.ui-icon-folder-collapsed { background-position: 0 -96px; }
+.ui-icon-folder-open { background-position: -16px -96px; }
+.ui-icon-document { background-position: -32px -96px; }
+.ui-icon-document-b { background-position: -48px -96px; }
+.ui-icon-note { background-position: -64px -96px; }
+.ui-icon-mail-closed { background-position: -80px -96px; }
+.ui-icon-mail-open { background-position: -96px -96px; }
+.ui-icon-suitcase { background-position: -112px -96px; }
+.ui-icon-comment { background-position: -128px -96px; }
+.ui-icon-person { background-position: -144px -96px; }
+.ui-icon-print { background-position: -160px -96px; }
+.ui-icon-trash { background-position: -176px -96px; }
+.ui-icon-locked { background-position: -192px -96px; }
+.ui-icon-unlocked { background-position: -208px -96px; }
+.ui-icon-bookmark { background-position: -224px -96px; }
+.ui-icon-tag { background-position: -240px -96px; }
+.ui-icon-home { background-position: 0 -112px; }
+.ui-icon-flag { background-position: -16px -112px; }
+.ui-icon-calendar { background-position: -32px -112px; }
+.ui-icon-cart { background-position: -48px -112px; }
+.ui-icon-pencil { background-position: -64px -112px; }
+.ui-icon-clock { background-position: -80px -112px; }
+.ui-icon-disk { background-position: -96px -112px; }
+.ui-icon-calculator { background-position: -112px -112px; }
+.ui-icon-zoomin { background-position: -128px -112px; }
+.ui-icon-zoomout { background-position: -144px -112px; }
+.ui-icon-search { background-position: -160px -112px; }
+.ui-icon-wrench { background-position: -176px -112px; }
+.ui-icon-gear { background-position: -192px -112px; }
+.ui-icon-heart { background-position: -208px -112px; }
+.ui-icon-star { background-position: -224px -112px; }
+.ui-icon-link { background-position: -240px -112px; }
+.ui-icon-cancel { background-position: 0 -128px; }
+.ui-icon-plus { background-position: -16px -128px; }
+.ui-icon-plusthick { background-position: -32px -128px; }
+.ui-icon-minus { background-position: -48px -128px; }
+.ui-icon-minusthick { background-position: -64px -128px; }
+.ui-icon-close { background-position: -80px -128px; }
+.ui-icon-closethick { background-position: -96px -128px; }
+.ui-icon-key { background-position: -112px -128px; }
+.ui-icon-lightbulb { background-position: -128px -128px; }
+.ui-icon-scissors { background-position: -144px -128px; }
+.ui-icon-clipboard { background-position: -160px -128px; }
+.ui-icon-copy { background-position: -176px -128px; }
+.ui-icon-contact { background-position: -192px -128px; }
+.ui-icon-image { background-position: -208px -128px; }
+.ui-icon-video { background-position: -224px -128px; }
+.ui-icon-script { background-position: -240px -128px; }
+.ui-icon-alert { background-position: 0 -144px; }
+.ui-icon-info { background-position: -16px -144px; }
+.ui-icon-notice { background-position: -32px -144px; }
+.ui-icon-help { background-position: -48px -144px; }
+.ui-icon-check { background-position: -64px -144px; }
+.ui-icon-bullet { background-position: -80px -144px; }
+.ui-icon-radio-off { background-position: -96px -144px; }
+.ui-icon-radio-on { background-position: -112px -144px; }
+.ui-icon-pin-w { background-position: -128px -144px; }
+.ui-icon-pin-s { background-position: -144px -144px; }
+.ui-icon-play { background-position: 0 -160px; }
+.ui-icon-pause { background-position: -16px -160px; }
+.ui-icon-seek-next { background-position: -32px -160px; }
+.ui-icon-seek-prev { background-position: -48px -160px; }
+.ui-icon-seek-end { background-position: -64px -160px; }
+.ui-icon-seek-start { background-position: -80px -160px; }
+/* ui-icon-seek-first is deprecated, use ui-icon-seek-start instead */
+.ui-icon-seek-first { background-position: -80px -160px; }
+.ui-icon-stop { background-position: -96px -160px; }
+.ui-icon-eject { background-position: -112px -160px; }
+.ui-icon-volume-off { background-position: -128px -160px; }
+.ui-icon-volume-on { background-position: -144px -160px; }
+.ui-icon-power { background-position: 0 -176px; }
+.ui-icon-signal-diag { background-position: -16px -176px; }
+.ui-icon-signal { background-position: -32px -176px; }
+.ui-icon-battery-0 { background-position: -48px -176px; }
+.ui-icon-battery-1 { background-position: -64px -176px; }
+.ui-icon-battery-2 { background-position: -80px -176px; }
+.ui-icon-battery-3 { background-position: -96px -176px; }
+.ui-icon-circle-plus { background-position: 0 -192px; }
+.ui-icon-circle-minus { background-position: -16px -192px; }
+.ui-icon-circle-close { background-position: -32px -192px; }
+.ui-icon-circle-triangle-e { background-position: -48px -192px; }
+.ui-icon-circle-triangle-s { background-position: -64px -192px; }
+.ui-icon-circle-triangle-w { background-position: -80px -192px; }
+.ui-icon-circle-triangle-n { background-position: -96px -192px; }
+.ui-icon-circle-arrow-e { background-position: -112px -192px; }
+.ui-icon-circle-arrow-s { background-position: -128px -192px; }
+.ui-icon-circle-arrow-w { background-position: -144px -192px; }
+.ui-icon-circle-arrow-n { background-position: -160px -192px; }
+.ui-icon-circle-zoomin { background-position: -176px -192px; }
+.ui-icon-circle-zoomout { background-position: -192px -192px; }
+.ui-icon-circle-check { background-position: -208px -192px; }
+.ui-icon-circlesmall-plus { background-position: 0 -208px; }
+.ui-icon-circlesmall-minus { background-position: -16px -208px; }
+.ui-icon-circlesmall-close { background-position: -32px -208px; }
+.ui-icon-squaresmall-plus { background-position: -48px -208px; }
+.ui-icon-squaresmall-minus { background-position: -64px -208px; }
+.ui-icon-squaresmall-close { background-position: -80px -208px; }
+.ui-icon-grip-dotted-vertical { background-position: 0 -224px; }
+.ui-icon-grip-dotted-horizontal { background-position: -16px -224px; }
+.ui-icon-grip-solid-vertical { background-position: -32px -224px; }
+.ui-icon-grip-solid-horizontal { background-position: -48px -224px; }
+.ui-icon-gripsmall-diagonal-se { background-position: -64px -224px; }
+.ui-icon-grip-diagonal-se { background-position: -80px -224px; }
+
+
+/* Misc visuals
+----------------------------------*/
+
+/* Corner radius */
+.ui-corner-all, .ui-corner-top, .ui-corner-left, .ui-corner-tl { -moz-border-radius-topleft: 3px; -webkit-border-top-left-radius: 3px; -khtml-border-top-left-radius: 3px; border-top-left-radius: 3px; }
+.ui-corner-all, .ui-corner-top, .ui-corner-right, .ui-corner-tr { -moz-border-radius-topright: 3px; -webkit-border-top-right-radius: 3px; -khtml-border-top-right-radius: 3px; border-top-right-radius: 3px; }
+.ui-corner-all, .ui-corner-bottom, .ui-corner-left, .ui-corner-bl { -moz-border-radius-bottomleft: 3px; -webkit-border-bottom-left-radius: 3px; -khtml-border-bottom-left-radius: 3px; border-bottom-left-radius: 3px; }
+.ui-corner-all, .ui-corner-bottom, .ui-corner-right, .ui-corner-br { -moz-border-radius-bottomright: 3px; -webkit-border-bottom-right-radius: 3px; -khtml-border-bottom-right-radius: 3px; border-bottom-right-radius: 3px; }
+
+/* Overlays */
+.ui-widget-overlay { background: #aaaaaa url(/assets/jquery.ui/ui-bg_flat_0_aaaaaa_40x100.png) 50% 50% repeat-x; opacity: .30;filter:Alpha(Opacity=30); }
+.ui-widget-shadow { margin: -8px 0 0 -8px; padding: 8px; background: #aaaaaa url(/assets/jquery.ui/ui-bg_flat_0_aaaaaa_40x100.png) 50% 50% repeat-x; opacity: .30;filter:Alpha(Opacity=30); -moz-border-radius: 8px; -khtml-border-radius: 8px; -webkit-border-radius: 8px; border-radius: 8px; }/*!
+ * jQuery UI Resizable 1.8.19
+ *
+ * Copyright 2012, AUTHORS.txt (http://jqueryui.com/about)
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://jquery.org/license
+ *
+ * http://docs.jquery.com/UI/Resizable#theming
+ */
+.ui-resizable { position: relative;}
+.ui-resizable-handle { position: absolute;font-size: 0.1px;z-index: 99999; display: block; }
+.ui-resizable-disabled .ui-resizable-handle, .ui-resizable-autohide .ui-resizable-handle { display: none; }
+.ui-resizable-n { cursor: n-resize; height: 7px; width: 100%; top: -5px; left: 0; }
+.ui-resizable-s { cursor: s-resize; height: 7px; width: 100%; bottom: -5px; left: 0; }
+.ui-resizable-e { cursor: e-resize; width: 7px; right: -5px; top: 0; height: 100%; }
+.ui-resizable-w { cursor: w-resize; width: 7px; left: -5px; top: 0; height: 100%; }
+.ui-resizable-se { cursor: se-resize; width: 12px; height: 12px; right: 1px; bottom: 1px; }
+.ui-resizable-sw { cursor: sw-resize; width: 9px; height: 9px; left: -5px; bottom: -5px; }
+.ui-resizable-nw { cursor: nw-resize; width: 9px; height: 9px; left: -5px; top: -5px; }
+.ui-resizable-ne { cursor: ne-resize; width: 9px; height: 9px; right: -5px; top: -5px;}/*!
+ * jQuery UI Selectable 1.8.19
+ *
+ * Copyright 2012, AUTHORS.txt (http://jqueryui.com/about)
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://jquery.org/license
+ *
+ * http://docs.jquery.com/UI/Selectable#theming
+ */
+.ui-selectable-helper { position: absolute; z-index: 100; border:1px dotted black; }
+/*!
+ * jQuery UI Accordion 1.8.19
+ *
+ * Copyright 2012, AUTHORS.txt (http://jqueryui.com/about)
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://jquery.org/license
+ *
+ * http://docs.jquery.com/UI/Accordion#theming
+ */
+/* IE/Win - Fix animation bug - #4615 */
+.ui-accordion { width: 100%; }
+.ui-accordion .ui-accordion-header { cursor: pointer; position: relative; margin-top: 1px; zoom: 1; }
+.ui-accordion .ui-accordion-li-fix { display: inline; }
+.ui-accordion .ui-accordion-header-active { border-bottom: 0 !important; }
+.ui-accordion .ui-accordion-header a { display: block; font-size: 1em; padding: .5em .5em .5em .7em; }
+.ui-accordion-icons .ui-accordion-header a { padding-left: 2.2em; }
+.ui-accordion .ui-accordion-header .ui-icon { position: absolute; left: .5em; top: 50%; margin-top: -8px; }
+.ui-accordion .ui-accordion-content { padding: 1em 2.2em; border-top: 0; margin-top: -2px; position: relative; top: 1px; margin-bottom: 2px; overflow: auto; display: none; zoom: 1; }
+.ui-accordion .ui-accordion-content-active { display: block; }
+/*!
+ * jQuery UI Autocomplete 1.8.19
+ *
+ * Copyright 2012, AUTHORS.txt (http://jqueryui.com/about)
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://jquery.org/license
+ *
+ * http://docs.jquery.com/UI/Autocomplete#theming
+ */
+.ui-autocomplete { position: absolute; cursor: default; }	
+
+/* workarounds */
+* html .ui-autocomplete { width:1px; } /* without this, the menu expands to 100% in IE6 */
+
+/*
+ * jQuery UI Menu @VERSION
+ *
+ * Copyright 2010, AUTHORS.txt (http://jqueryui.com/about)
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://jquery.org/license
+ *
+ * http://docs.jquery.com/UI/Menu#theming
+ */
+.ui-menu {
+	list-style:none;
+	padding: 2px;
+	margin: 0;
+	display:block;
+	float: left;
+}
+.ui-menu .ui-menu {
+	margin-top: -3px;
+}
+.ui-menu .ui-menu-item {
+	margin:0;
+	padding: 0;
+	zoom: 1;
+	float: left;
+	clear: left;
+	width: 100%;
+}
+.ui-menu .ui-menu-item a {
+	text-decoration:none;
+	display:block;
+	padding:.2em .4em;
+	line-height:1.5;
+	zoom:1;
+}
+.ui-menu .ui-menu-item a.ui-state-hover,
+.ui-menu .ui-menu-item a.ui-state-active {
+	font-weight: normal;
+	margin: -1px;
+}
+/*!
+ * jQuery UI Button 1.8.19
+ *
+ * Copyright 2012, AUTHORS.txt (http://jqueryui.com/about)
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://jquery.org/license
+ *
+ * http://docs.jquery.com/UI/Button#theming
+ */
+.ui-button { display: inline-block; position: relative; padding: 0; margin-right: .1em; text-decoration: none !important; cursor: pointer; text-align: center; zoom: 1; overflow: visible; } /* the overflow property removes extra width in IE */
+.ui-button-icon-only { width: 2.2em; } /* to make room for the icon, a width needs to be set here */
+button.ui-button-icon-only { width: 2.4em; } /* button elements seem to need a little more width */
+.ui-button-icons-only { width: 3.4em; } 
+button.ui-button-icons-only { width: 3.7em; } 
+
+/*button text element */
+.ui-button .ui-button-text { display: block; line-height: 1.4;  }
+.ui-button-text-only .ui-button-text { padding: .4em 1em; }
+.ui-button-icon-only .ui-button-text, .ui-button-icons-only .ui-button-text { padding: .4em; text-indent: -9999999px; }
+.ui-button-text-icon-primary .ui-button-text, .ui-button-text-icons .ui-button-text { padding: .4em 1em .4em 2.1em; }
+.ui-button-text-icon-secondary .ui-button-text, .ui-button-text-icons .ui-button-text { padding: .4em 2.1em .4em 1em; }
+.ui-button-text-icons .ui-button-text { padding-left: 2.1em; padding-right: 2.1em; }
+/* no icon support for input elements, provide padding by default */
+input.ui-button { padding: .4em 1em; }
+
+/*button icon element(s) */
+.ui-button-icon-only .ui-icon, .ui-button-text-icon-primary .ui-icon, .ui-button-text-icon-secondary .ui-icon, .ui-button-text-icons .ui-icon, .ui-button-icons-only .ui-icon { position: absolute; top: 50%; margin-top: -8px; }
+.ui-button-icon-only .ui-icon { left: 50%; margin-left: -8px; }
+.ui-button-text-icon-primary .ui-button-icon-primary, .ui-button-text-icons .ui-button-icon-primary, .ui-button-icons-only .ui-button-icon-primary { left: .5em; }
+.ui-button-text-icon-secondary .ui-button-icon-secondary, .ui-button-text-icons .ui-button-icon-secondary, .ui-button-icons-only .ui-button-icon-secondary { right: .5em; }
+.ui-button-text-icons .ui-button-icon-secondary, .ui-button-icons-only .ui-button-icon-secondary { right: .5em; }
+
+/*button sets*/
+.ui-buttonset { margin-right: 7px; }
+.ui-buttonset .ui-button { margin-left: 0; margin-right: -.3em; }
+
+/* workarounds */
+button.ui-button::-moz-focus-inner { border: 0; padding: 0; } /* reset extra padding in Firefox */
+/*!
+ * jQuery UI Dialog 1.8.19
+ *
+ * Copyright 2012, AUTHORS.txt (http://jqueryui.com/about)
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://jquery.org/license
+ *
+ * http://docs.jquery.com/UI/Dialog#theming
+ */
+.ui-dialog { position: absolute; padding: .2em; width: 300px; overflow: hidden; }
+.ui-dialog .ui-dialog-titlebar { padding: .4em 1em; position: relative;  }
+.ui-dialog .ui-dialog-title { float: left; margin: .1em 16px .1em 0; } 
+.ui-dialog .ui-dialog-titlebar-close { position: absolute; right: .3em; top: 50%; width: 19px; margin: -10px 0 0 0; padding: 1px; height: 18px; }
+.ui-dialog .ui-dialog-titlebar-close span { display: block; margin: 1px; }
+.ui-dialog .ui-dialog-titlebar-close:hover, .ui-dialog .ui-dialog-titlebar-close:focus { padding: 0; }
+.ui-dialog .ui-dialog-content { position: relative; border: 0; padding: .5em 1em; background: none; overflow: auto; zoom: 1; }
+.ui-dialog .ui-dialog-buttonpane { text-align: left; border-width: 1px 0 0 0; background-image: none; margin: .5em 0 0 0; padding: .3em 1em .5em .4em; }
+.ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset { float: right; }
+.ui-dialog .ui-dialog-buttonpane button { margin: .5em .4em .5em 0; cursor: pointer; }
+.ui-dialog .ui-resizable-se { width: 14px; height: 14px; right: 3px; bottom: 3px; }
+.ui-draggable .ui-dialog-titlebar { cursor: move; }
+/*!
+ * jQuery UI Slider 1.8.19
+ *
+ * Copyright 2012, AUTHORS.txt (http://jqueryui.com/about)
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://jquery.org/license
+ *
+ * http://docs.jquery.com/UI/Slider#theming
+ */
+.ui-slider { position: relative; text-align: left; }
+.ui-slider .ui-slider-handle { position: absolute; z-index: 2; width: 1.2em; height: 1.2em; cursor: default; }
+.ui-slider .ui-slider-range { position: absolute; z-index: 1; font-size: .7em; display: block; border: 0; background-position: 0 0; }
+
+.ui-slider-horizontal { height: .8em; }
+.ui-slider-horizontal .ui-slider-handle { top: -.3em; margin-left: -.6em; }
+.ui-slider-horizontal .ui-slider-range { top: 0; height: 100%; }
+.ui-slider-horizontal .ui-slider-range-min { left: 0; }
+.ui-slider-horizontal .ui-slider-range-max { right: 0; }
+
+.ui-slider-vertical { width: .8em; height: 100px; }
+.ui-slider-vertical .ui-slider-handle { left: -.3em; margin-left: 0; margin-bottom: -.6em; }
+.ui-slider-vertical .ui-slider-range { left: 0; width: 100%; }
+.ui-slider-vertical .ui-slider-range-min { bottom: 0; }
+.ui-slider-vertical .ui-slider-range-max { top: 0; }/*!
+ * jQuery UI Tabs 1.8.19
+ *
+ * Copyright 2012, AUTHORS.txt (http://jqueryui.com/about)
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://jquery.org/license
+ *
+ * http://docs.jquery.com/UI/Tabs#theming
+ */
+.ui-tabs { position: relative; padding: .2em; zoom: 1; } /* position: relative prevents IE scroll bug (element with position: relative inside container with overflow: auto appear as "fixed") */
+.ui-tabs .ui-tabs-nav { margin: 0; padding: .2em .2em 0; }
+.ui-tabs .ui-tabs-nav li { list-style: none; float: left; position: relative; top: 1px; margin: 0 .2em 1px 0; border-bottom: 0 !important; padding: 0; white-space: nowrap; }
+.ui-tabs .ui-tabs-nav li a { float: left; padding: .5em 1em; text-decoration: none; }
+.ui-tabs .ui-tabs-nav li.ui-tabs-selected { margin-bottom: 0; padding-bottom: 1px; }
+.ui-tabs .ui-tabs-nav li.ui-tabs-selected a, .ui-tabs .ui-tabs-nav li.ui-state-disabled a, .ui-tabs .ui-tabs-nav li.ui-state-processing a { cursor: text; }
+.ui-tabs .ui-tabs-nav li a, .ui-tabs.ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-selected a { cursor: pointer; } /* first selector in group seems obsolete, but required to overcome bug in Opera applying cursor: text overall if defined elsewhere... */
+.ui-tabs .ui-tabs-panel { display: block; border-width: 0; padding: 1em 1.4em; background: none; }
+.ui-tabs .ui-tabs-hide { display: none !important; }
+/*!
+ * jQuery UI Datepicker 1.8.19
+ *
+ * Copyright 2012, AUTHORS.txt (http://jqueryui.com/about)
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://jquery.org/license
+ *
+ * http://docs.jquery.com/UI/Datepicker#theming
+ */
+.ui-datepicker { width: 17em; padding: .2em .2em 0; display: none; }
+.ui-datepicker .ui-datepicker-header { position:relative; padding:.2em 0; }
+.ui-datepicker .ui-datepicker-prev, .ui-datepicker .ui-datepicker-next { position:absolute; top: 2px; width: 1.8em; height: 1.8em; }
+.ui-datepicker .ui-datepicker-prev-hover, .ui-datepicker .ui-datepicker-next-hover { top: 1px; }
+.ui-datepicker .ui-datepicker-prev { left:2px; }
+.ui-datepicker .ui-datepicker-next { right:2px; }
+.ui-datepicker .ui-datepicker-prev-hover { left:1px; }
+.ui-datepicker .ui-datepicker-next-hover { right:1px; }
+.ui-datepicker .ui-datepicker-prev span, .ui-datepicker .ui-datepicker-next span { display: block; position: absolute; left: 50%; margin-left: -8px; top: 50%; margin-top: -8px;  }
+.ui-datepicker .ui-datepicker-title { margin: 0 2.3em; line-height: 1.8em; text-align: center; }
+.ui-datepicker .ui-datepicker-title select { font-size:1em; margin:1px 0; }
+.ui-datepicker select.ui-datepicker-month-year {width: 100%;}
+.ui-datepicker select.ui-datepicker-month, 
+.ui-datepicker select.ui-datepicker-year { width: 49%;}
+.ui-datepicker table {width: 100%; font-size: .9em; border-collapse: collapse; margin:0 0 .4em; }
+.ui-datepicker th { padding: .7em .3em; text-align: center; font-weight: bold; border: 0;  }
+.ui-datepicker td { border: 0; padding: 1px; }
+.ui-datepicker td span, .ui-datepicker td a { display: block; padding: .2em; text-align: right; text-decoration: none; }
+.ui-datepicker .ui-datepicker-buttonpane { background-image: none; margin: .7em 0 0 0; padding:0 .2em; border-left: 0; border-right: 0; border-bottom: 0; }
+.ui-datepicker .ui-datepicker-buttonpane button { float: right; margin: .5em .2em .4em; cursor: pointer; padding: .2em .6em .3em .6em; width:auto; overflow:visible; }
+.ui-datepicker .ui-datepicker-buttonpane button.ui-datepicker-current { float:left; }
+
+/* with multiple calendars */
+.ui-datepicker.ui-datepicker-multi { width:auto; }
+.ui-datepicker-multi .ui-datepicker-group { float:left; }
+.ui-datepicker-multi .ui-datepicker-group table { width:95%; margin:0 auto .4em; }
+.ui-datepicker-multi-2 .ui-datepicker-group { width:50%; }
+.ui-datepicker-multi-3 .ui-datepicker-group { width:33.3%; }
+.ui-datepicker-multi-4 .ui-datepicker-group { width:25%; }
+.ui-datepicker-multi .ui-datepicker-group-last .ui-datepicker-header { border-left-width:0; }
+.ui-datepicker-multi .ui-datepicker-group-middle .ui-datepicker-header { border-left-width:0; }
+.ui-datepicker-multi .ui-datepicker-buttonpane { clear:left; }
+.ui-datepicker-row-break { clear:both; width:100%; font-size:0em; }
+
+/* RTL support */
+.ui-datepicker-rtl { direction: rtl; }
+.ui-datepicker-rtl .ui-datepicker-prev { right: 2px; left: auto; }
+.ui-datepicker-rtl .ui-datepicker-next { left: 2px; right: auto; }
+.ui-datepicker-rtl .ui-datepicker-prev:hover { right: 1px; left: auto; }
+.ui-datepicker-rtl .ui-datepicker-next:hover { left: 1px; right: auto; }
+.ui-datepicker-rtl .ui-datepicker-buttonpane { clear:right; }
+.ui-datepicker-rtl .ui-datepicker-buttonpane button { float: left; }
+.ui-datepicker-rtl .ui-datepicker-buttonpane button.ui-datepicker-current { float:right; }
+.ui-datepicker-rtl .ui-datepicker-group { float:right; }
+.ui-datepicker-rtl .ui-datepicker-group-last .ui-datepicker-header { border-right-width:0; border-left-width:1px; }
+.ui-datepicker-rtl .ui-datepicker-group-middle .ui-datepicker-header { border-right-width:0; border-left-width:1px; }
+
+/* IE6 IFRAME FIX (taken from datepicker 1.5.3 */
+.ui-datepicker-cover {
+    display: none; /*sorry for IE5*/
+    display/**/: block; /*sorry for IE5*/
+    position: absolute; /*must have*/
+    z-index: -1; /*must have*/
+    filter: mask(); /*must have*/
+    top: -4px; /*must have*/
+    left: -4px; /*must have*/
+    width: 200px; /*must have*/
+    height: 200px; /*must have*/
+}/*!
+ * jQuery UI Progressbar 1.8.19
+ *
+ * Copyright 2012, AUTHORS.txt (http://jqueryui.com/about)
+ * Dual licensed under the MIT or GPL Version 2 licenses.
+ * http://jquery.org/license
+ *
+ * http://docs.jquery.com/UI/Progressbar#theming
+ */
+.ui-progressbar { height:2em; text-align: left; overflow: hidden; }
+.ui-progressbar .ui-progressbar-value {margin: -1px; height:100%; }
+.ui-tooltip,.qtip{position:absolute;left:-28000px;top:-28000px;display:none;max-width:320px;min-width:50px;font-size:10.5px;line-height:12px;}.ui-tooltip-fluid{display:block;visibility:hidden;position:static!important;float:left!important;}.ui-tooltip-content{position:relative;padding:5px 9px;overflow:hidden;border:1px solid #000001;text-align:left;word-wrap:break-word;overflow:hidden;}.ui-tooltip-titlebar{position:relative;min-height:14px;padding:5px 35px 5px 10px;overflow:hidden;border:1px solid #000001;border-width:1px 1px 0;font-weight:bold;}.ui-tooltip-titlebar+.ui-tooltip-content{border-top-width:0!important;}/*!Default close button class */ .ui-tooltip-titlebar .ui-state-default{position:absolute;right:4px;top:50%;margin-top:-9px;cursor:pointer;outline:medium none;border-width:1px;border-style:solid;}* html .ui-tooltip-titlebar .ui-state-default{top:16px;}.ui-tooltip-titlebar .ui-icon,.ui-tooltip-icon .ui-icon{display:block;text-indent:-1000em;}.ui-tooltip-icon,.ui-tooltip-icon .ui-icon{-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;}.ui-tooltip-icon .ui-icon{width:18px;height:14px;text-align:center;text-indent:0;font:normal bold 10px/13px Tahoma,sans-serif;color:inherit;background:transparent none no-repeat -100em -100em;}/*!Default tooltip style */ .ui-tooltip-default .ui-tooltip-titlebar,.ui-tooltip-default .ui-tooltip-content{border-color:#F1D031;background-color:#FFFFA3;color:#555;}.ui-tooltip-default .ui-tooltip-titlebar{background-color:#FFEF93;}.ui-tooltip-default .ui-tooltip-icon{border-color:#CCC;background:#F1F1F1;color:#777;}.ui-tooltip-default .ui-tooltip-titlebar .ui-state-hover{border-color:#AAA;color:#111;}.ui-tooltip .ui-tooltip-tip{margin:0 auto;overflow:hidden;z-index:10;}.ui-tooltip .ui-tooltip-tip,.ui-tooltip .ui-tooltip-tip *{position:absolute;line-height:.1px!important;font-size:.1px!important;color:#123456;background:transparent;border:0 dashed transparent;}.ui-tooltip .ui-tooltip-tip canvas{top:0;left:0;}#qtip-overlay{position:fixed;left:-10000em;top:-10000em;}#qtip-overlay.blurs{cursor:pointer;}#qtip-overlay div{position:absolute;left:0;top:0;width:100%;height:100%;background-color:black;opacity:.7;filter:alpha(opacity=70);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";}/*!Light tooltip style */ .ui-tooltip-light .ui-tooltip-titlebar,.ui-tooltip-light .ui-tooltip-content{border-color:#E2E2E2;color:#454545;}.ui-tooltip-light .ui-tooltip-content{background-color:white;}.ui-tooltip-light .ui-tooltip-titlebar{background-color:#f1f1f1;}/*!Dark tooltip style */ .ui-tooltip-dark .ui-tooltip-titlebar,.ui-tooltip-dark .ui-tooltip-content{border-color:#303030;color:#f3f3f3;}.ui-tooltip-dark .ui-tooltip-content{background-color:#505050;}.ui-tooltip-dark .ui-tooltip-titlebar{background-color:#404040;}.ui-tooltip-dark .ui-tooltip-icon{border-color:#444;}.ui-tooltip-dark .ui-tooltip-titlebar .ui-state-hover{border-color:#303030;}/*!Cream tooltip style */ .ui-tooltip-cream .ui-tooltip-titlebar,.ui-tooltip-cream .ui-tooltip-content{border-color:#F9E98E;color:#A27D35;}.ui-tooltip-cream .ui-tooltip-content{background-color:#FBF7AA;}.ui-tooltip-cream .ui-tooltip-titlebar{background-color:#F0DE7D;}.ui-tooltip-cream .ui-state-default .ui-tooltip-icon{background-position:-82px 0;}/*!Red tooltip style */ .ui-tooltip-red .ui-tooltip-titlebar,.ui-tooltip-red .ui-tooltip-content{border-color:#D95252;color:#912323;}.ui-tooltip-red .ui-tooltip-content{background-color:#F78B83;}.ui-tooltip-red .ui-tooltip-titlebar{background-color:#F06D65;}.ui-tooltip-red .ui-state-default .ui-tooltip-icon{background-position:-102px 0;}.ui-tooltip-red .ui-tooltip-icon{border-color:#D95252;}.ui-tooltip-red .ui-tooltip-titlebar .ui-state-hover{border-color:#D95252;}/*!Green tooltip style */ .ui-tooltip-green .ui-tooltip-titlebar,.ui-tooltip-green .ui-tooltip-content{border-color:#90D93F;color:#3F6219;}.ui-tooltip-green .ui-tooltip-content{background-color:#CAED9E;}.ui-tooltip-green .ui-tooltip-titlebar{background-color:#B0DE78;}.ui-tooltip-green .ui-state-default .ui-tooltip-icon{background-position:-42px 0;}/*!Blue tooltip style */ .ui-tooltip-blue .ui-tooltip-titlebar,.ui-tooltip-blue .ui-tooltip-content{border-color:#ADD9ED;color:#5E99BD;}.ui-tooltip-blue .ui-tooltip-content{background-color:#E5F6FE;}.ui-tooltip-blue .ui-tooltip-titlebar{background-color:#D0E9F5;}.ui-tooltip-blue .ui-state-default .ui-tooltip-icon{background-position:-2px 0;}/*!Add shadows to your tooltips in:FF3+,Chrome 2+,Opera 10.6+,IE6+,Safari 2+*/ .ui-tooltip-shadow{-webkit-box-shadow:1px 1px 3px 1px rgba(0,0,0,0.15);-moz-box-shadow:1px 1px 3px 1px rgba(0,0,0,0.15);box-shadow:1px 1px 3px 1px rgba(0,0,0,0.15);}.ui-tooltip-shadow .ui-tooltip-titlebar,.ui-tooltip-shadow .ui-tooltip-content{filter:progid:DXImageTransform.Microsoft.Shadow(Color='gray',Direction=135,Strength=3);-ms-filter:"progid:DXImageTransform.Microsoft.Shadow(Color='gray',Direction=135,Strength=3)";_margin-bottom:-3px;.margin-bottom:-3px;}/*!Add rounded corners to your tooltips in:FF3+,Chrome 2+,Opera 10.6+,IE9+,Safari 2+*/ .ui-tooltip-rounded,.ui-tooltip-rounded .ui-tooltip-content,.ui-tooltip-tipsy,.ui-tooltip-tipsy .ui-tooltip-content,.ui-tooltip-youtube,.ui-tooltip-youtube .ui-tooltip-content{-moz-border-radius:4px;-webkit-border-radius:4px;border-radius:4px;}.ui-tooltip-rounded .ui-tooltip-titlebar,.ui-tooltip-tipsy .ui-tooltip-titlebar,.ui-tooltip-youtube .ui-tooltip-titlebar{-moz-border-radius:5px 5px 0 0;-webkit-border-radius:5px 5px 0 0;border-radius:5px 5px 0 0;}.ui-tooltip-rounded .ui-tooltip-titlebar+.ui-tooltip-content,.ui-tooltip-tipsy .ui-tooltip-titlebar+.ui-tooltip-content,.ui-tooltip-youtube .ui-tooltip-titlebar+.ui-tooltip-content{-moz-border-radius:0 0 5px 5px;-webkit-border-radius:0 0 5px 5px;border-radius:0 0 5px 5px;}/*!Youtube tooltip style */ .ui-tooltip-youtube{-webkit-box-shadow:0 0 3px #333;-moz-box-shadow:0 0 3px #333;box-shadow:0 0 3px #333;}.ui-tooltip-youtube .ui-tooltip-titlebar,.ui-tooltip-youtube .ui-tooltip-content{_margin-bottom:0;.margin-bottom:0;background:transparent;background:rgba(0,0,0,0.85);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#D9000000,endColorstr=#D9000000);-ms-filter:"progid:DXImageTransform.Microsoft.gradient(startColorstr=#D9000000,endColorstr=#D9000000)";color:white;border-color:#CCC;}.ui-tooltip-youtube .ui-tooltip-icon{border-color:#222;}.ui-tooltip-youtube .ui-tooltip-titlebar .ui-state-hover{border-color:#303030;}.ui-tooltip-jtools{background:#232323;background:rgba(0,0,0,0.7);background-image:-moz-linear-gradient(top,#717171,#232323);background-image:-webkit-gradient(linear,left top,left bottom,from(#717171),to(#232323));border:2px solid #ddd;border:2px solid rgba(241,241,241,1);-moz-border-radius:2px;-webkit-border-radius:2px;border-radius:2px;-webkit-box-shadow:0 0 12px #333;-moz-box-shadow:0 0 12px #333;box-shadow:0 0 12px #333;}.ui-tooltip-jtools .ui-tooltip-titlebar{filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#717171,endColorstr=#4A4A4A);-ms-filter:"progid:DXImageTransform.Microsoft.gradient(startColorstr=#717171,endColorstr=#4A4A4A)";}.ui-tooltip-jtools .ui-tooltip-content{filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#4A4A4A,endColorstr=#232323);-ms-filter:"progid:DXImageTransform.Microsoft.gradient(startColorstr=#4A4A4A,endColorstr=#232323)";}.ui-tooltip-jtools .ui-tooltip-titlebar,.ui-tooltip-jtools .ui-tooltip-content{background:transparent;color:white;border:0 dashed transparent;}.ui-tooltip-jtools .ui-tooltip-icon{border-color:#555;}.ui-tooltip-jtools .ui-tooltip-titlebar .ui-state-hover{border-color:#333;}.ui-tooltip-cluetip{-webkit-box-shadow:4px 4px 5px rgba(0,0,0,0.4);-moz-box-shadow:4px 4px 5px rgba(0,0,0,0.4);box-shadow:4px 4px 5px rgba(0,0,0,0.4);}.ui-tooltip-cluetip .ui-tooltip-titlebar{background-color:#87876A;color:white;border:0 dashed transparent;}.ui-tooltip-cluetip .ui-tooltip-content{background-color:#D9D9C2;color:#111;border:0 dashed transparent;}.ui-tooltip-cluetip .ui-tooltip-icon{border-color:#808064;}.ui-tooltip-cluetip .ui-tooltip-titlebar .ui-state-hover{border-color:#696952;color:#696952;}.ui-tooltip-tipsy{border:0;}.ui-tooltip-tipsy .ui-tooltip-titlebar,.ui-tooltip-tipsy .ui-tooltip-content{_margin-bottom:0;.margin-bottom:0;background:transparent;background:rgba(0,0,0,.87);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#D9000000,endColorstr=#D9000000);-ms-filter:"progid:DXImageTransform.Microsoft.gradient(startColorstr=#D9000000,endColorstr=#D9000000)";color:white;border:0 transparent;font-size:11px;font-family:'Lucida Grande',sans-serif;font-weight:bold;line-height:16px;text-shadow:0 1px black;}.ui-tooltip-tipsy .ui-tooltip-titlebar{padding:6px 35px 0 10;}.ui-tooltip-tipsy .ui-tooltip-content{padding:6px 10;}.ui-tooltip-tipsy .ui-tooltip-icon{border-color:#222;text-shadow:none;}.ui-tooltip-tipsy .ui-tooltip-titlebar .ui-state-hover{border-color:#303030;}.ui-tooltip-tipped .ui-tooltip-titlebar,.ui-tooltip-tipped .ui-tooltip-content{border:3px solid #959FA9;filter:none;-ms-filter:none;}.ui-tooltip-tipped .ui-tooltip-titlebar{background:#3A79B8;background-image:-moz-linear-gradient(top,#3A79B8,#2E629D);background-image:-webkit-gradient(linear,left top,left bottom,from(#3A79B8),to(#2E629D));filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#3A79B8,endColorstr=#2E629D);-ms-filter:"progid:DXImageTransform.Microsoft.gradient(startColorstr=#3A79B8,endColorstr=#2E629D)";color:white;font-weight:normal;font-family:serif;border-bottom-width:0;-moz-border-radius:3px 3px 0 0;-webkit-border-radius:3px 3px 0 0;border-radius:3px 3px 0 0;}.ui-tooltip-tipped .ui-tooltip-content{background-color:#F9F9F9;color:#454545;-moz-border-radius:0 0 3px 3px;-webkit-border-radius:0 0 3px 3px;border-radius:0 0 3px 3px;}.ui-tooltip-tipped .ui-tooltip-icon{border:2px solid #285589;background:#285589;}.ui-tooltip-tipped .ui-tooltip-icon .ui-icon{background-color:#FBFBFB;color:#555;}.ui-tooltip:not(.ie9haxors) div.ui-tooltip-content,.ui-tooltip:not(.ie9haxors) div.ui-tooltip-titlebar{filter:none;-ms-filter:none;}
+div.ticker-handler{
+    overflow: hidden;
+    position: relative;
+}
+div.ticker-handler-horizontal{
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+}
+div.ticker-handler-horizontal div.ticker-element{
+    float: left;
+}
+div.ticker-handler-horizontal ul li{
+    display: inline;
+}
+.flexigrid{font-family:Arial, Helvetica, sans-serif;font-size:11px;position:relative;border:0 solid #eee;overflow:hidden;color:#000}
+.flexigrid.hideBody{height:26px!important;border-bottom:1px solid #ccc}
+.ie6fullwidthbug{border-right:0 solid #ccc;padding-right:2px}
+.flexigrid div.nDiv{background:#eee url(/assets/jquery.flexigrid/line.gif) repeat-y -1px top;border:1px solid #ccc;border-top:0;overflow:auto;left:0;position:absolute;z-index:999;float:left}
+.flexigrid div.nDiv table{margin:2px}
+.flexigrid div.hDivBox{float:left;padding-right:40px}
+.flexigrid div.bDiv table{margin-bottom:10px;border-bottom:1px solid #ccc}
+.flexigrid div.bDiv table.autoht{border-bottom:0;margin-bottom:0}
+.flexigrid div.nDiv td{border:1px solid #eee;cursor:default;padding:2px 3px}
+.flexigrid div.nDiv tr:hover td,.flexigrid div.nDiv tr.ndcolover td{background:#d5effc url(/assets/jquery.flexigrid/hl.png) repeat-x top;border:1px solid #a8d8eb}
+.flexigrid div.nDiv td.ndcol1{border-right:1px solid #ccc}
+.flexigrid div.nDiv td.ndcol2{border-left:1px solid #fff;padding-right:10px}
+.flexigrid div.nDiv tr:hover td.ndcol1,.flexigrid div.nDiv tr.ndcolover td.ndcol1{border-right:1px solid #d2e3ec}
+.flexigrid div.nDiv tr:hover td.ndcol2,.flexigrid div.nDiv tr.ndcolover td.ndcol2{border-left:1px solid #eef8ff}
+.flexigrid div.nBtn{position:absolute;height:24px;width:14px;z-index:900;background:#fafafa url(/assets/jquery.flexigrid/fhbg.gif) repeat-x bottom;border:0 solid #ccc;border-left:1px solid #ccc;top:0;left:0;margin-top:1px;cursor:pointer;display:none}
+.flexigrid div.nBtn div{height:24px;width:12px;border-left:1px solid #fff;float:left;background:url(/assets/jquery.flexigrid/ddn.png) no-repeat center}
+.flexigrid div.nBtn.srtd{background:url(/assets/jquery.flexigrid/wbg.gif) repeat-x 0 -1px}
+.flexigrid div.mDiv{background:url(/assets/jquery.flexigrid/wbg.gif) repeat-x top;border:1px solid #ccc;border-bottom:0;border-top:0;font-weight:700;display:block;overflow:hidden;white-space:nowrap;position:relative}
+.flexigrid div.mDiv div{white-space:nowrap;padding:6px}
+.flexigrid div.mDiv div.ptogtitle{position:absolute;top:4px;right:3px;height:16px;width:16px;overflow:hidden;border:1px solid #ccc;cursor:pointer;padding:0}
+.flexigrid div.mDiv div.ptogtitle:hover{background-position:left -2px;border-color:#bbb}
+.flexigrid div.mDiv div.ptogtitle span{display:block;border-left:1px solid #eee;border-top:1px solid #fff;border-bottom:1px solid #ddd;width:14px;height:14px;background:url(/assets/jquery.flexigrid/uup.png) no-repeat center}
+.flexigrid div.mDiv div.ptogtitle.vsble span{background:url(/assets/jquery.flexigrid/ddn.png) no-repeat center}
+.flexigrid div.tDiv /*toolbar*/{background:#fafafa url(/assets/jquery.flexigrid/bg.gif) repeat-x top;position:relative;border:1px solid #ccc;border-bottom:0;overflow:hidden}
+.flexigrid div.tDiv2{float:left;clear:both;padding:1px}
+.flexigrid div.sDiv /*toolbar*/{background:#fafafa url(/assets/jquery.flexigrid/bg.gif) repeat-x top;position:relative;border:1px solid #ccc;border-top:0;overflow:hidden;display:none}
+.flexigrid div.sDiv2{float:left;clear:both;width:1024px;padding:5px}
+.flexigrid div.sDiv2 input,.flexigrid div.sDiv2 select{vertical-align:middle}
+.flexigrid div.btnseparator{float:left;height:22px;border-left:1px solid #ccc;border-right:1px solid #fff;margin:1px}
+.flexigrid div.fbutton{float:left;display:block;cursor:pointer;padding:1px}
+.flexigrid div.fbutton div{float:left;padding:1px 3px}
+.flexigrid div.fbutton span{float:left;display:block;padding:3px}
+.flexigrid div.fbutton:hover,.flexigrid div.fbutton.fbOver{border:1px solid #ccc;padding:0}
+.flexigrid div.fbutton:hover div,.flexigrid div.fbutton.fbOver div{border-left:1px solid #fff;border-top:1px solid #fff;border-right:1px solid #eee;border-bottom:1px solid #eee;padding:0 2px}
+.flexigrid div.hDiv{background:#fafafa url(/assets/jquery.flexigrid/fhbg.gif) repeat-x bottom;position:relative;border:1px solid #ccc;border-bottom:0;overflow:hidden}
+.flexigrid div.hDiv table{border-right:1px solid #fff}
+.flexigrid div.cDrag{float:left;position:absolute;z-index:2;overflow:visible}
+.flexigrid div.cDrag div{float:left;background:none;display:block;position:absolute;height:24px;width:5px;cursor:col-resize}
+.flexigrid div.cDrag div:hover,.flexigrid div.cDrag div.dragging{background:url(/assets/jquery.flexigrid/line.gif) repeat-y 2px center}
+.flexigrid div.iDiv{border:1px solid #316ac5;position:absolute;overflow:visible;background:none}
+.flexigrid div.iDiv input,.flexigrid div.iDiv select,.flexigrid div.iDiv textarea{font-family:Arial, Helvetica, sans-serif;font-size:11px}
+.flexigrid div.iDiv input.tb{border:0;width:100%;height:100%;background:none;padding:0}
+.flexigrid div.bDiv{border:1px solid #ccc;border-top:0;background:#fff;overflow:auto;position:relative}
+.flexigrid div.hGrip{position:absolute;top:0;right:0;height:5px;width:5px;background:url(/assets/jquery.flexigrid/line.gif) repeat-x center;margin-right:1px;cursor:col-resize}
+.flexigrid div.hGrip:hover,.flexigrid div.hGrip.hgOver{border-right:1px solid #999;margin-right:0}
+.flexigrid div.vGrip{height:5px;overflow:hidden;position:relative;background:#fafafa url(/assets/jquery.flexigrid/wbg.gif) repeat-x 0 -1px;border:1px solid #ccc;border-top:0;text-align:center;cursor:row-resize}
+.flexigrid div.vGrip span{display:block;width:20px;height:1px;overflow:hidden;border-top:1px solid #aaa;border-bottom:1px solid #aaa;background:none;margin:1px auto}
+.flexigrid div.hDiv th,.flexigrid div.bDiv td
+/* common cell properties*/{text-align:left;border-right:1px solid #ddd;border-left:1px solid #fff;overflow:hidden;vertical-align:top!important;padding-left:0;padding-right:0}
+.flexigrid div.hDiv th div,.flexigrid div.bDiv td div,div.colCopy div
+/* common inner cell properties*/{border-left:0 solid #fff;padding:5px}
+.flexigrid div.hDiv th,div.colCopy{font-weight:400;height:24px;cursor:default;white-space:nowrap;overflow:hidden}
+div.colCopy{font-family:Arial, Helvetica, sans-serif;font-size:11px;background:#fafafa url(/assets/jquery.flexigrid/fhbg.gif) repeat-x bottom;border:1px solid #ccc;border-bottom:0;overflow:hidden}
+.flexigrid div.hDiv th.sorted{background:url(/assets/jquery.flexigrid/wbg.gif) repeat-x 0 -1px;border-bottom:0 solid #ccc}
+.flexigrid div.hDiv th.thOver div,.flexigrid div.hDiv th.sorted.thOver div{border-bottom:1px solid orange;padding-bottom:4px}
+.flexigrid div.hDiv th.sorted div{border-bottom:0 solid #ccc;padding-bottom:5px}
+.flexigrid div.hDiv th.thMove{background:#fff;color:#fff}
+.flexigrid div.hDiv th.sorted.thMove div{border-bottom:1px solid #fff;padding-bottom:4px}
+.flexigrid div.hDiv th.thMove div{background:#fff!important}
+.flexigrid div.hDiv th div.sdesc{background:url(/assets/jquery.flexigrid/dn.png) no-repeat center top}
+.flexigrid div.hDiv th div.sasc{background:url(/assets/jquery.flexigrid/up.png) no-repeat center top}
+.flexigrid div.bDiv td{border-bottom:1px solid #fff;vertical-align:top;white-space:nowrap}
+.flexigrid span.cdropleft{display:block;background:url(/assets/jquery.flexigrid/prev.gif) no-repeat -4px center;width:24px;height:24px;position:relative;top:-24px;margin-bottom:-24px;z-index:3}
+.flexigrid div.hDiv span.cdropright{display:block;background:url(/assets/jquery.flexigrid/next.gif) no-repeat 12px center;width:24px;height:24px;float:right;position:relative;top:-24px;margin-bottom:-24px}
+.flexigrid div.bDiv td div{border-top:0 solid #fff;padding-bottom:4px}
+.flexigrid tr td.sorted{background:#f3f3f3;border-right:1px solid #ddd;border-bottom:1px solid #f3f3f3}
+.flexigrid tr.erow td{background:#f7f7f7;border-bottom:1px solid #f7f7f7}
+.flexigrid tr.erow td.sorted{background:#e3e3e3;border-bottom:1px solid #e3e3e3}
+.flexigrid div.bDiv tr:hover td,.flexigrid div.bDiv tr:hover td.sorted,.flexigrid div.bDiv tr.trOver td.sorted,.flexigrid div.bDiv tr.trOver td{background:#d9ebf5;border-left:1px solid #eef8ff;border-bottom:1px dotted #a8d8eb}
+.flexigrid div.bDiv tr.trSelected:hover td,.flexigrid div.bDiv tr.trSelected:hover td.sorted,.flexigrid div.bDiv tr.trOver.trSelected td.sorted,.flexigrid div.bDiv tr.trOver.trSelected td,.flexigrid tr.trSelected td.sorted,.flexigrid tr.trSelected td{background:#d5effc url(/assets/jquery.flexigrid/hl.png) repeat-x top;border-right:1px solid #d2e3ec;border-left:1px solid #eef8ff;border-bottom:1px solid #a8d8eb}
+.flexigrid.novstripe .bDiv table{border-bottom:1px solid #ccc;border-right:1px solid #ccc}
+.flexigrid.novstripe div.bDiv td{border-right-color:#fff}
+.flexigrid.novstripe div.bDiv tr.erow td.sorted{border-right-color:#e3e3e3}
+.flexigrid.novstripe div.bDiv tr td.sorted{border-right-color:#f3f3f3}
+.flexigrid.novstripe div.bDiv tr.erow td{border-right-color:#f7f7f7;border-left-color:#f7f7f7}
+.flexigrid.novstripe div.bDiv tr.trSelected:hover td,.flexigrid.novstripe div.bDiv tr.trSelected:hover td.sorted,.flexigrid.novstripe div.bDiv tr.trOver.trSelected td.sorted,.flexigrid.novstripe div.bDiv tr.trOver.trSelected td,.flexigrid.novstripe tr.trSelected td.sorted,.flexigrid.novstripe tr.trSelected td{border-right:1px solid #06F;border-left:1px solid #06F}
+.flexigrid.novstripe div.bDiv tr.trOver td,.flexigrid.novstripe div.bDiv tr:hover td{border-left-color:#d9ebf5;border-right-color:#d9ebf5}
+.flexigrid div.pDiv{background:url(/assets/jquery.flexigrid/wbg.gif) repeat-x 0 -1px;border:1px solid #ccc;border-top:0;overflow:hidden;white-space:nowrap;position:relative}
+.flexigrid div.pDiv div.pDiv2{float:left;width:1024px;margin:3px 3px 3px -2px}
+div.pGroup{float:left;background:none;height:24px;margin:0 5px}
+.flexigrid div.pDiv .pPageStat,.flexigrid div.pDiv .pcontrol{position:relative;top:5px;overflow:visible}
+.flexigrid div.pDiv input{vertical-align:text-top;position:relative;top:-5px}
+.flexigrid div.pDiv div.pButton{float:left;width:22px;height:22px;border:0;cursor:pointer;overflow:hidden}
+.flexigrid div.pDiv div.pButton:hover,.flexigrid div.pDiv div.pButton.pBtnOver{width:20px;height:20px;border:1px solid #ccc;cursor:pointer}
+.flexigrid div.pDiv div.pButton span{width:20px;height:20px;display:block;float:left}
+.flexigrid div.pDiv div.pButton:hover span,.flexigrid div.pDiv div.pButton.pBtnOver span{width:19px;height:19px;border-top:1px solid #fff;border-left:1px solid #fff}
+.flexigrid .pSearch{background:url(/assets/jquery.flexigrid/magnifier.png) no-repeat center}
+.flexigrid .pFirst{background:url(/assets/jquery.flexigrid/first.gif) no-repeat center}
+.flexigrid .pPrev{background:url(/assets/jquery.flexigrid/prev.gif) no-repeat center}
+.flexigrid .pNext{background:url(/assets/jquery.flexigrid/next.gif) no-repeat center}
+.flexigrid .pLast{background:url(/assets/jquery.flexigrid/last.gif) no-repeat center}
+.flexigrid .pReload{background:url(/assets/jquery.flexigrid/load.png) no-repeat center}
+.flexigrid .pReload.loading{background:url(/assets/jquery.flexigrid/load.gif) no-repeat center}
+.flexigrid.ie div.hDiv th div,.flexigrid.ie div.bDiv td div,div.colCopy.ie div
+/* common inner cell properties*/{overflow:hidden}
+/******************************************************************************
+ *** Sizes definition
+ ******************************************************************************/
+/******************************************************************************
+ *** Colors definition
+ ******************************************************************************/
+/******************************************************************************
+ *** Font definition
+ ******************************************************************************/
+/******************************************************************************
+ *** Functions definition
+ ******************************************************************************/
+/******************************************************************************
+ *** Columns definition
+ ******************************************************************************/
+.cs5 {
+  overflow: hidden;
+  margin: 0 auto;
+  zoom: 1; }
+  .cs5:before, .cs5:after {
+    content: "\0020";
+    display: block;
+    height: 0px;
+    overflow: hidden;
+    visibility: hidden;
+    width: 0px; }
+  .cs5:after {
+    clear: both; }
+  .cs5 .c1 {
+    float: left;
+    margin-right: 20px;
+    width: 220px; }
+  .cs5 .c2 {
+    float: left;
+    margin-right: 20px;
+    width: 460px; }
+  .cs5 .c3 {
+    float: left;
+    margin-right: 20px;
+    width: 700px; }
+  .cs5 .c4 {
+    float: left;
+    margin-right: 20px;
+    width: 940px; }
+  .cs5 .c5 {
+    float: left;
+    margin-right: 20px;
+    width: 1180px; }
+  .cs5 .ce {
+    margin-right: 0px; }
+
+.cs10 {
+  overflow: hidden;
+  margin: 0 auto;
+  zoom: 1; }
+  .cs10:before, .cs10:after {
+    content: "\0020";
+    display: block;
+    height: 0px;
+    overflow: hidden;
+    visibility: hidden;
+    width: 0px; }
+  .cs10:after {
+    clear: both; }
+  .cs10 .c1 {
+    float: left;
+    margin-right: 20px;
+    width: 100px; }
+  .cs10 .c2 {
+    float: left;
+    margin-right: 20px;
+    width: 220px; }
+  .cs10 .c3 {
+    float: left;
+    margin-right: 20px;
+    width: 340px; }
+  .cs10 .c4 {
+    float: left;
+    margin-right: 20px;
+    width: 460px; }
+  .cs10 .c5 {
+    float: left;
+    margin-right: 20px;
+    width: 580px; }
+  .cs10 .c6 {
+    float: left;
+    margin-right: 20px;
+    width: 700px; }
+  .cs10 .c7 {
+    float: left;
+    margin-right: 20px;
+    width: 820px; }
+  .cs10 .c8 {
+    float: left;
+    margin-right: 20px;
+    width: 940px; }
+  .cs10 .c9 {
+    float: left;
+    margin-right: 20px;
+    width: 1060px; }
+  .cs10 .c10 {
+    float: left;
+    margin-right: 20px;
+    width: 1180px; }
+  .cs10 .ce {
+    margin-right: 0px; }
+
+.cs15 {
+  overflow: hidden;
+  margin: 0 auto;
+  zoom: 1; }
+  .cs15:before, .cs15:after {
+    content: "\0020";
+    display: block;
+    height: 0px;
+    overflow: hidden;
+    visibility: hidden;
+    width: 0px; }
+  .cs15:after {
+    clear: both; }
+  .cs15 .c1 {
+    float: left;
+    margin-right: 20px;
+    width: 60px; }
+  .cs15 .c2 {
+    float: left;
+    margin-right: 20px;
+    width: 140px; }
+  .cs15 .c3 {
+    float: left;
+    margin-right: 20px;
+    width: 220px; }
+  .cs15 .c4 {
+    float: left;
+    margin-right: 20px;
+    width: 300px; }
+  .cs15 .c5 {
+    float: left;
+    margin-right: 20px;
+    width: 380px; }
+  .cs15 .c6 {
+    float: left;
+    margin-right: 20px;
+    width: 460px; }
+  .cs15 .c7 {
+    float: left;
+    margin-right: 20px;
+    width: 540px; }
+  .cs15 .c8 {
+    float: left;
+    margin-right: 20px;
+    width: 620px; }
+  .cs15 .c9 {
+    float: left;
+    margin-right: 20px;
+    width: 700px; }
+  .cs15 .c10 {
+    float: left;
+    margin-right: 20px;
+    width: 780px; }
+  .cs15 .c11 {
+    float: left;
+    margin-right: 20px;
+    width: 860px; }
+  .cs15 .c12 {
+    float: left;
+    margin-right: 20px;
+    width: 940px; }
+  .cs15 .c13 {
+    float: left;
+    margin-right: 20px;
+    width: 1020px; }
+  .cs15 .c14 {
+    float: left;
+    margin-right: 20px;
+    width: 1100px; }
+  .cs15 .c15 {
+    float: left;
+    margin-right: 20px;
+    width: 1180px; }
+  .cs15 .ce {
+    margin-right: 0px; }
+
+.clear {
+  clear: both;
+  display: block;
+  height: 0px;
+  overflow: hidden;
+  visibility: hidden;
+  width: 0px; }
+/*
+* Application CSS
+*
+
+
+
+
+
+
+
+
+*/
+/* 
+ * http://meyerweb.com/eric/tools/css/reset/ 
+ * v2.0 | 20110126
+ * License: none (public domain)
+ */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+/******************************************************************************
+ *** Sizes definition
+ ******************************************************************************/
+/******************************************************************************
+ *** Colors definition
+ ******************************************************************************/
+/******************************************************************************
+ *** Font definition
+ ******************************************************************************/
+/******************************************************************************
+*** General definition
+******************************************************************************/
+body {
+  background: url("/images/bg-body.jpg") repeat-x;
+  text-align: center; }
+  body.simple {
+    background: none; }
+
+body {
+  font-family: arial, verdana, sans-serif;
+  font-size: 12px; }
+  body table,
+  body input,
+  body textarea,
+  body p, body span, body div {
+    font-family: arial, verdana, sans-serif;
+    font-size: 12px; }
+
+#page-margins {
+  margin: auto;
+  min-height: 500px;
+  text-align: left;
+  width: 1210px; }
+  #page-margins #page {
+    padding: 0px 15px; }
+    #page-margins #page #header {
+      background: white url(/images/bg-header.jpg) no-repeat; }
+      #page-margins #page #header .right-top {
+        line-height: 25px;
+        padding-right: 10px;
+        text-align: right; }
+      #page-margins #page #header .right-middle {
+        color: #ffffff;
+        line-height: 25px;
+        padding-right: 10px;
+        text-align: right; }
+      #page-margins #page #header .right-bottom {
+        line-height: 25px;
+        padding-right: 10px;
+        text-align: right; }
+      #page-margins #page #header .title {
+        float: right;
+        font-size: 24px;
+        height: 40px;
+        line-height: 0.55em;
+        margin-top: 35px;
+        padding-right: 10px;
+        text-align: center; }
+        #page-margins #page #header .title .website a {
+          color: #000000;
+          font-size: 14px;
+          text-decoration: none; }
+      #page-margins #page #header .bottom {
+        background-color: #016798;
+        color: white;
+        margin-top: 2px;
+        overflow: hidden; }
+    #page-margins #page #content {
+      margin-top: 5px; }
+
+#content {
+  text-align: left; }
+
+h1 {
+  font-size: 2.0em;
+  font-weight: bold;
+  line-height: 1.2em;
+  margin-bottom: 1em; }
+
+h3 {
+  font-size: 1.3em;
+  font-weight: bold;
+  line-height: 1.2em;
+  margin-bottom: 0.5em; }
+
+h4 {
+  font-size: 1.3em;
+  font-style: italic;
+  line-height: 1.2em;
+  margin-bottom: 0.5em; }
+
+.td-right {
+  text-align: right; }
+
+.tabs {
+  visibility: hidden; }
+
+/******************************************************************************
+*** Menu definition
+******************************************************************************/
+#menu {
+  clear: both;
+  margin-bottom: 20px; }
+  #menu .menu-item a {
+    background-color: #016798;
+    color: white;
+    display: block;
+    font-size: 1.4em;
+    font-weight: bold;
+    padding: 0.4em 0px;
+    text-align: center;
+    text-decoration: none; }
+    #menu .menu-item a:hover {
+      background-color: white;
+      border: 2px solid #016798;
+      color: #016798;
+      padding: 2px 0px; }
+
+/******************************************************************************
+*** Breadcrumb definition
+******************************************************************************/
+#breadcrumb {
+  float: left;
+  padding: 0.5em 1em; }
+  #breadcrumb a {
+    color: white;
+    text-decoration: none; }
+    #breadcrumb a:hover {
+      text-decoration: underline; }
+  #breadcrumb span {
+    padding: 0px 2px; }
+
+/******************************************************************************
+*** Language bar definition
+******************************************************************************/
+#lang {
+  float: right;
+  margin-top: 2px;
+  padding: 0.5em 1em 0.5em 0; }
+  #lang a {
+    color: #016798;
+    text-decoration: none; }
+    #lang a:hover, #lang a.active {
+      text-decoration: underline; }
+
+/******************************************************************************
+*** Footer definition
+******************************************************************************/
+#footer {
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+  margin-top: 1em;
+  overflow: hidden;
+  padding: 0.5em; }
+  #footer .header {
+    float: left;
+    font-weight: bold;
+    margin-right: 0.5em; }
+  #footer .ticker li {
+    margin-right: 10px; }
+
+/******************************************************************************
+*** Element definition
+******************************************************************************/
+div.box {
+  border: 1px solid #016798;
+  border-radius: 5px; }
+  div.box div.header {
+    background-color: #016798;
+    color: white;
+    font-size: 1.1em;
+    padding: 0.5em 0.5em; }
+  div.box div.content {
+    min-height: 10px; }
+    div.box div.content div.section {
+      padding: 0.5em; }
+    div.box div.content div.sep {
+      background-color: #016798;
+      height: 1px;
+      margin: 0.5em 0px; }
+  div.box.box-with-tabs {
+    border: none; }
+    div.box.box-with-tabs div.header {
+      background: none;
+      overflow: hidden;
+      padding: 0px; }
+      div.box.box-with-tabs div.header div.htab {
+        background-color: #016798;
+        color: white;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        cursor: pointer;
+        float: left;
+        height: 25px;
+        line-height: 25px;
+        margin-right: 2px;
+        opacity: 0.5;
+        padding: 0px 20px 0px 10px; }
+        div.box.box-with-tabs div.header div.htab.active {
+          opacity: 1; }
+        div.box.box-with-tabs div.header div.htab:hover {
+          opacity: 1; }
+    div.box.box-with-tabs div.content {
+      border: 1px solid #016798;
+      border-bottom-left-radius: 5px;
+      border-bottom-right-radius: 5px; }
+      div.box.box-with-tabs div.content div.ctab {
+        display: none; }
+        div.box.box-with-tabs div.content div.ctab.active {
+          display: block; }
+
+div.table div.header {
+  background-color: #016798;
+  color: white;
+  font-size: 1.1em;
+  font-weight: bold;
+  line-height: 1.2em;
+  padding: 0.5em 0.5em; }

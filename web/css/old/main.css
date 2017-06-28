@@ -1,0 +1,351 @@
+/******************************************************************************
+ *** Sizes definition
+ ******************************************************************************/
+/******************************************************************************
+ *** Colors definition
+ ******************************************************************************/
+/******************************************************************************
+ *** Font definition
+ ******************************************************************************/
+/******************************************************************************
+ *** General definition
+ ******************************************************************************/
+#content div.box div.content input[type="checkbox"],
+#content div.box div.content input[type="radio"] {
+  display: inline-block;
+  position: relative;
+  top: 2px; }
+#content div.box div.content span.icon {
+  display: inline-block;
+  height: 15px;
+  margin-right: 5px;
+  position: relative;
+  width: 15px; }
+  #content div.box div.content span.icon:before {
+    font-size: 22px;
+    line-height: 10px;
+    position: absolute; }
+  #content div.box div.content span.icon.legend:before {
+    content: '\25CF';
+    left: 0px;
+    top: 3px; }
+  #content div.box div.content span.icon.sitetype:before {
+    content: '\2605';
+    font-size: 18px;
+    left: -1px;
+    top: 1px; }
+  #content div.box div.content span.icon.network:before {
+    content: '\25C6';
+    font-size: 18px;
+    left: -1px;
+    top: 1px; }
+#content div.box div.content .sites {
+  overflow: hidden; }
+  #content div.box div.content .sites ul {
+    float: left;
+    margin-right: 20px;
+    width: 213px; }
+    #content div.box div.content .sites ul li span.icon:before {
+      top: 4px; }
+  #content div.box div.content .sites select {
+    width: 213px; }
+    #content div.box div.content .sites select.select-0 {
+      margin-top: 23px; }
+    #content div.box div.content .sites select.select-1 {
+      margin-top: 46px; }
+    #content div.box div.content .sites select.select-2 {
+      margin-top: 69px; }
+    #content div.box div.content .sites select.select-3 {
+      margin-top: 92px; }
+    #content div.box div.content .sites select.select-4 {
+      margin-top: 115px; }
+    #content div.box div.content .sites select.select-5 {
+      margin-top: 138px; }
+    #content div.box div.content .sites select.select-6 {
+      margin-top: 161px; }
+    #content div.box div.content .sites select.select-7 {
+      margin-top: 184px; }
+    #content div.box div.content .sites select.select-8 {
+      margin-top: 207px; }
+    #content div.box div.content .sites select.select-9 {
+      margin-top: 230px; }
+    #content div.box div.content .sites select.select-10 {
+      margin-top: 253px; }
+    #content div.box div.content .sites select.select-11 {
+      margin-top: 276px; }
+    #content div.box div.content .sites select.select-12 {
+      margin-top: 299px; }
+    #content div.box div.content .sites select.select-13 {
+      margin-top: 322px; }
+    #content div.box div.content .sites select.select-14 {
+      margin-top: 345px; }
+    #content div.box div.content .sites select.select-15 {
+      margin-top: 368px; }
+    #content div.box div.content .sites select.select-16 {
+      margin-top: 391px; }
+    #content div.box div.content .sites select.select-17 {
+      margin-top: 414px; }
+    #content div.box div.content .sites select.select-18 {
+      margin-top: 437px; }
+    #content div.box div.content .sites select.select-19 {
+      margin-top: 460px; }
+    #content div.box div.content .sites select.select-20 {
+      margin-top: 483px; }
+    #content div.box div.content .sites select.select-21 {
+      margin-top: 506px; }
+    #content div.box div.content .sites select.select-22 {
+      margin-top: 529px; }
+    #content div.box div.content .sites select.select-23 {
+      margin-top: 552px; }
+    #content div.box div.content .sites select.select-24 {
+      margin-top: 575px; }
+    #content div.box div.content .sites select.select-25 {
+      margin-top: 598px; }
+    #content div.box div.content .sites select.select-26 {
+      margin-top: 621px; }
+    #content div.box div.content .sites select.select-27 {
+      margin-top: 644px; }
+    #content div.box div.content .sites select.select-28 {
+      margin-top: 667px; }
+    #content div.box div.content .sites select.select-29 {
+      margin-top: 690px; }
+    #content div.box div.content .sites select.select-30 {
+      margin-top: 713px; }
+    #content div.box div.content .sites select.select-31 {
+      margin-top: 736px; }
+    #content div.box div.content .sites select.select-32 {
+      margin-top: 759px; }
+    #content div.box div.content .sites select.select-33 {
+      margin-top: 782px; }
+    #content div.box div.content .sites select.select-34 {
+      margin-top: 805px; }
+    #content div.box div.content .sites select.select-35 {
+      margin-top: 828px; }
+    #content div.box div.content .sites select.select-36 {
+      margin-top: 851px; }
+    #content div.box div.content .sites select.select-37 {
+      margin-top: 874px; }
+    #content div.box div.content .sites select.select-38 {
+      margin-top: 897px; }
+    #content div.box div.content .sites select.select-39 {
+      margin-top: 920px; }
+    #content div.box div.content .sites select.select-40 {
+      margin-top: 943px; }
+    #content div.box div.content .sites select.select-41 {
+      margin-top: 966px; }
+    #content div.box div.content .sites select.select-42 {
+      margin-top: 989px; }
+    #content div.box div.content .sites select.select-43 {
+      margin-top: 1012px; }
+    #content div.box div.content .sites select.select-44 {
+      margin-top: 1035px; }
+    #content div.box div.content .sites select.select-45 {
+      margin-top: 1058px; }
+    #content div.box div.content .sites select.select-46 {
+      margin-top: 1081px; }
+    #content div.box div.content .sites select.select-47 {
+      margin-top: 1104px; }
+    #content div.box div.content .sites select.select-48 {
+      margin-top: 1127px; }
+    #content div.box div.content .sites select.select-49 {
+      margin-top: 1150px; }
+    #content div.box div.content .sites select.select-50 {
+      margin-top: 1173px; }
+#content div.box div.content .automatic_network_stations {
+  overflow: hidden; }
+  #content div.box div.content .automatic_network_stations ul {
+    float: left;
+    margin-right: 20px;
+    width: 213px; }
+    #content div.box div.content .automatic_network_stations ul li span.icon:before {
+      top: 4px; }
+  #content div.box div.content .automatic_network_stations select {
+    width: 213px; }
+    #content div.box div.content .automatic_network_stations select.select-0 {
+      margin-top: 23px; }
+    #content div.box div.content .automatic_network_stations select.select-1 {
+      margin-top: 46px; }
+    #content div.box div.content .automatic_network_stations select.select-2 {
+      margin-top: 69px; }
+    #content div.box div.content .automatic_network_stations select.select-3 {
+      margin-top: 92px; }
+    #content div.box div.content .automatic_network_stations select.select-4 {
+      margin-top: 115px; }
+    #content div.box div.content .automatic_network_stations select.select-5 {
+      margin-top: 138px; }
+    #content div.box div.content .automatic_network_stations select.select-6 {
+      margin-top: 161px; }
+    #content div.box div.content .automatic_network_stations select.select-7 {
+      margin-top: 184px; }
+    #content div.box div.content .automatic_network_stations select.select-8 {
+      margin-top: 207px; }
+    #content div.box div.content .automatic_network_stations select.select-9 {
+      margin-top: 230px; }
+    #content div.box div.content .automatic_network_stations select.select-10 {
+      margin-top: 253px; }
+    #content div.box div.content .automatic_network_stations select.select-11 {
+      margin-top: 276px; }
+    #content div.box div.content .automatic_network_stations select.select-12 {
+      margin-top: 299px; }
+    #content div.box div.content .automatic_network_stations select.select-13 {
+      margin-top: 322px; }
+    #content div.box div.content .automatic_network_stations select.select-14 {
+      margin-top: 345px; }
+    #content div.box div.content .automatic_network_stations select.select-15 {
+      margin-top: 368px; }
+    #content div.box div.content .automatic_network_stations select.select-16 {
+      margin-top: 391px; }
+    #content div.box div.content .automatic_network_stations select.select-17 {
+      margin-top: 414px; }
+    #content div.box div.content .automatic_network_stations select.select-18 {
+      margin-top: 437px; }
+    #content div.box div.content .automatic_network_stations select.select-19 {
+      margin-top: 460px; }
+    #content div.box div.content .automatic_network_stations select.select-20 {
+      margin-top: 483px; }
+    #content div.box div.content .automatic_network_stations select.select-21 {
+      margin-top: 506px; }
+    #content div.box div.content .automatic_network_stations select.select-22 {
+      margin-top: 529px; }
+    #content div.box div.content .automatic_network_stations select.select-23 {
+      margin-top: 552px; }
+    #content div.box div.content .automatic_network_stations select.select-24 {
+      margin-top: 575px; }
+    #content div.box div.content .automatic_network_stations select.select-25 {
+      margin-top: 598px; }
+    #content div.box div.content .automatic_network_stations select.select-26 {
+      margin-top: 621px; }
+    #content div.box div.content .automatic_network_stations select.select-27 {
+      margin-top: 644px; }
+    #content div.box div.content .automatic_network_stations select.select-28 {
+      margin-top: 667px; }
+    #content div.box div.content .automatic_network_stations select.select-29 {
+      margin-top: 690px; }
+    #content div.box div.content .automatic_network_stations select.select-30 {
+      margin-top: 713px; }
+    #content div.box div.content .automatic_network_stations select.select-31 {
+      margin-top: 736px; }
+    #content div.box div.content .automatic_network_stations select.select-32 {
+      margin-top: 759px; }
+    #content div.box div.content .automatic_network_stations select.select-33 {
+      margin-top: 782px; }
+    #content div.box div.content .automatic_network_stations select.select-34 {
+      margin-top: 805px; }
+    #content div.box div.content .automatic_network_stations select.select-35 {
+      margin-top: 828px; }
+    #content div.box div.content .automatic_network_stations select.select-36 {
+      margin-top: 851px; }
+    #content div.box div.content .automatic_network_stations select.select-37 {
+      margin-top: 874px; }
+    #content div.box div.content .automatic_network_stations select.select-38 {
+      margin-top: 897px; }
+    #content div.box div.content .automatic_network_stations select.select-39 {
+      margin-top: 920px; }
+    #content div.box div.content .automatic_network_stations select.select-40 {
+      margin-top: 943px; }
+    #content div.box div.content .automatic_network_stations select.select-41 {
+      margin-top: 966px; }
+    #content div.box div.content .automatic_network_stations select.select-42 {
+      margin-top: 989px; }
+    #content div.box div.content .automatic_network_stations select.select-43 {
+      margin-top: 1012px; }
+    #content div.box div.content .automatic_network_stations select.select-44 {
+      margin-top: 1035px; }
+    #content div.box div.content .automatic_network_stations select.select-45 {
+      margin-top: 1058px; }
+    #content div.box div.content .automatic_network_stations select.select-46 {
+      margin-top: 1081px; }
+    #content div.box div.content .automatic_network_stations select.select-47 {
+      margin-top: 1104px; }
+    #content div.box div.content .automatic_network_stations select.select-48 {
+      margin-top: 1127px; }
+    #content div.box div.content .automatic_network_stations select.select-49 {
+      margin-top: 1150px; }
+    #content div.box div.content .automatic_network_stations select.select-50 {
+      margin-top: 1173px; }
+
+/******************************************************************************
+ *** Map definition
+ ******************************************************************************/
+#content div.map div.content {
+  overflow: hidden;
+  padding: 15px;
+  position: relative; }
+  #content div.map div.content div.content-wrap {
+    height: 290px;
+    position: relative;
+    width: 100%; }
+    #content div.map div.content div.content-wrap img {
+      height: 100%;
+      position: absolute;
+      width: 100%; }
+    #content div.map div.content div.content-wrap #zoom_closebtn {
+      background: url(/images/close.png) no-repeat;
+      cursor: pointer;
+      display: none;
+      height: 16px;
+      left: -10px;
+      position: absolute;
+      top: -10px;
+      width: 16px;
+      z-index: 3000; }
+  #content div.map div.content span.location {
+    display: none;
+    position: absolute;
+    z-index: 1050; }
+    #content div.map div.content span.location span.text, #content div.map div.content span.location span.title {
+      display: none; }
+  #content div.map div.content span.sublocation {
+    display: none;
+    position: absolute;
+    z-index: 2050; }
+    #content div.map div.content span.sublocation span.text, #content div.map div.content span.sublocation span.title {
+      display: none; }
+  #content div.map div.content div.zoomarea {
+    background-color: #D1DCFF;
+    border: 1px dashed #016798;
+    cursor: pointer;
+    opacity: 0.7;
+    position: absolute;
+    z-index: 1000; }
+    #content div.map div.content div.zoomarea:hover {
+      border: 1px dashed #444444; }
+
+/******************************************************************************
+ *** Map legend definition
+ ******************************************************************************/
+#content div.map-legend div.content li {
+  line-height: 20px; }
+
+/******************************************************************************
+ *** Map table definition
+ ******************************************************************************/
+#content div.map-table {
+  margin-top: 0.5em; }
+  #content div.map-table table {
+    width: 100%; }
+    #content div.map-table table th.date {
+      width: 16%; }
+    #content div.map-table table th.value {
+      width: 18%; }
+    #content div.map-table table th.error {
+      width: 18%; }
+    #content div.map-table table th.unit {
+      width: 10%; }
+    #content div.map-table table th.station {
+      width: 38%; }
+
+/******************************************************************************
+ *** Advanced search form
+ ******************************************************************************/
+#advsearch select {
+  width: 100%; }
+#advsearch .advsearch_stations {
+  display: none; }
+  #advsearch .advsearch_stations select {
+    display: none; }
+#advsearch .advsearch_nuclides {
+  display: none; }
+#advsearch .advsearch_submits {
+  display: none;
+  margin-top: 15px; }
