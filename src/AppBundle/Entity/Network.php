@@ -3,6 +3,8 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 
 /**
  * Network
@@ -12,6 +14,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Network
 {
+	use ORMBehaviors\Translatable\Translatable;
+	
     /**
      * @var integer
      *
@@ -20,6 +24,18 @@ class Network
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
+    
+    /**
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
+     */
+    private $createdAt;
+    
+    /**
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime")
+     */
+    private $updatedAt;
 
     /**
      * @var string
@@ -27,34 +43,6 @@ class Network
      * @ORM\Column(name="code", type="string", length=30, nullable=true)
      */
     private $code;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="name_de", type="string", length=100, nullable=true)
-     */
-    private $nameDe;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="name_fr", type="string", length=100, nullable=true)
-     */
-    private $nameFr;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="name_it", type="string", length=100, nullable=true)
-     */
-    private $nameIt;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="name_en", type="string", length=100, nullable=true)
-     */
-    private $nameEn;
 
     /**
      * @var boolean
@@ -69,21 +57,6 @@ class Network
      * @ORM\Column(name="network_category_id", type="integer", nullable=true)
      */
     private $networkCategoryId;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="created_at", type="datetime", nullable=false)
-     */
-    private $createdAt;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="updated_at", type="datetime", nullable=false)
-     */
-    private $updatedAt;
-
 
 
     /**
@@ -118,102 +91,6 @@ class Network
     public function getCode()
     {
         return $this->code;
-    }
-
-    /**
-     * Set nameDe
-     *
-     * @param string $nameDe
-     *
-     * @return Network
-     */
-    public function setNameDe($nameDe)
-    {
-        $this->nameDe = $nameDe;
-
-        return $this;
-    }
-
-    /**
-     * Get nameDe
-     *
-     * @return string
-     */
-    public function getNameDe()
-    {
-        return $this->nameDe;
-    }
-
-    /**
-     * Set nameFr
-     *
-     * @param string $nameFr
-     *
-     * @return Network
-     */
-    public function setNameFr($nameFr)
-    {
-        $this->nameFr = $nameFr;
-
-        return $this;
-    }
-
-    /**
-     * Get nameFr
-     *
-     * @return string
-     */
-    public function getNameFr()
-    {
-        return $this->nameFr;
-    }
-
-    /**
-     * Set nameIt
-     *
-     * @param string $nameIt
-     *
-     * @return Network
-     */
-    public function setNameIt($nameIt)
-    {
-        $this->nameIt = $nameIt;
-
-        return $this;
-    }
-
-    /**
-     * Get nameIt
-     *
-     * @return string
-     */
-    public function getNameIt()
-    {
-        return $this->nameIt;
-    }
-
-    /**
-     * Set nameEn
-     *
-     * @param string $nameEn
-     *
-     * @return Network
-     */
-    public function setNameEn($nameEn)
-    {
-        $this->nameEn = $nameEn;
-
-        return $this;
-    }
-
-    /**
-     * Get nameEn
-     *
-     * @return string
-     */
-    public function getNameEn()
-    {
-        return $this->nameEn;
     }
 
     /**
@@ -265,20 +142,6 @@ class Network
     }
 
     /**
-     * Set createdAt
-     *
-     * @param \DateTime $createdAt
-     *
-     * @return Network
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    /**
      * Get createdAt
      *
      * @return \DateTime
@@ -286,20 +149,6 @@ class Network
     public function getCreatedAt()
     {
         return $this->createdAt;
-    }
-
-    /**
-     * Set updatedAt
-     *
-     * @param \DateTime $updatedAt
-     *
-     * @return Network
-     */
-    public function setUpdatedAt($updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
     }
 
     /**

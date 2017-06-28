@@ -4,6 +4,8 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 
 /**
  * Legend
@@ -13,6 +15,8 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class Legend
 {
+	use ORMBehaviors\Translatable\Translatable;
+	
     /**
      * @var integer
      *
@@ -23,32 +27,16 @@ class Legend
     private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="name_de", type="text", length=65535, nullable=true)
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
      */
-    private $nameDe;
-
+    private $createdAt;
+    
     /**
-     * @var string
-     *
-     * @ORM\Column(name="name_fr", type="text", length=65535, nullable=true)
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime")
      */
-    private $nameFr;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="name_it", type="text", length=65535, nullable=true)
-     */
-    private $nameIt;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="name_en", type="text", length=65535, nullable=true)
-     */
-    private $nameEn;
+    private $updatedAt;
 
     /**
      * @var integer
@@ -56,20 +44,6 @@ class Legend
      * @ORM\Column(name="sorting", type="integer", nullable=true)
      */
     private $sorting;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="created_at", type="datetime", nullable=false)
-     */
-    private $createdAt;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="updated_at", type="datetime", nullable=false)
-     */
-    private $updatedAt;
 
     /**
      * @var boolean
@@ -97,6 +71,21 @@ class Legend
     public function __construct() {
     	$this->stations = new ArrayCollection();
     }
+    
+    /**
+     * @param $method
+     * @param $args
+     *
+     * @return mixed
+     */
+    public function __call($method, $args)
+    {
+    	if (!method_exists(self::getTranslationEntityClass(), $method)) {
+    		$method = 'get' . ucfirst($method);
+    	}
+    
+    	return $this->proxyCurrentLocaleTranslation($method, $args);
+    }
 
     /**
      * Get id
@@ -106,102 +95,6 @@ class Legend
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set nameDe
-     *
-     * @param string $nameDe
-     *
-     * @return Legend
-     */
-    public function setNameDe($nameDe)
-    {
-        $this->nameDe = $nameDe;
-
-        return $this;
-    }
-
-    /**
-     * Get nameDe
-     *
-     * @return string
-     */
-    public function getNameDe()
-    {
-        return $this->nameDe;
-    }
-
-    /**
-     * Set nameFr
-     *
-     * @param string $nameFr
-     *
-     * @return Legend
-     */
-    public function setNameFr($nameFr)
-    {
-        $this->nameFr = $nameFr;
-
-        return $this;
-    }
-
-    /**
-     * Get nameFr
-     *
-     * @return string
-     */
-    public function getNameFr()
-    {
-        return $this->nameFr;
-    }
-
-    /**
-     * Set nameIt
-     *
-     * @param string $nameIt
-     *
-     * @return Legend
-     */
-    public function setNameIt($nameIt)
-    {
-        $this->nameIt = $nameIt;
-
-        return $this;
-    }
-
-    /**
-     * Get nameIt
-     *
-     * @return string
-     */
-    public function getNameIt()
-    {
-        return $this->nameIt;
-    }
-
-    /**
-     * Set nameEn
-     *
-     * @param string $nameEn
-     *
-     * @return Legend
-     */
-    public function setNameEn($nameEn)
-    {
-        $this->nameEn = $nameEn;
-
-        return $this;
-    }
-
-    /**
-     * Get nameEn
-     *
-     * @return string
-     */
-    public function getNameEn()
-    {
-        return $this->nameEn;
     }
 
     /**
@@ -229,20 +122,6 @@ class Legend
     }
 
     /**
-     * Set createdAt
-     *
-     * @param \DateTime $createdAt
-     *
-     * @return Legend
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    /**
      * Get createdAt
      *
      * @return \DateTime
@@ -250,20 +129,6 @@ class Legend
     public function getCreatedAt()
     {
         return $this->createdAt;
-    }
-
-    /**
-     * Set updatedAt
-     *
-     * @param \DateTime $updatedAt
-     *
-     * @return Legend
-     */
-    public function setUpdatedAt($updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
     }
 
     /**
@@ -322,5 +187,10 @@ class Legend
     public function getColor()
     {
         return $this->color;
+    }
+    
+    public function getStations()
+    {
+    	return $this->stations;
     }
 }

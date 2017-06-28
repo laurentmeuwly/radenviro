@@ -2,8 +2,9 @@
 
 namespace AppBundle\Entity;
 
-use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 
 /**
  * AutomaticNetworkStation
@@ -13,6 +14,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class AutomaticNetworkStation
 {
+	use ORMBehaviors\Translatable\Translatable;
+	
     /**
      * @var integer
      *
@@ -23,60 +26,16 @@ class AutomaticNetworkStation
     private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="name_de", type="string", length=100, nullable=true)
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
      */
-    private $nameDe;
-
+    private $createdAt;
+    
     /**
-     * @var string
-     *
-     * @ORM\Column(name="name_fr", type="string", length=100, nullable=true)
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime")
      */
-    private $nameFr;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="name_it", type="string", length=100, nullable=true)
-     */
-    private $nameIt;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="name_en", type="string", length=100, nullable=true)
-     */
-    private $nameEn;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="description_de", type="text", length=65535, nullable=true)
-     */
-    private $descriptionDe;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="description_fr", type="text", length=65535, nullable=true)
-     */
-    private $descriptionFr;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="description_it", type="text", length=65535, nullable=true)
-     */
-    private $descriptionIt;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="description_en", type="text", length=65535, nullable=true)
-     */
-    private $descriptionEn;
+    private $updatedAt;
 
     /**
      * @var string
@@ -119,20 +78,7 @@ class AutomaticNetworkStation
      */
     private $automaticNetwork;
 
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="created_at", type="datetime", nullable=false)
-     */
-    private $createdAt;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="updated_at", type="datetime", nullable=false)
-     */
-    private $updatedAt;
-
+    
 
     public function setPosition($position)
     {
@@ -152,102 +98,6 @@ class AutomaticNetworkStation
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set nameDe
-     *
-     * @param string $nameDe
-     *
-     * @return AutomaticNetworkStation
-     */
-    public function setNameDe($nameDe)
-    {
-        $this->nameDe = $nameDe;
-
-        return $this;
-    }
-
-    /**
-     * Get nameDe
-     *
-     * @return string
-     */
-    public function getNameDe()
-    {
-        return $this->nameDe;
-    }
-
-    /**
-     * Set nameFr
-     *
-     * @param string $nameFr
-     *
-     * @return AutomaticNetworkStation
-     */
-    public function setNameFr($nameFr)
-    {
-        $this->nameFr = $nameFr;
-
-        return $this;
-    }
-
-    /**
-     * Get nameFr
-     *
-     * @return string
-     */
-    public function getNameFr()
-    {
-        return $this->nameFr;
-    }
-
-    /**
-     * Set nameIt
-     *
-     * @param string $nameIt
-     *
-     * @return AutomaticNetworkStation
-     */
-    public function setNameIt($nameIt)
-    {
-        $this->nameIt = $nameIt;
-
-        return $this;
-    }
-
-    /**
-     * Get nameIt
-     *
-     * @return string
-     */
-    public function getNameIt()
-    {
-        return $this->nameIt;
-    }
-
-    /**
-     * Set nameEn
-     *
-     * @param string $nameEn
-     *
-     * @return AutomaticNetworkStation
-     */
-    public function setNameEn($nameEn)
-    {
-        $this->nameEn = $nameEn;
-
-        return $this;
-    }
-
-    /**
-     * Get nameEn
-     *
-     * @return string
-     */
-    public function getNameEn()
-    {
-        return $this->nameEn;
     }
 
     /**
@@ -272,78 +122,6 @@ class AutomaticNetworkStation
     public function getDescriptionDe()
     {
         return $this->descriptionDe;
-    }
-
-    /**
-     * Set descriptionFr
-     *
-     * @param string $descriptionFr
-     *
-     * @return AutomaticNetworkStation
-     */
-    public function setDescriptionFr($descriptionFr)
-    {
-        $this->descriptionFr = $descriptionFr;
-
-        return $this;
-    }
-
-    /**
-     * Get descriptionFr
-     *
-     * @return string
-     */
-    public function getDescriptionFr()
-    {
-        return $this->descriptionFr;
-    }
-
-    /**
-     * Set descriptionIt
-     *
-     * @param string $descriptionIt
-     *
-     * @return AutomaticNetworkStation
-     */
-    public function setDescriptionIt($descriptionIt)
-    {
-        $this->descriptionIt = $descriptionIt;
-
-        return $this;
-    }
-
-    /**
-     * Get descriptionIt
-     *
-     * @return string
-     */
-    public function getDescriptionIt()
-    {
-        return $this->descriptionIt;
-    }
-
-    /**
-     * Set descriptionEn
-     *
-     * @param string $descriptionEn
-     *
-     * @return AutomaticNetworkStation
-     */
-    public function setDescriptionEn($descriptionEn)
-    {
-        $this->descriptionEn = $descriptionEn;
-
-        return $this;
-    }
-
-    /**
-     * Get descriptionEn
-     *
-     * @return string
-     */
-    public function getDescriptionEn()
-    {
-        return $this->descriptionEn;
     }
 
     /**
@@ -467,20 +245,6 @@ class AutomaticNetworkStation
     }
 
     /**
-     * Set createdAt
-     *
-     * @param \DateTime $createdAt
-     *
-     * @return AutomaticNetworkStation
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    /**
      * Get createdAt
      *
      * @return \DateTime
@@ -488,20 +252,6 @@ class AutomaticNetworkStation
     public function getCreatedAt()
     {
         return $this->createdAt;
-    }
-
-    /**
-     * Set updatedAt
-     *
-     * @param \DateTime $updatedAt
-     *
-     * @return AutomaticNetworkStation
-     */
-    public function setUpdatedAt($updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
     }
 
     /**

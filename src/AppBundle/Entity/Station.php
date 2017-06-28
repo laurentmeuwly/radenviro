@@ -4,6 +4,8 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 
 /**
  * Station
@@ -13,6 +15,8 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class Station
 {
+	use ORMBehaviors\Translatable\Translatable;
+	
     /**
      * @var integer
      *
@@ -21,6 +25,18 @@ class Station
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
+    
+    /**
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
+     */
+    private $createdAt;
+    
+    /**
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime")
+     */
+    private $updatedAt;
 
     /**
      * @var string
@@ -28,34 +44,6 @@ class Station
      * @ORM\Column(name="code", type="string", length=30, nullable=true)
      */
     private $code;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="name_de", type="string", length=100, nullable=true)
-     */
-    private $nameDe;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="name_fr", type="string", length=100, nullable=true)
-     */
-    private $nameFr;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="name_it", type="string", length=100, nullable=true)
-     */
-    private $nameIt;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="name_en", type="string", length=100, nullable=true)
-     */
-    private $nameEn;
 
     /**
      * @var boolean
@@ -72,52 +60,10 @@ class Station
     private $stationType;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="created_at", type="datetime", nullable=false)
-     */
-    private $createdAt;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="updated_at", type="datetime", nullable=false)
-     */
-    private $updatedAt;
-
-    /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Network")
      * 
      */
     private $network;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="description_de", type="text", length=65535, nullable=true)
-     */
-    private $descriptionDe;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="description_fr", type="text", length=65535, nullable=true)
-     */
-    private $descriptionFr;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="description_it", type="text", length=65535, nullable=true)
-     */
-    private $descriptionIt;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="description_en", type="text", length=65535, nullable=true)
-     */
-    private $descriptionEn;
 
     /**
      * @var integer
@@ -158,6 +104,21 @@ class Station
     public function __construct() {
     	$this->legends = new \Doctrine\Common\Collections\ArrayCollection();
     }
+    
+    /**
+     * @param $method
+     * @param $args
+     *
+     * @return mixed
+     */
+    public function __call($method, $args)
+    {
+    	if (!method_exists(self::getTranslationEntityClass(), $method)) {
+    		$method = 'get' . ucfirst($method);
+    	}
+    
+    	return $this->proxyCurrentLocaleTranslation($method, $args);
+    }
 
     /**
      * Get id
@@ -191,102 +152,6 @@ class Station
     public function getCode()
     {
         return $this->code;
-    }
-
-    /**
-     * Set nameDe
-     *
-     * @param string $nameDe
-     *
-     * @return Station
-     */
-    public function setNameDe($nameDe)
-    {
-        $this->nameDe = $nameDe;
-
-        return $this;
-    }
-
-    /**
-     * Get nameDe
-     *
-     * @return string
-     */
-    public function getNameDe()
-    {
-        return $this->nameDe;
-    }
-
-    /**
-     * Set nameFr
-     *
-     * @param string $nameFr
-     *
-     * @return Station
-     */
-    public function setNameFr($nameFr)
-    {
-        $this->nameFr = $nameFr;
-
-        return $this;
-    }
-
-    /**
-     * Get nameFr
-     *
-     * @return string
-     */
-    public function getNameFr()
-    {
-        return $this->nameFr;
-    }
-
-    /**
-     * Set nameIt
-     *
-     * @param string $nameIt
-     *
-     * @return Station
-     */
-    public function setNameIt($nameIt)
-    {
-        $this->nameIt = $nameIt;
-
-        return $this;
-    }
-
-    /**
-     * Get nameIt
-     *
-     * @return string
-     */
-    public function getNameIt()
-    {
-        return $this->nameIt;
-    }
-
-    /**
-     * Set nameEn
-     *
-     * @param string $nameEn
-     *
-     * @return Station
-     */
-    public function setNameEn($nameEn)
-    {
-        $this->nameEn = $nameEn;
-
-        return $this;
-    }
-
-    /**
-     * Get nameEn
-     *
-     * @return string
-     */
-    public function getNameEn()
-    {
-        return $this->nameEn;
     }
 
     /**
@@ -338,20 +203,6 @@ class Station
     }
 
     /**
-     * Set createdAt
-     *
-     * @param \DateTime $createdAt
-     *
-     * @return Station
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    /**
      * Get createdAt
      *
      * @return \DateTime
@@ -359,20 +210,6 @@ class Station
     public function getCreatedAt()
     {
         return $this->createdAt;
-    }
-
-    /**
-     * Set updatedAt
-     *
-     * @param \DateTime $updatedAt
-     *
-     * @return Station
-     */
-    public function setUpdatedAt($updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
     }
 
     /**
@@ -407,102 +244,6 @@ class Station
     public function getNetwork()
     {
         return $this->network;
-    }
-
-    /**
-     * Set descriptionDe
-     *
-     * @param string $descriptionDe
-     *
-     * @return Station
-     */
-    public function setDescriptionDe($descriptionDe)
-    {
-        $this->descriptionDe = $descriptionDe;
-
-        return $this;
-    }
-
-    /**
-     * Get descriptionDe
-     *
-     * @return string
-     */
-    public function getDescriptionDe()
-    {
-        return $this->descriptionDe;
-    }
-
-    /**
-     * Set descriptionFr
-     *
-     * @param string $descriptionFr
-     *
-     * @return Station
-     */
-    public function setDescriptionFr($descriptionFr)
-    {
-        $this->descriptionFr = $descriptionFr;
-
-        return $this;
-    }
-
-    /**
-     * Get descriptionFr
-     *
-     * @return string
-     */
-    public function getDescriptionFr()
-    {
-        return $this->descriptionFr;
-    }
-
-    /**
-     * Set descriptionIt
-     *
-     * @param string $descriptionIt
-     *
-     * @return Station
-     */
-    public function setDescriptionIt($descriptionIt)
-    {
-        $this->descriptionIt = $descriptionIt;
-
-        return $this;
-    }
-
-    /**
-     * Get descriptionIt
-     *
-     * @return string
-     */
-    public function getDescriptionIt()
-    {
-        return $this->descriptionIt;
-    }
-
-    /**
-     * Set descriptionEn
-     *
-     * @param string $descriptionEn
-     *
-     * @return Station
-     */
-    public function setDescriptionEn($descriptionEn)
-    {
-        $this->descriptionEn = $descriptionEn;
-
-        return $this;
-    }
-
-    /**
-     * Get descriptionEn
-     *
-     * @return string
-     */
-    public function getDescriptionEn()
-    {
-        return $this->descriptionEn;
     }
 
     /**
@@ -599,5 +340,10 @@ class Station
     public function getLatitude()
     {
         return $this->latitude;
+    }
+    
+    public function hasCoordinates()
+    {
+    	return $this->getLatitude()!=0 && $this->getLongitude()!=0;
     }
 }

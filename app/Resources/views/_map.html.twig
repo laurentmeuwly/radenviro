@@ -1,4 +1,5 @@
-<div class="c2">
+<div class="cs5">
+  <div class="c2">
     <div class="box map">
       <div class="header">{{ 'main.map.maps of radioactivity measurements'|trans }}</div>
       <div class="content">
@@ -9,10 +10,10 @@
         </div>
       </div>
     </div>
-    <div class="table map-table" id="handler_5_last_result" style="visibility:visible;">
+    <div class="table map-table" id="handler_5_last_result" style="visibility:hidden;">
       <div class="header">
-        <%= t('label.analyzed environment') -%>: <span id="nature_5_last_result"></span><br/>
-        <%= t('label.isotope') -%>: <select class="nuclides" id="nuclides_5_last_result" data-refresh="<%= url_for(:controller => :measures, :action => :data, :type => :nuclide) -%>">
+        {{ 'label.analyzed environments'|trans }}: <span id="nature_5_last_result"></span><br/>
+        {{ 'label.isotope'|trans }}: <select class="nuclides" id="nuclides_5_last_result" data-refresh="<%= url_for(:controller => :measures, :action => :data, :type => :nuclide) -%>">
           <option value=""></option>
         </select>
       </div>

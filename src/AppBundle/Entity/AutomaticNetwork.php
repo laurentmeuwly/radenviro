@@ -3,6 +3,8 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 
 /**
  * AutomaticNetwork
@@ -12,6 +14,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class AutomaticNetwork
 {
+	use ORMBehaviors\Translatable\Translatable;
+	
     /**
      * @var integer
      *
@@ -22,60 +26,16 @@ class AutomaticNetwork
     private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="name_de", type="string", length=100, nullable=true)
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
      */
-    private $nameDe;
-
+    private $createdAt;
+    
     /**
-     * @var string
-     *
-     * @ORM\Column(name="name_fr", type="string", length=100, nullable=true)
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime")
      */
-    private $nameFr;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="name_it", type="string", length=100, nullable=true)
-     */
-    private $nameIt;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="name_en", type="string", length=100, nullable=true)
-     */
-    private $nameEn;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="url_de", type="string", length=255, nullable=true)
-     */
-    private $urlDe;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="url_fr", type="string", length=255, nullable=true)
-     */
-    private $urlFr;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="url_it", type="string", length=255, nullable=true)
-     */
-    private $urlIt;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="url_en", type="string", length=255, nullable=true)
-     */
-    private $urlEn;
+    private $updatedAt;
 
     /**
      * @var string
@@ -98,21 +58,21 @@ class AutomaticNetwork
      */
     private $hidden = '0';
 
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="created_at", type="datetime", nullable=false)
-     */
-    private $createdAt;
 
     /**
-     * @var \DateTime
+     * @param $method
+     * @param $args
      *
-     * @ORM\Column(name="updated_at", type="datetime", nullable=false)
+     * @return mixed
      */
-    private $updatedAt;
-
-
+    public function __call($method, $args)
+    {
+    	if (!method_exists(self::getTranslationEntityClass(), $method)) {
+    		$method = 'get' . ucfirst($method);
+    	}
+    
+    	return $this->proxyCurrentLocaleTranslation($method, $args);
+    }
 
     /**
      * Get id
@@ -122,198 +82,6 @@ class AutomaticNetwork
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set nameDe
-     *
-     * @param string $nameDe
-     *
-     * @return AutomaticNetwork
-     */
-    public function setNameDe($nameDe)
-    {
-        $this->nameDe = $nameDe;
-
-        return $this;
-    }
-
-    /**
-     * Get nameDe
-     *
-     * @return string
-     */
-    public function getNameDe()
-    {
-        return $this->nameDe;
-    }
-
-    /**
-     * Set nameFr
-     *
-     * @param string $nameFr
-     *
-     * @return AutomaticNetwork
-     */
-    public function setNameFr($nameFr)
-    {
-        $this->nameFr = $nameFr;
-
-        return $this;
-    }
-
-    /**
-     * Get nameFr
-     *
-     * @return string
-     */
-    public function getNameFr()
-    {
-        return $this->nameFr;
-    }
-
-    /**
-     * Set nameIt
-     *
-     * @param string $nameIt
-     *
-     * @return AutomaticNetwork
-     */
-    public function setNameIt($nameIt)
-    {
-        $this->nameIt = $nameIt;
-
-        return $this;
-    }
-
-    /**
-     * Get nameIt
-     *
-     * @return string
-     */
-    public function getNameIt()
-    {
-        return $this->nameIt;
-    }
-
-    /**
-     * Set nameEn
-     *
-     * @param string $nameEn
-     *
-     * @return AutomaticNetwork
-     */
-    public function setNameEn($nameEn)
-    {
-        $this->nameEn = $nameEn;
-
-        return $this;
-    }
-
-    /**
-     * Get nameEn
-     *
-     * @return string
-     */
-    public function getNameEn()
-    {
-        return $this->nameEn;
-    }
-
-    /**
-     * Set urlDe
-     *
-     * @param string $urlDe
-     *
-     * @return AutomaticNetwork
-     */
-    public function setUrlDe($urlDe)
-    {
-        $this->urlDe = $urlDe;
-
-        return $this;
-    }
-
-    /**
-     * Get urlDe
-     *
-     * @return string
-     */
-    public function getUrlDe()
-    {
-        return $this->urlDe;
-    }
-
-    /**
-     * Set urlFr
-     *
-     * @param string $urlFr
-     *
-     * @return AutomaticNetwork
-     */
-    public function setUrlFr($urlFr)
-    {
-        $this->urlFr = $urlFr;
-
-        return $this;
-    }
-
-    /**
-     * Get urlFr
-     *
-     * @return string
-     */
-    public function getUrlFr()
-    {
-        return $this->urlFr;
-    }
-
-    /**
-     * Set urlIt
-     *
-     * @param string $urlIt
-     *
-     * @return AutomaticNetwork
-     */
-    public function setUrlIt($urlIt)
-    {
-        $this->urlIt = $urlIt;
-
-        return $this;
-    }
-
-    /**
-     * Get urlIt
-     *
-     * @return string
-     */
-    public function getUrlIt()
-    {
-        return $this->urlIt;
-    }
-
-    /**
-     * Set urlEn
-     *
-     * @param string $urlEn
-     *
-     * @return AutomaticNetwork
-     */
-    public function setUrlEn($urlEn)
-    {
-        $this->urlEn = $urlEn;
-
-        return $this;
-    }
-
-    /**
-     * Get urlEn
-     *
-     * @return string
-     */
-    public function getUrlEn()
-    {
-        return $this->urlEn;
     }
 
     /**
@@ -389,20 +157,6 @@ class AutomaticNetwork
     }
 
     /**
-     * Set createdAt
-     *
-     * @param \DateTime $createdAt
-     *
-     * @return AutomaticNetwork
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    /**
      * Get createdAt
      *
      * @return \DateTime
@@ -410,20 +164,6 @@ class AutomaticNetwork
     public function getCreatedAt()
     {
         return $this->createdAt;
-    }
-
-    /**
-     * Set updatedAt
-     *
-     * @param \DateTime $updatedAt
-     *
-     * @return AutomaticNetwork
-     */
-    public function setUpdatedAt($updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
     }
 
     /**

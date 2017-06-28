@@ -12,11 +12,10 @@ class DefaultController extends Controller
      * @Route("/", name="homepage")
      */
     public function indexAction(Request $request)
-    {
-        // replace this example code with whatever you need
-        return $this->render('default/index.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR,
-        ]);
+    {	
+    	return $this->render('default/radenviro.html.twig', [
+    			'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR,
+    	]);
     }
     
     /**
@@ -36,8 +35,7 @@ class DefaultController extends Controller
     	// retrieve all active automatic networks
     	$automaticNetworks = $em->getRepository('AppBundle:AutomaticNetwork')->findBy(array('hidden' => 0), array('sorting' => 'ASC'));
     	
-    	
-    	return $this->render('default/radenviro.html.twig', array(
+    	return $this->render('data_access.html.twig', array(
     			'legends' => $legends,
     			'siteTypes' => $siteTypes,
     			'automaticNetworks' => $automaticNetworks,
@@ -46,5 +44,84 @@ class DefaultController extends Controller
     	return $this->render('default/radenviro.html.twig', [
     			'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR,
     	]);*/
+    }
+    
+    /**
+     * @Route("/news", name="news")
+     */
+    public function newsAction(Request $request)
+    {
+    	// Getting doctrine manager
+    	$em = $this->getDoctrine()->getManager();
+    	
+    	// retrieve the page to display
+    	$page = $em->getRepository('AppBundle:Page')->findOneBy(array('code' => 'news'));
+
+    	return $this->render('iframe.html.twig', array(
+    			'page' => $page,
+    	));
+    }
+    
+    /**
+     * @Route("/radair", name="radair")
+     */
+    public function radairAction(Request $request)
+    {
+    	// Getting doctrine manager
+    	$em = $this->getDoctrine()->getManager();
+    	 
+    	// retrieve the page to display
+    	$page = $em->getRepository('AppBundle:Page')->findOneBy(array('code' => 'radair'));
+
+    	return $this->render('iframe.html.twig', array(
+    			'page' => $page,
+    	));
+    }
+    
+    /**
+     * @Route("/information", name="information")
+     */
+    public function informationAction(Request $request)
+    {
+    	// Getting doctrine manager
+    	$em = $this->getDoctrine()->getManager();
+    	 
+    	// retrieve the page to display
+    	$page = $em->getRepository('AppBundle:Page')->findOneBy(array('code' => 'informations'));
+    	
+    	return $this->render('iframe.html.twig', array(
+    			'page' => $page,
+    	));
+    }
+    
+    /**
+     * @Route("/convert", name="convert")
+     */
+    public function convertTranslation(Request $request)
+    {
+    	// Getting doctrine manager
+    	$em = $this->getDoctrine()->getManager();
+    	// retrieve all stations
+    	$items = $em->getRepository('AppBundle:NetworkCategory')->findAll();
+    	
+    	
+    	foreach($items as $item)
+    	{		
+    		$item->translate('fr')->setName($item->getNameFr());
+    		$item->translate('de')->setName($item->getNameDe());
+    		$item->translate('it')->setName($item->getNameIt());
+    		$item->translate('en')->setName($item->getNameEn());
+    		
+    		
+    		
+    		
+    			
+    		$item->mergeNewTranslations();
+    			
+    		$em->flush();
+    		
+    	}
+    	
+    	return $this->render('base.html.twig');
     }
 }
