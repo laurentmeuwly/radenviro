@@ -80,34 +80,6 @@ class Nuclide
     private $seconds;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="name_de", type="string", length=80, nullable=true)
-     */
-    private $nameDe;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="name_fr", type="string", length=80, nullable=true)
-     */
-    private $nameFr;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="name_it", type="string", length=80, nullable=true)
-     */
-    private $nameIt;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="name_en", type="string", length=80, nullable=true)
-     */
-    private $nameEn;
-
-    /**
      * @var boolean
      *
      * @ORM\Column(name="hidden", type="boolean", nullable=true)
@@ -122,6 +94,21 @@ class Nuclide
     private $elementId;
 
 
+
+    /**
+     * @param $method
+     * @param $args
+     *
+     * @return mixed
+     */
+    public function __call($method, $args)
+    {
+    	if (!method_exists(self::getTranslationEntityClass(), $method)) {
+    		$method = 'get' . ucfirst($method);
+    	}
+    
+    	return $this->proxyCurrentLocaleTranslation($method, $args);
+    }
 
     /**
      * Get id
@@ -275,102 +262,6 @@ class Nuclide
     public function getSeconds()
     {
         return $this->seconds;
-    }
-
-    /**
-     * Set nameDe
-     *
-     * @param string $nameDe
-     *
-     * @return Nuclide
-     */
-    public function setNameDe($nameDe)
-    {
-        $this->nameDe = $nameDe;
-
-        return $this;
-    }
-
-    /**
-     * Get nameDe
-     *
-     * @return string
-     */
-    public function getNameDe()
-    {
-        return $this->nameDe;
-    }
-
-    /**
-     * Set nameFr
-     *
-     * @param string $nameFr
-     *
-     * @return Nuclide
-     */
-    public function setNameFr($nameFr)
-    {
-        $this->nameFr = $nameFr;
-
-        return $this;
-    }
-
-    /**
-     * Get nameFr
-     *
-     * @return string
-     */
-    public function getNameFr()
-    {
-        return $this->nameFr;
-    }
-
-    /**
-     * Set nameIt
-     *
-     * @param string $nameIt
-     *
-     * @return Nuclide
-     */
-    public function setNameIt($nameIt)
-    {
-        $this->nameIt = $nameIt;
-
-        return $this;
-    }
-
-    /**
-     * Get nameIt
-     *
-     * @return string
-     */
-    public function getNameIt()
-    {
-        return $this->nameIt;
-    }
-
-    /**
-     * Set nameEn
-     *
-     * @param string $nameEn
-     *
-     * @return Nuclide
-     */
-    public function setNameEn($nameEn)
-    {
-        $this->nameEn = $nameEn;
-
-        return $this;
-    }
-
-    /**
-     * Get nameEn
-     *
-     * @return string
-     */
-    public function getNameEn()
-    {
-        return $this->nameEn;
     }
 
     /**

@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class DefaultController extends Controller
 {
@@ -13,6 +14,17 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {	
+    	return $this->render('default/radenviro.html.twig', [
+    			'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR,
+    	]);
+    }
+    
+    /**
+     * @Route("/advanced", name="advanced")
+     * @Security("has_role('ROLE_AUTEUR') and has_role('ROLE_AUTRE')")
+     */
+    public function advancedAction(Request $request)
+    {   	
     	return $this->render('default/radenviro.html.twig', [
     			'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR,
     	]);
@@ -102,7 +114,7 @@ class DefaultController extends Controller
     	// Getting doctrine manager
     	$em = $this->getDoctrine()->getManager();
     	// retrieve all stations
-    	$items = $em->getRepository('AppBundle:NetworkCategory')->findAll();
+    	$items = $em->getRepository('AppBundle:Country')->findAll();
     	
     	
     	foreach($items as $item)
@@ -112,8 +124,10 @@ class DefaultController extends Controller
     		$item->translate('it')->setName($item->getNameIt());
     		$item->translate('en')->setName($item->getNameEn());
     		
-    		
-    		
+    		/*$item->translate('fr')->setDescription($item->getDescriptionFr());
+    		$item->translate('de')->setDescription($item->getDescriptionDe());
+    		$item->translate('it')->setDescription($item->getDescriptionIt());
+    		$item->translate('en')->setDescription($item->getDescriptionEn());*/
     		
     			
     		$item->mergeNewTranslations();

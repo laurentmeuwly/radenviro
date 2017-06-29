@@ -16,8 +16,8 @@ class AutomaticNetworkAdmin extends AbstractAdmin
 	protected function configureListFields(ListMapper $listMapper)
 	{
 		$listMapper
-		->add('name_fr')
-		->add('url_fr')
+		->add('name')
+		->add('url')
 		->add('color')
 		->add('sorting')
 		->add('hidden')

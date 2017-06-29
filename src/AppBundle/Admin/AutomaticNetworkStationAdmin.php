@@ -38,8 +38,8 @@ class AutomaticNetworkStationAdmin extends AbstractAdmin
 	protected function configureListFields(ListMapper $listMapper)
 	{
 		$listMapper
-		->addIdentifier('name_fr')
-		->add('automaticNetwork.nameFr')
+		->addIdentifier('name')
+		->add('automaticNetwork.name')
 		->add('sorting')
 		->add('hidden', 'boolean', array('editable' => true))
 		->add('_action', null, array(

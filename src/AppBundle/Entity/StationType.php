@@ -3,6 +3,8 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 
 /**
  * StationType
@@ -12,6 +14,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class StationType
 {
+	use ORMBehaviors\Translatable\Translatable;
+	
     /**
      * @var integer
      *
@@ -22,56 +26,40 @@ class StationType
     private $id;
 
     /**
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
+     */
+    private $createdAt;
+    
+    /**
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime")
+     */
+    private $updatedAt;
+    
+    /**
      * @var string
      *
      * @ORM\Column(name="code", type="string", length=32, nullable=false)
      */
     private $code;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="description_de", type="string", length=128, nullable=true)
-     */
-    private $descriptionDe;
 
     /**
-     * @var string
+     * @param $method
+     * @param $args
      *
-     * @ORM\Column(name="description_fr", type="string", length=128, nullable=true)
+     * @return mixed
      */
-    private $descriptionFr;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="description_it", type="string", length=128, nullable=true)
-     */
-    private $descriptionIt;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="description_en", type="string", length=128, nullable=true)
-     */
-    private $descriptionEn;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="created_at", type="datetime", nullable=false)
-     */
-    private $createdAt;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="updated_at", type="datetime", nullable=false)
-     */
-    private $updatedAt;
-
-
-
+    public function __call($method, $args)
+    {
+    	if (!method_exists(self::getTranslationEntityClass(), $method)) {
+    		$method = 'get' . ucfirst($method);
+    	}
+    
+    	return $this->proxyCurrentLocaleTranslation($method, $args);
+    }
+    
     /**
      * Get id
      *
@@ -107,116 +95,6 @@ class StationType
     }
 
     /**
-     * Set descriptionDe
-     *
-     * @param string $descriptionDe
-     *
-     * @return StationType
-     */
-    public function setDescriptionDe($descriptionDe)
-    {
-        $this->descriptionDe = $descriptionDe;
-
-        return $this;
-    }
-
-    /**
-     * Get descriptionDe
-     *
-     * @return string
-     */
-    public function getDescriptionDe()
-    {
-        return $this->descriptionDe;
-    }
-
-    /**
-     * Set descriptionFr
-     *
-     * @param string $descriptionFr
-     *
-     * @return StationType
-     */
-    public function setDescriptionFr($descriptionFr)
-    {
-        $this->descriptionFr = $descriptionFr;
-
-        return $this;
-    }
-
-    /**
-     * Get descriptionFr
-     *
-     * @return string
-     */
-    public function getDescriptionFr()
-    {
-        return $this->descriptionFr;
-    }
-
-    /**
-     * Set descriptionIt
-     *
-     * @param string $descriptionIt
-     *
-     * @return StationType
-     */
-    public function setDescriptionIt($descriptionIt)
-    {
-        $this->descriptionIt = $descriptionIt;
-
-        return $this;
-    }
-
-    /**
-     * Get descriptionIt
-     *
-     * @return string
-     */
-    public function getDescriptionIt()
-    {
-        return $this->descriptionIt;
-    }
-
-    /**
-     * Set descriptionEn
-     *
-     * @param string $descriptionEn
-     *
-     * @return StationType
-     */
-    public function setDescriptionEn($descriptionEn)
-    {
-        $this->descriptionEn = $descriptionEn;
-
-        return $this;
-    }
-
-    /**
-     * Get descriptionEn
-     *
-     * @return string
-     */
-    public function getDescriptionEn()
-    {
-        return $this->descriptionEn;
-    }
-
-    /**
-     * Set createdAt
-     *
-     * @param \DateTime $createdAt
-     *
-     * @return StationType
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    /**
      * Get createdAt
      *
      * @return \DateTime
@@ -224,20 +102,6 @@ class StationType
     public function getCreatedAt()
     {
         return $this->createdAt;
-    }
-
-    /**
-     * Set updatedAt
-     *
-     * @param \DateTime $updatedAt
-     *
-     * @return StationType
-     */
-    public function setUpdatedAt($updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
     }
 
     /**

@@ -8,6 +8,7 @@ use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use A2lix\TranslationFormBundle\Form\Type\TranslationsType;
 
 class NetworkAdmin extends AbstractAdmin
 {
@@ -16,8 +17,25 @@ class NetworkAdmin extends AbstractAdmin
 	{
 		$listMapper
 		->addIdentifier('code')
-		->add('name_de')
-		->add('name_fr')
+		->add('name')
+		;
+	}
+	
+	/**
+	 * {@inheritdoc}
+	 */
+	protected function configureFormFields(FormMapper $formMapper)
+	{
+		$formMapper
+		->with('General', array('class' => 'col-md-6'))
+			->add('code')
+		->end()
+		->with('Translations', array('class' => 'col-md-6'))
+			->add('translations', TranslationsType::class)
+		->end()
+		->with('Additional infos', array('class' => 'col-md-12'))
+			
+		->end()
 		;
 	}
 }

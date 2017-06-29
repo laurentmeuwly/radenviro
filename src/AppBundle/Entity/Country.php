@@ -3,6 +3,8 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 
 /**
  * Country
@@ -12,6 +14,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Country
 {
+	use ORMBehaviors\Translatable\Translatable;
+	
     /**
      * @var integer
      *
@@ -22,55 +26,39 @@ class Country
     private $id;
 
     /**
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
+     */
+    private $createdAt;
+    
+    /**
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime")
+     */
+    private $updatedAt;
+    
+    /**
      * @var string
      *
      * @ORM\Column(name="code", type="string", length=2, nullable=true)
      */
     private $code;
 
+    
     /**
-     * @var string
+     * @param $method
+     * @param $args
      *
-     * @ORM\Column(name="name_de", type="string", length=30, nullable=true)
+     * @return mixed
      */
-    private $nameDe;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="name_fr", type="string", length=30, nullable=true)
-     */
-    private $nameFr;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="name_it", type="string", length=30, nullable=true)
-     */
-    private $nameIt;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="name_en", type="string", length=30, nullable=true)
-     */
-    private $nameEn;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="created_at", type="datetime", nullable=false)
-     */
-    private $createdAt;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="updated_at", type="datetime", nullable=false)
-     */
-    private $updatedAt;
-
-
+    public function __call($method, $args)
+    {
+    	if (!method_exists(self::getTranslationEntityClass(), $method)) {
+    		$method = 'get' . ucfirst($method);
+    	}
+    
+    	return $this->proxyCurrentLocaleTranslation($method, $args);
+    }
 
     /**
      * Get id
@@ -107,116 +95,6 @@ class Country
     }
 
     /**
-     * Set nameDe
-     *
-     * @param string $nameDe
-     *
-     * @return Country
-     */
-    public function setNameDe($nameDe)
-    {
-        $this->nameDe = $nameDe;
-
-        return $this;
-    }
-
-    /**
-     * Get nameDe
-     *
-     * @return string
-     */
-    public function getNameDe()
-    {
-        return $this->nameDe;
-    }
-
-    /**
-     * Set nameFr
-     *
-     * @param string $nameFr
-     *
-     * @return Country
-     */
-    public function setNameFr($nameFr)
-    {
-        $this->nameFr = $nameFr;
-
-        return $this;
-    }
-
-    /**
-     * Get nameFr
-     *
-     * @return string
-     */
-    public function getNameFr()
-    {
-        return $this->nameFr;
-    }
-
-    /**
-     * Set nameIt
-     *
-     * @param string $nameIt
-     *
-     * @return Country
-     */
-    public function setNameIt($nameIt)
-    {
-        $this->nameIt = $nameIt;
-
-        return $this;
-    }
-
-    /**
-     * Get nameIt
-     *
-     * @return string
-     */
-    public function getNameIt()
-    {
-        return $this->nameIt;
-    }
-
-    /**
-     * Set nameEn
-     *
-     * @param string $nameEn
-     *
-     * @return Country
-     */
-    public function setNameEn($nameEn)
-    {
-        $this->nameEn = $nameEn;
-
-        return $this;
-    }
-
-    /**
-     * Get nameEn
-     *
-     * @return string
-     */
-    public function getNameEn()
-    {
-        return $this->nameEn;
-    }
-
-    /**
-     * Set createdAt
-     *
-     * @param \DateTime $createdAt
-     *
-     * @return Country
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    /**
      * Get createdAt
      *
      * @return \DateTime
@@ -224,20 +102,6 @@ class Country
     public function getCreatedAt()
     {
         return $this->createdAt;
-    }
-
-    /**
-     * Set updatedAt
-     *
-     * @param \DateTime $updatedAt
-     *
-     * @return Country
-     */
-    public function setUpdatedAt($updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
     }
 
     /**
