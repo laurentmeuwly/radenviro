@@ -108,15 +108,6 @@ class Legend
     	return $this->proxyCurrentLocaleTranslation($method, $args);
     }
 
-    public function getPosition()
-    {
-    	return $this->position;
-    }
-    public function setPosition($position)
-    {
-    	$this->position=$position;
-    	return $this;
-    }
     
     /**
      * Get id
@@ -151,6 +142,30 @@ class Legend
     {
         return $this->sorting;
     }
+    
+    /**
+     * Set position
+     *
+     * @param integer $position
+     *
+     * @return Legend
+     */
+    public function setPosition($position)
+    {
+    	$this->position=$position;
+    	return $this;
+    }
+    
+    /**
+     * Get position
+     *
+     * @return integer
+     */
+    public function getPosition()
+    {
+    	return $this->position;
+    }
+    
 
     /**
      * Get createdAt

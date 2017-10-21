@@ -19,7 +19,7 @@ services:
         arguments:
             - ~
             - AppBundle\Entity\Legend
-            - 'PixSortableBehaviorBundle:SortableAdmin' # define the new controller via the third argument
+            - 'PixSortableBehaviorBundle:SortableAdmin'
             - ~
         calls:
             - [ setTranslationDomain, [messages]]
@@ -53,6 +53,7 @@ services:
         arguments:
             - ~
             - AppBundle\Entity\AutomaticNetwork
+            - 'PixSortableBehaviorBundle:SortableAdmin'
             - ~
         calls:
             - [ setTranslationDomain, [messages]]

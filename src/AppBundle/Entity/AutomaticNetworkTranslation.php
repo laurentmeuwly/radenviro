@@ -15,16 +15,16 @@ class AutomaticNetworkTranslation
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=100, nullable=true)
+     * @ORM\Column(name="name", type="string", length=100)
      */
     private $name;
     
     /**
      * @var string
      *
-     * @ORM\Column(name="url", type="text", length=65535, nullable=true)
+     * @ORM\Column(name="url", type="text", length=255, nullable=true)
      */
-    private $url;
+    private $url='';
 
     
     /**

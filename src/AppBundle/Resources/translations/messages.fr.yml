@@ -52,6 +52,10 @@ admin:
     code: Identifiant
     title: Titre
     content: Contenu
+  automatic_network:
+    name: Réseau automatique
+    url: Lien vers le site officiel
+    total_stations: Nb de stations
     
     
     
