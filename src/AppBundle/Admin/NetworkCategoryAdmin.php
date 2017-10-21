@@ -18,8 +18,18 @@ class NetworkCategoryAdmin extends AbstractAdmin
 	protected function configureListFields(ListMapper $listMapper)
 	{
 		$listMapper
-		->addIdentifier('name', null, array('label' => 'label.name'))
-		->add('hidden', 'boolean', array('editable' => true))
+		->addIdentifier('name', null, array('label' => 'admin.network_category.name'))
+		->add('_active', 'boolean', array('label' => 'admin.label.active',
+				'editable' => true,
+				'header_style' => 'text-align: center',
+				'row_align' => 'center')
+				)
+		->add('_action', 'actions', array(
+				'actions' => array(
+						'edit' => array(),
+						'delete' => array(),
+				)
+		))
 		;
 	}
 	
@@ -31,7 +41,7 @@ class NetworkCategoryAdmin extends AbstractAdmin
 		$formMapper
 		->with('Category', array('class' => 'col-md-6'))
 		->add('translations', TranslationsType::class)
-		->add('hidden')
+		->add('active')
 		->end()
 		;
 	}

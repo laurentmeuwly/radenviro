@@ -42,6 +42,8 @@ admin:
     translations: Informations multilingues
     created_at: Créé le
     updated_at: Modifié le
+    latitude: Latitude
+    longitude: Longitude
 
 ## Entities specific
   legend:
@@ -52,10 +54,30 @@ admin:
     code: Identifiant
     title: Titre
     content: Contenu
+  zoom:
+    name: Nom de la zone zoomable
+    zoom: Niveau de zoom   
+    additional: Informations additionnelles
   automatic_network:
     name: Réseau automatique
     url: Lien vers le site officiel
     total_stations: Nb de stations
+  automatic_network_station:
+    name: Nom de la station
+    description: Description de la station
+    network: Réseau automatique
+  network_category:
+    name: Catégorie de réseaux
+  network:
+    name: Nom du réseau
+  station_type:
+    name: Type de stations
+  station:
+    name: Nom de la station
+  site_type:
+    name: Genre de site
+  site:
+    name: Nom du site
     
     
     

@@ -40,9 +40,9 @@ class NetworkCategory
     /**
      * @var boolean
      *
-     * @ORM\Column(name="hidden", type="boolean", nullable=true)
+     * @ORM\Column(name="active", type="boolean")
      */
-    private $hidden;
+    private $active=true;
 
 
     /**
@@ -59,6 +59,11 @@ class NetworkCategory
     
     	return $this->proxyCurrentLocaleTranslation($method, $args);
     }
+    
+    public function __toString()
+    {
+    	return (string) $this->getName();
+    }
 
     /**
      * Get id
@@ -70,28 +75,29 @@ class NetworkCategory
         return $this->id;
     }
 
+
     /**
-     * Set hidden
+     * Set active
      *
-     * @param boolean $hidden
+     * @param boolean $active
      *
      * @return NetworkCategory
      */
-    public function setHidden($hidden)
+    public function setActive($active)
     {
-        $this->hidden = $hidden;
-
-        return $this;
+    	$this->active = $active;
+    
+    	return $this;
     }
-
+    
     /**
-     * Get hidden
+     * Get active
      *
      * @return boolean
      */
-    public function getHidden()
+    public function getActive()
     {
-        return $this->hidden;
+    	return $this->active;
     }
 
     /**
@@ -112,5 +118,33 @@ class NetworkCategory
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     *
+     * @return NetworkCategory
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     *
+     * @return NetworkCategory
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
     }
 }

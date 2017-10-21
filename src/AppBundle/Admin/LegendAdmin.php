@@ -20,12 +20,11 @@ class LegendAdmin extends AbstractAdmin
 	
 	protected function configureRoutes(RouteCollection $collection)
 	{
-		// ...
 		$collection->add('move', $this->getRouterIdParameter().'/move/{position}');
 	}
 	
 	public function configure() {
-		$this->setTemplate('edit', 'AppBundle:LegendAdmin:edit.html.twig');
+		$this->setTemplate('edit', 'AppBundle:SpecialAdmin:edit.html.twig');
 	}
 	
 	/*

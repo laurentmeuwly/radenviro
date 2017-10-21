@@ -9,7 +9,7 @@ use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 /**
  * AutomaticNetworkStation
  *
- * @ORM\Table(name="automatic_network_station", indexes={@ORM\Index(name="index_automatic_network_stations_on_automatic_network_id", columns={"automatic_network_id"}), @ORM\Index(name="index_automatic_network_stations_on_sorting", columns={"sorting"})})
+ * @ORM\Table(name="automatic_network_station", indexes={@ORM\Index(name="index_automatic_network_stations_on_automatic_network_id", columns={"automatic_network_id"})})
  * @ORM\Entity
  */
 class AutomaticNetworkStation
@@ -51,25 +51,13 @@ class AutomaticNetworkStation
      */
     private $longitude = '0.000000000000000';
 
-    /**
-     * @var integer
-     * 
-     * @ORM\Column(name="sorting", type="integer", nullable=true)
-     */
-    private $sorting = '0';
     
-    /**
-     * @Gedmo\SortablePosition
-     * @ORM\Column(name="position", type="integer")
-     */
-    private $position;
-
     /**
      * @var boolean
      *
-     * @ORM\Column(name="hidden", type="boolean", nullable=true)
+     * @ORM\Column(name="active", type="boolean")
      */
-    private $hidden = '0';
+    private $active = '0';
 
     
     /**
@@ -186,53 +174,29 @@ class AutomaticNetworkStation
     {
         return $this->longitude;
     }
-
+    
     /**
-     * Set sorting
+     * Set active
      *
-     * @param integer $sorting
+     * @param boolean $active
      *
      * @return AutomaticNetworkStation
      */
-    public function setSorting($sorting)
+    public function setActive($active)
     {
-        $this->sorting = $sorting;
-
-        return $this;
+    	$this->active = $active;
+    
+    	return $this;
     }
-
+    
     /**
-     * Get sorting
-     *
-     * @return integer
-     */
-    public function getSorting()
-    {
-        return $this->sorting;
-    }
-
-    /**
-     * Set hidden
-     *
-     * @param boolean $hidden
-     *
-     * @return AutomaticNetworkStation
-     */
-    public function setHidden($hidden)
-    {
-        $this->hidden = $hidden;
-
-        return $this;
-    }
-
-    /**
-     * Get hidden
+     * Get active
      *
      * @return boolean
      */
-    public function getHidden()
+    public function getActive()
     {
-        return $this->hidden;
+    	return $this->active;
     }
 
     /**
@@ -277,5 +241,33 @@ class AutomaticNetworkStation
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     *
+     * @return AutomaticNetworkStation
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     *
+     * @return AutomaticNetworkStation
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
     }
 }

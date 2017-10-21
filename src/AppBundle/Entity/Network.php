@@ -47,17 +47,14 @@ class Network
     /**
      * @var boolean
      *
-     * @ORM\Column(name="hidden", type="boolean", nullable=true)
+     * @ORM\Column(name="active", type="boolean")
      */
-    private $hidden;
+    private $active=true;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="network_category_id", type="integer", nullable=true)
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\NetworkCategory")
      */
-    private $networkCategoryId;
-
+    private $networkCategory;
 
     /**
      * @param $method
@@ -107,53 +104,41 @@ class Network
     {
         return $this->code;
     }
-
+    
     /**
-     * Set hidden
+     * Set active
      *
-     * @param boolean $hidden
+     * @param boolean $active
      *
      * @return Network
      */
-    public function setHidden($hidden)
+    public function setActive($active)
     {
-        $this->hidden = $hidden;
-
-        return $this;
+    	$this->active = $active;
+    
+    	return $this;
     }
-
+    
     /**
-     * Get hidden
+     * Get active
      *
      * @return boolean
      */
-    public function getHidden()
+    public function getActive()
     {
-        return $this->hidden;
+    	return $this->active;
     }
 
-    /**
-     * Set networkCategoryId
-     *
-     * @param integer $networkCategoryId
-     *
-     * @return Network
-     */
-    public function setNetworkCategoryId($networkCategoryId)
+    public function setNetworkCategory($networkCategory)
     {
-        $this->networkCategoryId = $networkCategoryId;
+        $this->networkCategory = $networkCategory;
 
         return $this;
     }
 
-    /**
-     * Get networkCategoryId
-     *
-     * @return integer
-     */
-    public function getNetworkCategoryId()
+    	public function getNetworkCategory()
     {
-        return $this->networkCategoryId;
+        return $this->networkCategory;
     }
 
     /**
@@ -174,5 +159,33 @@ class Network
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     *
+     * @return Network
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     *
+     * @return Network
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
     }
 }

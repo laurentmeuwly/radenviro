@@ -5,67 +5,71 @@
 namespace AppBundle\Admin;
 
 use Sonata\AdminBundle\Admin\AbstractAdmin;
-use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
-use Sonata\AdminBundle\Route\RouteCollection;
+use A2lix\TranslationFormBundle\Form\Type\TranslationsType;
+
 
 class AutomaticNetworkStationAdmin extends AbstractAdmin
 {
-	public $last_position = 0;
-	
-	private $positionService;
-	
-	protected $datagridValues = array(
-			'_page' => 1,
-			'_sort_order' => 'ASC',
-			'_sort_by' => 'sorting',
-	);
-	
-	public function setPositionService(PositionHandler $positionHandler)
-	{
-		$this->positionService = $positionHandler;
-	}
-	
-	protected function configureRoutes(RouteCollection $collection)
-	{
-		// ...
-		$collection->add('move', $this->getRouterIdParameter().'/move/{position}');
+	public function configure() {
+		$this->setTemplate('edit', 'AppBundle:SpecialAdmin:edit.html.twig');
 	}
 	
 	// Fields to be shown on lists
 	protected function configureListFields(ListMapper $listMapper)
 	{
 		$listMapper
-		->addIdentifier('name')
-		->add('automaticNetwork.name')
-		->add('sorting')
-		->add('hidden', 'boolean', array('editable' => true))
-		->add('_action', null, array(
+		->addIdentifier('name', null, array('label' => 'admin.automatic_network_station.name'))
+		->add('automaticNetwork.name', null, array('label' => 'admin.automatic_network_station.network'))
+		->add('_latitude', null, array('label' => 'admin.automatic_network_station.latitude'))
+		->add('_longitude', null, array('label' => 'admin.automatic_network_station.longitude'))
+		->add('_active', 'boolean', array('label' => 'admin.label.active',
+				'editable' => true,
+				'header_style' => 'text-align: center',
+				'row_align' => 'center')
+				)
+		->add('_action', 'actions', array(
 				'actions' => array(
-						'move' => array(
-								'template' => 'PixSortableBehaviorBundle:Default:_sort.html.twig'
-						),
+						'edit' => array(),
+						'delete' => array(),
 				)
-		)
-				)
+		))
 		;
 	}
 	
 	protected function configureFormFields(FormMapper $formMapper)
 	{
 		$formMapper
-			->add('name_de', 'text')
-			->add('description_de', 'text')
-			->add('name_fr', 'text')
-			->add('description_fr', 'text')
-			->add('name_it', 'text')
-			->add('description_it', 'text')
-			->add('name_en', 'text')
-			->add('description_en', 'text')
-			->add('latitude', 'text')
-			->add('longitude', 'text')
+		->with('General', array('class' => 'col-md-6', 'label' => 'admin.label.general'))
+		->add('translations', TranslationsType::class, array(
+				'label' => false,
+				'fields' => array(
+						'name'=> array('label' => 'admin.automatic_network_station.name'),
+						'description'=> array('field_type' => 'textarea',
+								'label' => 'admin.automatic_network_station.description',
+								'attr' => array('class' => 'ckeditor'))
+				)
+		))
+		->end()
+		->with('Attributs', array('class' => 'col-md-3', 'label' => 'admin.label.attributs'))
+		->add('latitude', null, array('scale' => 12, 'label' => 'admin.automatic_network_station.latitude'))
+		->add('longitude', null, array('label' => 'admin.automatic_network_station.longitude'))
+		->add('active', null, array('label' => 'admin.label.active'))
+		->end()
+		->with('History', array('class' => 'col-md-3', 'label' => 'admin.label.history'))
+		->add('createdAt', 'sonata_type_datetime_picker',  array('label' => 'admin.label.created_at',
+				'attr' => array(
+						'readonly' => true
+				)
+		))
+		->add('updatedAt', 'sonata_type_datetime_picker', array('label' => 'admin.label.updated_at',
+				'attr' => array(
+						'readonly' => true
+				)
+		))
+		->end()
 		;
 	}
 	
