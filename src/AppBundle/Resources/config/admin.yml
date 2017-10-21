@@ -4,7 +4,7 @@ services:
     app.admin.page:
         class: AppBundle\Admin\PageAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Page" }
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "admin.menu.page" }
         arguments:
             - ~
             - AppBundle\Entity\Page
@@ -15,7 +15,7 @@ services:
     app.admin.legend:
         class: AppBundle\Admin\LegendAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "ofsp_frontend", label: "menu.legend" }
+            - { name: sonata.admin, manager_type: orm, group: "ofsp_frontend", label: "admin.menu.legend" }
         arguments:
             - ~
             - AppBundle\Entity\Legend
@@ -27,18 +27,18 @@ services:
     app.admin.siteType:
         class: AppBundle\Admin\SiteTypeAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Site Type" }
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "admin.menu.site_type" }
         arguments:
             - ~
             - AppBundle\Entity\SiteType
             - ~
         calls:
-            - [ setTranslationDomain, [AppBundle]]
+            - [ setTranslationDomain, [messages]]
             
     app.admin.site:
         class: AppBundle\Admin\SiteAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Site" }
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "admin.menu.site" }
         arguments:
             - ~
             - AppBundle\Entity\Site
@@ -49,111 +49,111 @@ services:
     app.admin.automaticNetwork:
         class: AppBundle\Admin\AutomaticNetworkAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Automatic Network" }
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "admin.menu.automatic_network" }
         arguments:
             - ~
             - AppBundle\Entity\AutomaticNetwork
             - ~
         calls:
-            - [ setTranslationDomain, [AppBundle]]
+            - [ setTranslationDomain, [messages]]
     
     app.admin.automaticNetworkStation:
         class: AppBundle\Admin\AutomaticNetworkStationAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Automatic Network Station" }
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "admin.menu.automatic_network_station" }
         arguments:
             - ~
             - AppBundle\Entity\AutomaticNetworkStation
             - ~
         calls:
-            - [ setTranslationDomain, [AppBundle]]
+            - [ setTranslationDomain, [messages]]
             
     app.admin.station:
         class: AppBundle\Admin\StationAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Station" }
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "admin.menu.station" }
         arguments:
             - ~
             - AppBundle\Entity\Station
             - ~
         calls:
-            - [ setTranslationDomain, [AppBundle]]
+            - [ setTranslationDomain, [messages]]
    
     app.admin.stationType:
         class: AppBundle\Admin\StationTypeAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Station type" }
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "admin.menu.station_type" }
         arguments:
             - ~
             - AppBundle\Entity\StationType
             - ~
         calls:
-            - [ setTranslationDomain, [AppBundle]]
+            - [ setTranslationDomain, [messages]]
    
     app.admin.networkCategory:
         class: AppBundle\Admin\NetworkCategoryAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Network category" }
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "admin.menu.network_category" }
         arguments:
             - ~
             - AppBundle\Entity\NetworkCategory
             - ~
         calls:
-            - [ setTranslationDomain, [AppBundle]]
+            - [ setTranslationDomain, [messages]]
             
     app.admin.network:
         class: AppBundle\Admin\NetworkAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Network" }
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "admin.menu.network" }
         arguments:
             - ~
             - AppBundle\Entity\Network
             - ~
         calls:
-            - [ setTranslationDomain, [AppBundle]]
+            - [ setTranslationDomain, [messages]]
             
     app.admin.nuclide:
         class: AppBundle\Admin\NuclideAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Nuclide" }
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "admin.menu.nuclide" }
         arguments:
             - ~
             - AppBundle\Entity\Nuclide
             - ~
         calls:
-            - [ setTranslationDomain, [AppBundle]]
+            - [ setTranslationDomain, [messages]]
             
     app.admin.mapZoom:
         class: AppBundle\Admin\MapZoomAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Zoom" }
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "admin.menu.zoom" }
         arguments:
             - ~
             - AppBundle\Entity\MapZoom
             - ~
         calls:
-            - [ setTranslationDomain, [AppBundle]]
+            - [ setTranslationDomain, [messages]]
             
 #    app.admin.bagCode:
 #        class: AppBundle\Admin\BagCodeAdmin
 #        tags:
-#            - { name: sonata.admin, manager_type: orm, group: "Content", label: "BAG Code" }
+#            - { name: sonata.admin, manager_type: orm, group: "Content", label: "admin.menu.bag_code" }
 #        arguments:
 #            - ~
 #            - AppBundle\Entity\BagCode
 #            - ~
 #        calls:
-#            - [ setTranslationDomain, [AppBundle]]
+#            - [ setTranslationDomain, [messages]]
             
     app.admin.country:
         class: AppBundle\Admin\CountryAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Country" }
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "admin.menu.country" }
         arguments:
             - ~
             - AppBundle\Entity\Country
             - ~
         calls:
-            - [ setTranslationDomain, [AppBundle]]
+            - [ setTranslationDomain, [messages]]
             
     

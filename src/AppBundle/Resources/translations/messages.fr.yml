@@ -1,8 +1,7 @@
 
-menu:
-    legend: Légende
+
     
-menu.legend: Légende
+
 
 ofsp_content: Test
 
@@ -14,7 +13,21 @@ ofsp_content: Test
 admin:
 
 ## Menu
-
+  menu:
+    legend: Légende
+    page: Pages statiques
+    automatic_network: Réseaux automatiques
+    automatic_network_station: Stations des réseaux automatiques
+    network_category: Catégories de réseau
+    network: Réseaux
+    station_type: Types de station
+    station: Stations de mesure
+    site_type: Genres de site
+    site: Sites
+    zoom: Zones zoomables
+    nuclide: Isotopes
+    country: Pays
+    
 ## Generic
   label:
     general: Généralités
