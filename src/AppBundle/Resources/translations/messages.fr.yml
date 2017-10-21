@@ -1,3 +1,63 @@
+
+menu:
+    legend: Légende
+    
+menu.legend: Légende
+
+ofsp_content: Test
+
+
+
+#####################
+# Admin translations
+#####################
+admin:
+
+## Menu
+
+## Generic
+  label:
+    general: Généralités
+    attributs: Attributs
+    informations: Informations
+    history: Historique
+    name: Nom
+    color: Couleur
+    hidden: Caché
+    active: Actif
+    position: Ordre d'affichage
+    translations: Informations multilingues
+    created_at: Créé le
+    updated_at: Modifié le
+
+## Entities specific
+  legend:
+    name: Titre de la légende
+    total_stations: Nb stations liées
+    total_nuclides: Nb isotopes liés
+  page:
+    code: Identifiant
+    title: Titre
+    content: Contenu
+    
+    
+    
+    
+    
+
+label:
+  analyzed environments: Milieux analysés
+  sites: Sites
+  automatic networks: Réseaux automatiques
+  name: Nom
+  description: Description
+  sorting: Ordre d'affichage
+  hidden: Caché
+  latitude: Latitude
+  longitude: Longitude
+  zoom: Zoom
+  
+
 activerecord:
   models:
     networks: Réseaux
@@ -192,9 +252,21 @@ main:
 menus:
   automatic_networks: Réseaux automatiques
   informations: Informations
+  laboratories: Labs. cantonaux
   map: Accès aux données
   radair: RADAIR
   radon: RADON
   welcome: Actualités
   who: Qui mesure
   back_to_map: Retour à la carte
+
+app:
+  networkcategory:
+    name: Nom
+    hidden: caché
+
+
+network:
+  admin:
+    network: réseau
+Network Category List: Liste des réseaux

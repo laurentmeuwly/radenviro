@@ -1,0 +1,9 @@
+sonata_user:
+    security_acl: true
+    manager_type: orm
+    
+sonata_block:
+    blocks:
+        #...
+        sonata.user.block.menu:    # used to display the menu in profile pages
+        sonata.user.block.account: # used to display menu option (login option)

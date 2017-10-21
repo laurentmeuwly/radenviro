@@ -6,11 +6,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use Xmon\ColorPickerTypeBundle\Validator\Constraints as XmonAssertColor;
 
 /**
  * Legend
  *
- * @ORM\Table(name="legend", indexes={@ORM\Index(name="index_legends_on_hidden", columns={"hidden"})})
+ * @ORM\Table(name="legend", indexes={@ORM\Index(name="index_legends_on_active", columns={"active"})})
  * @ORM\Entity
  */
 class Legend
@@ -40,36 +41,56 @@ class Legend
 
     /**
      * @var integer
-     *
-     * @ORM\Column(name="sorting", type="integer", nullable=true)
+     * 
+     * @ORM\Column(name="sorting", type="integer")
      */
     private $sorting;
-
+    
+    /**
+     * @var integer
+     * @Gedmo\SortablePosition
+     * @ORM\Column(name="position", type="integer")
+     */
+    private $position;
+    
     /**
      * @var boolean
      *
-     * @ORM\Column(name="hidden", type="boolean", nullable=true)
+     * @ORM\Column(name="active", type="boolean", nullable=false)
      */
-    private $hidden;
+    private $active = true;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="color", type="string", length=255, nullable=false)
+     * @ORM\Column(name="color", type="string", length=6, nullable=false)
+     * @XmonAssertColor\HexColor()
      */
     private $color = '#ffffff';
     
     
     /**
      * Many Legends have Many Stations.
-     * @ORM\ManyToMany(targetEntity="Station", inversedBy="legends")
+     * @ORM\ManyToMany(targetEntity="Station", inversedBy="legends", fetch="EXTRA_LAZY")
      * @ORM\JoinTable(name="legend_station")
      */
     private $stations;
+    
+    /**
+     * @var Nuclid[]
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\LegendNuclide", mappedBy="legend"))
+     */
+    private $nuclides;
+    
+    
+    private $totalStations;
+    
+    private $totalNuclides;
 
 
     public function __construct() {
     	$this->stations = new ArrayCollection();
+    	$this->nuclides = new ArrayCollection();
     }
     
     /**
@@ -87,6 +108,16 @@ class Legend
     	return $this->proxyCurrentLocaleTranslation($method, $args);
     }
 
+    public function getPosition()
+    {
+    	return $this->position;
+    }
+    public function setPosition($position)
+    {
+    	$this->position=$position;
+    	return $this;
+    }
+    
     /**
      * Get id
      *
@@ -140,29 +171,29 @@ class Legend
     {
         return $this->updatedAt;
     }
-
+    
     /**
-     * Set hidden
+     * Set active
      *
-     * @param boolean $hidden
+     * @param boolean $active
      *
      * @return Legend
      */
-    public function setHidden($hidden)
+    public function setActive($active)
     {
-        $this->hidden = $hidden;
-
-        return $this;
+    	$this->active = $active;
+    
+    	return $this;
     }
-
+    
     /**
-     * Get hidden
+     * Get active
      *
      * @return boolean
      */
-    public function getHidden()
+    public function getActive()
     {
-        return $this->hidden;
+    	return $this->active;
     }
 
     /**
@@ -192,5 +223,99 @@ class Legend
     public function getStations()
     {
     	return $this->stations;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     *
+     * @return Legend
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     *
+     * @return Legend
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Add station
+     *
+     * @param \AppBundle\Entity\Station $station
+     *
+     * @return Legend
+     */
+    public function addStation(\AppBundle\Entity\Station $station)
+    {
+        $this->stations[] = $station;
+
+        return $this;
+    }
+    
+    /**
+     * Remove station
+     *
+     * @param \AppBundle\Entity\Station $station
+     */
+    public function removeStation(\AppBundle\Entity\Station $station)
+    {
+    	$this->stations->removeElement($station);
+    }
+    
+    
+    /**
+     * Return all nuclides associated to the legend.
+     *
+     * @return Nuclide[]
+     */
+    public function getNuclides()
+    {
+    	return $this->nuclides;
+    }
+    
+    /**
+     * Set all nuclides in the legend.
+     *
+     * @param Nuclide[] $nuclides
+     */
+    public function setNuclides($nuclides)
+    {
+    	$this->nuclides->clear();
+    	$this->nuclides = new ArrayCollection($nuclides);
+    }
+    
+     
+    
+    /**
+     * Count stations associated to legend.
+     *
+     * @return integer
+     */
+    public function getTotalStations(){
+    	return $this->getStations()->count();
+    }
+    
+    /**
+     * Count nuclides associated to legend.
+     *
+     * @return integer
+     */
+    public function getTotalNuclides(){
+    	return $this->getNuclides()->count();
     }
 }

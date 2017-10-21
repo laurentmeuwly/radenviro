@@ -1,0 +1,11 @@
+{% extends 'SonataAdminBundle:CRUD:base_edit.html.twig' %}
+
+{% block form %}
+    {{ block('parentForm') }}
+{% endblock %}
+
+
+{% block javascripts %}
+{{ parent() }}
+<script type="text/javascript" src="{{asset('js/jscolor.min.js')}}"></script>
+{% endblock %}

@@ -1,16 +1,50 @@
 # src/AppBundle/Resources/config/admin.yml
 
 services:
+    app.admin.page:
+        class: AppBundle\Admin\PageAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Page" }
+        arguments:
+            - ~
+            - AppBundle\Entity\Page
+            - ~
+        calls:
+            - [ setTranslationDomain, [messages]]
+    
     app.admin.legend:
         class: AppBundle\Admin\LegendAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Legend" }
+            - { name: sonata.admin, manager_type: orm, group: "ofsp_frontend", label: "menu.legend" }
         arguments:
             - ~
             - AppBundle\Entity\Legend
+            - 'PixSortableBehaviorBundle:SortableAdmin' # define the new controller via the third argument
+            - ~
+        calls:
+            - [ setTranslationDomain, [messages]]
+            
+    app.admin.siteType:
+        class: AppBundle\Admin\SiteTypeAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Site Type" }
+        arguments:
+            - ~
+            - AppBundle\Entity\SiteType
             - ~
         calls:
             - [ setTranslationDomain, [AppBundle]]
+            
+    app.admin.site:
+        class: AppBundle\Admin\SiteAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Site" }
+        arguments:
+            - ~
+            - AppBundle\Entity\Site
+            - ~
+        calls:
+            - [ setTranslationDomain, [messages]]
             
     app.admin.automaticNetwork:
         class: AppBundle\Admin\AutomaticNetworkAdmin
@@ -85,6 +119,39 @@ services:
         arguments:
             - ~
             - AppBundle\Entity\Nuclide
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle]]
+            
+    app.admin.mapZoom:
+        class: AppBundle\Admin\MapZoomAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Zoom" }
+        arguments:
+            - ~
+            - AppBundle\Entity\MapZoom
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle]]
+            
+#    app.admin.bagCode:
+#        class: AppBundle\Admin\BagCodeAdmin
+#        tags:
+#            - { name: sonata.admin, manager_type: orm, group: "Content", label: "BAG Code" }
+#        arguments:
+#            - ~
+#            - AppBundle\Entity\BagCode
+#            - ~
+#        calls:
+#            - [ setTranslationDomain, [AppBundle]]
+            
+    app.admin.country:
+        class: AppBundle\Admin\CountryAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Country" }
+        arguments:
+            - ~
+            - AppBundle\Entity\Country
             - ~
         calls:
             - [ setTranslationDomain, [AppBundle]]
