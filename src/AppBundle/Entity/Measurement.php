@@ -3,12 +3,13 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Measurement
  *
- * @ORM\Table(name="measurement", indexes={@ORM\Index(name="index_measurements_on_sample_id", columns={"sample_id"}), @ORM\Index(name="index_measurements_on_laboratory_id", columns={"laboratory_id"}), @ORM\Index(name="index_measurements_on_method_id", columns={"method_id"}), @ORM\Index(name="index_measurements_on_quantity_units_id", columns={"quantity_units_id"}), @ORM\Index(name="index_measurements_on_result_units_id", columns={"result_units_id"})})
- * @ORM\Entity
+ * @ORM\Table(name="measurement", indexes={@ORM\Index(name="index_measurements_on_sample_id", columns={"sample_id"}), @ORM\Index(name="index_measurements_on_laboratory_id", columns={"laboratory_id"}), @ORM\Index(name="index_measurements_on_method_id", columns={"method_id"}), @ORM\Index(name="index_measurements_on_quantity_unit_id", columns={"quantity_unit_id"}), @ORM\Index(name="index_measurements_on_result_unit_id", columns={"result_unit_id"})})
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\MeasurementRepository")
  */
 class Measurement
 {
@@ -78,43 +79,41 @@ class Measurement
     private $resultsfresh;
 
     /**
-     * @var integer
+     * @var Sample
      *
-     * @ORM\Column(name="sample_id", type="integer", nullable=true)
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Sample", inversedBy="measurements")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $sampleId;
+    private $sample;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="laboratory_id", type="integer", nullable=true)
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Laboratory")
+     * @ORM\JoinColumn(nullable=true)
      */
-    private $laboratoryId;
+    private $laboratory;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="method_id", type="integer", nullable=true)
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Method")
+     * @ORM\JoinColumn(nullable=true)
      */
-    private $methodId;
+    private $method;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="quantity_units_id", type="integer", nullable=true)
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\QuantityUnit")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $quantityUnitsId;
+    private $quantityUnit;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="result_units_id", type="integer", nullable=true)
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\ResultUnit")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $resultUnitsId;
-
+    private $resultUnit;
+    
     /**
      * @var \DateTime
      *
+     * @Gedmo\Timestampable(on="create")
      * @ORM\Column(name="created_at", type="datetime", nullable=false)
      */
     private $createdAt;
@@ -122,10 +121,18 @@ class Measurement
     /**
      * @var \DateTime
      *
+     * @Gedmo\Timestampable(on="update")
      * @ORM\Column(name="updated_at", type="datetime", nullable=false)
      */
     private $updatedAt;
 
+    /**
+     * Results of the measurement.
+     *
+     * @var Result[]
+     * @ORM\OneToMany(targetEntity="Result", mappedBy="measurement")
+     **/
+    private $results;
 
 
     /**
@@ -331,123 +338,123 @@ class Measurement
     }
 
     /**
-     * Set sampleId
+     * Set sample
      *
-     * @param integer $sampleId
+     * @param integer $sample
      *
      * @return Measurement
      */
-    public function setSampleId($sampleId)
+    public function setSample($sample)
     {
-        $this->sampleId = $sampleId;
+        $this->sample = $sample;
 
         return $this;
     }
 
     /**
-     * Get sampleId
+     * Get sample
      *
      * @return integer
      */
-    public function getSampleId()
+    public function getSample()
     {
-        return $this->sampleId;
+        return $this->sample;
     }
 
     /**
-     * Set laboratoryId
+     * Set laboratory
      *
-     * @param integer $laboratoryId
+     * @param integer $laboratory
      *
      * @return Measurement
      */
-    public function setLaboratoryId($laboratoryId)
+    public function setLaboratoryId($laboratory)
     {
-        $this->laboratoryId = $laboratoryId;
+        $this->laboratory = $laboratory;
 
         return $this;
     }
 
     /**
-     * Get laboratoryId
+     * Get laboratory
      *
      * @return integer
      */
-    public function getLaboratoryId()
+    public function getLaboratory()
     {
-        return $this->laboratoryId;
+        return $this->laboratory;
     }
 
     /**
-     * Set methodId
+     * Set method
      *
-     * @param integer $methodId
+     * @param integer $method
      *
      * @return Measurement
      */
-    public function setMethodId($methodId)
+    public function setMethod($method)
     {
-        $this->methodId = $methodId;
+        $this->method = $method;
 
         return $this;
     }
 
     /**
-     * Get methodId
+     * Get method
      *
      * @return integer
      */
-    public function getMethodId()
+    public function getMethod()
     {
-        return $this->methodId;
+        return $this->method;
     }
 
     /**
-     * Set quantityUnitsId
+     * Set quantityUnit
      *
-     * @param integer $quantityUnitsId
+     * @param integer $quantityUnit
      *
      * @return Measurement
      */
-    public function setQuantityUnitsId($quantityUnitsId)
+    public function setQuantityUnit($quantityUnit)
     {
-        $this->quantityUnitsId = $quantityUnitsId;
+        $this->quantityUnit = $quantityUnit;
 
         return $this;
     }
 
     /**
-     * Get quantityUnitsId
+     * Get quantityUnit
      *
      * @return integer
      */
-    public function getQuantityUnitsId()
+    public function getQuantityUnit()
     {
-        return $this->quantityUnitsId;
+        return $this->quantityUnit;
     }
 
     /**
-     * Set resultUnitsId
+     * Set resultUnit
      *
-     * @param integer $resultUnitsId
+     * @param integer $resultUnit
      *
      * @return Measurement
      */
-    public function setResultUnitsId($resultUnitsId)
+    public function setResultUnis($resultUnit)
     {
-        $this->resultUnitsId = $resultUnitsId;
+        $this->resultUnit = $resultUnit;
 
         return $this;
     }
 
     /**
-     * Get resultUnitsId
+     * Get resultUnit
      *
      * @return integer
      */
-    public function getResultUnitsId()
+    public function getResultUnit()
     {
-        return $this->resultUnitsId;
+        return $this->resultUnit;
     }
 
     /**
@@ -497,4 +504,26 @@ class Measurement
     {
         return $this->updatedAt;
     }
+    
+    /**
+     * Return all results associated to the measurement.
+     *
+     * @return Result[]
+     */
+    public function getResults()
+    {
+    	return $this->results;
+    }
+    
+    /**
+     * Set all results in the measurement.
+     *
+     * @param Result[] $results
+     */
+    public function setResults($results)
+    {
+    	$this->results->clear();
+    	$this->results = new ArrayCollection($results);
+    }
 }
+

@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * LegendNuclide
  *
- * @ORM\Table(name="legend_nuclide", indexes={@ORM\Index(name="index_legends_nuclides_on_legend_id", columns={"legend_id"}), @ORM\Index(name="index_legends_nuclides_on_nuclide_id", columns={"nuclide_id"}), @ORM\Index(name="index_legends_nuclides_on_sorting", columns={"sorting"})})
+ * @ORM\Table(name="legend_nuclide", indexes={@ORM\Index(name="index_legends_nuclides_on_legend_id", columns={"legend_id"}), @ORM\Index(name="index_legends_nuclides_on_nuclide_id", columns={"nuclide_id"}), @ORM\Index(name="index_legends_nuclides_on_position", columns={"position"})})
  * @ORM\Entity
  */
 class LegendNuclide
@@ -22,25 +22,24 @@ class LegendNuclide
     private $id;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="legend_id", type="integer", nullable=true)
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Legend")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $legendId;
+    private $legend;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Nuclide")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $nuclide;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="nuclide_id", type="integer", nullable=true)
+     * @ORM\Column(name="position", type="integer", nullable=false)
      */
-    private $nuclideId;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="sorting", type="integer", nullable=false)
-     */
-    private $sorting = '0';
+    private $position = '0';
+    
 
 
 
@@ -53,76 +52,77 @@ class LegendNuclide
     {
         return $this->id;
     }
-
+    
     /**
-     * Set legendId
+     * Set legend
      *
-     * @param integer $legendId
+     * @param integer $legend
      *
      * @return LegendNuclide
      */
-    public function setLegendId($legendId)
+    public function setLegend($legend)
     {
-        $this->legendId = $legendId;
+    	$this->legend = $legend;
+    
+    	return $this;
+    }
+    
+    /**
+     * Get legend
+     *
+     * @return Legend
+     */
+    public function getLegend()
+    {
+    	return $this->legend;
+    }
+
+
+    /**
+     * Set nuclide
+     *
+     * @param integer $nuclide
+     *
+     * @return LegendNuclide
+     */
+    public function setNuclide($nuclide)
+    {
+        $this->nuclide = $nuclide;
 
         return $this;
     }
 
     /**
-     * Get legendId
+     * Get nuclide
      *
      * @return integer
      */
-    public function getLegendId()
+    public function getNuclide()
     {
-        return $this->legendId;
+        return $this->nuclide;
     }
 
     /**
-     * Set nuclideId
+     * Set position
      *
-     * @param integer $nuclideId
+     * @param integer $position
      *
      * @return LegendNuclide
      */
-    public function setNuclideId($nuclideId)
+    public function setPosition($position)
     {
-        $this->nuclideId = $nuclideId;
-
-        return $this;
+    	$this->position=$position;
+    	return $this;
     }
-
+    
     /**
-     * Get nuclideId
+     * Get position
      *
      * @return integer
      */
-    public function getNuclideId()
+    public function getPosition()
     {
-        return $this->nuclideId;
+    	return $this->position;
     }
-
-    /**
-     * Set sorting
-     *
-     * @param integer $sorting
-     *
-     * @return LegendNuclide
-     */
-    public function setSorting($sorting)
-    {
-        $this->sorting = $sorting;
-
-        return $this;
-    }
-
-    /**
-     * Get sorting
-     *
-     * @return integer
-     */
-    public function getSorting()
-    {
-        return $this->sorting;
-    }
+    
 }

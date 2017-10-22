@@ -3,6 +3,8 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 
 /**
  * Laboratory
@@ -12,6 +14,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Laboratory
 {
+	use ORMBehaviors\Translatable\Translatable;
+	
     /**
      * @var integer
      *
@@ -29,50 +33,23 @@ class Laboratory
     private $code;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="name_de", type="string", length=80, nullable=true)
-     */
-    private $nameDe;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="name_fr", type="string", length=80, nullable=true)
-     */
-    private $nameFr;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="name_it", type="string", length=80, nullable=true)
-     */
-    private $nameIt;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="name_en", type="string", length=80, nullable=true)
-     */
-    private $nameEn;
-
-    /**
      * @var boolean
      *
-     * @ORM\Column(name="hidden", type="boolean", nullable=true)
+     * @ORM\Column(name="active", type="boolean")
      */
-    private $hidden = '0';
+    private $active = true;
 
     /**
      * @var \DateTime
      *
+     * @Gedmo\Timestampable(on="create")
      * @ORM\Column(name="created_at", type="datetime", nullable=false)
      */
     private $createdAt;
 
     /**
      * @var \DateTime
-     *
+     * @Gedmo\Timestampable(on="update")
      * @ORM\Column(name="updated_at", type="datetime", nullable=false)
      */
     private $updatedAt;
@@ -114,124 +91,29 @@ class Laboratory
     }
 
     /**
-     * Set nameDe
+     * Set active
      *
-     * @param string $nameDe
+     * @param boolean $active
      *
-     * @return Laboratory
+     * @return AutomaticNetwork
      */
-    public function setNameDe($nameDe)
+    public function setActive($active)
     {
-        $this->nameDe = $nameDe;
-
-        return $this;
+    	$this->active = $active;
+    
+    	return $this;
     }
-
+    
     /**
-     * Get nameDe
-     *
-     * @return string
-     */
-    public function getNameDe()
-    {
-        return $this->nameDe;
-    }
-
-    /**
-     * Set nameFr
-     *
-     * @param string $nameFr
-     *
-     * @return Laboratory
-     */
-    public function setNameFr($nameFr)
-    {
-        $this->nameFr = $nameFr;
-
-        return $this;
-    }
-
-    /**
-     * Get nameFr
-     *
-     * @return string
-     */
-    public function getNameFr()
-    {
-        return $this->nameFr;
-    }
-
-    /**
-     * Set nameIt
-     *
-     * @param string $nameIt
-     *
-     * @return Laboratory
-     */
-    public function setNameIt($nameIt)
-    {
-        $this->nameIt = $nameIt;
-
-        return $this;
-    }
-
-    /**
-     * Get nameIt
-     *
-     * @return string
-     */
-    public function getNameIt()
-    {
-        return $this->nameIt;
-    }
-
-    /**
-     * Set nameEn
-     *
-     * @param string $nameEn
-     *
-     * @return Laboratory
-     */
-    public function setNameEn($nameEn)
-    {
-        $this->nameEn = $nameEn;
-
-        return $this;
-    }
-
-    /**
-     * Get nameEn
-     *
-     * @return string
-     */
-    public function getNameEn()
-    {
-        return $this->nameEn;
-    }
-
-    /**
-     * Set hidden
-     *
-     * @param boolean $hidden
-     *
-     * @return Laboratory
-     */
-    public function setHidden($hidden)
-    {
-        $this->hidden = $hidden;
-
-        return $this;
-    }
-
-    /**
-     * Get hidden
+     * Get active
      *
      * @return boolean
      */
-    public function getHidden()
+    public function getActive()
     {
-        return $this->hidden;
+    	return $this->active;
     }
+
 
     /**
      * Set createdAt
