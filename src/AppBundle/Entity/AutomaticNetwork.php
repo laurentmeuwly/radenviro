@@ -46,13 +46,6 @@ class AutomaticNetwork
      * @XmonAssertColor\HexColor()
      */
     private $color = '#ffffff';
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="sorting", type="integer", nullable=true)
-     */
-    private $sorting = '0';
     
     /**
      * @var integer
@@ -61,13 +54,6 @@ class AutomaticNetwork
      */
     private $position;
 
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="hidden", type="boolean", nullable=true)
-     */
-    private $hidden = '0';
-    
     /**
      * @var boolean
      *
@@ -139,30 +125,6 @@ class AutomaticNetwork
     {
         return $this->color;
     }
-
-    /**
-     * Set sorting
-     *
-     * @param integer $sorting
-     *
-     * @return AutomaticNetwork
-     */
-    public function setSorting($sorting)
-    {
-        $this->sorting = $sorting;
-
-        return $this;
-    }
-
-    /**
-     * Get sorting
-     *
-     * @return integer
-     */
-    public function getSorting()
-    {
-        return $this->sorting;
-    }
     
     /**
      * Set position
@@ -209,30 +171,6 @@ class AutomaticNetwork
     public function getActive()
     {
     	return $this->active;
-    }
-
-    /**
-     * Set hidden
-     *
-     * @param boolean $hidden
-     *
-     * @return AutomaticNetwork
-     */
-    public function setHidden($hidden)
-    {
-        $this->hidden = $hidden;
-
-        return $this;
-    }
-
-    /**
-     * Get hidden
-     *
-     * @return boolean
-     */
-    public function getHidden()
-    {
-        return $this->hidden;
     }
 
     /**

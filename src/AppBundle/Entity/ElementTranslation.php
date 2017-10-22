@@ -8,7 +8,7 @@ use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 /**
  * @ORM\Entity
  */
-class NuclideTranslation
+class ElementTranslation
 {
     use ORMBehaviors\Translatable\Translation;
 

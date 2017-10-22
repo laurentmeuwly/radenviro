@@ -85,13 +85,12 @@ class Nuclide
      * @ORM\Column(name="hidden", type="boolean", nullable=true)
      */
     private $hidden;
-
+    
     /**
-     * @var integer
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Element")
      *
-     * @ORM\Column(name="element_id", type="integer", nullable=false)
      */
-    private $elementId;
+    private $element;
 
 
 
@@ -309,26 +308,54 @@ class Nuclide
     }
 
     /**
-     * Set elementId
+     * Set element
      *
-     * @param integer $elementId
+     * @param integer $element
      *
      * @return Nuclide
      */
-    public function setElementId($elementId)
+    public function setElement($element)
     {
-        $this->elementId = $elementId;
+        $this->element = $element;
 
         return $this;
     }
 
     /**
-     * Get elementId
+     * Get element
      *
      * @return integer
      */
-    public function getElementId()
+    public function getElement()
     {
-        return $this->elementId;
+        return $this->element;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     *
+     * @return Nuclide
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     *
+     * @return Nuclide
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
     }
 }
