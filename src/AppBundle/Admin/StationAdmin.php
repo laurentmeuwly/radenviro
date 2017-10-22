@@ -16,8 +16,8 @@ class StationAdmin extends AbstractAdmin
 	protected function configureListFields(ListMapper $listMapper)
 	{
 		$listMapper
-			->addIdentifier('code')
-			->add('name')
+			->addIdentifier('code', null, array('label' => 'label.code'))
+			->add('name', null, array('label' => 'label.name'))
 			->add('network.name')
 			->add('stationType.code')
 		;
@@ -46,6 +46,11 @@ class StationAdmin extends AbstractAdmin
 		->with('Descriptions', array('class' => 'col-md-12'))
 			->add('translations', TranslationsType::class)
 		->end()
+		->add('latitude', 	null, [ 'label' => 'label.latitude' ])
+		->add('longitude', 	null, [ 'label' => 'label.longitude' ])
+		->add('hidden', 	null, [ 'label' => 'label.hidden' ])
+		->add('zoom', 		null, [ 'label' => 'label.zoom' ])
+		->add('defaultZoom',null, [ 'label' => 'label.default_zoom' ])
 		;
 	}
 	

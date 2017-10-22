@@ -1,20 +1,17 @@
 
-
-    
-
-
-ofsp_content: Test
-
-
-
 #####################
 # Admin translations
 #####################
 admin:
+  group:
+    frontend: Affichage frontend
+    content: Contenu OFSP
+    base: Données de base
+    config: Configuration système
 
 ## Menu
   menu:
-    legend: Légende
+    legend: Légendes
     page: Pages statiques
     automatic_network: Réseaux automatiques
     automatic_network_station: Stations des réseaux automatiques
@@ -78,6 +75,9 @@ admin:
     name: Genre de site
   site:
     name: Nom du site
+  nuclide:
+    code: Isotope
+    name: Nom
     
     
     

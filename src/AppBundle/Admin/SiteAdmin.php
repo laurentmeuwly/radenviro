@@ -15,9 +15,14 @@ class SiteAdmin extends AbstractAdmin
 	protected function configureListFields(ListMapper $listMapper)
 	{
 		$listMapper
-		->addIdentifier('name', null, array('label' => 'label.name'))
-		->add('siteType.name', 		null, array('label' => 'label.site_type'))
-		->add('sorting', 		null, array('label' => 'label.sorting'))
+		->addIdentifier('name', null, array('label' => 'admin.site.name'))
+		->add('siteType.name', 		null, array('label' => 'admin.site_type.name'))
+		->add('_active', 'boolean', array('label' => 'admin.label.active',
+				'editable' => true,
+				'header_style' => 'text-align: center',
+				'row_align' => 'center')
+				)
+		->add('position', 		null, array('label' => 'admin.label.sorting'))
 		;
 	}
 	
@@ -38,11 +43,27 @@ class SiteAdmin extends AbstractAdmin
 				]
 				
 			])
-		->add('hidden', 	null, [ 'label' => 'label.hidden' ])
-		->add('sorting', 	null, [ 'label' => 'label.sorting' ])
-		->add('latitude', 	null, [ 'label' => 'label.latitude' ])
-		->add('longitude', 	null, [ 'label' => 'label.longitude' ])
-		->add('zoom', 		null, [ 'label' => 'label.zoom' ])
+		->end()
+		
+		->with('Attributs', array('class' => 'col-md-3', 'label' => 'admin.label.attributs'))
+		->add('latitude', 	null, [ 'label' => 'admin.label.latitude' ])
+		->add('longitude', 	null, [ 'label' => 'admin.label.longitude' ])
+		->add('zoom', 		null, [ 'label' => 'admin.label.zoom' ])
+		->add('active', null, array('label' => 'admin.label.active'))
+		->add('position', null, array('label' => 'admin.label.position'))
+		->end()
+		
+		->with('History', array('class' => 'col-md-3', 'label' => 'admin.label.history'))
+		->add('createdAt', 'sonata_type_datetime_picker',  array('label' => 'admin.label.created_at',
+				'attr' => array(
+						'readonly' => true
+				)
+		))
+		->add('updatedAt', 'sonata_type_datetime_picker', array('label' => 'admin.label.updated_at',
+				'attr' => array(
+						'readonly' => true
+				)
+		))
 		->end()
 		;
 		 
