@@ -16,9 +16,14 @@ class NuclideAdmin extends AbstractAdmin
 	protected function configureListFields(ListMapper $listMapper)
 	{
 		$listMapper
-		->addIdentifier('code')
-		->add('name')
-		->add('hidden', 'boolean', array('editable' => true))
+		->addIdentifier('code', null, array('label' => 'admin.nuclide.code'))
+		->add('name', null, array('label' => 'admin.nuclide.name'))
+		->add('active', 'boolean', array('label' => 'admin.label.active',
+				'editable' => true,
+				'header_style' => 'text-align: center',
+				'row_align' => 'center')
+				)
+		
 		/*->add('_action', null, array(
 				'actions' => array(
 						'show' => array(),
@@ -36,9 +41,14 @@ class NuclideAdmin extends AbstractAdmin
 	{
 		$formMapper
 		->with('Nuclide', array('class' => 'col-md-6'))
-		->add('code')
-		->add('translations', TranslationsType::class)
-		->add('hidden')
+		->add('code', null, array('label' => 'admin.nuclide.code'))
+		->add('translations', TranslationsType::class, array(
+				'label' => false,
+				'fields' => array(
+						'name'=> array('label' => 'admin.nuclide.name')
+				)
+		))
+		->add('active','boolean', array('label' => 'admin.label.active'))
 		->end()
 		;
 	}

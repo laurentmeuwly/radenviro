@@ -4,7 +4,7 @@ services:
     app.admin.page:
         class: AppBundle\Admin\PageAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Content", label: "admin.menu.page" }
+            - { name: sonata.admin, manager_type: orm, group: "admin.group.frontend", label: "admin.menu.page" }
         arguments:
             - ~
             - AppBundle\Entity\Page
@@ -15,7 +15,7 @@ services:
     app.admin.legend:
         class: AppBundle\Admin\LegendAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "ofsp_frontend", label: "admin.menu.legend" }
+            - { name: sonata.admin, manager_type: orm, group: "admin.group.frontend", label: "admin.menu.legend" }
         arguments:
             - ~
             - AppBundle\Entity\Legend
@@ -27,10 +27,11 @@ services:
     app.admin.siteType:
         class: AppBundle\Admin\SiteTypeAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "Content", label: "admin.menu.site_type" }
+            - { name: sonata.admin, manager_type: orm, group: "admin.group.frontend", label: "admin.menu.site_type" }
         arguments:
             - ~
             - AppBundle\Entity\SiteType
+            - 'PixSortableBehaviorBundle:SortableAdmin'
             - ~
         calls:
             - [ setTranslationDomain, [messages]]

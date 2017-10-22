@@ -8,17 +8,10 @@ use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 /**
  * @ORM\Entity
  */
-class StationTranslation
+class StationTypeTranslation
 {
     use ORMBehaviors\Translatable\Translation;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=100, nullable=true)
-     */
-    private $name;
-    
     /**
      * @var string
      *
@@ -27,24 +20,7 @@ class StationTranslation
     private $description;
 
     
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-    	return $this->name;
-    }
-    
-    /**
-     * @param  string
-     * @return null
-     */
-    public function setName($name)
-    {
-    	$this->name = $name;
-    }
-    
-    /**
+   /**
      * @return string
      */
     public function getDescription()

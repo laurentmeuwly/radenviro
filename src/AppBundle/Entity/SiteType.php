@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use Xmon\ColorPickerTypeBundle\Validator\Constraints as XmonAssertColor;
 
 /**
  * SiteType
@@ -40,24 +41,33 @@ class SiteType
     
     /**
      * @var integer
-     *
-     * @ORM\Column(name="sorting", type="integer", nullable=true)
+     * @Gedmo\SortablePosition
+     * @ORM\Column(name="position", type="integer")
      */
-    private $sorting = '0';
+    private $position;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="hidden", type="boolean", nullable=true)
+     * @ORM\Column(name="active", type="boolean")
      */
-    private $hidden = '0';
+    private $active = true;
 
     /**
      * @var string
      *
      * @ORM\Column(name="color", type="string", length=255, nullable=false)
+     * @XmonAssertColor\HexColor()
      */
     private $color = '#ffffff';
+    
+    /**
+     * Sites of the SiteType.
+     *
+     * @var Site[]
+     * @ORM\OneToMany(targetEntity="Site", mappedBy="siteType")
+     **/
+    private $sites;
 
 
     /**
@@ -84,29 +94,28 @@ class SiteType
     {
         return $this->id;
     }
-
+    
     /**
-     * Set sorting
+     * Set position
      *
-     * @param integer $sorting
+     * @param integer $position
      *
-     * @return SiteType
+     * @return AutomaticNetwork
      */
-    public function setSorting($sorting)
+    public function setPosition($position)
     {
-        $this->sorting = $sorting;
-
-        return $this;
+    	$this->position=$position;
+    	return $this;
     }
-
+    
     /**
-     * Get sorting
+     * Get position
      *
      * @return integer
      */
-    public function getSorting()
+    public function getPosition()
     {
-        return $this->sorting;
+    	return $this->position;
     }
 
     /**
@@ -128,29 +137,29 @@ class SiteType
     {
         return $this->updatedAt;
     }
-
+    
     /**
-     * Set hidden
+     * Set active
      *
-     * @param boolean $hidden
+     * @param boolean $active
      *
-     * @return SiteType
+     * @return AutomaticNetwork
      */
-    public function setHidden($hidden)
+    public function setActive($active)
     {
-        $this->hidden = $hidden;
-
-        return $this;
+    	$this->active = $active;
+    
+    	return $this;
     }
-
+    
     /**
-     * Get hidden
+     * Get active
      *
      * @return boolean
      */
-    public function getHidden()
+    public function getActive()
     {
-        return $this->hidden;
+    	return $this->active;
     }
 
     /**
@@ -175,5 +184,54 @@ class SiteType
     public function getColor()
     {
         return $this->color;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     *
+     * @return SiteType
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     *
+     * @return SiteType
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+    
+    /**
+     * Return all sites associated to the siteType.
+     *
+     * @return Site[]
+     */
+    public function getSites()
+    {
+    	return $this->sites;
+    }
+    
+    /**
+     * Set all sites in the siteType.
+     *
+     * @param Site[] $sites
+     */
+    public function setSites($sites)
+    {
+    	$this->sites->clear();
+    	$this->sites = new ArrayCollection($sites);
     }
 }

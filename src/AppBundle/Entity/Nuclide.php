@@ -82,9 +82,9 @@ class Nuclide
     /**
      * @var boolean
      *
-     * @ORM\Column(name="hidden", type="boolean", nullable=true)
+     * @ORM\Column(name="active", type="boolean")
      */
-    private $hidden;
+    private $active = true;
     
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Element")
@@ -264,27 +264,27 @@ class Nuclide
     }
 
     /**
-     * Set hidden
+     * Set active
      *
-     * @param boolean $hidden
+     * @param boolean $active
      *
-     * @return Nuclide
+     * @return AutomaticNetwork
      */
-    public function setHidden($hidden)
+    public function setActive($active)
     {
-        $this->hidden = $hidden;
-
-        return $this;
+    	$this->active = $active;
+    
+    	return $this;
     }
-
+    
     /**
-     * Get hidden
+     * Get active
      *
      * @return boolean
      */
-    public function getHidden()
+    public function getActive()
     {
-        return $this->hidden;
+    	return $this->active;
     }
 
     /**

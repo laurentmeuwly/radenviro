@@ -11,7 +11,7 @@ use Knp\DoctrineBehaviors\Model as ORMBehaviors;
  * Station
  *
  * @ORM\Table(name="station")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\StationRepository")
  */
 class Station
 {
@@ -345,5 +345,67 @@ class Station
     public function hasCoordinates()
     {
     	return $this->getLatitude()!=0 && $this->getLongitude()!=0;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     *
+     * @return Station
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     *
+     * @return Station
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Add legend
+     *
+     * @param \AppBundle\Entity\Legend $legend
+     *
+     * @return Station
+     */
+    public function addLegend(\AppBundle\Entity\Legend $legend)
+    {
+        $this->legends[] = $legend;
+
+        return $this;
+    }
+
+    /**
+     * Remove legend
+     *
+     * @param \AppBundle\Entity\Legend $legend
+     */
+    public function removeLegend(\AppBundle\Entity\Legend $legend)
+    {
+        $this->legends->removeElement($legend);
+    }
+
+    /**
+     * Get legends
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getLegends()
+    {
+        return $this->legends;
     }
 }

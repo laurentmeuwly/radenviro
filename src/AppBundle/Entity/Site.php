@@ -39,17 +39,23 @@ class Site
 
     /**
      * @var integer
-     *
-     * @ORM\Column(name="sorting", type="integer", nullable=true)
+     * @Gedmo\SortablePosition
+     * @ORM\Column(name="position", type="integer")
      */
-    private $sorting = '0';
-
+    private $position;
+    
     /**
-     * @var integer
+     * @var boolean
      *
-     * @ORM\Column(name="site_type_id", type="integer", nullable=true)
+     * @ORM\Column(name="active", type="boolean")
      */
-    private $siteTypeId;
+    private $active = true;
+   
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\SiteType")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $siteType;
 
     /**
      * @var string
@@ -64,13 +70,6 @@ class Site
      * @ORM\Column(name="longitude", type="decimal", precision=20, scale=15, nullable=false)
      */
     private $longitude = '0.000000000000000';
-
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="hidden", type="boolean", nullable=true)
-     */
-    private $hidden = '0';
 
     /**
      * @var integer
@@ -133,53 +132,16 @@ class Site
     {
         return $this->id;
     }
-
-    /**
-     * Set sorting
-     *
-     * @param integer $sorting
-     *
-     * @return Site
-     */
-    public function setSorting($sorting)
+    
+    public function setSiteType(SiteType $siteType)
     {
-        $this->sorting = $sorting;
-
-        return $this;
+    	$this->siteType = $siteType;
+    	return $this;
     }
-
-    /**
-     * Get sorting
-     *
-     * @return integer
-     */
-    public function getSorting()
+    
+    public function getSiteType()
     {
-        return $this->sorting;
-    }
-
-    /**
-     * Set siteTypeId
-     *
-     * @param integer $siteTypeId
-     *
-     * @return Site
-     */
-    public function setSiteTypeId($siteTypeId)
-    {
-        $this->siteTypeId = $siteTypeId;
-
-        return $this;
-    }
-
-    /**
-     * Get siteTypeId
-     *
-     * @return integer
-     */
-    public function getSiteTypeId()
-    {
-        return $this->siteTypeId;
+    	return $this->siteType;
     }
 
     /**
@@ -251,27 +213,50 @@ class Site
     }
 
     /**
-     * Set hidden
+     * Set active
      *
-     * @param boolean $hidden
+     * @param boolean $active
      *
-     * @return Site
+     * @return AutomaticNetwork
      */
-    public function setHidden($hidden)
+    public function setActive($active)
     {
-        $this->hidden = $hidden;
-
-        return $this;
+    	$this->active = $active;
+    
+    	return $this;
     }
-
+    
     /**
-     * Get hidden
+     * Get active
      *
      * @return boolean
      */
-    public function getHidden()
+    public function getActive()
     {
-        return $this->hidden;
+    	return $this->active;
+    }
+    
+    /**
+     * Set position
+     *
+     * @param integer $position
+     *
+     * @return AutomaticNetwork
+     */
+    public function setPosition($position)
+    {
+    	$this->position=$position;
+    	return $this;
+    }
+    
+    /**
+     * Get position
+     *
+     * @return integer
+     */
+    public function getPosition()
+    {
+    	return $this->position;
     }
 
     /**
@@ -392,5 +377,33 @@ class Site
     public function getWlongitude()
     {
         return $this->wlongitude;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     *
+     * @return Site
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     *
+     * @return Site
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
     }
 }
