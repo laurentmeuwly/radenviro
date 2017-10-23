@@ -70,9 +70,8 @@ class Legend
     
     
     /**
-     * Many Legends have Many Stations.
-     * @ORM\ManyToMany(targetEntity="Station", inversedBy="legends", fetch="EXTRA_LAZY")
-     * @ORM\JoinTable(name="legend_station")
+     * @var Station[]
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\LegendStation", mappedBy="legends", fetch="EXTRA_LAZY")
      */
     private $stations;
     
@@ -238,6 +237,17 @@ class Legend
     public function getStations()
     {
     	return $this->stations;
+    }
+    
+    /**
+     * Set all stations in the legend.
+     *
+     * @param Station[] $stations
+     */
+    public function setStations($stations)
+    {
+    	$this->stations->clear();
+    	$this->stations = new ArrayCollection($stations);
     }
 
     /**

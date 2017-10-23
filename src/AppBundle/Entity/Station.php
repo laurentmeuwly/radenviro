@@ -95,17 +95,6 @@ class Station
     
     
     /**
-     * Many Stations have Many Legends.
-     * @ORM\ManyToMany(targetEntity="Legend", inversedBy="stations")
-     */
-    private $legends;
-
-
-    public function __construct() {
-    	$this->legends = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-    
-    /**
      * @param $method
      * @param $args
      *
@@ -375,37 +364,5 @@ class Station
         return $this;
     }
 
-    /**
-     * Add legend
-     *
-     * @param \AppBundle\Entity\Legend $legend
-     *
-     * @return Station
-     */
-    public function addLegend(\AppBundle\Entity\Legend $legend)
-    {
-        $this->legends[] = $legend;
-
-        return $this;
-    }
-
-    /**
-     * Remove legend
-     *
-     * @param \AppBundle\Entity\Legend $legend
-     */
-    public function removeLegend(\AppBundle\Entity\Legend $legend)
-    {
-        $this->legends->removeElement($legend);
-    }
-
-    /**
-     * Get legends
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getLegends()
-    {
-        return $this->legends;
-    }
+    
 }
