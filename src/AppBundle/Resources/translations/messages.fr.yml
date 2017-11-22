@@ -41,6 +41,9 @@ admin:
     updated_at: Modifié le
     latitude: Latitude
     longitude: Longitude
+    description: Description
+    zoom: Niveau de zoom
+    default_zoom: Zoom par défaut
 
 ## Entities specific
   legend:
@@ -63,6 +66,8 @@ admin:
     name: Nom de la station
     description: Description de la station
     network: Réseau automatique
+    latitude: Latitude
+    longitude: Longitude
   network_category:
     name: Catégorie de réseaux
   network:
@@ -70,7 +75,9 @@ admin:
   station_type:
     name: Type de stations
   station:
+    code: Station
     name: Nom de la station
+    network: Réseau
   site_type:
     name: Genre de site
   site:
@@ -81,10 +88,18 @@ admin:
     
     
     
+table:
+  refdate: Date référence
+    
+search:
+  field:
+    network: Réseau
+  choose_network: Sélectionnez un réseau...
     
     
 
-label:
+label2:
+  search: Chercher
   analyzed environments: Milieux analysés
   sites: Sites
   automatic networks: Réseaux automatiques
@@ -291,7 +306,7 @@ main:
 menus:
   automatic_networks: Réseaux automatiques
   informations: Informations
-  laboratories: Labs. cantonaux
+  laboratories: Espace pro
   map: Accès aux données
   radair: RADAIR
   radon: RADON

@@ -39,9 +39,28 @@ class NetworkCategoryAdmin extends AbstractAdmin
 	protected function configureFormFields(FormMapper $formMapper)
 	{
 		$formMapper
-		->with('Category', array('class' => 'col-md-6'))
-		->add('translations', TranslationsType::class)
-		->add('active')
+		->with('General', array('class' => 'col-md-6', 'label' => 'admin.label.general'))
+			->add('translations', TranslationsType::class, array(
+					'label' => false,
+					'fields' => array(
+							'name'=> array('label' => 'admin.network_category.name')
+					)
+			))
+		->end()
+		->with('Attributs', array('class' => 'col-md-3', 'label' => 'admin.label.attributs'))
+			->add('active', null, array('label' => 'admin.label.active'))
+		->end()
+		->with('History', array('class' => 'col-md-3', 'label' => 'admin.label.history'))
+			->add('createdAt', 'sonata_type_datetime_picker',  array('label' => 'admin.label.created_at',
+					'attr' => array(
+							'readonly' => true
+					)
+			))
+			->add('updatedAt', 'sonata_type_datetime_picker', array('label' => 'admin.label.updated_at',
+					'attr' => array(
+							'readonly' => true
+					)
+			))
 		->end()
 		;
 	}

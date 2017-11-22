@@ -24,11 +24,28 @@ class StationTypeAdmin extends AbstractAdmin
 	protected function configureFormFields(FormMapper $formMapper)
 	{
 		$formMapper
-		->with('General', array('class' => 'col-md-6'))
+		->with('General', array('class' => 'col-md-3', 'label' => 'admin.label.general'))
 		->add('code')
 		->end()
-		->with('Translations', array('class' => 'col-md-6'))
-		->add('translations', TranslationsType::class)
+		->with('Informations', array('class' => 'col-md-6', 'label' => 'admin.label.informations'))
+			->add('translations', TranslationsType::class, array(
+				'label' => false,
+				'fields' => array(
+								'description'=> array('label' => 'admin.label.description')
+							)
+				))
+		->end()
+		->with('History', array('class' => 'col-md-3', 'label' => 'admin.label.history'))
+		->add('createdAt', 'sonata_type_datetime_picker',  array('label' => 'admin.label.created_at',
+				'attr' => array(
+						'readonly' => true
+				)
+		))
+		->add('updatedAt', 'sonata_type_datetime_picker', array('label' => 'admin.label.updated_at',
+				'attr' => array(
+						'readonly' => true
+				)
+		))
 		->end()
 		;
 	}

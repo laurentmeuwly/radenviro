@@ -29,15 +29,16 @@ class SiteAdmin extends AbstractAdmin
 	protected function configureFormFields(FormMapper $formMapper)
 	{
 		$formMapper
-		->with('General', array('class' => 'col-md-6'))
+		->with('General', array('class' => 'col-md-6', 'label' => 'admin.label.general'))
 		->add('translations', TranslationsType::class, [
+				'label' => false,
 				'fields' => [
 						'name'=> [
-								'label' => 'label.name',
+								'label' => 'admin.site.name',
 						],
 						'description' => [
 								'field_type' => 'textarea',
-								'label' => 'label.description',
+								'label' => 'admin.label.description',
 								'attr' => ['class' => 'ckeditor']
 						]		
 				]

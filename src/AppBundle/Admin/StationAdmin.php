@@ -16,10 +16,10 @@ class StationAdmin extends AbstractAdmin
 	protected function configureListFields(ListMapper $listMapper)
 	{
 		$listMapper
-			->addIdentifier('code', null, array('label' => 'label.code'))
-			->add('name', null, array('label' => 'label.name'))
-			->add('network.name')
-			->add('stationType.code')
+			->addIdentifier('code', null, array('label' => 'admin.station.code'))
+			->add('name', null, array('label' => 'admin.station.name'))
+			->add('network.name', null, array('label' => 'admin.station.network'))
+			->add('stationType.code', null, array('label' => 'admin.station_type.name'))
 		;
 	}
 	
@@ -40,17 +40,40 @@ class StationAdmin extends AbstractAdmin
 	protected function configureFormFields(FormMapper $formMapper)
 	{
 		$formMapper
-		->with('General', array('class' => 'col-md-6'))
-			->add('code')
+		->with('General', array('class' => 'col-md-6', 'label' => 'admin.label.general'))
+			->add('code', null, [ 'label' => 'admin.station.code' ])
+			->add('network', null, [ 'label' => 'admin.station.network' ])
+			->add('stationType', null, [ 'label' => 'admin.station_type.name' ])
 		->end()
-		->with('Descriptions', array('class' => 'col-md-12'))
-			->add('translations', TranslationsType::class)
+		->with('Attributs', array('class' => 'col-md-3', 'label' => 'admin.label.attributs'))
+		->add('latitude', 	null, [ 'label' => 'admin.label.latitude' ])
+		->add('longitude', 	null, [ 'label' => 'admin.label.longitude' ])
+		->add('hidden', 	null, [ 'label' => 'admin.label.hidden' ])
+		->add('zoom', 		null, [ 'label' => 'admin.label.zoom' ])
+		->add('defaultZoom',null, [ 'label' => 'admin.label.default_zoom' ])
 		->end()
-		->add('latitude', 	null, [ 'label' => 'label.latitude' ])
-		->add('longitude', 	null, [ 'label' => 'label.longitude' ])
-		->add('hidden', 	null, [ 'label' => 'label.hidden' ])
-		->add('zoom', 		null, [ 'label' => 'label.zoom' ])
-		->add('defaultZoom',null, [ 'label' => 'label.default_zoom' ])
+		->with('History', array('class' => 'col-md-3', 'label' => 'admin.label.history'))
+			->add('createdAt', 'sonata_type_datetime_picker',  array('label' => 'admin.label.created_at',
+					'attr' => array(
+							'readonly' => true
+					)
+			))
+			->add('updatedAt', 'sonata_type_datetime_picker', array('label' => 'admin.label.updated_at',
+					'attr' => array(
+							'readonly' => true
+					)
+			))
+		->end()
+		->with('Informations', array('class' => 'col-md-6', 'label' => 'admin.label.informations'))
+			->add('translations', TranslationsType::class, array(
+				'label' => false,
+				'fields' => array(
+						'name'=> array('label' => 'admin.station.name'),
+						'description'=> array('label' => 'admin.label.description')
+				)
+			))
+		->end()
+		
 		;
 	}
 	

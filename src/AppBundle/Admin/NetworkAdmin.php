@@ -17,7 +17,7 @@ class NetworkAdmin extends AbstractAdmin
 	{
 		$listMapper
 		->addIdentifier('code')
-		->add('name')
+		->add('name', null, array('label' => 'admin.network.name'))
 		//->add('networkCategory.name')
 		->add('_active', 'boolean', array('label' => 'admin.label.active',
 				'editable' => true,
@@ -39,16 +39,29 @@ class NetworkAdmin extends AbstractAdmin
 	protected function configureFormFields(FormMapper $formMapper)
 	{
 		$formMapper
-		->with('General', array('class' => 'col-md-6'))
+		->with('General', array('class' => 'col-md-3', 'label' => 'admin.label.general'))
 			->add('code')
+			->add('networkCategory', null, array('label' => 'admin.network_category.name'))
 		->end()
-		->with('Translations', array('class' => 'col-md-6'))
-			->add('translations', TranslationsType::class)
+		->with('Informations', array('class' => 'col-md-6', 'label' => 'admin.label.informations'))
+			->add('translations', TranslationsType::class, array(
+					'label' => false,
+					'fields' => array(
+							'name'=> array('label' => 'admin.network.name')
+					)
+			))
 		->end()
-		->with('Additional infos', array('class' => 'col-md-12'))
-		->add('networkCategory', 'entity', array(
-				'class' => 'AppBundle\Entity\NetworkCategory'
-				))
+		->with('History', array('class' => 'col-md-3', 'label' => 'admin.label.history'))
+		->add('createdAt', 'sonata_type_datetime_picker',  array('label' => 'admin.label.created_at',
+				'attr' => array(
+						'readonly' => true
+				)
+		))
+		->add('updatedAt', 'sonata_type_datetime_picker', array('label' => 'admin.label.updated_at',
+				'attr' => array(
+						'readonly' => true
+				)
+		))
 		->end()
 		;
 	}
