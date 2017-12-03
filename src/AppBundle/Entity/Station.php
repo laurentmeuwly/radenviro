@@ -93,6 +93,16 @@ class Station
      */
     private $latitude = '0';
     
+    /**
+     * @ORM\ManyToMany(targetEntity="Site", mappedBy="stations")
+     */
+    private $sites;
+    
+    
+    public function __construct()
+    {
+    	$this->sites = new ArrayCollection();
+    }
     
     /**
      * @param $method
@@ -107,6 +117,11 @@ class Station
     	}
     
     	return $this->proxyCurrentLocaleTranslation($method, $args);
+    }
+    
+    public function __toString()
+    {
+    	return (string)($this->getName() . " (" . $this->getCode() . ")");
     }
 
     /**
@@ -331,9 +346,35 @@ class Station
         return $this->latitude;
     }
     
+    /**
+     *
+     * @return bool
+     */
     public function hasCoordinates()
     {
     	return $this->getLatitude()!=0 && $this->getLongitude()!=0;
+    }
+    
+    
+    public function getSites()
+    {
+    	return $this->sites;
+    }
+    
+    public function setSites($sites)
+    {
+    	$this->sites = $sites;
+    	return $this;
+    }
+    
+    public function addStation($site)
+    {
+    	$this->site[] = $site;
+    }
+    
+    public function removeStation($site)
+    {
+    	$this->site->removeElement($site);
     }
 
     /**

@@ -106,8 +106,17 @@ class Site
      */
     private $wlongitude = '0.000000000000000';
 
+    /**
+     * @ORM\ManyToMany(targetEntity="Station", inversedBy="sites")
+     */
+    private $stations;
 
-
+    
+    public function __construct()
+    {
+    	$this->stations = new ArrayCollection();
+    }
+    
     /**
      * @param $method
      * @param $args
@@ -377,6 +386,28 @@ class Site
     public function getWlongitude()
     {
         return $this->wlongitude;
+    }
+    
+    public function getStations()
+    {
+    	return $this->stations;
+    }
+    
+    public function setStations($stations)
+    {
+    	$this->stations = $stations;
+    	return $this;
+    }
+    
+    public function addStation($station)
+    {
+    	$station->addSite($this);
+    	$this->station[] = $station;
+    }
+    
+    public function removeStation($station)
+    {
+    	$this->station->removeElement($station);
     }
 
     /**

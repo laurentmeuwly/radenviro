@@ -60,6 +60,11 @@ class StationType
     	return $this->proxyCurrentLocaleTranslation($method, $args);
     }
     
+    public function __toString()
+    {
+    	return (string)$this->getCode();
+    }
+    
     /**
      * Get id
      *

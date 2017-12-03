@@ -3,12 +3,15 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use APY\DataGridBundle\Grid\Mapping as GRID;
+
 
 /**
  * Sample
  *
  * @ORM\Table(name="sample", indexes={@ORM\Index(name="index_samples_on_samCoordinateSystem_and_samDate", columns={"samCoordinateSystem", "samDate"}), @ORM\Index(name="index_samples_on_bag_code_id", columns={"bag_code_id"}), @ORM\Index(name="index_samples_on_laboratory_id", columns={"laboratory_id"}), @ORM\Index(name="index_samples_on_type_id", columns={"type_id"}), @ORM\Index(name="index_samples_on_sample_type_id", columns={"sample_type_id"}), @ORM\Index(name="index_samples_on_quantity_unit_id", columns={"quantity_unit_id"}), @ORM\Index(name="index_samples_on_network_id", columns={"network_id"}), @ORM\Index(name="index_samples_on_station_id", columns={"station_id"})})
  * @ORM\Entity
+ *
  */
 class Sample
 {
@@ -99,18 +102,16 @@ class Sample
     private $samlocality;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="samCanton_id", type="integer", nullable=true)
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Canton")
+     * @ORM\JoinColumn(nullable=true)
      */
-    private $samcantonId;
+    private $samcanton;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="samCountry_id", type="integer", nullable=true)
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Country")
+     * @ORM\JoinColumn(nullable=true)
      */
-    private $samcountryId;
+    private $samcountry;
 
     /**
      * @var string
@@ -176,18 +177,16 @@ class Sample
     private $orilocality;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="oriCanton_id", type="integer", nullable=true)
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Canton")
+     * @ORM\JoinColumn(nullable=true)
      */
-    private $oricantonId;
+    private $oricanton;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="oriCountry_id", type="integer", nullable=true)
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Country")
+     * @ORM\JoinColumn(nullable=true)
      */
-    private $oricountryId;
+    private $oricountry;
 
     /**
      * @var string
@@ -239,53 +238,48 @@ class Sample
     private $comment;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="bag_code_id", type="integer", nullable=true)
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\BagCode")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $bagCodeId;
+    private $bagCode;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="laboratory_id", type="integer", nullable=true)
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Laboratory")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $laboratoryId;
+    private $laboratory;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="type_id", type="integer", nullable=true)
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Type")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $typeId;
+    private $type;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="sample_type_id", type="integer", nullable=true)
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\SampleType")
+     * @ORM\JoinColumn(nullable=true)
      */
-    private $sampleTypeId;
+    private $sampleType;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="quantity_unit_id", type="integer", nullable=true)
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\QuantityUnit")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $quantityUnitId;
+    private $quantityUnit;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="network_id", type="integer", nullable=true)
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Network")
+     * @ORM\JoinColumn(nullable=false)
+     * @GRID\Column(field="network.id", title="network.id")
      */
-    private $networkId;
+    private $network;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="station_id", type="integer", nullable=true)
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Station")
+     * @ORM\JoinColumn(nullable=false)
+     * @GRID\Column(field="station.id", title="station.id")
      */
-    private $stationId;
+    private $station;
 
     /**
      * @var string
@@ -314,8 +308,20 @@ class Sample
      * @ORM\Column(name="updated_at", type="datetime", nullable=false)
      */
     private $updatedAt;
+    
+    /**
+     * Measurements of the sample.
+     *
+     * @var Measurement[]
+     * @ORM\OneToMany(targetEntity="Measurement", mappedBy="sample")
+     **/
+    private $measurements;
 
 
+    public function __construct()
+    {
+    	$this->measurements = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -592,51 +598,51 @@ class Sample
     }
 
     /**
-     * Set samcantonId
+     * Set samcanton
      *
-     * @param integer $samcantonId
+     * @param integer $samcanton
      *
      * @return Sample
      */
-    public function setSamcantonId($samcantonId)
+    public function setSamcanton($samcanton)
     {
-        $this->samcantonId = $samcantonId;
+        $this->samcanton = $samcanton;
 
         return $this;
     }
 
     /**
-     * Get samcantonId
+     * Get samcanton
      *
      * @return integer
      */
-    public function getSamcantonId()
+    public function getSamcanton()
     {
-        return $this->samcantonId;
+        return $this->samcanton;
     }
 
     /**
-     * Set samcountryId
+     * Set samcountry
      *
-     * @param integer $samcountryId
+     * @param integer $samcountry
      *
      * @return Sample
      */
-    public function setSamcountryId($samcountryId)
+    public function setSamcountry($samcountry)
     {
-        $this->samcountryId = $samcountryId;
+        $this->samcountry = $samcountry;
 
         return $this;
     }
 
     /**
-     * Get samcountryId
+     * Get samcountry
      *
      * @return integer
      */
-    public function getSamcountryId()
+    public function getSamcountry()
     {
-        return $this->samcountryId;
+        return $this->samcountry;
     }
 
     /**
@@ -856,51 +862,51 @@ class Sample
     }
 
     /**
-     * Set oricantonId
+     * Set oricanton
      *
-     * @param integer $oricantonId
+     * @param integer $oricanton
      *
      * @return Sample
      */
-    public function setOricantonId($oricantonId)
+    public function setOricantonId($oricanton)
     {
-        $this->oricantonId = $oricantonId;
+        $this->oricantonId = $oricanton;
 
         return $this;
     }
 
     /**
-     * Get oricantonId
+     * Get oricanton
      *
      * @return integer
      */
-    public function getOricantonId()
+    public function getOricanton()
     {
-        return $this->oricantonId;
+        return $this->oricanton;
     }
 
     /**
-     * Set oricountryId
+     * Set oricountry
      *
-     * @param integer $oricountryId
+     * @param integer $oricountry
      *
      * @return Sample
      */
-    public function setOricountryId($oricountryId)
+    public function setOricountryId($oricountry)
     {
-        $this->oricountryId = $oricountryId;
+        $this->oricountry = $oricountry;
 
         return $this;
     }
 
     /**
-     * Get oricountryId
+     * Get oricountry
      *
      * @return integer
      */
-    public function getOricountryId()
+    public function getOricountry()
     {
-        return $this->oricountryId;
+        return $this->oricountry;
     }
 
     /**
@@ -1072,171 +1078,172 @@ class Sample
     }
 
     /**
-     * Set bagCodeId
+     * Set bagCode
      *
-     * @param integer $bagCodeId
+     * @param integer $bagCode
      *
      * @return Sample
      */
-    public function setBagCodeId($bagCodeId)
+    public function setBagCode($bagCode)
     {
-        $this->bagCodeId = $bagCodeId;
+        $this->bagCode = $bagCode;
 
         return $this;
     }
 
     /**
-     * Get bagCodeId
+     * Get bagCode
      *
      * @return integer
      */
-    public function getBagCodeId()
+    public function getBagCode()
     {
-        return $this->bagCodeId;
+        return $this->bagCode;
     }
 
+        
     /**
-     * Set laboratoryId
+     * Set laboratory
      *
-     * @param integer $laboratoryId
+     * @param integer $laboratory
      *
      * @return Sample
      */
-    public function setLaboratoryId($laboratoryId)
+    public function setLaboratory($laboratory)
     {
-        $this->laboratoryId = $laboratoryId;
+    	$this->laboratory = $laboratory;
+    
+    	return $this;
+    }
+    
+    /**
+     * Get laboratory
+     *
+     * @return integer
+     */
+    public function getLaboratory()
+    {
+    	return $this->laboratory;
+    }
+
+    /**
+     * Set type
+     *
+     * @param integer $type
+     *
+     * @return Sample
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
 
         return $this;
     }
 
     /**
-     * Get laboratoryId
+     * Get type
      *
      * @return integer
      */
-    public function getLaboratoryId()
+    public function getType()
     {
-        return $this->laboratoryId;
+        return $this->type;
     }
 
     /**
-     * Set typeId
+     * Set sampleType
      *
-     * @param integer $typeId
+     * @param integer $sampleType
      *
      * @return Sample
      */
-    public function setTypeId($typeId)
+    public function setSampleTypeId($sampleType)
     {
-        $this->typeId = $typeId;
+        $this->sampleType = $sampleType;
 
         return $this;
     }
 
     /**
-     * Get typeId
+     * Get sampleType
      *
      * @return integer
      */
-    public function getTypeId()
+    public function getSampleType()
     {
-        return $this->typeId;
+        return $this->sampleType;
     }
 
     /**
-     * Set sampleTypeId
+     * Set quantityUnit
      *
-     * @param integer $sampleTypeId
+     * @param integer $quantityUnit
      *
      * @return Sample
      */
-    public function setSampleTypeId($sampleTypeId)
+    public function setQuantityUnit($quantityUnit)
     {
-        $this->sampleTypeId = $sampleTypeId;
+        $this->quantityUnit = $quantityUnit;
 
         return $this;
     }
 
     /**
-     * Get sampleTypeId
+     * Get quantityUnit
      *
      * @return integer
      */
-    public function getSampleTypeId()
+    public function getQuantityUnit()
     {
-        return $this->sampleTypeId;
+        return $this->quantityUnit;
     }
 
     /**
-     * Set quantityUnitId
+     * Set network
      *
-     * @param integer $quantityUnitId
+     * @param integer $network
      *
      * @return Sample
      */
-    public function setQuantityUnitId($quantityUnitId)
+    public function setNetwork($network)
     {
-        $this->quantityUnitId = $quantityUnitId;
+        $this->network = $network;
 
         return $this;
     }
 
     /**
-     * Get quantityUnitId
+     * Get network
      *
      * @return integer
      */
-    public function getQuantityUnitId()
+    public function getNetwork()
     {
-        return $this->quantityUnitId;
+        return $this->network;
     }
 
     /**
-     * Set networkId
+     * Set station
      *
-     * @param integer $networkId
+     * @param integer $station
      *
      * @return Sample
      */
-    public function setNetworkId($networkId)
+    public function setStation($station)
     {
-        $this->networkId = $networkId;
+        $this->station= $station;
 
         return $this;
     }
 
     /**
-     * Get networkId
+     * Get station
      *
      * @return integer
      */
-    public function getNetworkId()
+    public function getStation()
     {
-        return $this->networkId;
-    }
-
-    /**
-     * Set stationId
-     *
-     * @param integer $stationId
-     *
-     * @return Sample
-     */
-    public function setStationId($stationId)
-    {
-        $this->stationId = $stationId;
-
-        return $this;
-    }
-
-    /**
-     * Get stationId
-     *
-     * @return integer
-     */
-    public function getStationId()
-    {
-        return $this->stationId;
+        return $this->station;
     }
 
     /**
@@ -1333,5 +1340,26 @@ class Sample
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+    
+    /**
+     * Return all measurements associated to the sample.
+     *
+     * @return Measurement[]
+     */
+    public function getMeasurements()
+    {
+    	return $this->measurements;
+    }
+    
+    /**
+     * Set all measurements in the sample.
+     *
+     * @param Measurement[] $products
+     */
+    public function setMeasurements($measurements)
+    {
+    	$this->measurements->clear();
+    	$this->measurements = new ArrayCollection($measurements);
     }
 }

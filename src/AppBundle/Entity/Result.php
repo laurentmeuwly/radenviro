@@ -43,18 +43,18 @@ class Result
     private $error;
 
     /**
-     * @var integer
+     * @var Measurement
      *
-     * @ORM\Column(name="measurement_id", type="integer", nullable=true)
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Measurement", inversedBy="results")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private $measurementId;
+    private $measurement;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="nuclide_id", type="integer", nullable=true)
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Nuclide")
+     * @ORM\JoinColumn(nullable=true)
      */
-    private $nuclideId;
+    private $nuclide;
 
     /**
      * @var \DateTime
@@ -155,51 +155,51 @@ class Result
     }
 
     /**
-     * Set measurementId
+     * Set measurement
      *
-     * @param integer $measurementId
+     * @param integer $measurement
      *
      * @return Result
      */
-    public function setMeasurementId($measurementId)
+    public function setMeasurement($measurement)
     {
-        $this->measurementId = $measurementId;
+        $this->measurement = $measurement;
 
         return $this;
     }
 
     /**
-     * Get measurementId
+     * Get measurement
      *
      * @return integer
      */
-    public function getMeasurementId()
+    public function getMeasurement()
     {
-        return $this->measurementId;
+        return $this->measurement;
     }
 
     /**
-     * Set nuclideId
+     * Set nuclide
      *
-     * @param integer $nuclideId
+     * @param integer $nuclide
      *
      * @return Result
      */
-    public function setNuclideId($nuclideId)
+    public function setNuclide($nuclide)
     {
-        $this->nuclideId = $nuclideId;
+        $this->nuclideId = $nuclide;
 
         return $this;
     }
 
     /**
-     * Get nuclideId
+     * Get nuclide
      *
      * @return integer
      */
-    public function getNuclideId()
+    public function getNuclide()
     {
-        return $this->nuclideId;
+        return $this->nuclide;
     }
 
     /**

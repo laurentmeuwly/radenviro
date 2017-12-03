@@ -71,7 +71,7 @@ class Legend
     
     /**
      * @var Station[]
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\LegendStation", mappedBy="legends", fetch="EXTRA_LAZY")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\LegendStation", mappedBy="legend", fetch="EXTRA_LAZY")
      */
     private $stations;
     

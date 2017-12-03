@@ -84,6 +84,11 @@ class SiteType
     
     	return $this->proxyCurrentLocaleTranslation($method, $args);
     }
+    
+    public function __toString()
+    {
+    	return (string)$this->getName();
+    }
 
     /**
      * Get id
