@@ -1,6 +1,9 @@
 sonata_user:
     security_acl: true
     manager_type: orm
+    class:
+        user: Application\Sonata\UserBundle\Entity\User
+        group: Application\Sonata\UserBundle\Entity\Group
     
 sonata_block:
     blocks:
