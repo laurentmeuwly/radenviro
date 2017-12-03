@@ -19,21 +19,34 @@ services:
         class: AppBundle\Form\RegistrationType
         tags:
             - { name: form.type, alias: app_user_registration }
-    
-    app.admin.automaticNetworkStation:
-        class: AppBundle\Admin\AutomaticNetworkStationAdmin
-        tags:
-          - { name: sonata.admin, manager_type: orm, label: "Stations des réseaux automatiques" }
-        arguments:
-          - ~
-          - AppBundle\Entity\AutomaticNetworkStation
-          - 'PixSortableBehaviorBundle:SortableAdmin' # define the new controller via the third argument
-        calls:
-          - [ setContainer, [ "@service_container" ] ]
-          - [ setPositionService, [ "@pix_sortable_behavior.position" ] ] 
           
     app.menu_listener:
         class: AppBundle\EventListener\MenuBuilderListener
         tags:
             - { name: kernel.event_listener, event: sonata.admin.event.configure.menu.sidebar, method: addMenuItems }
+            
+    app.datatable.post:
+        class: AppBundle\Datatables\SampleDatatable
+        parent: sg_datatables.datatable.abstract
 
+    #mailer: fos_user.mailer.twig_swift
+    # Permet de renseigner le nouveau formulaire d'inscription
+    #registration:
+    #form:
+    #type: myapp_user_registration
+    # Permet la validation automatique du compte par envoi d'un email
+    #confirmation:
+    #    enabled: true
+    #    from_email: laurent@lmeuwly.ch
+    # Adresse de l'expediteur
+    #    address: laurent@lmeuwly.ch
+    # Nom de l'expediteur
+    #    sender_name: Admin de radenviro.ch
+    # Permet de définir le template de l'email à envoyer (en html)
+    #email:
+        #template: MyAppMonBundle:User:registration.email.twig
+        
+    twig.extension.sortbyfield:
+        class: Snilius\Twig\SortByFieldExtension
+        tags:
+            - { name: twig.extension }
