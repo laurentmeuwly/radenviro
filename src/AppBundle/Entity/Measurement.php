@@ -100,13 +100,13 @@ class Measurement
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\QuantityUnit")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $quantityUnit;
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\ResultUnit")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $resultUnit;
     
