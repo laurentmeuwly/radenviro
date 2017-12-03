@@ -202,15 +202,15 @@ sonata_formatter:
             service: sonata.formatter.text.twigengine
             extensions: [] # Twig formatter cannot have extensions
 
-#knp_doctrine_behaviors:
-#    translatable: true
+knp_doctrine_behaviors:
+    translatable: true
     
-#a2lix_translation_form:
-#    locale_provider: default       
-#    locales: [fr, de, it, en]     
-#    default_locale: fr             
-#    required_locales: [fr, de]         
-#    templating: "A2lixTranslationFormBundle::default.html.twig"     
+a2lix_translation_form:
+    locale_provider: default       
+    locales: [fr, de, it, en]     
+    default_locale: fr             
+    required_locales: [fr, de]         
+    templating: "A2lixTranslationFormBundle::default.html.twig"     
             
 stof_doctrine_extensions:
     default_locale: fr
