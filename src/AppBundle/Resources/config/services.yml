@@ -1,0 +1,4 @@
+services:
+    app.lastresult:
+        class: AppBundle\Services\LastResult
+        arguments: ["@doctrine.orm.entity_manager"]

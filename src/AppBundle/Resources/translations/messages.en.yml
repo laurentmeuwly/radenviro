@@ -1,3 +1,14 @@
+admin:
+  legend:
+    name: Nom
+    sorting: En ordre
+    hidden: hideux
+
+hidden: hhiiddeenn
+Hidden: HHiiddeenn
+app.label.sorting: Display order
+sorting: Display order
+
 activerecord:
   models:
     networks: networks
@@ -185,6 +196,7 @@ main:
 menus:
   automatic_networks: Automatic networks
   informations: Information
+  laboratories: Professionnal area
   map: Data access
   radair: RADAIR
   radon: RADON

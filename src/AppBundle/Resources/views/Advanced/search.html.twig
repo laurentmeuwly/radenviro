@@ -1,0 +1,36 @@
+
+
+{% block main %}
+{# Display the form #}
+{{ form(form) }}
+<br/><br/>
+{{ network }}
+<br/><br/>
+{{ grid(grid) }}
+<br/><br/>
+
+{# Add ajax thingie that will update the city select box #}
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#test_parent').change(function(){
+           var val = $(this).val();
+           $.ajax({
+                type: "POST",
+                url: "{{ url('parent_ajax_call') }}?parent_id=" + val,
+                success: function(data) {
+                    // Remove current options
+                    $('#test_id').html('');
+                    $.each(data, function(k, v) {
+                        $('#test_id').append('<option value="' + v + '">' + k + '</option>');
+                    });
+                }
+            });
+            return false;
+        });
+    });
+</script>
+
+{% endblock %}

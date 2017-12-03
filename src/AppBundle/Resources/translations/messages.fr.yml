@@ -1,7 +1,8 @@
 
-#####################
-# Admin translations
-#####################
+######################
+# Backend translations
+######################
+
 admin:
   group:
     frontend: Affichage frontend
@@ -44,6 +45,7 @@ admin:
     description: Description
     zoom: Niveau de zoom
     default_zoom: Zoom par défaut
+    map: Carte
 
 ## Entities specific
   legend:
@@ -73,7 +75,7 @@ admin:
   network:
     name: Nom du réseau
   station_type:
-    name: Type de stations
+    name: Type de station
   station:
     code: Station
     name: Nom de la station
@@ -82,11 +84,17 @@ admin:
     name: Genre de site
   site:
     name: Nom du site
+    stations: Stations concernées
   nuclide:
     code: Isotope
     name: Nom
     
-    
+  
+  
+
+#######################
+# Frontend translations
+#######################  
     
 table:
   refdate: Date référence
@@ -98,7 +106,7 @@ search:
     
     
 
-label2:
+label:
   search: Chercher
   analyzed environments: Milieux analysés
   sites: Sites
@@ -110,6 +118,7 @@ label2:
   latitude: Latitude
   longitude: Longitude
   zoom: Zoom
+  nuclide: Isotope
   
 
 activerecord:

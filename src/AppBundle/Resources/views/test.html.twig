@@ -1,0 +1,38 @@
+
+
+{% block content %}
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/r/dt/dt-1.10.9/datatables.min.css"/>
+    {{ datatable_html({
+            'id' : 'dta-tst'
+        })
+    }}
+
+
+    {{ datatable_html({
+            'id' : 'dta-tst2'
+        })
+    }}
+
+{% endblock %}
+
+{% block javascripts %}
+<script type="text/javascript" charset="utf8" src="//code.jquery.com/jquery-3.2.0.min.js"></script>
+<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
+{{ datatable_js({
+        'id' : 'dta-tst',
+        'js' : {
+            'dom': '<"clearfix"lf>rtip',
+            'ajax': path('datatable'),
+        }
+    })
+}}
+
+{{ datatable_js({
+        'id' : 'dta-tst2',
+        'js' : {
+            'dom': '<"clearfix"lf>rtip',
+            'ajax': path('datatable2'),
+        }
+    })
+}}
+{% endblock javascripts %}

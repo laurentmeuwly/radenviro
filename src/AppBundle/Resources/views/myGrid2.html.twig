@@ -1,0 +1,17 @@
+{% extends 'AppBundle::basegrid.html.twig' %}
+
+{% block main %}
+<div>
+{{ form(form) }}
+</div>
+<br/><br/>
+{{ network }}
+<br/><br/>
+<div>
+
+{{ grid_search(grid, 'APYDataGridBundle::blocks.html.twig') }}
+{{ grid(grid, 'APYDataGridBundle::blocks_js.jquery.html.twig') }}
+
+
+</div>
+{% endblock %}

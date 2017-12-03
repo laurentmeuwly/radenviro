@@ -1,0 +1,12 @@
+{% extends 'AppBundle::basegrid.html.twig' %}
+
+{% block main %}
+<div>
+{{ form(form) }}
+</div>
+<br/>
+<br/>
+<div>
+{{ sg_datatables_render(datatable) }}
+</div>
+{% endblock %}

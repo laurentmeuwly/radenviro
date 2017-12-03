@@ -1,3 +1,33 @@
+
+
+
+
+
+
+
+
+
+search:
+  field:
+    network: Netzwerk
+  choose_network: Netzwerk wählen...
+
+
+label:
+  search: Suchen
+
+
+
+
+
+
+
+
+
+
+
+
+
 activerecord:
   models:
     networks: Netzwerke
@@ -185,6 +215,7 @@ main:
 menus:
   automatic_networks: Automatische Netzwerke
   informations: Informationen
+  laboratories: Für Profi
   map: Zugang zu den Daten 
   radair: RADAIR
   radon: RADON

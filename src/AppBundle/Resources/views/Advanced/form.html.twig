@@ -1,0 +1,49 @@
+<form action="{{ path('form1') }}" method="POST">
+          <div class="row">
+            <div class="col-md-6">
+              <div>
+                {{ form_errors(form) }}
+              </div>
+              <div>
+                {{ form_label(form.network, "Réseau:", {'label_attr': {'class': 'control-label'}}) }}
+                {{ form_errors(form.network) }}
+                {{ form_widget(form.network, {'attr': {'class': 'form-control', 'id': 'network',   'onChange':'fillStation();'}}) }}
+              </div>
+              <div>
+                {{ form_label(form.station, "Station:", {'label_attr': {'class': 'control-label'}}) }}
+                {{ form_errors(form.station) }}
+                {{ form_widget(form.station, {'attr': {'class': 'form-control', 'id': 'station'}}) }}
+              </div>
+              <br>
+            </div>
+          </div>
+          {# valiDation #}
+          <br>
+          <div class="row">
+            <div class="clo-md-4"></div>
+              <input onclick="clear_form_elements(this.form)" type="reset" value="Vider les champs" class="btn btn-xs btn-default"/>
+            </div>
+            <br>
+            <div class="clo-md-4"></div>
+              <input type="submit" value="Chercher" class="btn btn-small btn-success"/>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <script type="text/javascript">function fillStation(){
+        var id_select = $('#myspace_databasebundle_station_network').val();
+          $.ajax({
+            url: "{{ path('selectSample') }}",
+            type: 'POST',
+            data: {'id': id_select},
+            dataType: 'json',
+            success: function(json){ // quand la réponse de la requete arrive
+              $('#myspace_databasebundle_station_network').html('');
+              $.each(json, function(index, value) { // et  boucle sur la réponse contenu dans la variable passé à la function du success "json"
+              $('#myspace_databasebundle_station_network').append('<option value="'+ value.id +'">'+ value.nom +'</option>');
+              });
+            }
+          });
+      }
+    </script>

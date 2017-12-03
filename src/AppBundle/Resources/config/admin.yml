@@ -1,5 +1,5 @@
 # src/AppBundle/Resources/config/admin.yml
-
+    
 services:
     app.admin.page:
         class: AppBundle\Admin\PageAdmin
