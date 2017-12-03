@@ -8,6 +8,8 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use A2lix\TranslationFormBundle\Form\Type\TranslationsType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class SiteAdmin extends AbstractAdmin
 {	
@@ -37,9 +39,8 @@ class SiteAdmin extends AbstractAdmin
 								'label' => 'admin.site.name',
 						],
 						'description' => [
-								'field_type' => 'textarea',
+								'field_type' => 'ckeditor',
 								'label' => 'admin.label.description',
-								'attr' => ['class' => 'ckeditor']
 						]		
 				]
 				
@@ -47,6 +48,7 @@ class SiteAdmin extends AbstractAdmin
 		->end()
 		
 		->with('Attributs', array('class' => 'col-md-3', 'label' => 'admin.label.attributs'))
+		->add('siteType', 	null, [ 'label' => 'admin.site_type.name' ])
 		->add('latitude', 	null, [ 'label' => 'admin.label.latitude' ])
 		->add('longitude', 	null, [ 'label' => 'admin.label.longitude' ])
 		->add('zoom', 		null, [ 'label' => 'admin.label.zoom' ])
@@ -65,6 +67,18 @@ class SiteAdmin extends AbstractAdmin
 						'readonly' => true
 				)
 		))
+		->end()
+		
+		->with('Map', array('class' => 'col-md-3', 'label' => 'admin.label.map'))
+		->end()
+		
+		->with('Stations', array('class' => 'col-md-6', 'label' => 'admin.site.stations'))
+		->add('stations', CollectionType::class, array('by_reference' => false))
+		/*->add('stations', CollectionType::class, array(
+				'class'        => 'AppBundle:Station',
+				'choice_label' => 'name',
+				'multiple'     => true,
+				'required'     => false))*/
 		->end()
 		;
 		 

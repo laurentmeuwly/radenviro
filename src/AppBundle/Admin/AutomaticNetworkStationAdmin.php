@@ -47,9 +47,9 @@ class AutomaticNetworkStationAdmin extends AbstractAdmin
 				'label' => false,
 				'fields' => array(
 						'name'=> array('label' => 'admin.automatic_network_station.name'),
-						'description'=> array('field_type' => 'textarea',
+						'description'=> array('field_type' => 'ckeditor',
 								'label' => 'admin.automatic_network_station.description',
-								'attr' => array('class' => 'ckeditor'))
+								)
 				)
 		))
 		->end()

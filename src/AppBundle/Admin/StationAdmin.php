@@ -69,7 +69,7 @@ class StationAdmin extends AbstractAdmin
 				'label' => false,
 				'fields' => array(
 						'name'=> array('label' => 'admin.station.name'),
-						'description'=> array('label' => 'admin.label.description')
+						'description'=> array('field_type' => 'ckeditor', 'label' => 'admin.label.description')
 				)
 			))
 		->end()

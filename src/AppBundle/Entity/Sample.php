@@ -263,20 +263,20 @@ class Sample
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\QuantityUnit")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $quantityUnit;
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Network")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      * @GRID\Column(field="network.id", title="network.id")
      */
     private $network;
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Station")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      * @GRID\Column(field="station.id", title="station.id")
      */
     private $station;
