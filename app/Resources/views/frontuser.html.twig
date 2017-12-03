@@ -1,0 +1,23 @@
+{% extends "default/radenviro.html.twig" %}
+
+{% block stylesheets %}
+{{ parent() }} 
+<link rel="stylesheet" href="{{ asset('css/sonata_front_css.css') }}" /> 
+{% endblock %}
+
+{% block content %}
+        {% if app.request.hasPreviousSession %}
+            {% for type, messages in app.session.flashbag.all() %}
+                {% for message in messages %}
+                    <div class="flash-{{ type }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        {% endif %}
+        
+	{% block fos_user_content %}
+        Please extend this template to manage all user related actions
+    {% endblock fos_user_content %}
+
+{% endblock content %}
