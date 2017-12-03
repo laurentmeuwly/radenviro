@@ -9,9 +9,15 @@
 
 
 {% block javascripts %}
-  	<script type="text/javascript" src="{{asset('js/application.js')}}"></script>
-  	<script type="text/javascript" src="{{asset('js/main.js')}}"></script>
+    {% javascripts 
+    	'js/test1.js'
+    	'js/test2.js' 
+        output='js/compiled/main.js' %}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+   
 {% endblock %}
+
   
   
 {% block body %}
@@ -36,10 +42,9 @@
     <div id="content">    
 	{% block content %}
 		Ici, le contenu de l'onglet courant!
+		
 	{% endblock %}
 	</div>	
-			
-		
-    
+ 
    	</div>
 {% endblock %}
