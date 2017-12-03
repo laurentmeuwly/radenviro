@@ -1,6 +1,20 @@
 /******************************************************************************
  *** Sizes definition
  ******************************************************************************/
+ .sg-datatables-individual-filtering {
+ width: 100px;
+ }
+ #sg-datatables-sample_datatable_filter {
+  display: none;
+ }
+ .sorting_disabled {
+ width: 85px;
+
+ }
+ 
+  #sg-datatables-sample_datatable_wrapper td.sorting_disabled {
+  width: 85px;
+  }
 /******************************************************************************
  *** Colors definition
  ******************************************************************************/

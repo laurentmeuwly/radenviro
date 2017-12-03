@@ -1,0 +1,138 @@
+/******************************************************************************
+    *** Measure table definition
+******************************************************************************/
+#content div.measures-table table {
+  width: 100%; }
+  #content div.measures-table table th.date {
+    width: 7%; }
+  #content div.measures-table table th.value {
+    width: 8%; }
+  #content div.measures-table table th.error {
+    width: 8%; }
+  #content div.measures-table table th.unit {
+    width: 6%; }
+  #content div.measures-table table th.station {
+    width: 15%; }
+  #content div.measures-table table th.type {
+    width: 8%; }
+
+/******************************************************************************
+    *** Measure graph definition
+******************************************************************************/
+#content div.measures-graph div.filter {
+  overflow: hidden; }
+  #content div.measures-graph div.filter div.title {
+    float: left;
+    font-size: 1.2em;
+    font-weight: bold;
+    width: 300px; }
+  #content div.measures-graph div.filter div.infos {
+    font-size: 1.1em;
+    line-height: 1.2em;
+    margin-left: 310px; }
+    #content div.measures-graph div.filter div.infos label {
+      font-weight: bold; }
+#content div.measures-graph div.graph {
+  margin-top: 0.5em; }
+#content div.measures-graph div.graph-tooltip {
+  padding: 15px; }
+  #content div.measures-graph div.graph-tooltip div.date {
+    font-size: 1.3em;
+    font-weight: bold;
+    margin-bottom: 15px; }
+  #content div.measures-graph div.graph-tooltip div.data {
+    font-size: 1.1em; }
+#content div.measures-graph #measures-graph-dashboard {
+  border-top: 1px solid #cccccc;
+  margin-top: 10px;
+  padding-top: 10px;
+  position: relative; }
+  #content div.measures-graph #measures-graph-dashboard #measures-graph-header {
+    overflow: hidden; }
+    #content div.measures-graph #measures-graph-dashboard #measures-graph-header #measures-graph-dates {
+      float: right;
+      margin-right: 5%; }
+      #content div.measures-graph #measures-graph-dashboard #measures-graph-header #measures-graph-dates input {
+        padding: 0px 5px;
+        width: 65px; }
+    #content div.measures-graph #measures-graph-dashboard #measures-graph-header #measures-graph-zooms {
+      float: left;
+      margin-left: 5%; }
+      #content div.measures-graph #measures-graph-dashboard #measures-graph-header #measures-graph-zooms button {
+        margin: 0px 3px; }
+        #content div.measures-graph #measures-graph-dashboard #measures-graph-header #measures-graph-zooms button:hover, #content div.measures-graph #measures-graph-dashboard #measures-graph-header #measures-graph-zooms button.current {
+          box-shadow: 0px 0px 3px #666666; }
+  #content div.measures-graph #measures-graph-dashboard #measures-graph-legends {
+    position: absolute;
+    right: 415px;
+    top: 10px;
+    z-index: 100; }
+    #content div.measures-graph #measures-graph-dashboard #measures-graph-legends ul {
+      list-style: disc; }
+      #content div.measures-graph #measures-graph-dashboard #measures-graph-legends ul li {
+        font-size: 30px;
+        line-height: 11px;
+        margin-bottom: 5px;
+        overflow: hidde; }
+        #content div.measures-graph #measures-graph-dashboard #measures-graph-legends ul li span {
+          color: #000000;
+          display: block;
+          float: left;
+          white-space: nowrap; }
+        #content div.measures-graph #measures-graph-dashboard #measures-graph-legends ul li.green {
+          color: #008000; }
+        #content div.measures-graph #measures-graph-dashboard #measures-graph-legends ul li.orange {
+          color: #FFA500; }
+
+/******************************************************************************
+    *** Measure download definition
+******************************************************************************/
+#content div.measures-download div.header {
+  background-color: #016798;
+  color: white;
+  font-size: 1.1em;
+  font-weight: bold;
+  line-height: 1.2em;
+  padding: 0.5em; }
+#content div.measures-download div.content {
+  padding: 40px 20px; }
+  #content div.measures-download div.content div.filter {
+    margin-bottom: 10px; }
+    #content div.measures-download div.content div.filter label {
+      display: inline-block;
+      font-weight: bold;
+      text-transform: uppercase;
+      width: 125px; }
+    #content div.measures-download div.content div.filter input {
+      padding: 0px 5px;
+      width: 65px; }
+
+/******************************************************************************
+    *** Measure advanced search definition
+******************************************************************************/
+#content div.advsearch select {
+  max-width: 100%; }
+#content div.advsearch .advsearch_stations {
+  display: none; }
+  #content div.advsearch .advsearch_stations select {
+    display: none; }
+
+/******************************************************************************
+    *** Single measure display
+******************************************************************************/
+#content #single-measure div.measures-graph #measures-graph-dashboard {
+  border: none;
+  margin: 0px; }
+
+#content .box.measures .content {
+  position: relative; }
+  #content .box.measures .content .shortcuts {
+    position: absolute;
+    right: 15px;
+    top: 16px; }
+    #content .box.measures .content .shortcuts a {
+      color: #ffffff;
+      display: inline-block;
+      font-weight: bold;
+      padding: 0 10px;
+      text-decoration: none; }
