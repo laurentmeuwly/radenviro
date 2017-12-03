@@ -202,8 +202,8 @@ sonata_formatter:
             service: sonata.formatter.text.twigengine
             extensions: [] # Twig formatter cannot have extensions
 
-knp_doctrine_behaviors:
-    translatable: true
+#knp_doctrine_behaviors:
+#    translatable: true
     
 a2lix_translation_form:
     locale_provider: default       
