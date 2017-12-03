@@ -1,0 +1,7 @@
+# app/config/ivory/ivory_google_map.yml
+          
+ivory_google_map:
+    map:
+        debug: "%kernel.debug%"
+        language: "%locale%"
+        api_key: ~
