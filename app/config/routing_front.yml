@@ -1,0 +1,55 @@
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+    
+#sonata_user_admin_security:
+#    resource: '@SonataUserBundle/Resources/config/routing/admin_security.xml'
+#    prefix: /admin
+
+#sonata_user_admin_resetting:
+#    resource: '@SonataUserBundle/Resources/config/routing/admin_resetting.xml'
+#    prefix: /admin/resetting
+
+default:
+    resource: '@AppBundle/Controller/DefaultController.php'
+    type: annotation
+    prefix: /
+
+advanced:
+    resource: '@AppBundle/Controller/AdvancedController.php'
+    type: annotation
+    prefix: /
+    
+sonata_user:
+    resource: '@SonataUserBundle/Resources/config/routing/admin_security.xml'
+    prefix: /admin
+    
+print_sample:
+    path:     /printSample
+    defaults: { _controller: AppBundle:Report:printReport }
+
+parent_ajax_call:
+    path:     /parent_ajax_call
+    defaults: { _controller: AppBundle:Admin:ajax }
+    
+sg_datatables_bundle:
+    resource: "@SgDatatablesBundle/Controller/"
+    type:     annotation
+    
+    
+# advanced search form
+_form1:
+      path:  /form1
+      defaults: { _controller: AppBundle:Advanced:form1 }
+      
+# Ajax
+formZones:
+    path:  /labosample/addform
+    defaults: { _controller: AppBundle:Advanced:formZone }
+    requirements:
+      _method: POST
+
+ajouterZonesConformites_process:
+    path:     /labosample/add/process
+    defaults: { _controller: AppBundle:Advanced:ajouterTest }
+    requirements:
+    methods: POST
