@@ -2,7 +2,7 @@
 sonata_admin:
     title: Radenviro
     #title_logo: bundles/app/images/radenviro.png
-    title_logo: bundles/logo.png
+    title_logo: /images/logo.png
     
     templates:
         #layout: admin/layout.html.twig
