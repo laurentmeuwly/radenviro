@@ -17,6 +17,8 @@ imports:
     
     # Ivory CKEditor
     - { resource: ivory/ivory_ckeditor.yml }
+    # Ivory Google Map
+    - { resource: ivory/ivory_google_map.yml }
     
     
 
@@ -57,6 +59,8 @@ framework:
 twig:
     globals:
         google_api_key: '%google_api_key%'
+        measureSrv: "@app.lastresult"
+        
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
     
@@ -126,7 +130,7 @@ doctrine:
 # Swiftmailer Configuration
 swiftmailer:
     transport: '%mailer_transport%'
-    host: '%mailer_host%'
+    #host: '%mailer_host%'
     username: '%mailer_user%'
     password: '%mailer_password%'
     spool: { type: memory }
@@ -146,24 +150,7 @@ assetic:
             formatter: 'Leafo\ScssPhp\Formatter\Compressed'
 
 # Sonata Configuration
-sonata_admin:
-    title: Radenviro
-    #title_logo: bundles/app/images/radenviro.png
-    title_logo: bundles/logo.png
-    templates:
-        #layout: admin/layout.html.twig
-        #edit: AppBundle::Admin/edit.html.twig
-    dashboard:
-        groups:
-            #my_group:
-                #label:                ~
-                #label_catalogue:      ~
-                #items:
-                    #- route:        map
-                      #label:        Carte
-            #Networks:
-                #provider: 'AppBundle:MenuProvider:Get'
-                #icon:     '<i class="fa fa-bar-chart"></i>'
+
               
     
 sonata_block:
@@ -281,4 +268,10 @@ waldo_datatable:
         lengthMenu: [[5,10, 25, 50, -1], [5,10, 25, 50, 'All']]
         dom: '<"clearfix"lf>rtip'
         jQueryUI: "false"
-        
+  
+apy_data_grid:
+    persistence: true
+    limits: [5, 10, 15]      
+    
+fos_js_routing:
+    routes_to_expose: [ adv, advlist, ... ]
