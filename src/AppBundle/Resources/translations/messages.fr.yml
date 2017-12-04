@@ -119,6 +119,7 @@ label:
   longitude: Longitude
   zoom: Zoom
   nuclide: Isotope
+  all: Tous
   
 
 activerecord:
