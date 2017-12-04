@@ -1,5 +1,23 @@
 {% extends 'SonataAdminBundle:CRUD:base_edit.html.twig' %}
 
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <style type="text/css">
+        
+            /**
+             * Make checkbox / radio label consistant with other labels
+             */
+            .checkbox label,
+            .radio label {
+                font-weight: 700;
+                margin-left: 0px;
+        }
+    </style>
+
+{% endblock %}
+
 {% block javascripts %}
 {{ parent() }}
 	<script src="{{ asset('js/jquery-3.2.0.min.js') }}"></script>
