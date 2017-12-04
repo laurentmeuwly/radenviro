@@ -79,7 +79,7 @@
               {%  endfor %}
               </ul>
               {% for siteType in siteTypes %}
-              <select id="sitetype_{{ siteType.id }}_sites" class="select-{{ siteType.id }}" style="display: none;">
+              <select id="sitetype_{{ siteType.id }}_sites" class="select-{{ loop.index - 1 }}" style="display: none;">
                 <option value="all">{{ 'label.all'|trans }}</option>
                 {%  for site in siteType.sites %}    
                   <option value="{{ site.id }}" id="site_{{ site.id }}">{{ site.name }}</option>
