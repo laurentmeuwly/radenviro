@@ -1,4 +1,4 @@
- <div class="c2">
+
     <div class="box map-legend box-with-tabs"> 
     <div class="header">
         <div class="htab active">{{ 'main.map.map legend'|trans }}</div>
@@ -12,30 +12,33 @@
 				<li>
 					<input type="checkbox" id="legend_{{ legend.id }}" value="" name="categorie[]" data-legend="{{ legend.id }}" data-nature="{{ legend.name }}" title="{{ legend.name }}"/>
                     <label for="legend_{{ legend.id }}">
-                    	<span class="icon legend" id="icon_legend_{{ legend.id }}" style="color:{{ legend.color }};"></span>
+                    	<span class="icon legend" id="icon_legend_{{ legend.id }}" style="color:#{{ legend.color }};"></span>
                     	{{ legend.name }}
                     </label>
-                    {% for station in legend.stations %}
-                      {% if station.hasCoordinates() %}
-                        <span class="location samples" id="location_sample_<%= station.id -%>" style="display:none;" data-icon="icon_legend_<%= legend.id -%>" data-latitude="<%= station.latitude -%>" data-longitude="<%= station.longitude -%>" data-link="<%= url_for :controller => :measures, :id => station.id -%>">
-                          <span class="title"><%= station.name -%></span>
+                     {% for legendstation in legend.stations %}
+                    
+                     {% if legendstation.station.hasCoordinates() %}
+                        <span class="location samples" id="location_sample_{{ legendstation.station.id }}" style="display:none;" data-icon="icon_legend_{{ legend.id }}" data-latitude="{{ legendstation.station.latitude }}" data-longitude="{{ legendstation.station.longitude }}" data-link="{{ url('measures',{'id': legendstation.station.id}) }}">
+                          <span class="title">{{ legendstation.station.name }}</span>
                           <span class="text">
-                            <ul>
-                              <% station.last_results_by_nuclide(legend.nuclides.first).each do |result| -%>
+                          	<ul>
+                             
                                 <li style="font-size: 0.8em;">
-                                  <%= l result.measurement.referenceDate, :format => "%d.%m.%Y" -%>:&nbsp;
-                                  <%= result.nuclide.name %>,&nbsp;
-                                  <%= (result.limited ? '&lt;&nbsp;' : '').html_safe + ("%.1e" % result.value).to_s -%>&nbsp;
-                                  <%= ('&#177; ' + ("%.1e" % result.error).to_s + '&nbsp;').html_safe unless result.error.nil? || result.error == 0 -%>
-                                  <%= result.unit.name -%>
+                                  {% set result = measureSrv.getLastResultByStationAndIsotope(
+                                            legendstation.station.id,
+                                            legend.nuclides|sortbyfield('position')|first.nuclide.id
+                                        ) %}
+                                  	{{ result.code }}
+                                  
                                 </li>
-                              <% end -%>
-                            </ul><br/>
-                            {{ station.description }}
+                              
+                            </ul>
+                            <br/>
+                            {{ legendstation.station.description|raw }}
                           </span>
                         </span>
-                      {% endif %}
-                    {% endfor %}      
+                      {% endif %} 
+                    {% endfor %}     
 				</li>
 				{% endfor %}
 				<li>
@@ -43,6 +46,11 @@
                 <label for="legend_selectall">{{ 'application.selectall_or_unselectall'|trans }}</label>
               </li>
 			</ul>
+			<div class="zooms">
+              {% for zoom in zooms %}
+      			<div class="zoomarea" data-latitude="{{ zoom.latitude }}" data-nlatitude="{{ zoom.nlatitude }}" data-slatitude="{{ zoom.slatitude }}" data-longitude="{{ zoom.longitude }}" data-elongitude="{{ zoom.elongitude }}" data-wlongitude="{{ zoom.wlongitude }}" data-zoom="{{ zoom.zoom }}" ></div>
+              {% endfor %}
+            </div>
             </div>
             <div class="sep"></div>
         <div class="section sites">
@@ -56,9 +64,28 @@
                   <li>
                     <input type="radio" id="sitetype_{{ siteType.id }}" value="" name="sitetype" />
                     <label for="sitetype_{{ siteType.id }}"><span class="icon sitetype" id="icon_sitetype_{{ siteType.id }}" style="color:{{ siteType.color }};"></span>{{ siteType.name }}</label>
+                    
+                    {% for site in siteType.sites %}    
+                      <span class="location sites location_site_{{ site.id }}" id="location_site_{{ site.id }}" style="display:none;" data-icon="icon_sitetype_{{ siteType.id }}" data-parent="{{ siteType.id }}" data-id="{{ site.id }}" data-latitude="{{ site.latitude }}" data-nlatitude="{{ site.longitude }}" data-slatitude="{{ site.latitude }}" data-longitude="{{ site.longitude }}" data-elongitude="{{ site.elongitude }}" data-wlongitude="{{ site.wlongitude }}" data-zoom="{{ site.zoom }}" >
+                        <span class="title">{{ site.name }}</span>
+                        <span class="text">{{ site.description|raw }}</span>
+                        <span class="sublocations"> 
+                          
+                        </span>
+                      </span>
+                    {%  endfor %}
+                    
               	</li>
               {%  endfor %}
               </ul>
+              {% for siteType in siteTypes %}
+              <select id="sitetype_{{ siteType.id }}_sites" class="select-{{ siteType.id }}" style="display: none;">
+                <option value="all">{{ 'label.all'|trans }}</option>
+                {%  for site in siteType.sites %}    
+                  <option value="{{ site.id }}" id="site_{{ site.id }}">{{ site.name }}</option>
+                {%  endfor %}
+              </select>
+           {%  endfor %}
         </div>
         <div class="sep"></div>
         <div class="section automatic_network_stations">  
@@ -72,8 +99,13 @@
             	{% for automaticNetwork in automaticNetworks %}
             	 <li>
                     <input type="radio" id="automatic_network_{{ automaticNetwork.id }}" value="" name="automatic_network" />
-                    <label for="automatic_network_{{ automaticNetwork.id }}"><span class="icon network" id="icon_network_{{ automaticNetwork.id }}" style="color:{{ automaticNetwork.color }};"></span>{{ automaticNetwork.name }}</label>
-                    
+                    <label for="automatic_network_{{ automaticNetwork.id }}"><span class="icon network" id="icon_network_{{ automaticNetwork.id }}" style="color:#{{ automaticNetwork.color }};"></span>{{ automaticNetwork.name }}</label>
+                    {% for station in automaticNetwork.automaticNetworkStations %}    
+                      <span class="location automatic_network_stations location_automatic_network_station_{{ station.id }}" style="display:none;" data-icon="icon_network_{{ automaticNetwork.id }}" data-id="{{ station.id }}" data-latitude="{{ station.latitude }}" data-longitude="{{ station.longitude }}" data-link="{{ automaticNetwork.url }}" data-link-target="_blank">
+                        <span class="title">{{ station.name }}</span>
+                        <span class="text">{{ station.description|raw }}</span>
+                      </span>
+                    {%  endfor %}
                  </li>
             	{%  endfor %}
             </ul>
@@ -84,9 +116,4 @@
             </div>
    
    
-          
- 
-  
-  
-  
-</div>
+

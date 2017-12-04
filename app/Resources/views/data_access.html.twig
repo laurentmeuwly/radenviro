@@ -1,0 +1,44 @@
+{% extends 'default/radenviro.html.twig' %}
+
+{% block javascripts %}
+
+<script type="text/javascript" charset="utf8" src="{{ asset('js/application2.js') }}"></script>
+<script type="text/javascript" charset="utf8" src="{{ asset('js/main.js') }}"></script>
+
+
+
+{% endblock %}
+
+{% block content %}
+<div class="cs5">
+  <div class="c2">
+    {% include '_map.html.twig' %}
+    
+    <div class="table map-table" id="handler_5_last_result" style="visibility: visible; display: block;">
+      <div class="header">
+        {{ 'label.analyzed environments'|trans }}: <span id="nature_5_last_result"></span><br/>
+        {{ 'label.nuclide'|trans }}: <select class="nuclides" id="nuclides_5_last_result" data-refresh="{{ url('data', { type: 'nuclide' }) }}">
+          <option value=""></option>
+        </select>
+      </div>
+      <div class="content">
+        <table class="datagrid" id="datagrid_5_last_result" data-url="<%= url_for(:controller => :measures, :action => :data, :type => :table, :rp => 5, :sortorder => 'desc', :format => 'short') -%>" >
+          <thead>
+            <tr>
+              <th class="date" data-sortable="0">date</th>
+              <th class="value td-right" data-sortable="0">resultat</th>
+              <th class="error td-right" data-sortable="0">incertitude</th>
+              <th class="unit" data-sortable="0">unité</th>
+              <th class="station" data-sortable="0">station</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+    </div>
+    
+  </div>
+  <div class="c2">
+    {% include '_legend.html.twig' %}
+  </div>
+</div>
+{% endblock %}
