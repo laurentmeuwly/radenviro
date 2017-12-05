@@ -1,0 +1,27 @@
+<div class="filter">
+  <div class="title">{{ 'label.search results'|trans }}</div>
+  <div class="infos">
+    {{ 'label.analyzed environments'|trans }}: {{ station.legends|first.legend.name }}<br/>
+    {{ 'label.station'|trans }}:
+    
+    <select class="stations">
+    {% for legendstation in station.legends|first.legend.stations %}
+      <option value="{{ legendstation.station.id }}" 
+              data-url="{{ url('measures', {'id': legendstation.station.id}) }}#measures-graph"
+              {% if legendstation.station.id==station.id %} selected="selected" {% endif %} >{{  legendstation.station.name }} ({{  legendstation.station.code }})</option>
+    {% endfor %}
+  </select>
+  <br/>
+    {{ 'label.isotope'|trans }}: <select class="nuclides nuclides-graph" data-refresh="<%=  
+    hash_to_javascript({
+        :url => url_for(:controller => :measures, :action => :data, :id => @station.id, :type => 'graph'),
+        :station => @station.fullname.gsub("'", "&quote;")
+      }) 
+              -%>">
+                <% @station.nuclides.by_legends(@station.legends).visible.each do |nuclide| -%>
+         {% for legendnuclide in station.legends|first.legend.nuclides %}
+        <option value="{{ legendnuclide.nuclide.id }}">{{ legendnuclide.nuclide.name }}</option>
+      {% endfor %}
+    </select>
+  </div>
+</div>

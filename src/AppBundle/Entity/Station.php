@@ -98,6 +98,12 @@ class Station
      */
     private $sites;
     
+    /**
+     * @var Legend[]
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\LegendStation", mappedBy="station", fetch="EXTRA_LAZY")
+     */
+    private $legends;
+    
     
     public function __construct()
     {
@@ -367,15 +373,32 @@ class Station
     	return $this;
     }
     
-    public function addStation($site)
+    public function addSite($site)
     {
     	$this->site[] = $site;
     }
     
-    public function removeStation($site)
+    public function removeSite($site)
     {
     	$this->site->removeElement($site);
     }
+    
+    public function getLegends()
+    {
+    	return $this->legends;
+    }
+    
+    /**
+     * Set all legends in the station.
+     *
+     * @param Legend[] $legends
+     */
+    public function setLegends($legends)
+    {
+    	$this->legends->clear();
+    	$this->legends = new ArrayCollection($legends);
+    }
+    
 
     /**
      * Set createdAt

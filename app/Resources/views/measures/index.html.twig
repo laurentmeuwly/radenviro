@@ -1,0 +1,47 @@
+{% extends 'default/radenviro.html.twig' %}
+
+{% block stylesheets %}
+{{ parent() }} 
+		<link rel="stylesheet" type="text/css" href="{{ asset('css/measures.css') }}" />
+{% endblock %}
+
+	
+{% block javascripts %}
+{{ parent() }} 
+<script type="text/javascript" src="https://www.google.com/jsapi"></script> 
+<script type="text/javascript" charset="utf8" src="{{ asset('js/application2.js') }}"></script>
+<script type="text/javascript" charset="utf8" src="{{ asset('js/measures.js') }}"></script>
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="box measures">
+  <div class="content">
+    <div class="tabs">
+      <ul>
+        <li><a href="#measures-graph">{{ 'label.graph'|trans }}</a></li>
+        <!-- <li><a href="#measures-table">{{ 'label.table'|trans }}</a></li>
+        <li><a href="#measures-download">{{ 'label.download'|trans }}</a></li> -->
+      </ul>
+      
+      <div class="measures-graph" id="measures-graph" style="visibility: hidden;">
+        {% include 'measures/_graph_filter.html.twig' %}
+        {% include 'measures/_graph.html.twig' %}
+      </div>
+      <!-- <div class="measures-table table" id="measures-table">
+        {% include 'measures/_table_filter.html.twig' %}
+        {% include 'measures/_table.html.twig' %}
+      </div>
+      <div class="measures-download" id="measures-download" style="visibility: hidden;">
+        {% include 'measures/_download.html.twig' %}
+      </div> -->
+    </div>
+    <div class="shortcuts">
+      <a href="{{ path('map') }}">{{ 'menus.back_to_map'|trans }}</a>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
