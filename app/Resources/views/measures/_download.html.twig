@@ -1,0 +1,31 @@
+<div class="header">
+  <%= t('label.station') -%>: <%= @station.fullname -%><br/>
+  <%= t('label.analyzed environments') -%>: <%= @station.legends.map {|l| l.name}.join(', ') -%>
+</div>
+<div class="content">
+  <form action="<%= url_for :controller => :measures, :action => :download, :id => @station.id  -%>" method="post" >
+    <h3><%= t('label.export.title') -%></h3>
+    <h4><%= t('label.export.description') -%></h4>
+    <br/>
+    <div class="filter">
+      <label for="measures-download-nuclides"><%= t('label.isotope') -%>:</label>
+      <select for="measures-download-nuclides" name="nuclide" class="nuclides-downloads" data-refresh="<%= url_for(:controller => :measures, :action => :data, :type => :table, :id => @station.id) -%>">
+        <option value="all"><%= t('label.all') -%></option>
+        <% @station.nuclides.by_legends(@station.legends).visible.each do |nuclide| -%>
+          <option value="<%= nuclide.id -%>"><%= nuclide.name -%></option>
+        <% end -%>
+      </select>
+    </div>
+    <div class="filter">
+      <label for="measures-download-start"><%= t("label.range.start") -%>:</label>
+      <input type="text" id="measures-download-start" name="start" class="datepicker start" value="<%= l Date.today.prev_year, :format => "%d.%m.%Y" -%>" />
+    </div>
+    <div class="filter">
+      <label for="measures-download-end"><%= t("label.range.end") -%>:</label>
+      <input type="text" id="measures-download-end" name="end" class="datepicker end" value="<%= l Date.today, :format => "%d.%m.%Y" -%>" />
+    </div>
+    <input type="hidden" value="xslx" name="format" id="measures-download-format" />
+    <%= image_submit_tag "application-vnd.ms-excel.png", :title => "XLSX", :onclick => "jQuery('#measures-download-format').val('xlsx');" %>
+    <%= image_submit_tag "text-csv.png", :title => "CSV", :onclick => "jQuery('#measures-download-format').val('csv');" %>
+  </form>
+</div>

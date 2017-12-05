@@ -1,0 +1,18 @@
+<div class="header">
+  {{ 'label.analyzed environments'|trans }}: <%= @station.legends.map {|l| l.name}.join(', ') -%><br/>
+  {{ 'label.station'|trans }}: <select class="stations">
+  <% @station.stations_with_same_legends.each do |station| -%>
+      <option value="<%= station.id -%>" data-url="<%= url_for :controller => :measures, :id => station.id, :anchor => 'measures-table' -%>" <%= 'selected="selected"' if @station.id == station.id -%> ><%= station.fullname -%></option>
+    <% end -%>
+  </select><br/>
+  {{ 'label.isotope'|trans }}: <select class="nuclides nuclides-table" data-refresh="<%= url_for(:controller => :measures, :action => :data, :type => :table, :id => @station.id) -%>">
+  <% @station.nuclides.by_legends(@station.legends).visible.each do |nuclide| -%>
+      <option value="{{ 'nuclide.id' }}">{{ 'nuclide.name' }}</option>
+    <% end -%>
+  </select>
+  <br/>
+  <strong>{{ station.name }}</strong>
+  <br/>
+  <strong>{{ nuclide.name }}</strong>
+  <br/>
+</div>
