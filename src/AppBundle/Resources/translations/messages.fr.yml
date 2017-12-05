@@ -108,6 +108,7 @@ search:
 
 label:
   search: Chercher
+  analyzed environment: Milieu analysé
   analyzed environments: Milieux analysés
   sites: Sites
   automatic networks: Réseaux automatiques
@@ -120,6 +121,32 @@ label:
   zoom: Zoom
   nuclide: Isotope
   all: Tous
+  graph: Graphique
+  table: Tableau
+  all: Tous
+  detection limit: Limite de détection
+  download: Téléchargement
+  export:
+    title: Exportation des données
+    description: Exportation des données au format xlsx ou csv, veuillez choisir le filtre désiré.
+  isotope: Isotope
+  measured values: Valeurs mesurées
+  range:
+    start: De
+    end: à
+  station: Station
+  zooms:
+    1d: 1j
+    1m: 1m
+    1y: 1a
+    10y: 10a
+    2w: 2s
+    3m: 3m
+    5y: 5a
+    6m: 6m
+    7d: 7j
+    title: Zooms
+  search results: Résultat de votre recherche
   
 
 activerecord:
@@ -278,36 +305,7 @@ authentication:
     sending new password: Modification du mot de passe...
   reset password: Réinitialiser votre mot de passe
   sign in: Se connecter
-label:
-  all: Tous
-  analyzed environment: Milieu analysé
-  analyzed environments: Milieux analysés
-  automatic networks: Réseaux automatiques
-  detection limit: Limite de détection
-  download: Téléchargement
-  export:
-    title: Exportation des données
-    description: Exportation des données au format xlsx ou csv, veuillez choisir le filtre désiré.
-  graph: Graphique
-  isotope: Isotope
-  measured values: Valeurs mesurées
-  range:
-    start: De
-    end: à
-  station: Station
-  table: Tableau
-  zooms:
-    1d: 1j
-    1m: 1m
-    1y: 1a
-    10y: 10a
-    2w: 2s
-    3m: 3m
-    5y: 5a
-    6m: 6m
-    7d: 7j
-    title: Zooms
-  search results: Résultat de votre recherche
+  
 main:
   map:
     advanced search: Recherche avancée
