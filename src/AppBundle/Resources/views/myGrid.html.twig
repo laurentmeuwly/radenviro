@@ -1,12 +1,28 @@
 {% extends 'AppBundle::basegrid.html.twig' %}
 
 {% block main %}
-<div>
-{{ form(form) }}
+<div class="well">
+{{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+
+<div class="form-group">
+	{{ form_label(form.network, 'search.field.network', {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+	<div class="col-sm-6">
+        {# Génération de l'input. #}
+        {{ form_widget(form.network, {'attr': {'class': 'form-control'}}) }}
+      </div>
+
+</div>
+
+{{ form_widget(form.search, {'attr': {'class': 'btn btn-primary'}}) }}
+
+{{ form_rest(form) }}
+{{ form_end(form) }}
 </div>
 <br/>
 <br/>
 <div>
-{{ sg_datatables_render(datatable) }}
+{% if datatable %}
+    {{ sg_datatables_render(datatable) }}
+{% endif %}
 </div>
 {% endblock %}

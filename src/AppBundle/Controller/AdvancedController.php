@@ -155,30 +155,30 @@ class AdvancedController extends Controller
 			$session->set('network', $data['network']);
 		}
 		
-		/** @var DatatableInterface $datatable */
-		$datatable = $this->get('sg_datatables.factory')->create(SampleDatatable::class);
-		$datatable->buildDatatable();
-		
-		if ($isAjax) {
-			$responseService = $this->get('sg_datatables.response');
-			$responseService->setDatatable($datatable);
-			$datatableQueryBuilder = $responseService->getDatatableQueryBuilder();
+		$datatable = null;
+		if($session->get('network')>0) {
+			/** @var DatatableInterface $datatable */
+			$datatable = $this->get('sg_datatables.factory')->create(SampleDatatable::class);
+			$datatable->buildDatatable();
 			
-			if($session->get('network')>0) {
+			if ($isAjax) {
+				$responseService = $this->get('sg_datatables.response');
+				$responseService->setDatatable($datatable);
+				$datatableQueryBuilder = $responseService->getDatatableQueryBuilder();
+				$datatableQueryBuilder->buildQuery();
 				
-				$qb = $datatableQueryBuilder->getQb();
-				$qb->andWhere('network.id = :network');
-				$qb->setParameter('network', $session->get('network'));
-			}
+				if($session->get('network')>0) {
+					
+					$qb = $datatableQueryBuilder->getQb();
+					$qb->andWhere('network.id = :network');
+					$qb->setParameter('network', $session->get('network'));
+					
+				}
 			
-			//$datatableQueryBuilder = $responseService->getDatatableQueryBuilder();
-			//$datatableQueryBuilder->buildQuery();
-		
-			//dump($datatableQueryBuilder->getQb()->getDQL()); die();
-		
-			return $responseService->getResponse();
+				return $responseService->getResponse();
+			}
 		}
-		//dump($datatable); die();
+		
 		return $this->render('AppBundle::myGrid.html.twig', array(
 				'datatable' => $datatable,
 				'form' => $form->createView(),
