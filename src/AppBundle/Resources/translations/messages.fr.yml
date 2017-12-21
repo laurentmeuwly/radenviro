@@ -52,6 +52,8 @@ admin:
     name: Titre de la légende
     total_stations: Nb stations liées
     total_nuclides: Nb isotopes liés
+    stations: Stations liées
+    nuclides: Isotopes liés
   page:
     code: Identifiant
     title: Titre

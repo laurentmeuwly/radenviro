@@ -107,11 +107,11 @@ class LegendAdmin extends AbstractAdmin
 					)
 				))
 		->end()
-		->with('Stations', array('class' => 'col-md-6', 'label' => 'admin.label.stations'))
+		->with('Stations', array('class' => 'col-md-6', 'label' => 'admin.legend.stations'))
 		/*->add('station', 'sonata_type_collection', array(
               'by_reference' => false), array('label' => 'admin.label.position'))*/
 		->end()
-		->with('Nuclides', array('class' => 'col-md-6', 'label' => 'admin.label.nuclides'))
+		->with('Nuclides', array('class' => 'col-md-6', 'label' => 'admin.legend.nuclides'))
 		->end()
 
 		//->add('station', 'sonata_type_model', array('multiple' => true, 'by_reference' => false))
