@@ -24,6 +24,7 @@ admin:
     site: Sites
     zoom: Zones zoomables
     nuclide: Isotopes
+    predefinednuclidelist: Listes isotopes prédéfinies
     country: Pays
     
 ## Generic
@@ -90,6 +91,9 @@ admin:
   nuclide:
     code: Isotope
     name: Nom
+  predefinednuclidelist:
+    name: Nom de la liste
+    nuclides: Isotopes disponibles
     
   
   

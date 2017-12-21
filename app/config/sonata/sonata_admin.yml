@@ -70,6 +70,7 @@ sonata_admin:
                     - app.admin.country
                     #- app.admin.bagCode
                     - app.admin.nuclide
+                    - app.admin.predefinednuclidelist
                         
             sonata.admin.group.administration:
                 label:           sonata_administration
