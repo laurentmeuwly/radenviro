@@ -21,21 +21,22 @@
                         <span class="location samples" id="location_sample_{{ legendstation.station.id }}" style="display:none;" data-icon="icon_legend_{{ legend.id }}" data-latitude="{{ legendstation.station.latitude }}" data-longitude="{{ legendstation.station.longitude }}" data-link="{{ url('measures',{'id': legendstation.station.id}) }}">
                           <span class="title">{{ legendstation.station.name }}</span>
                           <span class="text">
-                          	<ul>
-                             
-                                <li style="font-size: 0.8em;">
+                          	
                                   {% set result = measureSrv.getLastResultByStationAndIsotope(
                                             legendstation.station.id,
                                             legend.nuclides|sortbyfield('position')|first.nuclide.id
                                         ) %}
                                     {% if result|default is not empty %}
-{{ result.measurement.referencedate|date('d-m-Y') }} : {{ legend.nuclides|sortbyfield('position')|first.nuclide.name }},  {% if result.limited==1 %} &lt;{{ result.value }} {% else %} {{ result.value }} &plusmn;{{ result.error }} {% endif %} {{ result.measurement.resultUnit.code }}
+                                    <ul>
+                             
+                                	<li style="font-size: 0.9em;">
+                                
+{{ result.measurement.referencedate|date('d.m.Y') }} : {{ legend.nuclides|sortbyfield('position')|first.nuclide.name }},  {% if result.limited==1 %} &lt;{{ result.value }} {% else %} {{ result.value }} {% if result.error|default is not empty %} &plusmn;{{ result.error }} {% endif %} {% endif %} {{ result.measurement.resultUnit.code }}
+                                    </li>
+                                    </ul>
                                     {% endif %}
                                   
-                                </li>
-                              
-                            </ul>
-                            <br/>
+                             
                             {{ legendstation.station.description|raw }}
                           </span>
                         </span>
