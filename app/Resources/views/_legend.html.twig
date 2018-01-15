@@ -28,7 +28,9 @@
                                             legendstation.station.id,
                                             legend.nuclides|sortbyfield('position')|first.nuclide.id
                                         ) %}
-                                  	{{ result.code }}
+                                    {% if result|default is not empty %}
+{{ result.measurement.referencedate|date('d-m-Y') }} : {{ legend.nuclides|sortbyfield('position')|first.nuclide.name }},  {% if result.limited==1 %} &lt;{{ result.value }} {% else %} {{ result.value }} &plusmn;{{ result.error }} {% endif %} {{ result.measurement.resultUnit.code }}
+                                    {% endif %}
                                   
                                 </li>
                               
@@ -69,8 +71,25 @@
                       <span class="location sites location_site_{{ site.id }}" id="location_site_{{ site.id }}" style="display:none;" data-icon="icon_sitetype_{{ siteType.id }}" data-parent="{{ siteType.id }}" data-id="{{ site.id }}" data-latitude="{{ site.latitude }}" data-nlatitude="{{ site.longitude }}" data-slatitude="{{ site.latitude }}" data-longitude="{{ site.longitude }}" data-elongitude="{{ site.elongitude }}" data-wlongitude="{{ site.wlongitude }}" data-zoom="{{ site.zoom }}" >
                         <span class="title">{{ site.name }}</span>
                         <span class="text">{{ site.description|raw }}</span>
-                        <span class="sublocations"> 
-                          
+                        <span class="sublocations">
+                        {{ site.stations|length }}
+                          {%  for station in site.stations %}
+                            {% if station.hasCoordinates() %}
+                              <span class="sublocation sites" style="display:none;" data-icon="icon_{% if station.legends|length > 0 %}legend_{{ station.legends|first.legend.id }} {% else %}sitetype_#{{ siteType.id }} {%  endif %}" data-latitude="{{ station.latitude }}" data-longitude="{{ station.longitude }}" data-link="{{ url('measures',{'id': station.id}) }}">
+                                <span class="title">{{ station.name }}</span>
+                                <span class="text">
+                                  {% if station.legends|length > 0 %}
+                                  <ul>
+                                  <li>&nbsp;</li>
+                                  </ul><br/>
+                                  {%  endif %}
+                                  {{ station.description|raw }}
+                                </span>
+                           
+                                
+                              </span>
+                            {%  endif %}
+                          {%  endfor %}
                         </span>
                       </span>
                     {%  endfor %}
