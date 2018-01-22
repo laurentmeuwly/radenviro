@@ -10,6 +10,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 use AppBundle\Datatables\SampleDatatable;
+use AppBundle\Datatables\ResultDatatable;
+use AppBundle\Datatables\MeasurementDatatable;
 
 //use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use APY\DataGridBundle\Grid\Source\Entity;
@@ -19,6 +21,7 @@ use AppBundle\Entity\Station;
 use AppBundle\Entity\Network;
 use AppBundle\Form\NetworkSearchType;
 use AppBundle\Form\AdvancedSearchType;
+use AppBundle\Entity\PredefinedNuclideList;
 
 
 class AdvancedController extends Controller
@@ -128,6 +131,39 @@ class AdvancedController extends Controller
 		$this->datatable2();                                                         // call the datatable config initializer
 		return $this->render('AppBundle:Advanced:sample.html.twig');                 // replace "XXXMyBundle:Module:index.html.twig" by yours
 	}
+	
+	/**
+	 * appel principal du contrôleur
+	 * @Route("/advanced2", name="advanced2")
+	 * @Security("has_role('ROLE_USER')")
+	 */
+	public function advanced2Action(Request $request)
+	{
+		$isAjax = $request->isXmlHttpRequest();
+		
+		// Get your Datatable ...
+		//$datatable = $this->get('app.datatable.result');
+		//$datatable->buildDatatable();
+		
+		// or use the DatatableFactory
+		/** @var DatatableInterface $datatable */
+		$datatable = $this->get('sg_datatables.factory')->create(MeasurementDatatable::class);
+		$datatable->buildDatatable();
+		
+		if ($isAjax) {
+			$responseService = $this->get('sg_datatables.response');
+			$responseService->setDatatable($datatable);
+			$responseService->getDatatableQueryBuilder();
+		
+			return $responseService->getResponse();
+		}
+		
+		
+		return $this->render('::dt.html.twig', array(
+				'datatable' => $datatable,
+		));
+	}
+	
 	/**
 	 * appel principal du contrôleur
 	 * @Route("/advanced", name="advanced")
@@ -140,25 +176,28 @@ class AdvancedController extends Controller
 
 		
 		$network = new Network();
+		$predefinedNuclideList = new PredefinedNuclideList();
 		$netId = 0;
-		$form = $this->createForm(AdvancedSearchType::class, $network);
+		$form = $this->createForm(AdvancedSearchType::class);
 		$form->handleRequest($request);
 		
 		// if call from main menu, we have neither Ajax query nor submitted form, so clean the session variable
-		if(!$form->isValid() && !$isAjax) {
+		if(!$form->isSubmitted() && !$isAjax) {
 			$session->remove('network');
+			$session->remove('displayList');
 		}
 		
 		
-		if ($form->isValid()) {
+		if ($form->isSubmitted() && $form->isValid()) {
 			$data = $request->request->get('advanced_search');
 			$session->set('network', $data['network']);
+			$session->set('displayList', $data['displayList']);
 		}
 		
 		$datatable = null;
 		if($session->get('network')>0) {
 			/** @var DatatableInterface $datatable */
-			$datatable = $this->get('sg_datatables.factory')->create(SampleDatatable::class);
+			$datatable = $this->get('sg_datatables.factory')->create(MeasurementDatatable::class);
 			$datatable->buildDatatable();
 			
 			if ($isAjax) {
@@ -170,7 +209,7 @@ class AdvancedController extends Controller
 				if($session->get('network')>0) {
 					
 					$qb = $datatableQueryBuilder->getQb();
-					$qb->andWhere('network.id = :network');
+					$qb->andWhere('sample.network = :network');
 					$qb->setParameter('network', $session->get('network'));
 					
 				}

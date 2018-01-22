@@ -40,6 +40,11 @@ class PredefinedNuclideListNuclide
      */
     private $position = '0';
     
+    public function __toString()
+    {
+    	return (string)($this->getNuclide()->getName());
+    }
+    
     /**
      * Get id
      *

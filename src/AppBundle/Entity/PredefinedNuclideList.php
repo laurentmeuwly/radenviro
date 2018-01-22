@@ -61,6 +61,12 @@ class PredefinedNuclideList
      * @ORM\Column(type="datetime")
      */
     private $updatedAt;
+    
+    
+    public function __toString()
+    {
+    	return (string)$this->getName();
+    }
 
     /**
      * Get id
@@ -143,6 +149,7 @@ class PredefinedNuclideList
     {
         return $this->updatedAt;
     }
+    
     /**
      * Constructor
      */

@@ -103,17 +103,26 @@ admin:
 #######################  
     
 table:
+  sample: Echantillon
   refdate: Date référence
+  nuclide: Isotope
+  laboratory: Laboratoire
+  station: Station
+  method: Méthode
+  unit: Unité
+  
     
 search:
   field:
     network: Réseau
+    displaylist: Affichage
   choose_network: Sélectionnez un réseau...
+  choose_displaylist: Sélectionnez une liste d'affichage...
     
     
 
 label:
-  search: Chercher
+  search: Afficher
   analyzed environment: Milieu analysé
   analyzed environments: Milieux analysés
   sites: Sites

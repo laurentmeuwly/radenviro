@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use AppBundle\Entity\Network;
+use AppBundle\Entity\PredefinedNuclideList;
 
 
 class AdvancedSearchType extends AbstractType
@@ -30,6 +31,18 @@ class AdvancedSearchType extends AbstractType
 					},
 					//'data' => $session->get('network'),
 			))
+			->add('displayList', 'entity', array(
+					'mapped' => false,
+					'class' => 'AppBundle:PredefinedNuclideList',
+					//'property' => 'name',
+					'placeholder' => 'search.choose_displaylist',
+					'label' => 'search.field.displaylist',
+					'query_builder' => function (EntityRepository $er) {
+					return $er->createQueryBuilder('l')
+					->where('l.active=1');
+					},
+					//'data' => $session->get('network'),
+					))
 			->add('search', SubmitType::class, array('label' => 'label.search'))
 		;
 	}
