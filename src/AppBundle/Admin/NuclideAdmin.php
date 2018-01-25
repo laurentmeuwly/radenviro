@@ -48,7 +48,7 @@ class NuclideAdmin extends AbstractAdmin
 						'name'=> array('label' => 'admin.nuclide.name')
 				)
 		))
-		->add('active','boolean', array('label' => 'admin.label.active'))
+		->add('active', null, array('label' => 'admin.label.active'))
 		->end()
 		;
 	}

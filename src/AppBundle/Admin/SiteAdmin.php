@@ -73,6 +73,8 @@ class SiteAdmin extends AbstractAdmin
 		->end()
 		
 		->with('Stations', array('class' => 'col-md-6', 'label' => 'admin.site.stations'))
+		//->add('stations', null, array('multiple'=>true, 'expanded'=>true, 'mapped'=>false))
+		->add('stations', null, array('multiple'=>true, 'expanded'=>true, 'mapped'=>true))
 		//->add('stations', CollectionType::class, array('by_reference' => false))
 		/*->add('stations', CollectionType::class, array(
 				'class'        => 'AppBundle:Station',

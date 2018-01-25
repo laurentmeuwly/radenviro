@@ -108,6 +108,7 @@ class LegendAdmin extends AbstractAdmin
 				))
 		->end()
 		->with('Stations', array('class' => 'col-md-6', 'label' => 'admin.legend.stations'))
+		//->add('stations.station', null, array('multiple'=>true, 'expanded'=>true, 'mapped'=>true))
 		/*->add('station', 'sonata_type_collection', array(
               'by_reference' => false), array('label' => 'admin.label.position'))*/
 		->end()
