@@ -17,9 +17,20 @@ class StationAdmin extends AbstractAdmin
 	{
 		$listMapper
 			->addIdentifier('code', null, array('label' => 'admin.station.code'))
+			->add('_active', 'boolean', array('label' => 'admin.label.active',
+					'editable' => true,
+					'header_style' => 'text-align: center',
+					'row_align' => 'center')
+					)
 			->add('name', null, array('label' => 'admin.station.name'))
 			->add('network.name', null, array('label' => 'admin.station.network'))
 			->add('stationType.code', null, array('label' => 'admin.station_type.name'))
+			->add('_action', 'actions', array(
+					'actions' => array(
+							'edit' => array(),
+							'delete' => array(),
+					)
+			))
 		;
 	}
 	
@@ -48,7 +59,7 @@ class StationAdmin extends AbstractAdmin
 		->with('Attributs', array('class' => 'col-md-3', 'label' => 'admin.label.attributs'))
 		->add('latitude', 	null, [ 'label' => 'admin.label.latitude' ])
 		->add('longitude', 	null, [ 'label' => 'admin.label.longitude' ])
-		->add('hidden', 	null, [ 'label' => 'admin.label.hidden' ])
+		->add('active', 	null, [ 'label' => 'admin.label.active' ])
 		->add('zoom', 		null, [ 'label' => 'admin.label.zoom' ])
 		->add('defaultZoom',null, [ 'label' => 'admin.label.default_zoom' ])
 		->end()

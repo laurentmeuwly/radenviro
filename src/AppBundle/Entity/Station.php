@@ -48,12 +48,6 @@ class Station
     /**
      * @var boolean
      *
-     * @ORM\Column(name="hidden", type="boolean", nullable=true)
-     */
-    private $hidden = '0';
-    /**
-     * @var boolean
-     *
      * @ORM\Column(name="active", type="boolean")
      */
     private $active=true;
@@ -171,27 +165,27 @@ class Station
     }
 
     /**
-     * Set hidden
+     * Set active
      *
-     * @param boolean $hidden
+     * @param boolean $active
      *
      * @return Station
      */
-    public function setHidden($hidden)
+    public function setActive($active)
     {
-        $this->hidden = $hidden;
+        $this->active = $active;
 
         return $this;
     }
 
     /**
-     * Get hidden
+     * Get active
      *
      * @return boolean
      */
-    public function getHidden()
+    public function getActive()
     {
-        return $this->hidden;
+        return $this->active;
     }
 
     /**
