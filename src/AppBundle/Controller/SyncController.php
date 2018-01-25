@@ -22,10 +22,7 @@ class SyncController extends Controller
 
 		$connection = $this->container->get('doctrine.dbal.envira_connection');
 		$connection->connect();
-		if($connection->isConnected())
-			echo 'OK'; else echo 'Not OK';
-		//$connection->connect();
-		var_dump($connection);die();
+		
 		$sql = "SELECT * FROM canton";
 		$stmt = $connection->query($sql); // Simple, but has several drawbacks
 		while ($row = $stmt->fetch()) {
