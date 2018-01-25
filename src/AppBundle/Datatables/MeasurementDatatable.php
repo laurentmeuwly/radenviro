@@ -166,6 +166,7 @@ class MeasurementDatatable extends AbstractDatatable
                     )
                 )
             ))*/
+        
         ;
         	
         	$listNuclide = $this->getListNuclide()->getNuclides();
@@ -179,6 +180,31 @@ class MeasurementDatatable extends AbstractDatatable
         				'orderable' => false,
         		));
         	}
+        	
+        	$this->columnBuilder
+        	->add(null, ActionColumn::class, array(
+        			'title' => '',
+        			'start_html' => '<div class="start_actions">',
+        			'end_html' => '</div>',
+        			'actions' => array(
+        					array(
+        							'route' => 'printSample',
+        							'label' => 'PDF',
+        							'route_parameters' => array(
+        									'id' => 'sample.number'
+        							),
+        	
+        							'attributes' => array(
+        									'rel' => 'tooltip',
+        									'title' => 'Show',
+        									'class' => 'btn btn-primary btn-xs',
+        									'role' => 'button'
+        							),
+        							'start_html' => '<div class="start_show_action">',
+        							'end_html' => '</div>',
+        					)
+        			)
+        	));
         	
     }
 

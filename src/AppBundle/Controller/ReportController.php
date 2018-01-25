@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,11 +14,14 @@ use AppBundle\Entity\Measurement;
 
 class ReportController extends Controller
 {
-	public function printReportAction(Request $request)
+	/**
+	 * @Route("/printSample/{id}", name="printSample")
+	 */
+	public function printReportAction($id, Request $request)
 	{
 		$em = $this->getDoctrine()->getManager();
 		 
-		$sample = $em->getRepository('AppBundle:Sample')->findOneByNumber('17-00464');	// 1 measurement
+		$sample = $em->getRepository('AppBundle:Sample')->findOneByNumber($id);	// 1 measurement
 		//$sample = $em->getRepository('AppBundle:Sample')->findOneByNumber('17-01642'); // 2 measurements
 		//$measure = $em->getRepository('AppBundle:Measurement')->findOneById('15883');
 		
