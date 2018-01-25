@@ -19,16 +19,7 @@ class SyncController extends Controller
 	 */
 	public function syncEnviraAction(Request $request)
 	{
-		
-		$conn = mysqli_connect('10.203.210.10', 'envira', 'Cs-137');
-		
-		// Check connection
-		if (!$conn) {
-			die("Connection failed: " . mysqli_connect_error());
-		}
-		echo "Connected successfully";
-		
-		die();
+
 		$connection = $this->container->get('doctrine.dbal.envira_connection');
 		$connection->connect();
 		if($connection->isConnected())
