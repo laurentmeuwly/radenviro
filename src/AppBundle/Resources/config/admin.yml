@@ -125,6 +125,17 @@ services:
         calls:
             - [ setTranslationDomain, [messages]]
             
+    app.admin.predefinednuclidelist:
+        class: AppBundle\Admin\PredefinedNuclideListAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "admin.menu.predefinednuclidelist" }
+        arguments:
+            - ~
+            - AppBundle\Entity\PredefinedNuclideList
+            - ~
+        calls:
+            - [ setTranslationDomain, [messages]]
+            
     app.admin.mapZoom:
         class: AppBundle\Admin\MapZoomAdmin
         tags:
@@ -157,5 +168,5 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [messages]]
-            
+
     
