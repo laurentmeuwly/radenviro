@@ -245,8 +245,8 @@
 {% for result in measurement.results %}
 	<tr style="page-break-inside: avoid">
 		<td>{{ result.nuclide.code }}</td>
-		<td>{% if result.error %} {{ result.value }} {% else %} <{{ result.value }} {%  endif %}</td>
-		<td>{{ result.error }}</td>
+		<td>{% if result.limited == 0 %} {{ "%.1e"|format(result.value) }} {% else %} &lt;{{ "%.1e"|format(result.value) }} {%  endif %}</td>
+		<td>{% if result.error %}{{ "%.1e"|format(result.error) }} {%  endif %}</td>
 	</tr>
 {% endfor %}
 </tbody>
