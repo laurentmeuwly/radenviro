@@ -84,7 +84,7 @@ doctrine:
                 charset: UTF8
             envira:
                 server_version: 14.14
-                driver: mysqli
+                driver: pdo_mysql
                 host: '%db_envira_host%'
                 port: '%db_envira_port%'
                 dbname: '%db_envira_name%'
