@@ -5,9 +5,9 @@ sonata_admin:
     title_logo: /images/logo.png
     
     templates:
-        #layout: admin/layout.html.twig
+        layout: AppBundle:Admin:layout.html.twig
         #edit: AppBundle::Admin/edit.html.twig
-        edit:                AppBundle:CRUD:edit.html.twig
+        edit:  AppBundle:CRUD:edit.html.twig
 
     dashboard:
         
@@ -87,7 +87,7 @@ sonata_admin:
                 label_catalogue: messages
                 icon:            '<i class="fa fa-cogs"></i>'
                 items:
-                    - app.admin.country     
+                    #- app.admin.sync    
                     
                     
                     

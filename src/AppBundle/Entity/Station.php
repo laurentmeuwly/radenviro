@@ -51,6 +51,12 @@ class Station
      * @ORM\Column(name="hidden", type="boolean", nullable=true)
      */
     private $hidden = '0';
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="active", type="boolean")
+     */
+    private $active=true;
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\StationType")
