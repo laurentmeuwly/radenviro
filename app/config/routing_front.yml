@@ -23,9 +23,11 @@ sonata_user:
     resource: '@SonataUserBundle/Resources/config/routing/admin_security.xml'
     prefix: /admin
     
-print_sample:
-    path:     /printSample
-    defaults: { _controller: AppBundle:Report:printReport }
+print:
+    resource: '@AppBundle/Controller/ReportController.php'
+    type: annotation
+    #path:     /printSample
+    #defaults: { _controller: AppBundle:Report:printReport }
 
 parent_ajax_call:
     path:     /parent_ajax_call
