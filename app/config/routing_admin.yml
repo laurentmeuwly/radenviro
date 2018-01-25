@@ -20,3 +20,6 @@ sonata_user_admin_resetting:
     resource: '@SonataUserBundle/Resources/config/routing/admin_resetting.xml'
     #prefix: /admin/resetting
     
+advanced:
+    resource: '@AppBundle/Controller/SyncController.php'
+    type: annotation
