@@ -32,7 +32,7 @@ class ReportController extends Controller
 		var_dump($sample->getMeasurements());
 		//die();
 		*/
-		$filePath = '/var/www/test.pdf';
+		$filePath = '/tmp/'.$id.'.pdf';
 		
 		/*return $this->render('AppBundle:Report:printSample.html.twig', array(
 				'sample' => $sample,
@@ -52,7 +52,7 @@ class ReportController extends Controller
 				200,
 				array(
 						'Content-Type'          => 'application/pdf',
-						'Content-Disposition'   => 'attachment; filename="file.pdf"'
+						'Content-Disposition'   => 'attachment; filename="'.$id.'.pdf"'
 				)
 		);
 	}
