@@ -22,7 +22,7 @@ class PredefinedNuclideListNuclide
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\PredefinedNuclideList")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\PredefinedNuclideList", inversedBy="nuclides")
      * @ORM\JoinColumn(nullable=false)
      */
     private $predefinedNuclideList;
@@ -42,7 +42,7 @@ class PredefinedNuclideListNuclide
     
     public function __toString()
     {
-    	return (string)($this->getNuclide()->getName());
+    	return (string)('['.$this->getPredefinedNuclideList()->getId().'] '. $this->getNuclide()->getName());
     }
     
     /**

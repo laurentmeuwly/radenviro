@@ -9,17 +9,14 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-use AppBundle\Datatables\SampleDatatable;
-use AppBundle\Datatables\ResultDatatable;
 use AppBundle\Datatables\MeasurementDatatable;
 
 //use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use APY\DataGridBundle\Grid\Source\Entity;
-use APY\DataGridBundle\Grid\Source\Vector;
+//use APY\DataGridBundle\Grid\Source\Vector;
 use AppBundle\Entity\Sample;
 use AppBundle\Entity\Station;
 use AppBundle\Entity\Network;
-use AppBundle\Form\NetworkSearchType;
 use AppBundle\Form\AdvancedSearchType;
 use AppBundle\Entity\PredefinedNuclideList;
 
@@ -131,38 +128,7 @@ class AdvancedController extends Controller
 		$this->datatable2();                                                         // call the datatable config initializer
 		return $this->render('AppBundle:Advanced:sample.html.twig');                 // replace "XXXMyBundle:Module:index.html.twig" by yours
 	}
-	
-	/**
-	 * appel principal du contrôleur
-	 * @Route("/advanced2", name="advanced2")
-	 * @Security("has_role('ROLE_USER')")
-	 */
-	public function advanced2Action(Request $request)
-	{
-		$isAjax = $request->isXmlHttpRequest();
-		
-		// Get your Datatable ...
-		//$datatable = $this->get('app.datatable.result');
-		//$datatable->buildDatatable();
-		
-		// or use the DatatableFactory
-		/** @var DatatableInterface $datatable */
-		$datatable = $this->get('sg_datatables.factory')->create(MeasurementDatatable::class);
-		$datatable->buildDatatable();
-		
-		if ($isAjax) {
-			$responseService = $this->get('sg_datatables.response');
-			$responseService->setDatatable($datatable);
-			$responseService->getDatatableQueryBuilder();
-		
-			return $responseService->getResponse();
-		}
-		
-		
-		return $this->render('::dt.html.twig', array(
-				'datatable' => $datatable,
-		));
-	}
+
 	
 	/**
 	 * appel principal du contrôleur

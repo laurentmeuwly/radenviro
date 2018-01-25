@@ -91,6 +91,12 @@ class Nuclide
      *
      */
     private $element;
+    
+    /**
+     * @var PredefinedNuclideList[]
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\PredefinedNuclideListNuclide", mappedBy="nuclide", fetch="EXTRA_LAZY")
+     */
+    private $predefinedNuclideLists;
 
 
 
@@ -109,6 +115,11 @@ class Nuclide
     	return $this->proxyCurrentLocaleTranslation($method, $args);
     }
 
+    public function __toString()
+    {
+    	return (string) $this->getName();
+    }
+    
     /**
      * Get id
      *
