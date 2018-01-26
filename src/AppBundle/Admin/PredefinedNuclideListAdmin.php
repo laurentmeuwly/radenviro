@@ -7,11 +7,8 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
-use Sonata\AdminBundle\Form\Type\ModelType;
-use Sonata\AdminBundle\Form\Type\ModelListType;
 use A2lix\TranslationFormBundle\Form\Type\TranslationsType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Xmon\ColorPickerTypeBundle\Form\Type\ColorPickerType;
 use Sonata\AdminBundle\Route\RouteCollection;
 
 class PredefinedNuclideListAdmin extends AbstractAdmin
@@ -24,6 +21,10 @@ class PredefinedNuclideListAdmin extends AbstractAdmin
 	protected function configureRoutes(RouteCollection $collection)
 	{
 		$collection->add('move', $this->getRouterIdParameter().'/move/{position}');
+	}
+	
+	public function configure() {
+		$this->setTemplate('edit', 'AppBundle:SpecialAdmin:edit.html.twig');
 	}
 	
 	// Fields to be shown on lists
@@ -41,6 +42,12 @@ class PredefinedNuclideListAdmin extends AbstractAdmin
 				'move' => array(
 						'template' => 'PixSortableBehaviorBundle:Default:_sort.html.twig'
 						)
+				)
+		))
+		->add('_action', 'actions', array(
+				'actions' => array(
+						'edit' => array(),
+						'delete' => array(),
 				)
 		))
 		;

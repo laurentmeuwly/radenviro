@@ -38,13 +38,6 @@ class Legend
      * @ORM\Column(type="datetime")
      */
     private $updatedAt;
-
-    /**
-     * @var integer
-     * 
-     * @ORM\Column(name="sorting", type="integer")
-     */
-    private $sorting;
     
     /**
      * @var integer
@@ -116,30 +109,6 @@ class Legend
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set sorting
-     *
-     * @param integer $sorting
-     *
-     * @return Legend
-     */
-    public function setSorting($sorting)
-    {
-        $this->sorting = $sorting;
-
-        return $this;
-    }
-
-    /**
-     * Get sorting
-     *
-     * @return integer
-     */
-    public function getSorting()
-    {
-        return $this->sorting;
     }
     
     /**

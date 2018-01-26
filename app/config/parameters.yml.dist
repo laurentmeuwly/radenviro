@@ -17,3 +17,10 @@ parameters:
 
     # A secret key that's used to generate certain security-related tokens
     secret: ThisTokenIsNotSoSecretChangeIt
+    
+    # external database to sync Envira data
+    db_envira_host: 127.0.0.1
+    db_envira_port: ~
+    db_envira_name: symfony
+    db_envira_user: root
+    db_envira_password: ~

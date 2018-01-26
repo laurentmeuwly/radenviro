@@ -132,7 +132,7 @@ services:
         arguments:
             - ~
             - AppBundle\Entity\PredefinedNuclideList
-            - ~
+            - 'PixSortableBehaviorBundle:SortableAdmin'
         calls:
             - [ setTranslationDomain, [messages]]
             
