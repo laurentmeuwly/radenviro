@@ -3,6 +3,8 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 
 /**
  * BagCode
@@ -12,6 +14,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class BagCode
 {
+	use ORMBehaviors\Translatable\Translatable;
+	
     /**
      * @var integer
      *
@@ -35,44 +39,19 @@ class BagCode
      */
     private $code;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="description_de", type="string", length=255, nullable=true)
-     */
-    private $descriptionDe;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="description_fr", type="string", length=255, nullable=true)
-     */
-    private $descriptionFr;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="description_it", type="string", length=255, nullable=true)
-     */
-    private $descriptionIt;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="description_en", type="string", length=255, nullable=true)
-     */
-    private $descriptionEn;
-
+    
     /**
      * @var \DateTime
      *
+     * @Gedmo\Timestampable(on="create")
      * @ORM\Column(name="created_at", type="datetime", nullable=false)
      */
     private $createdAt;
-
+    
     /**
      * @var \DateTime
      *
+     * @Gedmo\Timestampable(on="update")
      * @ORM\Column(name="updated_at", type="datetime", nullable=false)
      */
     private $updatedAt;
@@ -137,101 +116,6 @@ class BagCode
         return $this->code;
     }
 
-    /**
-     * Set descriptionDe
-     *
-     * @param string $descriptionDe
-     *
-     * @return BagCode
-     */
-    public function setDescriptionDe($descriptionDe)
-    {
-        $this->descriptionDe = $descriptionDe;
-
-        return $this;
-    }
-
-    /**
-     * Get descriptionDe
-     *
-     * @return string
-     */
-    public function getDescriptionDe()
-    {
-        return $this->descriptionDe;
-    }
-
-    /**
-     * Set descriptionFr
-     *
-     * @param string $descriptionFr
-     *
-     * @return BagCode
-     */
-    public function setDescriptionFr($descriptionFr)
-    {
-        $this->descriptionFr = $descriptionFr;
-
-        return $this;
-    }
-
-    /**
-     * Get descriptionFr
-     *
-     * @return string
-     */
-    public function getDescriptionFr()
-    {
-        return $this->descriptionFr;
-    }
-
-    /**
-     * Set descriptionIt
-     *
-     * @param string $descriptionIt
-     *
-     * @return BagCode
-     */
-    public function setDescriptionIt($descriptionIt)
-    {
-        $this->descriptionIt = $descriptionIt;
-
-        return $this;
-    }
-
-    /**
-     * Get descriptionIt
-     *
-     * @return string
-     */
-    public function getDescriptionIt()
-    {
-        return $this->descriptionIt;
-    }
-
-    /**
-     * Set descriptionEn
-     *
-     * @param string $descriptionEn
-     *
-     * @return BagCode
-     */
-    public function setDescriptionEn($descriptionEn)
-    {
-        $this->descriptionEn = $descriptionEn;
-
-        return $this;
-    }
-
-    /**
-     * Get descriptionEn
-     *
-     * @return string
-     */
-    public function getDescriptionEn()
-    {
-        return $this->descriptionEn;
-    }
 
     /**
      * Set createdAt

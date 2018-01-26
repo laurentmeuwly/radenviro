@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Result
@@ -52,13 +53,14 @@ class Result
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Nuclide")
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\JoinColumn(nullable=false)
      */
     private $nuclide;
 
     /**
      * @var \DateTime
      *
+     * @Gedmo\Timestampable(on="create")
      * @ORM\Column(name="created_at", type="datetime", nullable=false)
      */
     private $createdAt;
@@ -66,6 +68,7 @@ class Result
     /**
      * @var \DateTime
      *
+     * @Gedmo\Timestampable(on="update")
      * @ORM\Column(name="updated_at", type="datetime", nullable=false)
      */
     private $updatedAt;
@@ -187,7 +190,7 @@ class Result
      */
     public function setNuclide($nuclide)
     {
-        $this->nuclideId = $nuclide;
+        $this->nuclide = $nuclide;
 
         return $this;
     }

@@ -24,6 +24,13 @@ class Element
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
+    
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="z", type="integer")
+     */
+    private $z;
 
     /**
      * @var string
@@ -58,6 +65,30 @@ class Element
     public function getId()
     {
         return $this->id;
+    }
+    
+    /**
+     * Set Z
+     *
+     * @param string $z
+     *
+     * @return Element
+     */
+    public function setZ($z)
+    {
+    	$this->z = $z;
+    
+    	return $this;
+    }
+    
+    /**
+     * Get Z
+     *
+     * @return string
+     */
+    public function getZ()
+    {
+    	return $this->z;
     }
 
     /**

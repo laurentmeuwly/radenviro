@@ -368,7 +368,7 @@ class Measurement
      *
      * @return Measurement
      */
-    public function setLaboratoryId($laboratory)
+    public function setLaboratory($laboratory)
     {
         $this->laboratory = $laboratory;
 
@@ -440,7 +440,7 @@ class Measurement
      *
      * @return Measurement
      */
-    public function setResultUnis($resultUnit)
+    public function setResultUnit($resultUnit)
     {
         $this->resultUnit = $resultUnit;
 

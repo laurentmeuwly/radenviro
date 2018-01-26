@@ -2,3 +2,10 @@ services:
     app.lastresult:
         class: AppBundle\Services\LastResult
         arguments: ["@doctrine.orm.entity_manager"]
+        
+    app.formatter:
+        class: AppBundle\Services\Formatter
+        
+    app.synchronizer:
+        class: AppBundle\Services\Synchronizer
+        arguments: ["@doctrine.orm.entity_manager", "@doctrine.dbal.envira_connection"]

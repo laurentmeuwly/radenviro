@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use APY\DataGridBundle\Grid\Mapping as GRID;
 use Doctrine\Common\Collections\ArrayCollection;
 
@@ -46,6 +47,13 @@ class Sample
      */
     private $description;
 
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="mtime", type="datetime", nullable=true)
+     */
+    private $mtime;
+    
     /**
      * @var \DateTime
      *
@@ -297,16 +305,14 @@ class Sample
     private $toremovestation;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="created_at", type="datetime", nullable=false)
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
      */
     private $createdAt;
-
+    
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="updated_at", type="datetime", nullable=false)
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime")
      */
     private $updatedAt;
     
@@ -406,6 +412,30 @@ class Sample
         return $this->description;
     }
 
+    /**
+     * Set mtime
+     *
+     * @param \DateTime $mtime
+     *
+     * @return Sample
+     */
+    public function setMtime($mtime)
+    {
+    	$this->mtime = $mtime;
+    
+    	return $this;
+    }
+    
+    /**
+     * Get mtime
+     *
+     * @return \DateTime
+     */
+    public function getMtime()
+    {
+    	return $this->mtime;
+    }
+    
     /**
      * Set samdate
      *
@@ -869,9 +899,9 @@ class Sample
      *
      * @return Sample
      */
-    public function setOricantonId($oricanton)
+    public function setOricanton($oricanton)
     {
-        $this->oricantonId = $oricanton;
+        $this->oricanton = $oricanton;
 
         return $this;
     }
@@ -893,7 +923,7 @@ class Sample
      *
      * @return Sample
      */
-    public function setOricountryId($oricountry)
+    public function setOricountry($oricountry)
     {
         $this->oricountry = $oricountry;
 
@@ -1158,7 +1188,7 @@ class Sample
      *
      * @return Sample
      */
-    public function setSampleTypeId($sampleType)
+    public function setSampleType($sampleType)
     {
         $this->sampleType = $sampleType;
 

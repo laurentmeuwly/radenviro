@@ -56,7 +56,13 @@ class PredefinedNuclideListAdmin extends AbstractAdmin
 				
 		$formMapper
 		->with('General', array('class' => 'col-md-6', 'label' => 'admin.label.general'))
-		->add('name', 	null, [ 'label' => 'admin.predefinednuclidelist.name' ])
+			->add('translations', TranslationsType::class, array(
+					'label' => false,
+					'fields' => array(
+							'name'=> array('label' => 'admin.predefinednuclidelist.name')
+					)
+			))
+
 		->end()
 		
 		->with('Attributs', array('class' => 'col-md-3', 'label' => 'admin.label.attributs'))
@@ -95,14 +101,14 @@ class PredefinedNuclideListAdmin extends AbstractAdmin
 		
 				
 		// ok n'affiche que les éléments de la liste concernée. Mais édition pas exploitable
-		->add('nuclides', CollectionType::class, [], [
+		/*->add('nuclides', CollectionType::class, [], [
 				'edit' => 'inline',
 				'inline' => 'table',
 				'sortable' => 'position',
 				//'link_parameters' => ['context' => $context],
 				//'admin_code' => 'sonata.media.admin.gallery_has_media',
 				//'admin_code' => 'appbundle.admin.predefinednuclidelistnuclideadmin',
-		])
+		])*/
 		->end()
 		;
 		 
