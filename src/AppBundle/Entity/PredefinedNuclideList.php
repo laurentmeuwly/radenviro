@@ -28,6 +28,7 @@ class PredefinedNuclideList
     /**
      * @var Nuclid[]
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\PredefinedNuclideListNuclide", mappedBy="predefinedNuclideList"))
+     * @ORM\OrderBy({"position" = "ASC"})
      */
     private $nuclides;
     
