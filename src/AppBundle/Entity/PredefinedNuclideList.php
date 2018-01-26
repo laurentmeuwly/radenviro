@@ -57,6 +57,20 @@ class PredefinedNuclideList
      */
     private $updatedAt;
     
+    /**
+     * @param $method
+     * @param $args
+     *
+     * @return mixed
+     */
+    public function __call($method, $args)
+    {
+    	if (!method_exists(self::getTranslationEntityClass(), $method)) {
+    		$method = 'get' . ucfirst($method);
+    	}
+    
+    	return $this->proxyCurrentLocaleTranslation($method, $args);
+    }
     
     public function __toString()
     {
