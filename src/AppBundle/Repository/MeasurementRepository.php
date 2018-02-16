@@ -40,20 +40,22 @@ ORDER BY measurement.referenceDate DESC';
 		
 		$conn = $this->getEntityManager()
 		->getConnection();
+		
 		$sql = '
-            SELECT  measurement.referenceDate, result.value, station.code
+            SELECT  measurement.referenceDate, result.limited, result.value, result.error, station.code
 FROM sample, measurement, result, station
 WHERE sample.station_id= :station
 AND result.nuclide_id= :nuclide
 AND result.measurement_id=measurement.id
 AND measurement.sample_id=sample.id
 AND sample.station_id=station.id
-ORDER BY measurement.referenceDate DESC
+ORDER BY measurement.referenceDate ASC
             ';
 		$stmt = $conn->prepare($sql);
 		$stmt->execute(array('station' => $station->getId(), 'nuclide' => $nuclide->getId()));
 		//var_dump($stmt->fetchAll());die;
-		return $stmt->fetch();
+		return $stmt->fetchAll();
+		
 		
 		//return $this->createQueryBuilder('c')->where()->orderBy('c.referenceDate', 'DESC');
 	}

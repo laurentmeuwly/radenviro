@@ -43,4 +43,23 @@ class StationRepository extends \Doctrine\ORM\EntityRepository
 	
 		return $getResult?$preparedQuery->getResult():$preparedQuery;
 	}
+	
+	
+	public function getResultsByNuclide($nuclide)
+	{
+		$qb = $this->_em->createQueryBuilder();
+		
+		$qb
+		->select('u')
+		->from('AppBundle:Sample', 'u')
+		;
+		
+		$qb
+		->andWhere('u.station = :station')
+		->setParameter('station', $this->getId())
+		;
+		
+		return $qb->getQuery()->getResult();
+	}
+
 }
