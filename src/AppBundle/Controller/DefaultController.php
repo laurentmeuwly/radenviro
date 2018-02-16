@@ -4,16 +4,17 @@ namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+//use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-use APY\DataGridBundle\Grid\Source\Entity;
-use APY\DataGridBundle\Grid\Source\Vector;
-use APY\DataGridBundle\Grid\Column\BlankColumn;
-use APY\DataGridBundle\Grid\Export\XmlExport;
+use Symfony\Component\Validator\Constraints\DateTime;
 
-use AppBundle\Grid\SampleListType;
+use APY\DataGridBundle\Grid\Source\Entity;
+
+use AppBundle\Datatables\LastResultDatatable;
+use AppBundle\Datatables\MeasurementDatatable;
 
 
 class DefaultController extends Controller
@@ -29,10 +30,42 @@ class DefaultController extends Controller
     }
     
     /**
+     * appel principal du contrôleur
+     * @Route("/mainmap", name="mainmap")
+     */
+    public function mainmapAction(Request $request)
+    {
+    	$isAjax = $request->isXmlHttpRequest();
+    	
+    	$datatable = null;
+    	
+    		/** @var DatatableInterface $datatable */
+    		$datatable = $this->get('sg_datatables.factory')->create(LastResultDatatable::class);
+    		$datatable->buildDatatable();
+    			
+    		if ($isAjax) {
+    			$responseService = $this->get('sg_datatables.response');
+    			$responseService->setDatatable($datatable);
+    			$datatableQueryBuilder = $responseService->getDatatableQueryBuilder();
+    				
+    			return $responseService->getResponse();
+    		}
+    	
+    	
+    	return $this->render('AppBundle::mainmap.html.twig', array(
+    			'datatable' => $datatable
+    	));
+    	
+    }
+    
+    
+    /**
      * @Route("/map", name="map")
      */
     public function mapAction(Request $request)
     {    	
+    	$isAjax = $request->isXmlHttpRequest();
+    	
     	// Getting doctrine manager
     	$em = $this->getDoctrine()->getManager();
     	
@@ -51,11 +84,49 @@ class DefaultController extends Controller
     	/*var_dump($zooms);
     	die();*/
     	
+    	
+    	
+    	/*$datatable = null;
+    	
+    		
+    		$datatable = $this->get('sg_datatables.factory')->create(MeasurementDatatable::class);
+    		$datatable->buildDatatable();
+    			
+    		if ($isAjax) {
+    			$responseService = $this->get('sg_datatables.response');
+    			$responseService->setDatatable($datatable);
+    			$datatableQueryBuilder = $responseService->getDatatableQueryBuilder();
+    			$datatableQueryBuilder->buildQuery();
+    	
+    			
+    					
+    			$qb = $datatableQueryBuilder->getQb();
+    			$qb->andWhere('network.id = :network');
+    			$qb->setParameter('network', '10');
+    			
+    			return $responseService->getResponse();
+    		}*/
+    	
+    	
+    	$datatable=NULL;
+    	$datatable = $this->get('sg_datatables.factory')->create(MeasurementDatatable::class);
+    	$datatable->buildDatatable();
+    	
+    	if ($isAjax) {
+    		$responseService = $this->get('sg_datatables.response');
+    		$responseService->setDatatable($datatable);
+    		$datatableQueryBuilder = $responseService->getDatatableQueryBuilder();
+    		$datatableQueryBuilder->buildQuery();
+    			
+    		return $responseService->getResponse();
+    	}
+    	
     	return $this->render('data_access.html.twig', array(
     			'legends' => $legends,
     			'siteTypes' => $siteTypes,
     			'automaticNetworks' => $automaticNetworks,
     			'zooms' => $zooms,
+    			'datatable' => $datatable,
     	));
     	/*
     	return $this->render('default/radenviro.html.twig', [
@@ -152,19 +223,17 @@ class DefaultController extends Controller
     {
     	// Getting doctrine manager
     	$em = $this->getDoctrine()->getManager();
-    	 
     	$station = $em->getRepository('AppBundle:Station')->findOneById(array('id'=>$id));
     	$nuclide = $em->getRepository('AppBundle:Nuclide')->findOneById(array('id'=>21));
+    	/*$results = $em->getRepository('AppBundle:Measurement')->getAllByStationAndNuclide($station, $nuclide);
     	
-    	$measure = $em->getRepository('AppBundle:Measurement')->getAllByStationAndNuclide($station, $nuclide);
-    	// retrieve all active legends
-    	//$legends = $em->getRepository('AppBundle:Legend')->findBy(array('hidden' => 0), array('sorting' => 'ASC'));
-    	 
-    	// retrieve all active site types
-    	//$siteTypes = $em->getRepository('AppBundle:SiteType')->findBy(array('hidden' => 0), array('sorting' => 'ASC'));
-    	 
-    	// retrieve all active automatic networks
-    	//$automaticNetworks = $em->getRepository('AppBundle:AutomaticNetwork')->findBy(array('hidden' => 0), array('sorting' => 'ASC'));
+    	foreach($results as $result)
+    	{
+    		$date = \DateTime::createFromFormat('Y-m-d H:i:s', $result['referenceDate']);
+    		$data[] = [$date->getTimeStamp()*1000, (float)$result['value']];
+    		
+    	}*/
+    	//var_dump($data);die();
     	 
     	return $this->render('measures/index.html.twig', array(
     			'station' => $station, 'nuclide'=>$nuclide
@@ -185,6 +254,32 @@ class DefaultController extends Controller
     	// Renders the grid
     	return $this->render('measures/index.html.twig', array('grid' => $grid));*/
     	
+    }
+    
+    /**
+     * @Route("/measures/data/{type}/{id}.datas", name="measuresData")
+     */
+    public function measuresDataAction($type, $id, Request $request)
+    {
+    	$nuclide = $request->query->get('nuclide');
+    	$station = $id;
+    	
+    	// Getting doctrine manager
+    	$em = $this->getDoctrine()->getManager();
+    	
+    	$station = $em->getRepository('AppBundle:Station')->findOneById(array('id'=>$id));
+    	
+    	$results = $station->resultsByNuclide(array('nuclide'=>$nuclide));
+    	/*echo $nuclide;
+    	echo $station;
+    	echo $type;
+    	
+    	dump($request);
+    	die();*/
+    	//return new JsonResponse($data);
+    	return $this->render('measures/datas/graph.html.twig', array(
+    			'results' => $result
+    	));
     }
     
     /**
@@ -274,7 +369,9 @@ class DefaultController extends Controller
     	
     }
     
-    
+    /**
+     * @Route("/last", name="last")
+     */
     public function lastMeasureAction()
     {
     	// attention 2 boucles imbriquées dans radenviro PROD
@@ -318,15 +415,16 @@ class DefaultController extends Controller
     /**
      * @Route("/lmy", name="lmy")
      */
-    public function lmyAction()
+    public function lmyAction(Request $request)
     {
     	// Creates the grid from the type
-    	$grid = $this->createGrid(new SampleListType());
+    	//$grid = $this->createGrid(new SampleListType());
     	
     	// Handles filters, sorts, exports, ...
     	//$grid->handleRequest($request);
-    	$grid->isReadyForRedirect();
-    	return $this->render('AppBundle:Lmy:lmy.html.twig', ['grid' => $grid]);
+    	//$grid->isReadyForRedirect();
+    	//return $this->render('AppBundle:Lmy:lmy.html.twig', ['grid' => $grid]);
+    	return $this->render('AppBundle:Lmy:lmy.html.twig');
     }
     
     /**
@@ -335,6 +433,92 @@ class DefaultController extends Controller
     public function createGrid($type, Source $source = null, array $options = [])
     {
     	return $this->container->get('apy_grid.factory')->create($type, $source, $options);    	
+    }
+    
+    
+    
+    
+    
+    /**
+     * @Route("/graph", name="graph")
+     */
+    public function graphAction(Request $request)
+    {
+    	$em = $this->getDoctrine()->getManager();
+    	$station = $em->getRepository('AppBundle:Station')->findOneById(array('id'=>7));
+    	$nuclide = $em->getRepository('AppBundle:Nuclide')->findOneById(array('id'=> $request->get('nuclide') ));
+    	$results = $em->getRepository('AppBundle:Measurement')->getAllByStationAndNuclide($station, $nuclide);
+    	
+    	foreach($results as $result)
+    	{
+    		$date = \DateTime::createFromFormat('Y-m-d H:i:s', $result['referenceDate']);
+    		$data[] = [$date->getTimeStamp()*1000, (float)$result['value'], $result['limited'], (float)$result['error']];
+    	}
+    	
+    	//$date = \DateTime::createFromFormat('Y-m-d H:i:s', '2018-01-29 07:00:00');
+    	//$now = new \DateTime();
+    	    	
+    	$serie = [
+    		'unit' => 'Bq/m3',
+    		'limit_low' => 0.00000010,
+    		'limit_high'=> 0.00000100,
+    		'data' => $data,
+    		//'data2' => $data2
+    	];
+    	 
+    	 
+    	return new JsonResponse($serie);
+    }
+    
+    /**
+     * @Route("/graph_xpl", name="graph_xpl")
+     */
+    public function graphxplAction(Request $request)
+    {
+    	$data = [
+    	/* Dec 2017 */
+    	[1512086400000,171.05],
+    	[1512345600000,169.80],
+    	[1512432000000,169.64],
+    	[1512518400000,169.01],
+    	[1512604800000,169.32],
+    	[1512691200000,169.37],
+    	[1512950400000,172.67],
+    	[1513036800000,171.70],
+    	[1513123200000,172.27],
+    	[1513209600000,172.22],
+    	[1513296000000,173.97],
+    	[1513555200000,176.42],
+    	[1513641600000,174.54],
+    	[1513728000000,174.35],
+    	[1513814400000,175.01],
+    	[1513900800000,175.01],
+    	[1514246400000,170.57],
+    	[1514332800000,170.60],
+    	[1514419200000,171.08],
+    	[1514505600000,169.23],
+    	/* Jan 2018 */
+    	[1514851200000,172.26],
+    	[1514937600000,172.23],
+    	[1515024000000,173.03],
+    	[1515110400000,175.00],
+    	[1515369600000,174.35],
+    	[1515456000000,174.33],
+    	[1515542400000,174.29],
+    	[1515628800000,175.28],
+    	[1515715200000,177.09],
+    	[1516060800000,176.19],
+    	[1516147200000,179.10],
+    	[1516233600000,179.26],
+    	[1516320000000,178.46],
+    	[1516579200000,177.00],
+    	[1516665600000,177.04],
+    	[1516752000000,174.22],
+    	[1516838400000,171.11]
+    	];
+    	
+    	
+    	return new JsonResponse($data);
     }
     
     

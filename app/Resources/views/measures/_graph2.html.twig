@@ -1,0 +1,227 @@
+
+    
+<div class="graph" id="measures-graph-dashboard" >
+    
+  <div id="container" height: 520px; width: 100%; "></div>
+
+</div>
+
+
+		<script type="text/javascript">
+
+//var graphNuclides = $('select.nuclides-graph:first');
+//eval('var params = ' + (graphNuclides.attr('data-refresh') || '{}'));
+
+		
+//$.getJSON('https://www.highcharts.com/samples/data/jsonp.php?filename=aapl-c.json&callback=?', function (data) {
+//$.getJSON(url + '?nuclide=' + nuclide + '&jsoncallback=?', {}, function(data) {
+$('select.nuclides-graph').change(function () {
+
+	var nuclide = $(this).val();
+	//var stationSel = $('select.stations');
+	//var station = stationSel.val();
+	
+	$.getJSON('/fr/graph?nuclide='+nuclide,
+		function (data) {
+
+	var ohlc = [],
+	color = [],
+	dataLength = data['data'].length,
+	i=0;
+
+	
+	
+	for (i; i < dataLength; i += 1) {
+        ohlc.push([
+        	data['data'][i][0], // the date
+        	data['data'][i][1], // the value
+        	data['data'][i][2], // is limited
+        	data['data'][i][3], // the error
+            ]);
+
+        if(data['data'][i][2]==1) {
+        	color.push('#ff9933');
+        } else {
+        	color.push('#008000');
+        }
+        
+    }
+    
+    // Create the chart
+    Highcharts.stockChart('container', {
+    /*window.chart = new Highcharts.StockChart({
+            chart: {
+                renderTo: 'container'
+            },*/
+
+    	rangeSelector: {
+    		buttons: [{
+        	    type: 'month',
+        	    count: 1,
+        	    text: '1m'
+        	}, {
+        	    type: 'month',
+        	    count: 3,
+        	    text: '3m'
+        	}, {
+        	    type: 'month',
+        	    count: 6,
+        	    text: '6m'
+        	}, {
+        	    type: 'year',
+        	    count: 1,
+        	    text: '1y'
+        	}, {
+        	    type: 'year',
+        	    count: 5,
+        	    text: '5y'
+        	}, {
+        	    type: 'year',
+        	    count: 10,
+        	    text: '10y'
+        	}, {
+        	    type: 'all',
+        	    text: 'All'
+        	}],
+        	
+            selected: 3
+        },
+        chart: {
+            width: 1100
+        },
+
+        credits: {
+            enabled: false
+        },
+        
+        title: {
+            text: 'Mesure de la radioactivité'
+        },
+
+        legend: {
+            layout: 'vertical',
+            backgroundColor: '#ff0000',
+            align: 'left',
+            verticalAlign: 'top',
+            floating: true,
+            x: 90,
+            y: 45
+        },
+
+        xAxis: {
+            type: 'datetime',
+            dateTimeLabelFormats: {
+                second: '%Y-%m-%d<br/>%H:%M:%S',
+                minute: '%Y-%m-%d<br/>%H:%M',
+                hour: '%Y-%m-%d<br/>%H:%M',
+                day: '%Y<br/>%m-%d',
+                week: '%Y<br/>%m-%d',
+                month: '%Y-%m',
+                year: '%Y'
+            }
+        },
+
+        
+        yAxis: {
+            title: {
+                text: data['unit']
+            },
+            opposite: false,
+            /*plotBands: [{
+                color: '#ddd', // Color value
+                from: data['limit_low'], // Start of the plot band
+                to: data['limit_high'], // End of the plot band
+                label: {
+                    text: 'domaine de variation',
+                    style: {
+                        color: '#333',
+                        fontWeight: 'normal'
+                    },
+            		align: 'center',
+                }
+              }],*/
+            labels: {
+            	formatter: function() {
+            	    return this.value.toExponential(2); // 2 digits of precision
+            	}
+            }
+        },
+
+       /* tooltip: {
+            pointFormat: '{point.y}<br/>',
+            valueSuffix: ' ' + data['unit'],
+            shared: true
+        },*/
+
+        /*tooltip: {
+        	formatter: function() {
+        	    return this.y.toExponential(2); // 2 digits of precision
+        	},
+            shared: true
+        },*/
+
+        tooltip: {
+        	formatter: function() {
+                var s = '<b>'+  Highcharts.dateFormat('%d.%m.%Y',new Date(this.x)) +'</b><br/>';
+
+                $.each(this.points, function(i, point) {
+                	var serie = this.series;
+                	var index = this.series.data.indexOf(this.point);
+
+                	if(data['data'][index][2]==1) {
+                    	s += '<span style="color:#ff9933">\u25CF</span> '
+                    		+ '< ' + this.y.toExponential(2);
+                	} else {
+                    	s += '<span style="color:' + point.color + '">\u25CF</span> ' 
+                    		+ this.y.toExponential(2) 
+                    		+ ' +-' + data['data'][index][3].toExponential(2);
+                	}
+                });
+
+                return s;
+            },
+            xDateFormat: '%Y-%m-%d',
+            shared: true
+            },
+
+        plotOptions: {
+                series: {
+                    colorByPoint: true
+                }
+            },
+
+        navigator: {
+            	series: {
+                    colorByPoint: false
+                    
+                }
+            },
+
+        
+        series: [{
+            name: 'Valeur',
+            data: ohlc,
+            lineWidth: 0,
+            colors: color,
+            marker: {
+                enabled: true,
+                radius: 2
+            },
+            
+            states: {
+                hover: {
+                    lineWidthPlus: 0
+                }
+            }
+        }]
+        
+    });
+    
+    
+    
+});
+
+}).change();
+
+		</script>
+		

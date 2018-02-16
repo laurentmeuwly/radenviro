@@ -4,13 +4,21 @@
 {{ parent() }} 
 		<link rel="stylesheet" type="text/css" href="{{ asset('css/measures.css') }}" />
 {% endblock %}
-
 	
-{% block javascripts %}
+{% block head_javascripts %}
+
 {{ parent() }} 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script> 
 <script type="text/javascript" charset="utf8" src="{{ asset('js/application2.js') }}"></script>
+
+<script type="text/javascript" charset="utf8" src="{{ asset('js/radenviro.js') }}"></script>
 <script type="text/javascript" charset="utf8" src="{{ asset('js/measures.js') }}"></script>
+
+<script type="text/javascript" charset="utf8" src="{{ asset('js/highstock.js') }}"></script>
+
+
+
+
 
 {% endblock %}
 
@@ -26,11 +34,11 @@
         <li><a href="#measures-download">{{ 'label.download'|trans }}</a></li> -->
       </ul>
       
-      <div class="measures-graph" id="measures-graph" style="visibility: hidden;">
+      <div class="measures-graph" id="measures-graph"">
         {% include 'measures/_graph_filter.html.twig' %}
-        {% include 'measures/_graph.html.twig' %}
+        {% include 'measures/_graph2.html.twig' %}
       </div>
-      <!-- <div class="measures-table table" id="measures-table">
+      <!-- <div class="measures-table table" id="measures-table" style="visibility: hidden;>
         {% include 'measures/_table_filter.html.twig' %}
         {% include 'measures/_table.html.twig' %}
       </div>
