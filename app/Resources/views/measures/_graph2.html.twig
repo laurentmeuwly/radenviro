@@ -18,28 +18,27 @@
 $('select.nuclides-graph').change(function () {
 
 	var nuclide = $(this).val();
-	//var stationSel = $('select.stations');
-	//var station = stationSel.val();
+	var stationSel = $('select.stations');
+	var station = stationSel.val();
 	
-	$.getJSON('/fr/graph?nuclide='+nuclide,
+	$.getJSON('/fr/graph?nuclide='+nuclide+'&station='+station,
 		function (data) {
 
-	var ohlc = [],
+	var result = [],
 	color = [],
 	dataLength = data['data'].length,
 	i=0;
-
-	
 	
 	for (i; i < dataLength; i += 1) {
-        ohlc.push([
+        result.push([
         	data['data'][i][0], // the date
         	data['data'][i][1], // the value
-        	data['data'][i][2], // is limited
+        	/*data['data'][i][2], // is limited
         	data['data'][i][3], // the error
+        	data['data'][i][4], // the unit*/
             ]);
 
-        if(data['data'][i][2]==1) {
+        if(data['data'][i][2]==='1') {
         	color.push('#ff9933');
         } else {
         	color.push('#008000');
@@ -167,15 +166,16 @@ $('select.nuclides-graph').change(function () {
                 $.each(this.points, function(i, point) {
                 	var serie = this.series;
                 	var index = this.series.data.indexOf(this.point);
-
-                	if(data['data'][index][2]==1) {
-                    	s += '<span style="color:#ff9933">\u25CF</span> '
-                    		+ '< ' + this.y.toExponential(2);
+                	
+                	if(data['data'][index][2]==='1') {
+                    	s += '<span style="color:#ff0000">\u25CF</span> '
+                    		+ '\u003C ' + this.y.toExponential(2);
                 	} else {
-                    	s += '<span style="color:' + point.color + '">\u25CF</span> ' 
+                    	s += '<span style="color:#009900">\u25CF</span> ' 
                     		+ this.y.toExponential(2) 
-                    		+ ' +-' + data['data'][index][3].toExponential(2);
+                    		+ ' \u00B1' + data['data'][index][3].toExponential(2);
                 	}
+                	s += ' ' + data['data'][index][4];
                 });
 
                 return s;
@@ -200,9 +200,9 @@ $('select.nuclides-graph').change(function () {
         
         series: [{
             name: 'Valeur',
-            data: ohlc,
+            data: data['data'],
             lineWidth: 0,
-            colors: color,
+            colors: data['color'],
             marker: {
                 enabled: true,
                 radius: 2

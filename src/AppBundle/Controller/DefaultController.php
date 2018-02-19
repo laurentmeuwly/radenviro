@@ -445,25 +445,24 @@ class DefaultController extends Controller
     public function graphAction(Request $request)
     {
     	$em = $this->getDoctrine()->getManager();
-    	$station = $em->getRepository('AppBundle:Station')->findOneById(array('id'=>7));
+    	$station = $em->getRepository('AppBundle:Station')->findOneById(array('id'=> $request->get('station')));
     	$nuclide = $em->getRepository('AppBundle:Nuclide')->findOneById(array('id'=> $request->get('nuclide') ));
     	$results = $em->getRepository('AppBundle:Measurement')->getAllByStationAndNuclide($station, $nuclide);
     	
     	foreach($results as $result)
     	{
     		$date = \DateTime::createFromFormat('Y-m-d H:i:s', $result['referenceDate']);
-    		$data[] = [$date->getTimeStamp()*1000, (float)$result['value'], $result['limited'], (float)$result['error']];
+    		$data[] = [$date->getTimeStamp()*1000, (float)$result['value'], $result['limited'], (float)$result['error'], 
+    				$em->getRepository('AppBundle:ResultUnit')->findOneById(array('id'=> $result['result_unit_id']))->getCode() ];
+    		$color[] = $result['limited']=='1' ? '#ff0000' : '#00ff00';
     	}
-    	
-    	//$date = \DateTime::createFromFormat('Y-m-d H:i:s', '2018-01-29 07:00:00');
-    	//$now = new \DateTime();
     	    	
     	$serie = [
-    		'unit' => 'Bq/m3',
+    		'unit' => $data[0][4],
     		'limit_low' => 0.00000010,
     		'limit_high'=> 0.00000100,
     		'data' => $data,
-    		//'data2' => $data2
+    		'color' => $color,
     	];
     	 
     	 

@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Measurement
@@ -134,6 +135,11 @@ class Measurement
      **/
     private $results;
 
+    
+    public function __construct()
+    {
+    	$this->results = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -520,10 +526,9 @@ class Measurement
      *
      * @param Result[] $results
      */
-    public function setResults($results)
+    /*public function setResults(ArrayCollection $results)
     {
-    	$this->results->clear();
-    	$this->results = new ArrayCollection($results);
-    }
+    	$this->results = $results;
+    }*/
 }
 

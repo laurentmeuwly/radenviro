@@ -42,7 +42,7 @@ ORDER BY measurement.referenceDate DESC';
 		->getConnection();
 		
 		$sql = '
-            SELECT  measurement.referenceDate, result.limited, result.value, result.error, station.code
+            SELECT  measurement.referenceDate, result.limited, result.value, result.error, station.code, measurement.result_unit_id
 FROM sample, measurement, result, station
 WHERE sample.station_id= :station
 AND result.nuclide_id= :nuclide
