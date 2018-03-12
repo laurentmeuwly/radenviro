@@ -455,19 +455,59 @@ class DefaultController extends Controller
     		$data[] = [$date->getTimeStamp()*1000, (float)$result['value'], $result['limited'], (float)$result['error'], 
     				$em->getRepository('AppBundle:ResultUnit')->findOneById(array('id'=> $result['result_unit_id']))->getCode() ];
     		$color[] = $result['limited']=='1' ? '#ff0000' : '#00ff00';
+    		
+    		if($result['limited']=='1') {
+    			$dataNwg[] = [$date->getTimeStamp()*1000, (float)$result['value'], $result['limited'], (float)$result['error'], 
+    				$em->getRepository('AppBundle:ResultUnit')->findOneById(array('id'=> $result['result_unit_id']))->getCode() ];
+    		} else {
+    			$dataVal[] = [$date->getTimeStamp()*1000, (float)$result['value'], $result['limited'], (float)$result['error'],
+    					$em->getRepository('AppBundle:ResultUnit')->findOneById(array('id'=> $result['result_unit_id']))->getCode() ];
+    		}
     	}
     	    	
     	$serie = [
-    		'unit' => $data[0][4],
+    		'unit' => 'Bq/m3', //$data[0][4],
     		'limit_low' => 0.00000010,
     		'limit_high'=> 0.00000100,
     		'data' => $data,
+    			'data_nwg' => $dataNwg,
+    			'data_val' => $dataVal,
+    			
     		'color' => $color,
     	];
     	 
     	 
     	return new JsonResponse($serie);
     }
+    
+    /*
+     * version qui fonctionne bien, mise à part le tableau des couleurs qui ne se calque pas sur le tableau des valeurs
+    public function graphAction(Request $request)
+    {
+    	$em = $this->getDoctrine()->getManager();
+    	$station = $em->getRepository('AppBundle:Station')->findOneById(array('id'=> $request->get('station')));
+    	$nuclide = $em->getRepository('AppBundle:Nuclide')->findOneById(array('id'=> $request->get('nuclide') ));
+    	$results = $em->getRepository('AppBundle:Measurement')->getAllByStationAndNuclide($station, $nuclide);
+    	 
+    	foreach($results as $result)
+    	{
+    		$date = \DateTime::createFromFormat('Y-m-d H:i:s', $result['referenceDate']);
+    		$data[] = [$date->getTimeStamp()*1000, (float)$result['value'], $result['limited'], (float)$result['error'],
+    				$em->getRepository('AppBundle:ResultUnit')->findOneById(array('id'=> $result['result_unit_id']))->getCode() ];
+    		$color[] = $result['limited']=='1' ? '#ff0000' : '#00ff00';
+    	}
+    
+    	$serie = [
+    			'unit' => $data[0][4],
+    			'limit_low' => 0.00000010,
+    			'limit_high'=> 0.00000100,
+    			'data' => $data,
+    			'color' => $color,
+    	];
+    
+    
+    	return new JsonResponse($serie);
+    }*/
     
     /**
      * @Route("/graph_xpl", name="graph_xpl")

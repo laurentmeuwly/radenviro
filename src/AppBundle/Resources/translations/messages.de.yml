@@ -6,28 +6,6 @@
 
 
 
-
-search:
-  field:
-    network: Netzwerk
-  choose_network: Netzwerk wählen...
-
-
-label:
-  search: Suchen
-
-
-
-
-
-
-
-
-
-
-
-
-
 activerecord:
   models:
     networks: Netzwerke

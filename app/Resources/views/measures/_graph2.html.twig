@@ -25,7 +25,6 @@ $('select.nuclides-graph').change(function () {
 		function (data) {
 
 	var result = [],
-	color = [],
 	dataLength = data['data'].length,
 	i=0;
 	
@@ -33,58 +32,52 @@ $('select.nuclides-graph').change(function () {
         result.push([
         	data['data'][i][0], // the date
         	data['data'][i][1], // the value
-        	/*data['data'][i][2], // is limited
-        	data['data'][i][3], // the error
-        	data['data'][i][4], // the unit*/
             ]);
-
-        if(data['data'][i][2]==='1') {
-        	color.push('#ff9933');
-        } else {
-        	color.push('#008000');
-        }
-        
     }
+
+	Highcharts.setOptions({
+	    lang: {
+	    }
+	});
     
     // Create the chart
     Highcharts.stockChart('container', {
-    /*window.chart = new Highcharts.StockChart({
-            chart: {
-                renderTo: 'container'
-            },*/
 
     	rangeSelector: {
     		buttons: [{
         	    type: 'month',
         	    count: 1,
-        	    text: '1m'
+        	    text: '{{ 'label.zooms.1m'|trans }}'
         	}, {
         	    type: 'month',
         	    count: 3,
-        	    text: '3m'
+        	    text: '{{ 'label.zooms.3m'|trans }}'
         	}, {
         	    type: 'month',
         	    count: 6,
-        	    text: '6m'
+        	    text: '{{ 'label.zooms.6m'|trans }}'
         	}, {
         	    type: 'year',
         	    count: 1,
-        	    text: '1y'
+        	    text: '{{ 'label.zooms.1y'|trans }}'
         	}, {
         	    type: 'year',
         	    count: 5,
-        	    text: '5y'
+        	    text: '{{ 'label.zooms.5y'|trans }}'
         	}, {
         	    type: 'year',
         	    count: 10,
-        	    text: '10y'
+        	    text: '{{ 'label.zooms.10y'|trans }}'
         	}, {
         	    type: 'all',
-        	    text: 'All'
+        	    text: '{{ 'label.zooms.all'|trans }}'
         	}],
-        	
+
+        	inputDateFormat: '%Y-%m-%d',
+            	
             selected: 3
         },
+        
         chart: {
             width: 1100
         },
@@ -92,19 +85,27 @@ $('select.nuclides-graph').change(function () {
         credits: {
             enabled: false
         },
+
         
-        title: {
+        /*title: {
             text: 'Mesure de la radioactivité'
-        },
+        },*/
 
         legend: {
+        	enabled: true,
+        	floating: true,
+            align: 'center',
+            backgroundColor: 'white',
+            borderColor: 'black',
+            borderWidth: 0,
             layout: 'vertical',
-            backgroundColor: '#ff0000',
-            align: 'left',
             verticalAlign: 'top',
-            floating: true,
-            x: 90,
-            y: 45
+            y: -10,
+            x: 10,
+            shadow: true,
+            itemStyle: {
+                	fontWeight: 'normal',
+                }
         },
 
         xAxis: {
@@ -146,19 +147,6 @@ $('select.nuclides-graph').change(function () {
             }
         },
 
-       /* tooltip: {
-            pointFormat: '{point.y}<br/>',
-            valueSuffix: ' ' + data['unit'],
-            shared: true
-        },*/
-
-        /*tooltip: {
-        	formatter: function() {
-        	    return this.y.toExponential(2); // 2 digits of precision
-        	},
-            shared: true
-        },*/
-
         tooltip: {
         	formatter: function() {
                 var s = '<b>'+  Highcharts.dateFormat('%d.%m.%Y',new Date(this.x)) +'</b><br/>';
@@ -166,16 +154,20 @@ $('select.nuclides-graph').change(function () {
                 $.each(this.points, function(i, point) {
                 	var serie = this.series;
                 	var index = this.series.data.indexOf(this.point);
-                	
-                	if(data['data'][index][2]==='1') {
-                    	s += '<span style="color:#ff9933">\u25CF</span> '
-                    		+ '\u003C ' + this.y.toExponential(2);
-                	} else {
+
+                	if(this.series.index==2) {
+                			s += '<span style="color:#ff9933">\u25CF</span> '
+                        		+ '\u003C ' + this.y.toExponential(2);
+                			s += ' ' + data['data_nwg'][index][4];
+
+                    } else {
                     	s += '<span style="color:#008000">\u25CF</span> ' 
                     		+ this.y.toExponential(2) 
                     		+ ' \u00B1' + data['data'][index][3].toExponential(2);
-                	}
-                	s += ' ' + data['data'][index][4];
+                    	s += ' ' + data['data_val'][index][4];
+
+                    }
+                    
                 });
 
                 return s;
@@ -184,11 +176,11 @@ $('select.nuclides-graph').change(function () {
             shared: true
             },
 
-        plotOptions: {
+        /*plotOptions: {
                 series: {
                     colorByPoint: true
                 }
-            },
+            },*/
 
         navigator: {
             	series: {
@@ -198,22 +190,59 @@ $('select.nuclides-graph').change(function () {
             },
 
         
-        series: [{
-            name: 'Valeur',
-            data: data['data'],
-            lineWidth: 0,
-            colors: color,//data['color'],
-            marker: {
-                enabled: true,
-                radius: 2
+        series: [
+        	{
+                name: 'All',
+                data: result,
+                lineWidth: 0,
+                showInLegend: false,
+                marker: {
+                    enabled: true,
+                    radius: 3,
+                    symbol: 'circle'
+                },
+                
+                states: {
+                    hover: {
+                        lineWidthPlus: 0
+                    }
+                },
+                visible: false
             },
-            
-            states: {
-                hover: {
-                    lineWidthPlus: 0
-                }
-            }
-        }]
+            {
+                name: '{{ 'label.measured values'|trans }}',
+                data: data['data_val'],
+                lineWidth: 0,
+                color: '#008000',
+                marker: {
+                    enabled: true,
+                    radius: 3,
+                    symbol: 'circle'
+                },
+                
+                states: {
+                    hover: {
+                        lineWidthPlus: 0
+                    }
+                },
+            },
+            {
+                name: '{{ 'label.detection limit'|trans }}',
+                data: data['data_nwg'],
+                lineWidth: 0,
+                color: '#ff9933',
+                marker: {
+                    enabled: true,
+                    radius: 3,
+                    symbol: 'circle'
+                },
+                
+                states: {
+                    hover: {
+                        lineWidthPlus: 0
+                    }
+                },
+            }]
         
     });
     
