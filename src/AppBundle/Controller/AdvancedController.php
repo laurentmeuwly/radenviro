@@ -17,6 +17,7 @@ use APY\DataGridBundle\Grid\Source\Entity;
 use AppBundle\Entity\Sample;
 use AppBundle\Entity\Station;
 use AppBundle\Entity\Network;
+use AppBundle\Entity\Nuclide;
 use AppBundle\Form\AdvancedSearchType;
 use AppBundle\Entity\PredefinedNuclideList;
 
@@ -143,6 +144,7 @@ class AdvancedController extends Controller
 		
 		$network = new Network();
 		$predefinedNuclideList = new PredefinedNuclideList();
+		$nuclide = new Nuclide();
 		$netId = 0;
 		$form = $this->createForm(AdvancedSearchType::class);
 		$form->handleRequest($request);
@@ -151,6 +153,7 @@ class AdvancedController extends Controller
 		if(!$form->isSubmitted() && !$isAjax) {
 			$session->remove('network');
 			$session->remove('displayList');
+			$session->remove('nuclide');
 		}
 		
 		
@@ -158,6 +161,7 @@ class AdvancedController extends Controller
 			$data = $request->request->get('advanced_search');
 			$session->set('network', $data['network']);
 			$session->set('displayList', $data['displayList']);
+			$session->set('nuclide', $data['nuclide']);
 		}
 		
 		$datatable = null;

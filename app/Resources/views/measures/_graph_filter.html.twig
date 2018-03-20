@@ -12,7 +12,7 @@
     {% endfor %}
   </select>
   <br/>
-    {{ 'label.isotope'|trans }}: <select class="nuclides nuclides-graph" data-refresh="url: {{ path('graph', {}) }}">
+    {{ 'label.isotope'|trans }}: <select class="nuclides nuclides-graph">
          {% for legendnuclide in station.legends|first.legend.nuclides %}
         <option value="{{ legendnuclide.nuclide.id }}">{{ legendnuclide.nuclide.name }}</option>
       {% endfor %}

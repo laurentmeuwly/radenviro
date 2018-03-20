@@ -1,18 +1,19 @@
 <div class="header">
-  {{ 'label.analyzed environments'|trans }}: <%= @station.legends.map {|l| l.name}.join(', ') -%><br/>
-  {{ 'label.station'|trans }}: <select class="stations">
-  <% @station.stations_with_same_legends.each do |station| -%>
-      <option value="<%= station.id -%>" data-url="<%= url_for :controller => :measures, :id => station.id, :anchor => 'measures-table' -%>" <%= 'selected="selected"' if @station.id == station.id -%> ><%= station.fullname -%></option>
-    <% end -%>
-  </select><br/>
-  {{ 'label.isotope'|trans }}: <select class="nuclides nuclides-table" data-refresh="<%= url_for(:controller => :measures, :action => :data, :type => :table, :id => @station.id) -%>">
-  <% @station.nuclides.by_legends(@station.legends).visible.each do |nuclide| -%>
-      <option value="{{ 'nuclide.id' }}">{{ 'nuclide.name' }}</option>
-    <% end -%>
+  {{ 'label.analyzed environments'|trans }}: {{ station.legends|first.legend.name }}<br/>
+  {{ 'label.station'|trans }}:
+   <select class="stations">
+    {% for legendstation in station.legends|first.legend.stations %}
+      <option value="{{ legendstation.station.id }}" 
+              data-url="{{ url('measures', {'id': legendstation.station.id}) }}#measures-table"
+              {% if legendstation.station.id==station.id %} selected="selected" {% endif %} >{{  legendstation.station.name }} ({{  legendstation.station.code }})</option>
+    {% endfor %}
   </select>
   <br/>
-  <strong>{{ station.name }}</strong>
-  <br/>
-  <strong>{{ nuclide.name }}</strong>
-  <br/>
+  {{ 'label.isotope'|trans }}:
+  
+    <select class="nuclides nuclides-table">
+         {% for legendnuclide in station.legends|first.legend.nuclides %}
+        <option value="{{ legendnuclide.nuclide.id }}">{{ legendnuclide.nuclide.name }}</option>
+      {% endfor %}
+    </select>
 </div>

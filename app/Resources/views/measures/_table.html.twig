@@ -1,27 +1,30 @@
-<div class="content">
-  <table class="datagrid" style="width:100%;" data-params="<%=  
-  hash_to_javascript({
-      :height => 'auto', 
-      :minheight => 350, 
-      :resizable => false, 
-      :showToggleBtn => true, 
-      :striped => true,
-      :url => '',
-      :sortname => 'date',
-      :sortorder => 'desc',
-      :usepager => true
-    }) 
-         -%>">
-    <thead>
-      <tr>
-        <th class="date" data-sortable="1">date</th>
-        <th class="value td-right" data-sortable="1">resultat</th>
-        <th class="error td-right" data-sortable="1">incertitude</th>
-        <th class="unit" data-sortable="1">unité</th>
-        <th class="station" data-sortable="0">station</th>
-        <th class="type" data-sortable="0" data-hidden="1">sorte</th>
-        <th class="comment" data-sortable="0" data-hidden="1">comment</th>
-      </tr>
-    </thead>
-  </table>
-</div>
+
+
+{{ datatable_html({
+            'id' : 'dt2'
+        })
+}}
+
+
+{% block javascripts %}
+
+{{ 
+
+    datatable_js({
+        'id' : 'dt2',
+        'js' : {
+            'dom': '<"clearfix"lf>rtip',
+            
+        }
+    })
+ 
+}}
+
+{% endblock javascripts %}
+
+
+
+
+
+
+

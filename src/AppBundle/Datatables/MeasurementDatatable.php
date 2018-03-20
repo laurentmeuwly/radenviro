@@ -40,6 +40,19 @@ class MeasurementDatatable extends AbstractDatatable
 		return $em->findOneById($list);
 	}
 	
+	public function getSingleNuclide()
+	{
+		$session = new Session();
+		if($session->get('nuclide')>0) {
+			$nuclide = $session->get('nuclide');
+			$em = $this->em->getRepository('AppBundle\Entity\Nuclide');
+			return $em->findOneById($nuclide);
+		} else {
+			return null;
+		}
+		
+	}
+	
 	public function getLineFormatter()
 	{
 		$formatter = function($row) {
@@ -71,7 +84,28 @@ class MeasurementDatatable extends AbstractDatatable
 				
 			}
 			
-	
+			$singleNuclide = $this->getSingleNuclide();
+			if($singleNuclide) {
+				$result = $em->findOneBy(array('measurement' => $row['id'], 'nuclide' => $singleNuclide->getId()) );
+				
+				if($result) {
+						
+					if($result->getLimited()==1) {
+						$value = '&lt;' . sprintf('%.1e', $result->getValue());
+					} else {
+						$value = sprintf('%.1e', $result->getValue());
+							
+						if($result->getError() != '') {
+							$value .= ' &plusmn;'.sprintf('%.1e', $result->getError());
+						}
+				
+					}
+					$row[$singleNuclide->getCode()] = $value;
+						
+				} else {
+					$row[$singleNuclide->getCode()] = '';
+				}
+			}
 			return $row;
 		};
 	
@@ -96,6 +130,7 @@ class MeasurementDatatable extends AbstractDatatable
             'individual_filtering' => true,
             'individual_filtering_position' => 'head',
             'order_cells_top' => true,
+        	'order' => array(array(1, 'asc')),
         ));
 
         $this->features->set(array(
@@ -103,6 +138,32 @@ class MeasurementDatatable extends AbstractDatatable
 
         
         $this->columnBuilder
+        	/*->add(null, MultiselectColumn::class, array(
+        		'start_html' => '<div class="start_checkboxes">',
+                'end_html' => '</div>',
+        		'value' => 'id',
+        		'value_prefix' => true,
+        		//'render_actions_to_id' => 'sidebar-multiselect-actions', // custom Dom id for the actions
+        		'actions' => array(
+                        array(
+                            'route' => 'printall',
+                            'icon' => 'glyphicon glyphicon-ok',
+                            'label' => 'Print all',
+                            'attributes' => array(
+                                'rel' => 'tooltip',
+                                'title' => 'Print',
+                                'class' => 'btn btn-primary btn-xs',
+                                'role' => 'button',
+                            ),
+                            'confirm' => true,
+                            'confirm_message' => 'Really?',
+                            'start_html' => '<div class="start_print_action">',
+                            'end_html' => '</div>',
+                            
+                        ),
+                    ),
+            ))*/
+        		
         	->add('id', Column::class, array(
         		'title' => '#',
         		'visible' => false,
@@ -175,6 +236,16 @@ class MeasurementDatatable extends AbstractDatatable
         		$this->columnBuilder
         		->add($nuclide->getNuclide()->getCode(), VirtualColumn::class, array(
         				'title' => $nuclide->getNuclide()->getCode(),
+        				'type_of_field' => 'float',
+        				'searchable' => false,
+        				'orderable' => false,
+        		));
+        	}
+        	$singleNuclide = $this->getSingleNuclide();
+        	if($singleNuclide) {
+        		$this->columnBuilder
+        		->add($singleNuclide->getCode(), VirtualColumn::class, array(
+        				'title' => $singleNuclide->getCode(),
         				'type_of_field' => 'float',
         				'searchable' => false,
         				'orderable' => false,
