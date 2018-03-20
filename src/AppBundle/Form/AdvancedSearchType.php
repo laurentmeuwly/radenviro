@@ -39,10 +39,23 @@ class AdvancedSearchType extends AbstractType
 					'label' => 'search.field.displaylist',
 					'query_builder' => function (EntityRepository $er) {
 					return $er->createQueryBuilder('l')
-					->where('l.active=1');
+					->where('l.active=1')
+					->orderBy('l.position', 'asc');
 					},
 					//'data' => $session->get('network'),
 					))
+					->add('nuclide', 'entity', array(
+							'mapped' => false,
+							'class' => 'AppBundle:Nuclide',
+							//'property' => 'name',
+							'placeholder' => 'search.choose_nuclide',
+							'label' => 'search.field.nuclide',
+							'query_builder' => function (EntityRepository $er) {
+							return $er->createQueryBuilder('n')
+							->where('n.active=1');
+							},
+							
+							))
 			->add('search', SubmitType::class, array('label' => 'label.search'))
 		;
 	}
