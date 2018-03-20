@@ -75,6 +75,8 @@ class AppKernel extends Kernel
         	new Xmon\ColorPickerTypeBundle\XmonColorPickerTypeBundle(),
         		
         	new Ivory\GoogleMapBundle\IvoryGoogleMapBundle(),
+        		
+        	new JMose\CommandSchedulerBundle\JMoseCommandSchedulerBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
