@@ -1,0 +1,449 @@
+/******************************************************************************
+*** Reset CSS
+******************************************************************************/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+
+/******************************************************************************
+*** Override some bootstrap
+******************************************************************************/
+.col-md-12, .col-md-10, .col-md-9, .col-md-6, .col-md-3, .col-md-2 {
+	padding-left: 0px;
+}
+
+
+/******************************************************************************
+*** Specific Radenviro
+******************************************************************************/
+
+body {
+  background: url("/images/bg-body.jpg") repeat-x;
+  text-align: center;
+  font-family: arial, verdana, sans-serif;
+  font-size: 12px;
+}
+
+body.simple {
+    background: none;
+}
+
+body table,
+body input,
+body textarea,
+body p, body span, body div {
+    font-family: arial, verdana, sans-serif;
+    font-size: 12px;
+}
+    
+#page-margins {
+  margin: auto;
+  min-height: 500px;
+  text-align: left;
+  width: 1210px;
+}
+
+#page-margins #page {
+    padding: 0px 15px;
+}
+
+#page-margins #page #header {
+	background: white url(/images/bg-header.jpg) no-repeat;
+}
+#page-margins #page #header .right-top {
+  line-height: 25px;
+  padding-right: 10px;
+  text-align: right;
+}
+#page-margins #page #header .right-middle {
+  color: #ffffff;
+  line-height: 25px;
+  padding-right: 10px;
+  text-align: right;
+}
+#page-margins #page #header .right-bottom {
+  line-height: 25px;
+  padding-right: 10px;
+  text-align: right;
+}
+#page-margins #page #header .title {
+  float: right;
+  font-size: 24px;
+  height: 40px;
+  line-height: 0.55em;
+  margin-top: 35px;
+  padding-right: 10px;
+  text-align: center;
+}
+#page-margins #page #header .title .website a {
+  color: #000000;
+  font-size: 14px;
+  text-decoration: none;
+}
+#page-margins #page #header .bottom {
+  background-color: #016798;
+  color: white;
+  margin-top: 2px;
+  overflow: hidden;
+}
+#page-margins #page #content {
+  margin-top: 5px;
+}
+
+#content {
+  text-align: left;
+}
+
+h1 {
+  font-size: 2.0em;
+  font-weight: bold;
+  line-height: 1.2em;
+  margin-bottom: 1em; }
+
+h3 {
+  font-size: 1.3em;
+  font-weight: bold;
+  line-height: 1.2em;
+  margin-bottom: 0.5em; }
+
+h4 {
+  font-size: 1.3em;
+  font-style: italic;
+  line-height: 1.2em;
+  margin-bottom: 0.5em; }
+
+.td-right {
+  text-align: right; }
+  
+  
+/******************************************************************************
+*** Menu definition
+******************************************************************************/
+#menu {
+  clear: both;
+  margin-bottom: 20px; 
+  display: flex;
+  flex-direction: row;
+  align-content: flex-start; }
+  #menu .menu-item a {
+    background-color: #016798;
+    color: white;
+    display: block;
+    font-size: 1.4em;
+    font-weight: bold;
+    padding: 0.4em 0px;
+    text-align: center;
+    text-decoration: none; }
+    #menu .menu-item a:hover {
+      background-color: white;
+      border: 2px solid #016798;
+      color: #016798;
+      padding: 2px 0px; }
+
+/******************************************************************************
+*** Breadcrumb definition
+******************************************************************************/
+#breadcrumb {
+  float: left;
+  padding: 0.5em 1em; }
+  #breadcrumb a {
+    color: white;
+    text-decoration: none; }
+    #breadcrumb a:hover {
+      text-decoration: underline; }
+  #breadcrumb span {
+    padding: 0px 2px; }
+
+/******************************************************************************
+*** Language bar definition
+******************************************************************************/
+#lang {
+  float: right;
+  margin-top: 2px;
+  padding: 0.5em 1em 0.5em 0; }
+  #lang a {
+    color: #016798;
+    text-decoration: none; }
+    #lang a:hover, #lang a.active {
+      text-decoration: underline; }
+      
+/******************************************************************************
+*** Element definition
+******************************************************************************/
+div.box {
+  border: 1px solid #016798;
+  border-radius: 5px; }
+  div.box div.header {
+    background-color: #016798;
+    color: white;
+    font-size: 1.1em;
+    padding: 0.5em 0.5em; }
+  div.box div.content {
+    min-height: 10px; }
+    div.box div.content div.section {
+      padding: 0.5em; }
+    div.box div.content div.sep {
+      background-color: #016798;
+      height: 1px;
+      margin: 0.5em 0px; }
+ 
+
+#content .box.measures .content {
+  position: relative; }
+#content .box.measures .shortcuts {
+    position: absolute;
+    right: 15px;
+    top: 16px; }
+#content .box.measures  .shortcuts a {
+      color: #000000;
+      display: inline-block;
+      font-weight: bold;
+      padding: 0 10px;
+      text-decoration: none; }
+
+  
+/******************************************************************************
+    *** Measure graph definition
+******************************************************************************/
+#measures-graph div.filter {
+  overflow: hidden; }
+  #measures-graph div.filter div.title {
+    float: left;
+    font-size: 1.2em;
+    font-weight: bold;
+    width: 300px; }
+  #measures-graph div.filter div.infos {
+    font-size: 1.1em;
+    line-height: 1.2em;
+    margin-left: 310px; }
+    #measures-graph div.filter div.infos label {
+      font-weight: bold; }
+      
+#measures-graph #measures-graph-dashboard {
+  border-top: 1px solid #cccccc;
+  margin-top: 10px;
+  padding-top: 10px;
+  position: relative; }
+  
+/******************************************************************************
+ *** Map definition
+ ******************************************************************************/
+#content div.map div.content {
+  overflow: hidden;
+  padding: 15px;
+  position: relative; }
+  #content div.map div.content div.content-wrap {
+    height: 290px;
+    position: relative;
+    width: 100%; }
+    #content div.map div.content div.content-wrap img {
+      height: 100%;
+      position: absolute;
+      width: 100%; }
+    #content div.map div.content div.content-wrap #zoom_closebtn {
+      background: url(/images/close.png) no-repeat;
+      cursor: pointer;
+      display: none;
+      height: 16px;
+      left: -10px;
+      position: absolute;
+      top: -10px;
+      width: 16px;
+      z-index: 3000; }
+  #content div.map div.content span.location {
+    display: none;
+    position: absolute;
+    z-index: 1050; }
+    #content div.map div.content span.location span.text, #content div.map div.content span.location span.title {
+      display: none; }
+  #content div.map div.content span.sublocation {
+    display: none;
+    position: absolute;
+    z-index: 2050; }
+    #content div.map div.content span.sublocation span.text, #content div.map div.content span.sublocation span.title {
+      display: none; }
+  #content div.map div.content div.zoomarea {
+    background-color: #D1DCFF;
+    border: 1px dashed #016798;
+    cursor: pointer;
+    opacity: 0.7;
+    position: absolute;
+    z-index: 1000; }
+    #content div.map div.content div.zoomarea:hover {
+      border: 1px dashed #444444; }
+
+/******************************************************************************
+ *** Map legend definition
+ ******************************************************************************/
+#content div.map-legend div.content li {
+  line-height: 20px; }
+  
+/******************************************************************************
+    *** Legend definition
+******************************************************************************/
+ #content div.box div.content input[type="checkbox"],
+#content div.box div.content input[type="radio"] {
+  display: inline-block;
+  position: relative;
+  top: 2px; }
+#content div.box div.content span.icon {
+  display: inline-block;
+  height: 15px;
+  margin-right: 5px;
+  position: relative;
+  width: 15px; }
+  #content div.box div.content span.icon:before {
+    font-size: 22px;
+    line-height: 10px;
+    position: absolute; }
+  #content div.box div.content span.icon.legend:before {
+    content: '\25CF';
+    left: 0px;
+    top: 3px; }
+  #content div.box div.content span.icon.sitetype:before {
+    content: '\2605';
+    font-size: 18px;
+    left: -1px;
+    top: 1px; }
+  #content div.box div.content span.icon.network:before {
+    content: '\25C6';
+    font-size: 18px;
+    left: -1px;
+    top: 1px; }
+#content div.box div.content .sites {
+  overflow: hidden; }
+  #content div.box div.content .sites ul {
+    float: left;
+    margin-right: 20px;
+    width: 213px; }
+    #content div.box div.content .sites ul li span.icon:before {
+      top: 4px; }
+  #content div.box div.content .sites select {
+    width: 213px; }
+
+#content div.box div.content .sites select.select-0 {
+      margin-top: 23px; }
+    #content div.box div.content .sites select.select-1 {
+      margin-top: 46px; }
+    #content div.box div.content .sites select.select-2 {
+      margin-top: 69px; }
+    #content div.box div.content .sites select.select-3 {
+      margin-top: 92px; }
+     
+#content div.box div.content .automatic_network_stations {
+  overflow: hidden; }
+  #content div.box div.content .automatic_network_stations ul {
+    float: left;
+    margin-right: 20px;
+    width: 213px; }
+    #content div.box div.content .automatic_network_stations ul li span.icon:before {
+      top: 4px; }
+ #content div.box div.content .automatic_network_stations select {
+    width: 213px; }
+    #content div.box div.content .automatic_network_stations select.select-0 {
+      margin-top: 23px; }
+    #content div.box div.content .automatic_network_stations select.select-1 {
+      margin-top: 46px; }
+    #content div.box div.content .automatic_network_stations select.select-2 {
+      margin-top: 69px; }
+  
+/******************************************************************************
+ *** Map table definition
+ ******************************************************************************/
+#content div.map-table {
+  margin-top: 0.5em; }
+  #content div.map-table table {
+    width: 100%; }
+    #content div.map-table table th.date {
+      width: 16%; }
+    #content div.map-table table th.value {
+      width: 18%; }
+    #content div.map-table table th.error {
+      width: 18%; }
+    #content div.map-table table th.unit {
+      width: 10%; }
+    #content div.map-table table th.station {
+      width: 38%; }
+    
+
+div.table div.header {
+  background-color: #016798;
+  color: white;
+  font-size: 1.1em;
+  font-weight: bold;
+  line-height: 1.2em;
+  padding: 0.5em 0.5em; }  
+  
+select {
+	color: #000;
+}         
+      
+.qtip{position:absolute;left:-28000px;top:-28000px;display:none;max-width:320px;min-width:50px;font-size:10.5px;line-height:12px;} 
+.qtip-fluid{display:block;visibility:hidden;position:static!important;float:left!important;}
+.qtip-content{position:relative;padding:5px 9px;overflow:hidden;border:1px solid #000001;text-align:left;word-wrap:break-word;overflow:hidden;} 
+.qtip-titlebar{position:relative;min-height:14px;padding:5px 25px 5px 10px;overflow:hidden;border:1px solid #000001;border-width:1px 1px 0;font-weight:bold;}
+.qtip-titlebar, .qtip-content{border-color:#F1D031;background-color:#FFFFA3;color:#555;}
+.qtip-titlebar{background-color:#FFEF93;}
+#qtip-overlay{position:fixed;left:-10000em;top:-10000em;}
+#qtip-overlay.blurs{cursor:pointer;}
+#qtip-overlay div{position:absolute;left:0;top:0;width:100%;height:100%;background-color:black;opacity:.7;filter:alpha(opacity=70);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";}
+
+    
+.dataTables_wrapper .dataTables_filter {
+float: right;
+text-align: right;
+display: none;
+}
+
+div.dataTables_wrapper div.dataTables_length {
+text-align: left;
+display: none;
+}
+
+table.dataTable thead .sorting {
+	/*visibility: hidden;*/
+}
+      
+      
+      
+ 
