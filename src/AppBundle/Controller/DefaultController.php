@@ -122,7 +122,7 @@ class DefaultController extends Controller
     		return $responseService->getResponse();
     	}*/
     	
-    	$this->datatable2();
+    	$this->datatableResult();
     	
     	return $this->render('main_map.html.twig', array(
     			'legends' => $legends,
