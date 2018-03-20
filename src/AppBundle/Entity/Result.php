@@ -42,6 +42,13 @@ class Result
      * @ORM\Column(name="error", type="float", precision=10, scale=0, nullable=true)
      */
     private $error;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="displayValue", type="string", length=20, nullable=true)
+     */
+    private $displayValue;
 
     /**
      * @var Measurement
@@ -56,6 +63,7 @@ class Result
      * @ORM\JoinColumn(nullable=false)
      */
     private $nuclide;
+    
 
     /**
      * @var \DateTime
@@ -148,13 +156,37 @@ class Result
     }
 
     /**
+     * Get displayValue
+     *
+     * @return string
+     */
+    public function getDisplayValue()
+    {
+        return $this->displayValue;
+    }
+    
+    /**
+     * Set displayValue
+     *
+     * @param string $displayValue
+     *
+     * @return Result
+     */
+    public function setgetDisplayValue($displayValue)
+    {
+    	$this->displayValue = $displayValue;
+    
+    	return $this;
+    }
+    
+    /**
      * Get error
      *
      * @return float
      */
     public function getError()
     {
-        return $this->error;
+    	return $this->error;
     }
 
     /**
