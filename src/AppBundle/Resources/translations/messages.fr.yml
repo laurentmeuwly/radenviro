@@ -116,9 +116,10 @@ search:
   field:
     network: Réseau
     displaylist: Affichage
+    nuclide: Isotope
   choose_network: Sélectionnez un réseau...
   choose_displaylist: Sélectionnez une liste d'affichage...
-    
+  choose_nuclide: Sélectionnez un isotope...
     
 
 label:

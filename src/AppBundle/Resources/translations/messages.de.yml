@@ -1,11 +1,126 @@
 
+######################
+# Backend translations
+######################
 
+admin:
+  group:
+    frontend: Affichage frontend
+    content: Contenu OFSP
+    base: Données de base
+    config: Configuration système
 
+## Menu
+  menu:
+    legend: Légendes
+    page: Pages statiques
+    automatic_network: Réseaux automatiques
+    automatic_network_station: Stations des réseaux automatiques
+    network_category: Catégories de réseau
+    network: Réseaux
+    station_type: Types de station
+    station: Stations de mesure
+    site_type: Genres de site
+    site: Sites
+    zoom: Zones zoomables
+    nuclide: Isotopes
+    predefinednuclidelist: Listes isotopes prédéfinies
+    country: Pays
+    
+## Generic
+  label:
+    general: Généralités
+    attributs: Attributs
+    informations: Informations
+    history: Historique
+    name: Nom
+    color: Couleur
+    hidden: Caché
+    active: Actif
+    position: Ordre d'affichage
+    translations: Informations multilingues
+    created_at: Créé le
+    updated_at: Modifié le
+    latitude: Latitude
+    longitude: Longitude
+    description: Description
+    zoom: Niveau de zoom
+    default_zoom: Zoom par défaut
+    map: Carte
 
+## Entities specific
+  legend:
+    name: Titre de la légende
+    total_stations: Nb stations liées
+    total_nuclides: Nb isotopes liés
+    stations: Stations liées
+    nuclides: Isotopes liés
+  page:
+    code: Identifiant
+    title: Titre
+    content: Contenu
+  zoom:
+    name: Nom de la zone zoomable
+    zoom: Niveau de zoom   
+    additional: Informations additionnelles
+  automatic_network:
+    name: Réseau automatique
+    url: Lien vers le site officiel
+    total_stations: Nb de stations
+  automatic_network_station:
+    name: Nom de la station
+    description: Description de la station
+    network: Réseau automatique
+    latitude: Latitude
+    longitude: Longitude
+  network_category:
+    name: Catégorie de réseaux
+  network:
+    name: Nom du réseau
+  station_type:
+    name: Type de station
+  station:
+    code: Station
+    name: Nom de la station
+    network: Réseau
+  site_type:
+    name: Genre de site
+  site:
+    name: Nom du site
+    stations: Stations concernées
+  nuclide:
+    code: Isotop
+    name: Name
+  predefinednuclidelist:
+    name: Name der Anzeigeliste
+    nuclides: Isotope verfügbar
+    
+  
+  
 
+#######################
+# Frontend translations
+####################### 
 
-
-
+table:
+  sample: Probe
+  refdate: Referenzdatum
+  nuclide: Isotop
+  laboratory: Labor
+  station: Station
+  method: Method
+  unit: Einheit
+  
+    
+search:
+  field:
+    network: Netzwerk
+    displaylist: Anzeigeliste
+    nuclide: Isotop
+  choose_network: Wählen Sie ein Netzwerk...
+  choose_displaylist: Wählen Sie eine Anzeigeliste...
+  choose_nuclide: Wählen Sie ein isotope...
+  
 activerecord:
   models:
     networks: Netzwerke
