@@ -7,25 +7,20 @@
         
       </div>
       <div class="content">
-
-        <table class="datagrid" id="datatable_last_result_per_station" data-url="{{ url('last_result') }}" >
-          <thead>
-            <tr>
-              <th class="date" data-sortable="0">date</th>
-              <th class="value td-right" data-sortable="0">resultat</th>
-              <th class="error td-right" data-sortable="0">incertitude</th>
-              <th class="unit" data-sortable="0">unité</th>
-              <th class="station" data-sortable="0">station</th>
-            </tr>
-          </thead>
-        </table>
+{{ datatable_html({
+            'id' : 'tablelastresult'
+        })
+}}
       </div>
     </div>
 
 {% block javascripts %}
-{{ datatable({
+{{ 
+    datatable_js({
+        'id' : 'tablelastresult',
         'js' : {
-            'ajax' : path('tableresult')
+            'dom': '<"clearfix"lf>rtip',
+            
         }
     })
 }}
