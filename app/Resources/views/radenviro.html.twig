@@ -1,23 +1,16 @@
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}
-		
-        <link rel="stylesheet" href="{{ asset('css/old/application.css') }}" />
-        <link rel="stylesheet" href="{{ asset('css/old/main.css') }}" />
- 
+
+
+	<link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/radenviro.css') }}" /> 
 {% endblock %}
 
-
-{% block javascripts %}
-    {% javascripts 
-    	'js/test1.js'
-    	'js/test2.js' 
-        output='js/compiled/main.js' %}
-        <script src="{{ asset_url }}"></script>
-    {% endjavascripts %}
-   
+{% block head_javascripts %}
+	<script type="text/javascript" charset="utf8" src="{{ asset('js/jquery.min.js') }}"></script>
+	<script type="text/javascript" charset="utf8" src="{{ asset('js/bootstrap.js') }}"></script>
 {% endblock %}
-
   
   
 {% block body %}
@@ -35,16 +28,16 @@
             </span>
           </div>
           <div id="menu">
-            {% include 'menu.html.twig' %}
+            {% include 'main_menu.html.twig' %}
           </div>
         </div>
         
-    <div id="content">    
-	{% block content %}
-		Ici, le contenu de l'onglet courant!
-		
-	{% endblock %}
-	</div>	
- 
-   	</div>
+        <div id="content">    
+     	{% block content %}
+    		This should not be displayed as all specific views should replace the content block.
+    	{% endblock %}
+       	</div>
+     </div>
+</div>
+
 {% endblock %}

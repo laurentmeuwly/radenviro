@@ -1,24 +1,28 @@
-<div class="cs5">
-  <div class="c1 menu-item"><a href="{{ path('news') }}">{{ 'menus.welcome'|trans }}</a></div>
-  <div class="c1 menu-item"><a href="{{ path('map') }}">{{ 'menus.map'|trans }}</a></div>
-  <div class="c1 menu-item"><a href="{{ path('radair') }}">{{ 'menus.automatic_networks'|trans }}</a></div>
- <div class="c1 menu-item"><a href="{{ path('advanced') }}">{{ 'menus.laboratories'|trans }}</a></div>
+<div class="col-md-10">
+  <div class="col-md-3 menu-item"><a href="{{ path('news') }}">{{ 'menus.welcome'|trans }}</a></div>
+  <div class="col-md-3 menu-item"><a href="{{ path('map') }}">{{ 'menus.map'|trans }}</a></div>
+  <div class="col-md-3 menu-item"><a href="{{ path('radair') }}">{{ 'menus.automatic_networks'|trans }}</a></div>
+ <div class="col-md-3 menu-item"><a href="{{ path('advanced') }}">{{ 'menus.laboratories'|trans }}</a></div>
+</div>
 
-  <div class="c1 ce">
+<div class="col-md-2">
+  <div class="ce">
   
   {% set actualLangue = app.request.locale %}
   {% set routeParams = app.request.get('_route_params') %}
   
   <div id="lang">
   		{% set routeParams = routeParams|merge({'_locale': 'de'}) %}
-      	<a href="{{ path(app.request.get('_route'), routeParams) }}">Deutsch</a>&nbsp;&#124;
+      	<a href="{{ path(app.request.get('_route'), routeParams) }}">DE</a>&nbsp;&#124;
       	{% set routeParams = routeParams|merge({'_locale': 'fr'}) %}
-      	<a href="{{ path(app.request.get('_route'), routeParams) }}">Français</a>&nbsp;&#124;
+      	<a href="{{ path(app.request.get('_route'), routeParams) }}">FR</a>&nbsp;&#124;
       	{% set routeParams = routeParams|merge({'_locale': 'it'}) %}
-		<a href="{{ path(app.request.get('_route'), routeParams) }}">Italiano</a>&nbsp;&#124;
+		<a href="{{ path(app.request.get('_route'), routeParams) }}">IT</a>&nbsp;&#124;
 		{% set routeParams = routeParams|merge({'_locale': 'en'}) %}
-		<a href="{{ path(app.request.get('_route'), routeParams) }}">English</a>
+		<a href="{{ path(app.request.get('_route'), routeParams) }}">EN</a>
 	</div>
   </div>
-  <div class="clear"></div>
+  
 </div>
+
+<div class="clear"></div>

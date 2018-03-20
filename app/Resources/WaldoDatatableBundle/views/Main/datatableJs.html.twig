@@ -1,0 +1,33 @@
+{% block main %}
+
+{% spaceless %}
+
+<script type="text/javascript">
+
+$('select.nuclides-table').change(function () {
+	var nuclide = $(this).val();
+	var stationSel = $('select.stations');
+	var station = stationSel.val();
+	
+$(document).ready(function() {
+    $('#{{ id }}').DataTable({
+    destroy: true,
+    ajax:{
+        "url":"\/fr\/dt2",
+        "data":{"nuclide":nuclide}
+      },
+
+    {% for elementName, element in js %}{{ elementName }}:{{ element|printDatatableOption(elementName) }}{% if loop.last != true %},{%endif%}{% endfor %} });
+});
+
+}).change();
+
+{% if multiple %}
+{% include "WaldoDatatableBundle:Snippet:multipleRaw.js.twig" %}
+{% endif %}
+{% if search == true and searchFields is not empty %}
+{% include "WaldoDatatableBundle:Snippet:individualSearchField.js.twig" %}
+{% endif %}
+</script>
+{% endspaceless %}
+{% endblock  %}
