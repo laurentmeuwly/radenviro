@@ -12,7 +12,7 @@ use Xmon\ColorPickerTypeBundle\Validator\Constraints as XmonAssertColor;
  * Legend
  *
  * @ORM\Table(name="legend", indexes={@ORM\Index(name="index_legends_on_active", columns={"active"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\LegendRepository")
  */
 class Legend
 {
