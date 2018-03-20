@@ -1,0 +1,36 @@
+    <div class="table map-table" id="handler_last_result_per_station" style="visibility: visible; display: block;">
+      <div class="header">
+        {{ 'label.analyzed environments'|trans }}: <span id="nature_last_result_per_station"></span><br/>
+        {{ 'label.nuclide'|trans }}: <select class="nuclides" id="nuclides_last_result_per_station" data-refresh="{{ url('data', { type: 'nuclide' }) }}">
+          <option value=""></option>
+        </select>
+        
+      </div>
+      <div class="content">
+
+        <table class="datagrid" id="datatable_last_result_per_station" data-url="{{ url('last_result') }}" >
+          <thead>
+            <tr>
+              <th class="date" data-sortable="0">date</th>
+              <th class="value td-right" data-sortable="0">resultat</th>
+              <th class="error td-right" data-sortable="0">incertitude</th>
+              <th class="unit" data-sortable="0">unité</th>
+              <th class="station" data-sortable="0">station</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+    </div>
+
+{% block javascripts %}
+{{ datatable({
+        'js' : {
+            'ajax' : path('dt2')
+        }
+    })
+}}
+{% endblock javascripts %}
+    
+
+
+
