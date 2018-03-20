@@ -15,6 +15,7 @@ use APY\DataGridBundle\Grid\Source\Entity;
 
 use AppBundle\Datatables\LastResultDatatable;
 use AppBundle\Datatables\MeasurementDatatable;
+use AppBundle\Datatables\ResultDatatable;
 
 
 class DefaultController extends Controller
@@ -109,7 +110,7 @@ class DefaultController extends Controller
     	
     	
     	$datatable=NULL;
-    	$datatable = $this->get('sg_datatables.factory')->create(MeasurementDatatable::class);
+    	/*$datatable = $this->get('sg_datatables.factory')->create(MeasurementDatatable::class);
     	$datatable->buildDatatable();
     	
     	if ($isAjax) {
@@ -119,9 +120,11 @@ class DefaultController extends Controller
     		$datatableQueryBuilder->buildQuery();
     			
     		return $responseService->getResponse();
-    	}
+    	}*/
     	
-    	return $this->render('data_access.html.twig', array(
+    	$this->datatable2();
+    	
+    	return $this->render('main_map.html.twig', array(
     			'legends' => $legends,
     			'siteTypes' => $siteTypes,
     			'automaticNetworks' => $automaticNetworks,
@@ -225,36 +228,66 @@ class DefaultController extends Controller
     	$em = $this->getDoctrine()->getManager();
     	$station = $em->getRepository('AppBundle:Station')->findOneById(array('id'=>$id));
     	$nuclide = $em->getRepository('AppBundle:Nuclide')->findOneById(array('id'=>21));
-    	/*$results = $em->getRepository('AppBundle:Measurement')->getAllByStationAndNuclide($station, $nuclide);
+    	//$results = $em->getRepository('AppBundle:Measurement')->getAllByStationAndNuclide($station, $nuclide);
     	
-    	foreach($results as $result)
-    	{
-    		$date = \DateTime::createFromFormat('Y-m-d H:i:s', $result['referenceDate']);
-    		$data[] = [$date->getTimeStamp()*1000, (float)$result['value']];
-    		
-    	}*/
-    	//var_dump($data);die();
-    	 
-    	return $this->render('measures/index.html.twig', array(
-    			'station' => $station, 'nuclide'=>$nuclide
+    	
+    	$this->datatable2();
+    	
+    	return $this->render('measures/measures_history.html.twig', array(
+    			'station' => $station,
+    			'nuclide' => $nuclide,
     	));
-    	/*
-    	 return $this->render('default/radenviro.html.twig', [
-    	 'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR,
-    	 ]);*/
-    	
-    	// Creates the builder
-    /*	$grid = $this->createGridBuilder(new Entity('AppBundle:Station'));
-    	$grid
-    	->add('id', 'numeric', ['primary' => 'true'])
-    	->add('name', 'text')
-    	->getGrid();
-    	// Handles filters, sort, exports, action
-    	$grid->handleRequest($request);
-    	// Renders the grid
-    	return $this->render('measures/index.html.twig', array('grid' => $grid));*/
     	
     }
+    
+    /*
+     OLD VERSION 
+     * @Route("/measures/{id}", name="measures")
+     
+    public function measuresAction($id, Request $request)
+    {
+    	$isAjax = $request->isXmlHttpRequest();
+    	
+    	// Getting doctrine manager
+    	$em = $this->getDoctrine()->getManager();
+    	$station = $em->getRepository('AppBundle:Station')->findOneById(array('id'=>$id));
+    	$nuclide = $em->getRepository('AppBundle:Nuclide')->findOneById(array('id'=>21));
+    	//$results = $em->getRepository('AppBundle:Measurement')->getAllByStationAndNuclide($station, $nuclide);
+    	
+    	$datatable = $this->get('sg_datatables.factory')->create(ResultDatatable::class);
+    	$datatable->buildDatatable();
+    	
+    	if ($isAjax) {
+    		$station2 = $em->getRepository('AppBundle:Station')->findOneById(array('id'=>7));
+    		$meas = $em->getRepository('AppBundle:Mesurement')->findOneById(array('id'=>20158));
+    		$responseService = $this->get('sg_datatables.response');
+    		$responseService->setDatatable($datatable);
+    		$datatableQueryBuilder = $responseService->getDatatableQueryBuilder();
+    		$datatableQueryBuilder->buildQuery();
+    	
+    		//if($session->get('network')>0) {
+    		
+    			$qb = $datatableQueryBuilder->getQb();
+    			$qb->andWhere('measurement = :station');
+    			//$qb->andWhere('nuclide = :nuclide');
+    			$qb->setParameter('station', $meas);
+    			//$qb->setParameter('nuclide', 21);
+    		
+    		//}
+    		return $responseService->getResponse();
+    	}
+    	 
+    	$this->datatable2();
+    	
+    	return $this->render('measures/measures_history.html.twig', array(
+    			'station' => $station,
+    			'nuclide' => $nuclide,
+    			'datatable' => $datatable
+    	));
+    	
+    }
+    */
+     
     
     /**
      * @Route("/measures/data/{type}/{id}.datas", name="measuresData")
@@ -287,12 +320,30 @@ class DefaultController extends Controller
      */
     public function dataAction($type, Request $request)
     {
+    	$legends = array();
+    	$data = array();
+    	
     	$id = $request->attributes->get('id');
+    	
+    	$legends = $request->query->get('legends');
+    	
+    	// Getting doctrine manager
+    	$em = $this->getDoctrine()->getManager();
+    	 
+
     	if($type=='nuclide') {
-    	$data = [
+    		$results = $em->getRepository('AppBundle:Legend')->getNuclideByLegends(array('legends'=>$legends));
+    		$i=0;
+    		foreach($results as $result) {
+    			$data[$i]['value'] = $result->getNuclide()->getId();
+    			$data[$i]['label'] = $result->getNuclide()->getName();
+    			$i++;
+    		}
+    	
+    	/*$data = [
     			'0' => [
     					'value' => 54,
-    					'label' => 'Ruthénium 106',
+    					'label' => sprintf('%s', sizeof($legends)),
     			],
     			'1' => [
     					'value' => 26,
@@ -307,7 +358,7 @@ class DefaultController extends Controller
     					'label' => 'juste un test',
     			],
     			
-    		];
+    		];*/
     	}
     	if($type=='table') {
     		$data = [
@@ -402,11 +453,14 @@ class DefaultController extends Controller
           // corriger la requête
           
           $lastMeasure = $this->container->get('app.lastresult');
-          if($lastMeasure->getLastResultByStation(1)=='Hello') {
+          $result = $lastMeasure->getLastResultByStationAndIsotope(7,21);
+          if($result=='Hello') {
           	throw new \Exception('Not a valid number!');
           }
-          
-          return $this->render('AppBundle:Measures:_last_measure.html.twig');
+          echo $result->getMeasurement()->getReferenceDate()->format('Y-m-d');
+          var_dump($result);
+          die();
+          return $this->render('AppBundle:Measures:_last_measure.html.twig', array('result'=>$lastMeasure));
     }
     
     
@@ -444,6 +498,9 @@ class DefaultController extends Controller
      */
     public function graphAction(Request $request)
     {
+    	$dataNwg = array();
+    	$dataVal = array();
+    	
     	$em = $this->getDoctrine()->getManager();
     	$station = $em->getRepository('AppBundle:Station')->findOneById(array('id'=> $request->get('station')));
     	$nuclide = $em->getRepository('AppBundle:Nuclide')->findOneById(array('id'=> $request->get('nuclide') ));
@@ -510,9 +567,9 @@ class DefaultController extends Controller
     }*/
     
     /**
-     * @Route("/graph_xpl", name="graph_xpl")
+     * @Route("/table", name="table")
      */
-    public function graphxplAction(Request $request)
+    public function tableAction(Request $request)
     {
     	$data = [
     	/* Dec 2017 */
@@ -558,6 +615,135 @@ class DefaultController extends Controller
     	
     	
     	return new JsonResponse($data);
+    }
+    
+    /**
+     * Lists some result entities.
+     *
+     * @param Request $request
+     *
+     * @Route("/dtres", name="dtres")
+     * @return Response
+     */
+    public function dtresAction(Request $request)
+    {
+    	$isAjax = $request->isXmlHttpRequest();
+    
+    	// Get your Datatable ...
+    	//$datatable = $this->get('app.datatable.post');
+    	//$datatable->buildDatatable();
+    
+    	// or use the DatatableFactory
+    	/** @var DatatableInterface $datatable */
+    	$datatable = $this->get('sg_datatables.factory')->create(ResultDatatable::class);
+    	$datatable->buildDatatable();
+    
+    	if ($isAjax) {
+    		$responseService = $this->get('sg_datatables.response');
+    		$responseService->setDatatable($datatable);
+    		$responseService->getDatatableQueryBuilder();
+    
+    		return $responseService->getResponse();
+    	}
+    
+    	return $this->render('AppBundle::mydt.html.twig', array(
+    			'datatable' => $datatable,
+    	));
+    }
+    
+    /**
+     * Lists all entities.
+     * @Route("/listdt2", name="datatable_listdt2")
+     * @return Response
+     */
+    public function listdt2Action()
+    {
+    	$this->datatable2();                                                         // call the datatable config initializer
+    	return $this->render('::tab_small.html.twig');                 // replace "XXXMyBundle:Module:index.html.twig" by yours
+    }
+    
+    /**
+     * Grid action
+     * @Route("/dt2", name="dt2")
+     * @return Response
+     */
+    public function grid2Action(Request $request)
+    {
+    	$nuclide = $request->get('nuclide');
+    	// return JsonResponse
+    	return $this->datatable2($nuclide)->execute();                                      // call the "execute" method in your grid action
+    }
+    
+    /**
+     * set datatable configs
+     * @return \Waldo\DatatableBundle\Util\Datatable
+     */
+    private function datatable2($nuclide=null) {
+    	if($nuclide==null) {
+    		$nuclide=21;
+    	}
+    	$controller_instance = $this;
+    	return $this->get('datatable')
+    	->setDatatableId('dta-tst2')
+    	->setGlobalSearch(false)
+    	->setSearch(false)
+    	->setNotSortableFields(array(0,1,2,3,4,5))
+    	->setEntity("AppBundle:Result", "x")                          // replace "XXXMyBundle:Entity" by your entity
+    	->setOrder("m.referencedate", "desc")
+    	->setFields(
+    			array(
+    					"date"          => 'm.referencedate',                        // Declaration for fields:
+    					"value"          => 'x.displayValue',                        // Declaration for fields:
+    					"error"          => 'x.error',                        // Declaration for fields:
+    					"limit"          => 'x.limited',                        // Declaration for fields:
+    					"nuclide"          => 'n.code',                        // Declaration for fields:
+    					    	
+    					"station"          => 'st.code',                        // Declaration for fields:
+    					//"Total"         => 'COUNT(x.id) as total',      // Use SQL commands, you must always define an alias
+    					//"Sub"           => '(SELECT i FROM ... ) as sub',   // you can set sub DQL request, you MUST ALWAYS define an alias
+    					"_identifier_"  => 'x.id')                          // you have to put the identifier field without label. Do not replace the "_identifier_"
+    			)
+    			->setRenderer(
+    					function(&$data) use ($controller_instance)
+    					{
+    						foreach ($data as $key => $value)
+    						{
+    							if ($key == 0) // m.referencedate
+    							{
+    								$data[$key] = $controller_instance
+    								->get('templating')
+    								->render(
+    										'AppBundle:Renderers:_date.html.twig',
+    										array('data' => $value)
+    										);
+    							}
+    							
+    							if ($key == 2) // x.error
+    							{
+    								if($value) {
+    								$data[$key] = $controller_instance
+    								->get('templating')
+    								->render(
+    										'AppBundle:Renderers:_scinumber.html.twig',
+    										array('data' => $value)
+    										);
+    								}
+    							}
+    						}
+    			}
+    			)
+    	->addJoin('x.measurement', 'm', \Doctrine\ORM\Query\Expr\Join::LEFT_JOIN)
+    	->addJoin('m.sample', 's', \Doctrine\ORM\Query\Expr\Join::LEFT_JOIN)
+    	->addJoin('s.station', 'st', \Doctrine\ORM\Query\Expr\Join::LEFT_JOIN)
+    	->addJoin('x.nuclide', 'n', \Doctrine\ORM\Query\Expr\Join::LEFT_JOIN)
+    	
+    	->setWhere(                                                     // set your dql where statement
+    			 'st.id = :station AND n.id = :nuclide',
+    					array('station' => 7,'nuclide' => $nuclide)
+    					)
+    
+    	//->setOrder("x.code", "desc")                               // it's also possible to set the default order
+    	;
     }
     
     
