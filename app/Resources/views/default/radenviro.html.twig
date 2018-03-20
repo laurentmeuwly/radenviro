@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/radenviro.css') }}" />
+{% endblock %}
+
+{% block head_javascripts %}
+	<script type="text/javascript" charset="utf8" src="{{ asset('jquery/jquery-3.3.1.min.js') }}"></script>
+{% endblock %}
+  
+  
+{% block body %}
+
+<div id="page-margins">
+      <div id="page">
+        <div id="header">
+          <div class="right-top">{{ 'application.header.administration'|trans }}</div>
+          <div class="right-middle">{{ 'application.header.office'|trans }}</div>
+          <div class="right-bottom">{{ 'application.header.division'|trans }}</div>
+          <div class="title">
+            {{ 'application.header.title'|trans }}<br/>
+            <span class="website">
+              <a href="http://www.radenviro.ch">www.radenviro.ch</a>
+            </span>
+          </div>
+          <div id="menu">
+            {% include 'main_menu.html.twig' %}
+          </div>
+        </div>
+        
+    <div id="content">    
+	
+	</div>	
+ 	{% block content %}
+		This should not be displayed as all specific views should replace the content block.
+	{% endblock %}
+   	</div>
+</div>
+
+{% endblock %}
