@@ -13,8 +13,8 @@ $(document).ready(function() {
     $('#{{ id }}').DataTable({
     destroy: true,
     ajax:{
-        "url":"\/fr\/dt2",
-        "data":{"nuclide":nuclide}
+        "url":"\/{{ app.request.getLocale() }}\/tableresult",
+        "data":{"nuclide":nuclide, "station":station}
       },
 
     {% for elementName, element in js %}{{ elementName }}:{{ element|printDatatableOption(elementName) }}{% if loop.last != true %},{%endif%}{% endfor %} });

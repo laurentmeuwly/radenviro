@@ -230,8 +230,8 @@ class DefaultController extends Controller
     	$nuclide = $em->getRepository('AppBundle:Nuclide')->findOneById(array('id'=>21));
     	//$results = $em->getRepository('AppBundle:Measurement')->getAllByStationAndNuclide($station, $nuclide);
     	
-    	
-    	$this->datatable2();
+    	// initiate the datatable result
+    	$this->datatableResult();
     	
     	return $this->render('measures/measures_history.html.twig', array(
     			'station' => $station,
@@ -537,35 +537,6 @@ class DefaultController extends Controller
     	return new JsonResponse($serie);
     }
     
-    /*
-     * version qui fonctionne bien, mise à part le tableau des couleurs qui ne se calque pas sur le tableau des valeurs
-    public function graphAction(Request $request)
-    {
-    	$em = $this->getDoctrine()->getManager();
-    	$station = $em->getRepository('AppBundle:Station')->findOneById(array('id'=> $request->get('station')));
-    	$nuclide = $em->getRepository('AppBundle:Nuclide')->findOneById(array('id'=> $request->get('nuclide') ));
-    	$results = $em->getRepository('AppBundle:Measurement')->getAllByStationAndNuclide($station, $nuclide);
-    	 
-    	foreach($results as $result)
-    	{
-    		$date = \DateTime::createFromFormat('Y-m-d H:i:s', $result['referenceDate']);
-    		$data[] = [$date->getTimeStamp()*1000, (float)$result['value'], $result['limited'], (float)$result['error'],
-    				$em->getRepository('AppBundle:ResultUnit')->findOneById(array('id'=> $result['result_unit_id']))->getCode() ];
-    		$color[] = $result['limited']=='1' ? '#ff0000' : '#00ff00';
-    	}
-    
-    	$serie = [
-    			'unit' => $data[0][4],
-    			'limit_low' => 0.00000010,
-    			'limit_high'=> 0.00000100,
-    			'data' => $data,
-    			'color' => $color,
-    	];
-    
-    
-    	return new JsonResponse($serie);
-    }*/
-    
     /**
      * @Route("/table", name="table")
      */
@@ -664,44 +635,48 @@ class DefaultController extends Controller
     
     /**
      * Grid action
-     * @Route("/dt2", name="dt2")
+     * @Route("/tableresult", name="tableresult")
      * @return Response
      */
-    public function grid2Action(Request $request)
+    public function datatableResultAction(Request $request)
     {
     	$nuclide = $request->get('nuclide');
-    	// return JsonResponse
-    	return $this->datatable2($nuclide)->execute();                                      // call the "execute" method in your grid action
+    	$station = $request->get('station');
+
+    	return $this->datatableResult($nuclide, $station)->execute();
     }
     
     /**
      * set datatable configs
      * @return \Waldo\DatatableBundle\Util\Datatable
      */
-    private function datatable2($nuclide=null) {
+    private function datatableResult($nuclide=null, $station=null) {
+    	
+    	// TODO: no specific test here, but just return empty array
     	if($nuclide==null) {
     		$nuclide=21;
     	}
+    	if($station==null) {
+    		$station=7;
+    	}
+    	
     	$controller_instance = $this;
     	return $this->get('datatable')
     	->setDatatableId('dta-tst2')
     	->setGlobalSearch(false)
     	->setSearch(false)
-    	->setNotSortableFields(array(0,1,2,3,4,5))
-    	->setEntity("AppBundle:Result", "x")                          // replace "XXXMyBundle:Entity" by your entity
+    	->setNotSortableFields(array(0,1,2,3,4))
+    	->setEntity("AppBundle:Result", "x")
     	->setOrder("m.referencedate", "desc")
     	->setFields(
-    			array(
-    					"date"          => 'm.referencedate',                        // Declaration for fields:
-    					"value"          => 'x.displayValue',                        // Declaration for fields:
-    					"error"          => 'x.error',                        // Declaration for fields:
-    					"limit"          => 'x.limited',                        // Declaration for fields:
-    					"nuclide"          => 'n.code',                        // Declaration for fields:
-    					    	
-    					"station"          => 'st.code',                        // Declaration for fields:
-    					//"Total"         => 'COUNT(x.id) as total',      // Use SQL commands, you must always define an alias
-    					//"Sub"           => '(SELECT i FROM ... ) as sub',   // you can set sub DQL request, you MUST ALWAYS define an alias
-    					"_identifier_"  => 'x.id')                          // you have to put the identifier field without label. Do not replace the "_identifier_"
+	    			array(
+	    					"date"          => 'm.referencedate',
+	    					"value"          => 'x.displayValue',	// TODO: don't use this extra field. Here just as workaround to allow display some additional character
+	    					"error"          => 'x.error',
+	    					"nuclide"          => 'n.code',
+	    					"station"          => 'st.code',
+	    					"_identifier_"  => 'x.id'
+	    			)
     			)
     			->setRenderer(
     					function(&$data) use ($controller_instance)
@@ -739,7 +714,7 @@ class DefaultController extends Controller
     	
     	->setWhere(                                                     // set your dql where statement
     			 'st.id = :station AND n.id = :nuclide',
-    					array('station' => 7,'nuclide' => $nuclide)
+    					array('station' => $station,'nuclide' => $nuclide)
     					)
     
     	//->setOrder("x.code", "desc")                               // it's also possible to set the default order
