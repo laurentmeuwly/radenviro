@@ -49,25 +49,9 @@ $('select.nuclides-graph').change(function () {
         	    count: 1,
         	    text: '{{ 'label.zooms.1m'|trans }}'
         	}, {
-        	    type: 'month',
-        	    count: 3,
-        	    text: '{{ 'label.zooms.3m'|trans }}'
-        	}, {
-        	    type: 'month',
-        	    count: 6,
-        	    text: '{{ 'label.zooms.6m'|trans }}'
-        	}, {
         	    type: 'year',
         	    count: 1,
         	    text: '{{ 'label.zooms.1y'|trans }}'
-        	}, {
-        	    type: 'year',
-        	    count: 5,
-        	    text: '{{ 'label.zooms.5y'|trans }}'
-        	}, {
-        	    type: 'year',
-        	    count: 10,
-        	    text: '{{ 'label.zooms.10y'|trans }}'
         	}, {
         	    type: 'all',
         	    text: '{{ 'label.zooms.all'|trans }}'
@@ -79,7 +63,7 @@ $('select.nuclides-graph').change(function () {
         },
         
         chart: {
-            width: 1100
+            width: 1150
         },
 
         credits: {
@@ -98,10 +82,10 @@ $('select.nuclides-graph').change(function () {
             backgroundColor: 'white',
             borderColor: 'black',
             borderWidth: 0,
-            layout: 'vertical',
+            layout: 'horizontal',
             verticalAlign: 'top',
-            y: -10,
-            x: 10,
+            y: -8,
+            x: 0,
             shadow: true,
             itemStyle: {
                 	fontWeight: 'normal',
@@ -232,6 +216,9 @@ $('select.nuclides-graph').change(function () {
                 lineWidth: 0,
                 color: '#ff9933',
                 marker: {
+                	fillColor: '#ffffff',
+                	lineWidth: 1,
+                	lineColor: null,
                     enabled: true,
                     radius: 3,
                     symbol: 'circle'
