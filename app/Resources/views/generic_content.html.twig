@@ -1,0 +1,17 @@
+{% extends 'default/radenviro.html.twig' %}
+
+{% block stylesheets %}
+    {{  parent() }}
+{% endblock %}
+    
+{% block head_javascripts %}
+    {{  parent() }}
+{% endblock %}
+    
+{% block content %}
+    <div class="row">
+        <div id="main" class="col-sm-9">
+            {% block main %}{% endblock %}
+        </div>
+    </div>
+{% endblock %}
