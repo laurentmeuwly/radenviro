@@ -22,7 +22,7 @@ class LegendNuclide
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Legend")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Legend", inversedBy="nuclides")
      * @ORM\JoinColumn(nullable=false)
      */
     private $legend;

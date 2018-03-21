@@ -22,13 +22,13 @@ class LegendStation
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Legend")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Legend", inversedBy="stations")
      * @ORM\JoinColumn(nullable=false)
      */
     private $legend;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Station")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Station", inversedBy="legends")
      * @ORM\JoinColumn(nullable=false)
      */
     private $station;

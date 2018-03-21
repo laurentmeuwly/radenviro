@@ -28,7 +28,7 @@ class PredefinedNuclideListNuclide
     private $predefinedNuclideList;
     
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Nuclide")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Nuclide", inversedBy="predefinedNuclideLists")
      * @ORM\JoinColumn(nullable=false)
      */
     private $nuclide;

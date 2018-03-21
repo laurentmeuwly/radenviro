@@ -666,16 +666,16 @@ class DefaultController extends Controller
     	->setGlobalSearch(false)
     	->setSearch(false)
     	->setNotSortableFields(array(0,1,2,3,4))
-    	->setEntity("AppBundle:Result", "x")
+    	->setEntity("AppBundle:Result", "r")
     	->setOrder("m.referencedate", "desc")
     	->setFields(
 	    			array(
 	    					"date"          => 'm.referencedate',
-	    					"value"          => 'x.displayValue',	// TODO: don't use this extra field. Here just as workaround to allow display some additional character
-	    					"error"          => 'x.error',
-	    					"nuclide"          => 'n.code',
+	    					"value"          => 'r.displayValue',	// TODO: don't use this extra field. Here just as workaround to allow display some additional character
+	    					"error"          => 'r.error',
+	    					"unit"          => 'u.code',
 	    					"station"          => 'st.code',
-	    					"_identifier_"  => 'x.id'
+	    					"_identifier_"  => 'r.id'
 	    			)
     			)
     			->setRenderer(
@@ -693,7 +693,7 @@ class DefaultController extends Controller
     										);
     							}
     							
-    							if ($key == 2) // x.error
+    							if ($key == 2) // r.error
     							{
     								if($value) {
     								$data[$key] = $controller_instance
@@ -707,10 +707,11 @@ class DefaultController extends Controller
     						}
     			}
     			)
-    	->addJoin('x.measurement', 'm', \Doctrine\ORM\Query\Expr\Join::LEFT_JOIN)
+    	->addJoin('r.measurement', 'm', \Doctrine\ORM\Query\Expr\Join::LEFT_JOIN)
+    	->addJoin('m.resultUnit', 'u', \Doctrine\ORM\Query\Expr\Join::LEFT_JOIN)
     	->addJoin('m.sample', 's', \Doctrine\ORM\Query\Expr\Join::LEFT_JOIN)
     	->addJoin('s.station', 'st', \Doctrine\ORM\Query\Expr\Join::LEFT_JOIN)
-    	->addJoin('x.nuclide', 'n', \Doctrine\ORM\Query\Expr\Join::LEFT_JOIN)
+    	->addJoin('r.nuclide', 'n', \Doctrine\ORM\Query\Expr\Join::LEFT_JOIN)
     	
     	->setWhere(                                                     // set your dql where statement
     			 'st.id = :station AND n.id = :nuclide',

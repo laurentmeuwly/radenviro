@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use APY\DataGridBundle\Grid\Mapping as GRID;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
@@ -84,6 +85,7 @@ class Measurement
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Sample", inversedBy="measurements")
      * @ORM\JoinColumn(nullable=false)
+     * @GRID\Column(field="sample.id", title="sample.id")
      */
     private $sample;
 
