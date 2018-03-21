@@ -437,7 +437,7 @@ display: none;
 
 div.dataTables_wrapper div.dataTables_length {
 text-align: left;
-display: none;
+/*display: none;*/
 }
 
 table.dataTable thead .sorting {
