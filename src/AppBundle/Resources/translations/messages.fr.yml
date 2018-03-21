@@ -110,6 +110,8 @@ table:
   station: Station
   method: Méthode
   unit: Unité
+  error: Incertitude
+  value: Valeur
   
     
 search:
