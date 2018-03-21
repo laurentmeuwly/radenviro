@@ -660,6 +660,9 @@ class DefaultController extends Controller
     		$station=7;
     	}
     	
+    	// table heading
+    	$date = $this->get('translator')->trans('table.refdate');
+    	
     	$controller_instance = $this;
     	return $this->get('datatable')
     	->setDatatableId('dta-tst2')
@@ -670,11 +673,11 @@ class DefaultController extends Controller
     	->setOrder("m.referencedate", "desc")
     	->setFields(
 	    			array(
-	    					"date"          => 'm.referencedate',
-	    					"value"          => 'r.displayValue',	// TODO: don't use this extra field. Here just as workaround to allow display some additional character
-	    					"error"          => 'r.error',
-	    					"unit"          => 'u.code',
-	    					"station"          => 'st.code',
+	    					$this->get('translator')->trans('table.refdate')	=> 'm.referencedate',
+	    					$this->get('translator')->trans('table.value')		=> 'r.displayValue',	// TODO: don't use this extra field. Here just as workaround to allow display some additional character
+	    					$this->get('translator')->trans('table.error')		=> 'r.error',
+	    					$this->get('translator')->trans('table.unit')		=> 'u.code',
+	    					$this->get('translator')->trans('table.station')	=> 'st.code',
 	    					"_identifier_"  => 'r.id'
 	    			)
     			)
