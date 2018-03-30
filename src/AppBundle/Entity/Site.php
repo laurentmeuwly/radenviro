@@ -52,7 +52,7 @@ class Site
     private $active = true;
    
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\SiteType")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\SiteType", inversedBy="sites")
      * @ORM\JoinColumn(nullable=false)
      */
     private $siteType;

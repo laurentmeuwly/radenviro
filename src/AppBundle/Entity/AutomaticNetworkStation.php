@@ -61,7 +61,7 @@ class AutomaticNetworkStation
 
     
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\AutomaticNetwork")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\AutomaticNetwork", inversedBy="automaticNetworkStations")
      * 
      */
     private $automaticNetwork;
