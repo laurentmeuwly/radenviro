@@ -69,28 +69,39 @@
                     <label for="sitetype_{{ siteType.id }}"><span class="icon sitetype" id="icon_sitetype_{{ siteType.id }}" style="color:{{ siteType.color }};"></span>{{ siteType.name }}</label>
                     
                     {% for site in siteType.sites %}    
-                      <span class="location sites location_site_{{ site.id }}" id="location_site_{{ site.id }}" style="display:none;" data-icon="icon_sitetype_{{ siteType.id }}" data-parent="{{ siteType.id }}" data-id="{{ site.id }}" data-latitude="{{ site.latitude }}" data-nlatitude="{{ site.longitude }}" data-slatitude="{{ site.latitude }}" data-longitude="{{ site.longitude }}" data-elongitude="{{ site.elongitude }}" data-wlongitude="{{ site.wlongitude }}" data-zoom="{{ site.zoom }}" >
+                      <span class="location sites location_site_{{ site.id }}" id="location_site_{{ site.id }}" style="display:none;" data-icon="icon_sitetype_{{ siteType.id }}" data-parent="{{ siteType.id }}" data-id="{{ site.id }}" data-latitude="{{ site.latitude }}" data-nlatitude="{{ site.nlatitude }}" data-slatitude="{{ site.slatitude }}" data-longitude="{{ site.longitude }}" data-elongitude="{{ site.elongitude }}" data-wlongitude="{{ site.wlongitude }}" data-zoom="{{ site.zoom }}" >
                         <span class="title">{{ site.name }}</span>
                         <span class="text">{{ site.description|raw }}</span>
                         <span class="sublocations">
-                        {{ site.stations|length }}
-                          {%  for station in site.stations %}
-                            {% if station.hasCoordinates() %}
-                              <span class="sublocation sites" style="display:none;" data-icon="icon_{% if station.legends|length > 0 %}legend_{{ station.legends|first.legend.id }} {% else %}sitetype_#{{ siteType.id }} {%  endif %}" data-latitude="{{ station.latitude }}" data-longitude="{{ station.longitude }}" data-link="{{ url('measures',{'id': station.id}) }}">
+                          
+                          {% for station in site.stations %}
+                              {% if station.hasCoordinates() %}
+                          
+                              <span class="sublocation sites" style="display:none;" data-icon="{% if station.legends|length>0 %}{{ 'icon_legend_' ~station.legends|first.legend.id }}{% else %}{{ 'icon_sitetype_' ~siteType.id }}{% endif %}" data-latitude="{{ station.latitude }}" data-longitude="{{ station.longitude }}" data-link="{{ url('measures',{'id': station.id}) }}">
                                 <span class="title">{{ station.name }}</span>
                                 <span class="text">
-                                  {% if station.legends|length > 0 %}
-                                  <ul>
-                                  <li>&nbsp;</li>
-                                  </ul><br/>
-                                  {%  endif %}
+                                  {% if station.legends|length>0 %}
+                                    <ul>
+                                      {% set nuclide = station.legends|first.legend.nuclides|sortbyfield('position')|first.nuclide %}
+                                      {% set result = measureSrv.getLastResultByStationAndIsotope(
+                                            station.id,
+                                            nuclide.id
+                                        ) %}
+                                        {% if result|default is not empty %}
+                                      
+                                        <li style="font-size: 0.8em;">
+                                        {{ result.measurement.referencedate|date('d.m.Y') }} : {{ nuclide.name }},  {% if result.limited==1 %} &lt;{{ result.value }} {% else %} {{ result.value }} {% if result.error|default is not empty %} &plusmn;{{ result.error }} {% endif %} {% endif %} {{ result.measurement.resultUnit.code }}
+                                          
+                                        </li>
+                                      {% endif %}
+                                    </ul><br/>
+                                  {% endif %}
                                   {{ station.description|raw }}
                                 </span>
-                           
-                                
                               </span>
                             {%  endif %}
                           {%  endfor %}
+                            
                         </span>
                       </span>
                     {%  endfor %}
@@ -120,12 +131,7 @@
             	 <li>
                     <input type="radio" id="automatic_network_{{ automaticNetwork.id }}" value="" name="automatic_network" />
                     <label for="automatic_network_{{ automaticNetwork.id }}"><span class="icon network" id="icon_network_{{ automaticNetwork.id }}" style="color:#{{ automaticNetwork.color }};"></span>{{ automaticNetwork.name }}</label>
-                    {% for station in automaticNetwork.automaticNetworkStations %}    
-                      <span class="location automatic_network_stations location_automatic_network_station_{{ station.id }}" style="display:none;" data-icon="icon_network_{{ automaticNetwork.id }}" data-id="{{ station.id }}" data-latitude="{{ station.latitude }}" data-longitude="{{ station.longitude }}" data-link="{{ automaticNetwork.url }}" data-link-target="_blank">
-                        <span class="title">{{ station.name }}</span>
-                        <span class="text">{{ station.description|raw }}</span>
-                      </span>
-                    {%  endfor %}
+                    
                  </li>
             	{%  endfor %}
             </ul>
