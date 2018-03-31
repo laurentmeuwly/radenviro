@@ -127,10 +127,11 @@ class MeasurementDatatable extends AbstractDatatable
 
         $this->options->set(array(
         	'classes' => Style::BOOTSTRAP_3_STYLE,
+        	'length_menu' => array(10,25,50),
             'individual_filtering' => true,
             'individual_filtering_position' => 'head',
             'order_cells_top' => true,
-        	'order' => array(array(1, 'asc')),
+        	'order' => array(array(2, 'desc')),
         ));
 
         $this->features->set(array(
@@ -175,7 +176,7 @@ class MeasurementDatatable extends AbstractDatatable
         		'title' => $this->translator->trans('table.refdate'),
         		'data' => 'referencedate',
         		'searchable' => true,
-        		'orderable' => false,
+        		'orderable' => true,
         		'date_format' => 'YYYY-MM-DD',
         	))
         	
