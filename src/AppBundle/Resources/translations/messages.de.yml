@@ -110,6 +110,8 @@ table:
   station: Station
   method: Method
   unit: Einheit
+  error: Incertitude
+  value: Valeur
   
     
 search:
@@ -119,8 +121,50 @@ search:
     nuclide: Isotop
   choose_network: Wählen Sie ein Netzwerk...
   choose_displaylist: Wählen Sie eine Anzeigeliste...
-  choose_nuclide: Wählen Sie ein isotope...
+  choose_nuclide: Wählen Sie ein Isotop...
   
+
+label:
+  search: Afficher
+  analyzed environment: Analysierte Umgebung
+  analyzed environments: Analysierte Umgebungen
+  sites: Sites
+  automatic networks: Automatische Netzwerke
+  name: Nom
+  description: Description
+  sorting: Ordre d'affichage
+  hidden: Caché
+  latitude: Latitude
+  longitude: Longitude
+  zoom: Zoom
+  nuclide: Isotop
+  all: Alle
+  graph: Graphik
+  table: Tabelle
+  detection limit: Nachweisgrenze
+  download: Herunterladen
+  export:
+    title: Exportation des données
+    description: Exportation des données au format xlsx ou csv, veuillez choisir le filtre désiré.
+  isotope: Isotop
+  measured values: Messwerte
+  range:
+    start: De
+    end: à
+  station: Station
+  zooms:
+    1d: 1T
+    1m: 1M
+    1y: 1J
+    10y: 10J
+    2w: 2W
+    3m: 3M
+    5y: 5J
+    6m: 6M
+    7d: 7T
+    all: Alle
+  search results: Ergebnis Ihrer Suche
+        
 activerecord:
   models:
     networks: Netzwerke
@@ -145,6 +189,7 @@ activerecord:
         5y: 5J
         6m: 6M
         7d: 7T
+        all: Alles
         default: Standard-Zoom
     user:
       avatar: Avatar
