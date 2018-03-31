@@ -63,7 +63,6 @@ class Result
      * @ORM\JoinColumn(nullable=false)
      */
     private $nuclide;
-    
 
     /**
      * @var \DateTime

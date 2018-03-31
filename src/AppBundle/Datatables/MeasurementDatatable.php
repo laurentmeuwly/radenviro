@@ -33,11 +33,11 @@ class MeasurementDatatable extends AbstractDatatable
 		$session = new Session();
 		if($session->get('displayList')>0) {
 			$list = $session->get('displayList');
+			$em = $this->em->getRepository('AppBundle\Entity\PredefinedNuclideList');
+			return $em->findOneById($list);
 		} else {
-			$list = 1;
-		} 
-		$em = $this->em->getRepository('AppBundle\Entity\PredefinedNuclideList');
-		return $em->findOneById($list);
+			$list = null;
+		}
 	}
 	
 	public function getSingleNuclide()
@@ -59,29 +59,32 @@ class MeasurementDatatable extends AbstractDatatable
 			
 			$em = $this->em->getRepository('AppBundle\Entity\Result');
 			
-			$listNuclide = $this->getListNuclide()->getNuclides();
-			foreach($listNuclide as $nuclide) 
-			{
-				$result = $em->findOneBy(array('measurement' => $row['id'], 'nuclide' => $nuclide->getNuclide()->getId()) );
-				
-				if($result) {
+			$listNuclide = $this->getListNuclide();
+			if($listNuclide) {
+				$nuclides = $listNuclide->getNuclides();
+				foreach($nuclides as $nuclide)
+				{
+					$result = $em->findOneBy(array('measurement' => $row['id'], 'nuclide' => $nuclide->getNuclide()->getId()) );
 					
-					if($result->getLimited()==1) {
-						$value = '&lt;' . sprintf('%.1e', $result->getValue());
-					} else {
-						$value = sprintf('%.1e', $result->getValue());
-					
-						if($result->getError() != '') {
-							$value .= ' &plusmn;'.sprintf('%.1e', $result->getError());
-						}
+					if($result) {
 						
+						if($result->getLimited()==1) {
+							$value = '&lt;' . sprintf('%.1e', $result->getValue());
+						} else {
+							$value = sprintf('%.1e', $result->getValue());
+						
+							if($result->getError() != '') {
+								$value .= ' &plusmn;'.sprintf('%.1e', $result->getError());
+							}
+							
+						}
+						$row[$nuclide->getNuclide()->getCode()] = $value;
+						
+					} else {
+						$row[$nuclide->getNuclide()->getCode()] = '';
 					}
-					$row[$nuclide->getNuclide()->getCode()] = $value;
 					
-				} else {
-					$row[$nuclide->getNuclide()->getCode()] = '';
 				}
-				
 			}
 			
 			$singleNuclide = $this->getSingleNuclide();
@@ -231,16 +234,19 @@ class MeasurementDatatable extends AbstractDatatable
         
         ;
         	
-        	$listNuclide = $this->getListNuclide()->getNuclides();
-        	foreach($listNuclide as $nuclide)
-        	{
-        		$this->columnBuilder
-        		->add($nuclide->getNuclide()->getCode(), VirtualColumn::class, array(
-        				'title' => $nuclide->getNuclide()->getCode(),
-        				'type_of_field' => 'float',
-        				'searchable' => false,
-        				'orderable' => false,
-        		));
+        	$listNuclide = $this->getListNuclide();
+        	if($listNuclide) {
+        		$nuclides = $listNuclide->getNuclides();
+	        	foreach($nuclides as $nuclide)
+	        	{
+	        		$this->columnBuilder
+	        		->add($nuclide->getNuclide()->getCode(), VirtualColumn::class, array(
+	        				'title' => $nuclide->getNuclide()->getCode(),
+	        				'type_of_field' => 'float',
+	        				'searchable' => false,
+	        				'orderable' => false,
+	        		));
+	        	}
         	}
         	$singleNuclide = $this->getSingleNuclide();
         	if($singleNuclide) {

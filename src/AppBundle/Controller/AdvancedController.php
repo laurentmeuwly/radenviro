@@ -11,15 +11,12 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 use AppBundle\Datatables\MeasurementDatatable;
 
-//use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use APY\DataGridBundle\Grid\Source\Entity;
-//use APY\DataGridBundle\Grid\Source\Vector;
 use AppBundle\Entity\Sample;
 use AppBundle\Entity\Station;
 use AppBundle\Entity\Network;
 use AppBundle\Entity\Nuclide;
 use AppBundle\Form\AdvancedSearchType;
-use AppBundle\Entity\PredefinedNuclideList;
 
 
 class AdvancedController extends Controller
@@ -141,11 +138,6 @@ class AdvancedController extends Controller
 		$session = $request->getSession();
 		$isAjax = $request->isXmlHttpRequest();
 
-		
-		$network = new Network();
-		$predefinedNuclideList = new PredefinedNuclideList();
-		$nuclide = new Nuclide();
-		$netId = 0;
 		$form = $this->createForm(AdvancedSearchType::class);
 		$form->handleRequest($request);
 		
@@ -156,7 +148,6 @@ class AdvancedController extends Controller
 			$session->remove('nuclide');
 		}
 		
-		
 		if ($form->isSubmitted() && $form->isValid()) {
 			$data = $request->request->get('advanced_search');
 			$session->set('network', $data['network']);
@@ -166,6 +157,7 @@ class AdvancedController extends Controller
 		
 		$datatable = null;
 		if($session->get('network')>0) {
+			
 			/** @var DatatableInterface $datatable */
 			$datatable = $this->get('sg_datatables.factory')->create(MeasurementDatatable::class);
 			$datatable->buildDatatable();

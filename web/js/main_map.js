@@ -115,7 +115,7 @@ var mapDatatable = {
 	        if(this.isVisible() && legends.length > 0 && nuclide){
 	            this.lastCallKey = legends.join(',');
 	            var nparams = {
-	                'url': this.datatable.data('url') + '&legends[]=' + legends.join('&legends[]=') + '&nuclide=' + nuclide
+	                'url': this.datatable.data('url') + '?legends[]=' + legends.join('&legends[]=') + '&nuclide=' + nuclide
 	            } 
 	            //this.datatable.flexOptions(nparams);
 	            //this.datatable.flexReload();

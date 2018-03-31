@@ -97,8 +97,7 @@ class Nuclide
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\PredefinedNuclideListNuclide", mappedBy="nuclide", fetch="EXTRA_LAZY")
      */
     private $predefinedNuclideLists;
-
-
+    
 
     /**
      * @param $method
