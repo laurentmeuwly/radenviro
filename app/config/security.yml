@@ -60,8 +60,6 @@ security:
                 failure_path:   null
                 default_target_path: /fr/advanced
                 always_use_default_target_path: true
-                
-            logout:       true
             logout:
                 path:           fos_user_security_logout
                 target:         fos_user_security_login
