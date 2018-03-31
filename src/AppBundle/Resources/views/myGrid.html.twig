@@ -39,10 +39,12 @@
         {# Génération de l'input. #}
         {{ form_widget(form.nuclide, {'attr': {'class': 'form-control'}}) }}
       </div>
-
+	<div class="col-sm-3 pull-right">
+	{{ form_widget(form.search, {'attr': {'class': 'btn btn-primary'}}) }}
+	</div>
 </div>
 
-{{ form_widget(form.search, {'attr': {'class': 'btn btn-primary'}}) }}
+
 
 {{ form_rest(form) }}
 {{ form_end(form) }}
