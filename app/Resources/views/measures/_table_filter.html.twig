@@ -1,19 +1,39 @@
-<div class="header">
-  {{ 'label.analyzed environments'|trans }}: {{ station.legends|first.legend.name }}<br/>
-  {{ 'label.station'|trans }}:
-   <select class="stations">
+<div class="row">
+  <div class="col-sm-12">
+    <div class="well">
+    <form name="tab_search" method="post" class="form-horizontal">
+    
+    <div class="form-group">
+	<label class="col-sm-3 control-label" for="analyzed">{{ 'label.analyzed environments'|trans }}: </label>
+	<label class="col-sm-4">{{ station.legends|first.legend.name }}</label>
+	</div>
+	
+	<div class="form-group">
+	  <label class="col-sm-3 control-label" for="station">{{ 'label.station'|trans }}:</label>
+	  <div class="col-sm-4">
+        <select class="stations form-control">
     {% for legendstation in station.legends|first.legend.stations %}
       <option value="{{ legendstation.station.id }}" 
               data-url="{{ url('measures', {'id': legendstation.station.id}) }}#measures-table"
               {% if legendstation.station.id==station.id %} selected="selected" {% endif %} >{{  legendstation.station.name }} ({{  legendstation.station.code }})</option>
     {% endfor %}
   </select>
-  <br/>
-  {{ 'label.isotope'|trans }}:
   
-    <select class="nuclides nuclides-table">
+      </div>
+    </div>
+
+    <div class="form-group">
+    <div class="col-sm-3 control-label">{{ 'label.isotope'|trans }}:</div>
+	  <div class="col-sm-4">
+        <select class="nuclides nuclides-table form-control">
          {% for legendnuclide in station.legends|first.legend.nuclides %}
         <option value="{{ legendnuclide.nuclide.id }}">{{ legendnuclide.nuclide.name }}</option>
       {% endfor %}
     </select>
+      </div>
+      </div>
+	
+	</form>
+    </div>
+  </div>
 </div>
