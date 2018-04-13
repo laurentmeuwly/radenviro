@@ -111,7 +111,7 @@ class DefaultController extends Controller
     	
     	
     	$datatable=NULL;
-    	/*$datatable = $this->get('sg_datatables.factory')->create(MeasurementDatatable::class);
+    	$datatable = $this->get('sg_datatables.factory')->create(LastResultDatatable::class);
     	$datatable->buildDatatable();
     	
     	if ($isAjax) {
@@ -121,9 +121,8 @@ class DefaultController extends Controller
     		$datatableQueryBuilder->buildQuery();
     			
     		return $responseService->getResponse();
-    	}*/
+    	}
     	
-    	$this->datatableResult();
     	
     	return $this->render('main_map.html.twig', array(
     			'legends' => $legends,
@@ -513,7 +512,6 @@ class DefaultController extends Controller
     		$unit = $em->getRepository('AppBundle:ResultUnit')->findOneById(array('id'=> $result['result_unit_id']))->getCode();
     		$date = \DateTime::createFromFormat('Y-m-d H:i:s', $result['referenceDate']);
     		$data[] = [ $date->getTimeStamp()*1000, (float)$result['value'], $result['limited'], (float)$result['error'], $unit ];
-    		//$color[] = $result['limited']=='1' ? '#ff0000' : '#00ff00';
     		
     		if($result['limited']=='1') {
     			$dataNwg[] = [$date->getTimeStamp()*1000, (float)$result['value'], $result['limited'], (float)$result['error'], 
@@ -531,8 +529,6 @@ class DefaultController extends Controller
     		'data' => $data,
     			'data_nwg' => $dataNwg,
     			'data_val' => $dataVal,
-    			
-    		//'color' => $color,
     	];
     	 
     	 
@@ -608,7 +604,7 @@ class DefaultController extends Controller
     
     	// or use the DatatableFactory
     	/** @var DatatableInterface $datatable */
-    	$datatable = $this->get('sg_datatables.factory')->create(ResultDatatable::class);
+    	$datatable = $this->get('sg_datatables.factory')->create(LastResultDatatable::class);
     	$datatable->buildDatatable();
     
     	if ($isAjax) {
@@ -619,20 +615,9 @@ class DefaultController extends Controller
     		return $responseService->getResponse();
     	}
     
-    	return $this->render('AppBundle::mydt.html.twig', array(
+    	return $this->render('::_tab.html.twig', array(
     			'datatable' => $datatable,
     	));
-    }
-    
-    /**
-     * Lists all entities.
-     * @Route("/listdt2", name="datatable_listdt2")
-     * @return Response
-     */
-    public function listdt2Action()
-    {
-    	$this->datatable2();                                                         // call the datatable config initializer
-    	return $this->render('::tab_small.html.twig');                 // replace "XXXMyBundle:Module:index.html.twig" by yours
     }
     
     /**
