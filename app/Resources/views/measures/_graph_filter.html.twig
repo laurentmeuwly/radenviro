@@ -1,16 +1,21 @@
 <div class="row">
   <div class="col-sm-12">
-    <div class="well">
+   <div class="col-sm-12 well">
+        
+    <div class="col-sm-3">
+		<span class="col-sm-12"><b>{{ 'label.analyzed environments'|trans }} :</b></span>
+		<br/><br/>
+		<span class="col-sm-12"><b>{{ station.legends|first.legend.name }}</b></span>	
+	</div>
+    
+    <div class="col-sm-9">
     <form name="tab_search" method="post" class="form-horizontal">
     
-    <div class="form-group">
-	<label class="col-sm-3 control-label" for="analyzed">{{ 'label.analyzed environments'|trans }}: </label>
-	<label class="col-sm-4">{{ station.legends|first.legend.name }}</label>
-	</div>
+   
 	
 	<div class="form-group">
 	  <label class="col-sm-3 control-label" for="station">{{ 'label.station'|trans }}:</label>
-	  <div class="col-sm-4">
+	  <div class="col-sm-6">
         <select class="stations form-control">
     {% for legendstation in station.legends|first.legend.stations %}
       <option value="{{ legendstation.station.id }}" 
@@ -24,7 +29,7 @@
 
     <div class="form-group">
     <div class="col-sm-3 control-label">{{ 'label.isotope'|trans }}:</div>
-	  <div class="col-sm-4">
+	  <div class="col-sm-6">
         <select class="nuclides nuclides-graph form-control">
          {% for legendnuclide in station.legends|first.legend.nuclides %}
         <option value="{{ legendnuclide.nuclide.id }}">{{ legendnuclide.nuclide.name }}</option>
@@ -36,7 +41,8 @@
     
    
     </form>
+	</div>
   </div>
-</div>
+  </div>
 </div>
 
