@@ -6,25 +6,12 @@
         </select>
         
       </div>
-      <div class="content">
-{{ datatable_html({
-            'id' : 'tablelastresult'
-        })
-}}
+      <div class="content">        
+        {{ sg_datatables_render(datatable) }}
       </div>
     </div>
 
-{% block javascripts %}
-{{ 
-    datatable_js({
-        'id' : 'tablelastresult',
-        'js' : {
-            'dom': '<"clearfix"lf>rtip',
-            
-        }
-    })
-}}
-{% endblock javascripts %}
+
     
 
 
