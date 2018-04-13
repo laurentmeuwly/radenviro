@@ -5,20 +5,14 @@ namespace AppBundle\Datatables;
 use Sg\DatatablesBundle\Datatable\AbstractDatatable;
 use Sg\DatatablesBundle\Datatable\Style;
 use Sg\DatatablesBundle\Datatable\Column\Column;
-use Sg\DatatablesBundle\Datatable\Column\BooleanColumn;
 use Sg\DatatablesBundle\Datatable\Column\ActionColumn;
 use Sg\DatatablesBundle\Datatable\Column\MultiselectColumn;
 use Sg\DatatablesBundle\Datatable\Column\VirtualColumn;
 use Sg\DatatablesBundle\Datatable\Column\DateTimeColumn;
-use Sg\DatatablesBundle\Datatable\Column\ImageColumn;
 use Sg\DatatablesBundle\Datatable\Filter\TextFilter;
 use Sg\DatatablesBundle\Datatable\Filter\NumberFilter;
 use Sg\DatatablesBundle\Datatable\Filter\SelectFilter;
 use Sg\DatatablesBundle\Datatable\Filter\DateRangeFilter;
-use Sg\DatatablesBundle\Datatable\Editable\CombodateEditable;
-use Sg\DatatablesBundle\Datatable\Editable\SelectEditable;
-use Sg\DatatablesBundle\Datatable\Editable\TextareaEditable;
-use Sg\DatatablesBundle\Datatable\Editable\TextEditable;
 use Symfony\Component\HttpFoundation\Session\Session;
 
 /**
@@ -121,8 +115,7 @@ class MeasurementDatatable extends AbstractDatatable
     public function buildDatatable(array $options = array())
     {
         $this->language->set(array(
-            //'cdn_language_by_locale' => true
-            'language' => 'fr'
+            'cdn_language_by_locale' => true
         ));
 
         $this->ajax->set(array(
@@ -135,6 +128,14 @@ class MeasurementDatatable extends AbstractDatatable
             'individual_filtering_position' => 'head',
             'order_cells_top' => true,
         	'order' => array(array(2, 'desc')),
+        	'dom' => 'lBfrtip',
+        ));
+        
+        $this->extensions->set(array(
+        	//'buttons' => true,
+        	'buttons' => array(
+            	'show_buttons' => array('print', 'excel', 'csv'),    // built-in buttons
+            ),
         ));
 
         $this->features->set(array(

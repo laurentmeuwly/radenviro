@@ -125,13 +125,13 @@ search:
   
 
 label:
-  search: Afficher
+  search: Anzeigen
   analyzed environment: Analysierte Umgebung
   analyzed environments: Analysierte Umgebungen
   sites: Sites
   automatic networks: Automatische Netzwerke
-  name: Nom
-  description: Description
+  name: Name
+  description: Beschreibung
   sorting: Ordre d'affichage
   hidden: Caché
   latitude: Latitude
