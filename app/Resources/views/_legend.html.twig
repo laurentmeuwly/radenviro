@@ -131,7 +131,12 @@
             	 <li>
                     <input type="radio" id="automatic_network_{{ automaticNetwork.id }}" value="" name="automatic_network" />
                     <label for="automatic_network_{{ automaticNetwork.id }}"><span class="icon network" id="icon_network_{{ automaticNetwork.id }}" style="color:#{{ automaticNetwork.color }};"></span>{{ automaticNetwork.name }}</label>
-                    
+                    {% for station in automaticNetwork.automaticNetworkStations %}    
+                      <span class="location automatic_network_stations location_automatic_network_station_{{ station.id }}" style="display:none;" data-icon="icon_network_{{ automaticNetwork.id }}" data-id="{{ station.id }}" data-latitude="{{ station.latitude }}" data-longitude="{{ station.longitude }}" data-link="{{ automaticNetwork.url }}" data-link-target="_blank">
+                        <span class="title">{{ station.name }}</span>
+                        <span class="text">{{ station.description|raw }}</span>
+                      </span>
+                    {%  endfor %}
                  </li>
             	{%  endfor %}
             </ul>
