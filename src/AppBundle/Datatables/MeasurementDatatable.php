@@ -134,7 +134,33 @@ class MeasurementDatatable extends AbstractDatatable
         $this->extensions->set(array(
         	//'buttons' => true,
         	'buttons' => array(
-            	'show_buttons' => array('print', 'excel', 'csv'),    // built-in buttons
+            	/*'show_buttons' => array('excel', 'csv'),*/    // built-in buttons
+            	'create_buttons' => array(
+            		array(
+            			'extend' => 'print',
+            			'button_options' => array(
+            				'exportOptions' => array(
+            					'columns' => ':visible:not(.not-export-col)',
+            				),	
+            			),
+            		),
+            		array(
+            			'extend' => 'excel',
+            			'button_options' => array(
+            				'exportOptions' => array(
+            					'columns' => ':visible:not(.not-export-col)',
+            				),
+            			),
+            		),
+            		array(
+            			'extend' => 'csv',
+            			'button_options' => array(
+            				'exportOptions' => array(
+            					'columns' => ':visible:not(.not-export-col)',
+            				),
+            			),
+            		),
+            	),
             ),
         ));
 
@@ -263,6 +289,7 @@ class MeasurementDatatable extends AbstractDatatable
         	$this->columnBuilder
         	->add(null, ActionColumn::class, array(
         			'title' => '',
+        			'class_name' => 'not-export-col',
         			'start_html' => '<div class="start_actions">',
         			'end_html' => '</div>',
         			'actions' => array(
