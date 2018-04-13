@@ -148,6 +148,7 @@ label:
     description: Exportation des données au format xlsx ou csv, veuillez choisir le filtre désiré.
   isotope: Isotop
   measured values: Messwerte
+  natural_fluctuation_margin: Natürlicher Schwankungsbereich
   range:
     start: De
     end: à

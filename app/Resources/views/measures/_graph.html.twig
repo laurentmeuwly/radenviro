@@ -116,7 +116,7 @@ $('select.nuclides-graph').change(function () {
                 from: data['limit_low'], // Start of the plot band
                 to: data['limit_high'], // End of the plot band
                 label: {
-                    text: 'domaine de variation',
+                    text: '{{ 'label.natural_fluctuation_margin'|trans }}',
                     style: {
                         color: '#333',
                         fontWeight: 'normal'
@@ -146,8 +146,12 @@ $('select.nuclides-graph').change(function () {
 
                     } else {
                     	s += '<span style="color:#008000">\u25CF</span> ' 
-                    		+ this.y.toExponential(2) 
-                    		+ ' \u00B1' + data['data'][index][3].toExponential(2);
+                    		+ this.y.toExponential(2);
+
+                		if(data['data'][index][3]) {
+                    		s += ' \u00B1' + data['data'][index][3].toExponential(2);
+                    	}
+                    		
                     	s += ' ' + data['data_val'][index][4];
 
                     }
@@ -160,12 +164,6 @@ $('select.nuclides-graph').change(function () {
             shared: true
             },
 
-        /*plotOptions: {
-                series: {
-                    colorByPoint: true
-                }
-            },*/
-
         navigator: {
             	series: {
                     colorByPoint: false
@@ -173,7 +171,6 @@ $('select.nuclides-graph').change(function () {
                 }
             },
 
-        
         series: [
         	{
                 name: 'All',
