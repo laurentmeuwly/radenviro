@@ -13,8 +13,9 @@ use Symfony\Component\Validator\Constraints\DateTime;
 
 use APY\DataGridBundle\Grid\Source\Entity;
 
-use AppBundle\Datatables\LastResultDatatable;
 use AppBundle\Datatables\MeasurementDatatable;
+use AppBundle\Datatables\LastResultDatatable;
+
 use AppBundle\Datatables\ResultDatatable;
 
 
@@ -25,7 +26,7 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {	
-    	return $this->render('default/radenviro.html.twig', [
+    	return $this->render('radenviro.html.twig', [
     			'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR,
     	]);
     }
@@ -339,28 +340,8 @@ class DefaultController extends Controller
     			$data[$i]['label'] = $result->getNuclide()->getName();
     			$i++;
     		}
-    	
-    	/*$data = [
-    			'0' => [
-    					'value' => 54,
-    					'label' => sprintf('%s', sizeof($legends)),
-    			],
-    			'1' => [
-    					'value' => 26,
-    					'label' => 'Tritium',
-    			],
-    			'2' => [
-    					'value' => 17,
-    					'label' => 'Cobalt 60',
-    			],
-    			'3' => [
-    					'value' => $id,
-    					'label' => 'juste un test',
-    			],
-    			
-    		];*/
     	}
-    	if($type=='table') {
+    	if($type=='tab') {
     		$data = [
     				'0' => [
     						'value' => 12,
@@ -423,8 +404,16 @@ class DefaultController extends Controller
     /**
      * @Route("/last", name="last")
      */
-    public function lastMeasureAction()
+    public function lastMeasureAction(Request $request)
     {
+    	$session = $request->getSession();
+    	$isAjax = $request->isXmlHttpRequest();
+    	
+    	// just for testing purpose
+    	$session->set('nuclide', 21 );
+    	$session->set('station', 7);  	
+    	
+    	
     	// attention 2 boucles imbriquées dans radenviro PROD
     	/*
     	  @last_results_by_nuclide = nil
@@ -449,18 +438,30 @@ class DefaultController extends Controller
     return []
   end
     	 */
-    	
-          // corriger la requête
           
-          $lastMeasure = $this->container->get('app.lastresult');
-          $result = $lastMeasure->getLastResultByStationAndIsotope(7,21);
-          if($result=='Hello') {
-          	throw new \Exception('Not a valid number!');
+          
+          $datatable = null;
+          if($session->get('nuclide')>0) {
+          		
+          	/** @var DatatableInterface $datatable */
+          	$datatable = $this->get('sg_datatables.factory')->create(LastResultDatatable::class);
+          	$datatable->buildDatatable();
+          		
+          	if ($isAjax) {
+          		$responseService = $this->get('sg_datatables.response');
+          		$responseService->setDatatable($datatable);
+          		$datatableQueryBuilder = $responseService->getDatatableQueryBuilder();
+          		$datatableQueryBuilder->buildQuery();
+          				
+          		$qb = $datatableQueryBuilder->getQb();
+          		$qb->andWhere('nuclide = :nuclide');
+          		$qb->setParameter('nuclide', $session->get('nuclide'));
+          			
+          		return $responseService->getResponse();
+          	}
           }
-          echo $result->getMeasurement()->getReferenceDate()->format('Y-m-d');
-          var_dump($result);
-          die();
-          return $this->render('AppBundle:Measures:_last_measure.html.twig', array('result'=>$lastMeasure));
+          
+          return $this->render('AppBundle:Measures:_last_measure.html.twig', array('datatable' => $datatable,));
     }
     
     
@@ -500,6 +501,7 @@ class DefaultController extends Controller
     {
     	$dataNwg = array();
     	$dataVal = array();
+    	$unit = '';
     	
     	$em = $this->getDoctrine()->getManager();
     	$station = $em->getRepository('AppBundle:Station')->findOneById(array('id'=> $request->get('station')));
@@ -508,29 +510,29 @@ class DefaultController extends Controller
     	
     	foreach($results as $result)
     	{
+    		$unit = $em->getRepository('AppBundle:ResultUnit')->findOneById(array('id'=> $result['result_unit_id']))->getCode();
     		$date = \DateTime::createFromFormat('Y-m-d H:i:s', $result['referenceDate']);
-    		$data[] = [$date->getTimeStamp()*1000, (float)$result['value'], $result['limited'], (float)$result['error'], 
-    				$em->getRepository('AppBundle:ResultUnit')->findOneById(array('id'=> $result['result_unit_id']))->getCode() ];
-    		$color[] = $result['limited']=='1' ? '#ff0000' : '#00ff00';
+    		$data[] = [ $date->getTimeStamp()*1000, (float)$result['value'], $result['limited'], (float)$result['error'], $unit ];
+    		//$color[] = $result['limited']=='1' ? '#ff0000' : '#00ff00';
     		
     		if($result['limited']=='1') {
     			$dataNwg[] = [$date->getTimeStamp()*1000, (float)$result['value'], $result['limited'], (float)$result['error'], 
-    				$em->getRepository('AppBundle:ResultUnit')->findOneById(array('id'=> $result['result_unit_id']))->getCode() ];
+    				$unit ];
     		} else {
     			$dataVal[] = [$date->getTimeStamp()*1000, (float)$result['value'], $result['limited'], (float)$result['error'],
-    					$em->getRepository('AppBundle:ResultUnit')->findOneById(array('id'=> $result['result_unit_id']))->getCode() ];
+    					$unit ];
     		}
     	}
     	    	
     	$serie = [
-    		'unit' => 'Bq/m3', //$data[0][4],
-    		'limit_low' => 0.00000010,
-    		'limit_high'=> 0.00000100,
+    		'unit' => $unit,
+    		'limit_low' => 0.00000025,
+    		'limit_high'=> 0.00000060,
     		'data' => $data,
     			'data_nwg' => $dataNwg,
     			'data_val' => $dataVal,
     			
-    		'color' => $color,
+    		//'color' => $color,
     	];
     	 
     	 
