@@ -119,6 +119,10 @@ class DefaultController extends Controller
     		$responseService->setDatatable($datatable);
     		$datatableQueryBuilder = $responseService->getDatatableQueryBuilder();
     		$datatableQueryBuilder->buildQuery();
+    		
+    		$qb = $datatableQueryBuilder->getQb();
+    		$qb->andWhere($qb->expr()->gte('measurement.referencedate', ':date_min'));
+    		$qb->setParameter('date_min', '2018-01-01');
     			
     		return $responseService->getResponse();
     	}
@@ -324,7 +328,7 @@ class DefaultController extends Controller
     	$data = array();
     	
     	$id = $request->attributes->get('id');
-    	
+    	    	
     	$legends = $request->query->get('legends');
     	
     	// Getting doctrine manager

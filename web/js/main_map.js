@@ -47,7 +47,8 @@ var mapDatatable = {
 	        var _self = this;
 	                
 	        this.handler = $('#handler_last_result_per_station'); 
-	        this.datatable = $('#datatable_last_result_per_station');
+	        //this.datatable = $('#datatable_last_result_per_station'); 
+	        this.datatable = $('#sg-datatables-lastresult_datatable');
 	        this.natures = $('#nature_last_result_per_station');
 	        this.inputs = $('.section.samples li input[type="checkbox"]').not('.selectall');
 	        this.nuclides = $('#nuclides_last_result_per_station');
