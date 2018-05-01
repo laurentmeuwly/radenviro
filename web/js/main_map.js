@@ -116,7 +116,8 @@ var mapDatatable = {
 	        if(this.isVisible() && legends.length > 0 && nuclide){
 	            this.lastCallKey = legends.join(',');
 	            var nparams = {
-	                'url': this.datatable.data('url') + '?legends[]=' + legends.join('&legends[]=') + '&nuclide=' + nuclide
+	                //'url': this.datatable.data('url') + '?legends[]=' + legends.join('&legends[]=') + '&nuclide=' + nuclide
+	                'url': 'http://localhost:8888/fr/map' + '?legends[]=' + legends.join('&legends[]=') + '&nuclide=' + nuclide
 	            } 
 	            //this.datatable.flexOptions(nparams);
 	            //this.datatable.flexReload();
@@ -548,7 +549,7 @@ var mapZoomArea = function(reference, params){
     /**
      * Static Google Map
      */
-    this.staticmap = 'http://www.radenviro.ch/staticmap/api/staticmap?center='+_ref.data('latitude')+','+_ref.data('longitude')+'&zoom='+_ref.data('zoom')+'&size=430x290&maptype=roadmap&sensor=false&key=AIzaSyDK6w895niOatsoaOFyiihNCuRnvGiA6gA'
+    this.staticmap = 'http://old.radenviro.ch/staticmap/api/staticmap?center='+_ref.data('latitude')+','+_ref.data('longitude')+'&zoom='+_ref.data('zoom')+'&size=430x290&maptype=roadmap&sensor=false&key=AIzaSyDK6w895niOatsoaOFyiihNCuRnvGiA6gA'
     
     /**
      * DOM object that contains map
@@ -969,7 +970,7 @@ var mapSites = {
 	                        latitudeRatio: _self.params.height / (location.data('nlatitude') - location.data('slatitude')),
 	                        longitudeRatio: _self.params.width / (location.data('elongitude') - location.data('wlongitude'))
 	                    };
-	                    var googleStaticMap = 'http://www.radenviro.ch/staticmap/api/staticmap?center=' + location.data('latitude') + ',' + location.data('longitude') + '&zoom=' + location.data('zoom') + '&size=430x290&maptype=roadmap&sensor=false&key=AIzaSyDK6w895niOatsoaOFyiihNCuRnvGiA6gA';
+	                    var googleStaticMap = 'http://old.radenviro.ch/staticmap/api/staticmap?center=' + location.data('latitude') + ',' + location.data('longitude') + '&zoom=' + location.data('zoom') + '&size=430x290&maptype=roadmap&sensor=false&key=AIzaSyDK6w895niOatsoaOFyiihNCuRnvGiA6gA';
 	                    mapHandler.zoomOut();
 	                    mapHandler.zoomIn(googleStaticMap, function() {
 	                        var sublocations = location.data('sublocations');
