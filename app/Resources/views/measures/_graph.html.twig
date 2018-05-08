@@ -111,19 +111,19 @@ $('select.nuclides-graph').change(function () {
                 text: data['unit']
             },
             opposite: false,
-            /*plotBands: [{
+            plotBands: [{
                 color: '#ddd', // Color value
                 from: data['limit_low'], // Start of the plot band
                 to: data['limit_high'], // End of the plot band
                 label: {
-                    text: '{{ 'label.natural_fluctuation_margin'|trans }}',
+                    /*text: '{{ 'label.natural_fluctuation_margin'|trans }}',*/
                     style: {
                         color: '#333',
                         fontWeight: 'normal'
                     },
             		align: 'center',
                 }
-              }],*/
+              }],
             labels: {
             	formatter: function() {
             	    return this.value.toExponential(2); // 2 digits of precision
@@ -148,8 +148,8 @@ $('select.nuclides-graph').change(function () {
                     	s += '<span style="color:#008000">\u25CF</span> ' 
                     		+ this.y.toExponential(2);
 
-                		if(data['data'][index][3]) {
-                    		s += ' \u00B1' + data['data'][index][3].toExponential(2);
+                		if(data['data_val'][index][3]) {
+                    		s += ' \u00B1' + data['data_val'][index][3].toExponential(2);
                     	}
                     		
                     	s += ' ' + data['data_val'][index][4];
