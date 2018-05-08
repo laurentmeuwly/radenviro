@@ -659,13 +659,15 @@ class DefaultController extends Controller
     	->setDatatableId('dta-tst2')
     	->setGlobalSearch(false)
     	->setSearch(false)
-    	->setNotSortableFields(array(0,1,2,3,4))
+    	->setNotSortableFields(array(0,1,2,3,4,5))
+    	->setHiddenFields(array(1))
     	->setEntity("AppBundle:Result", "r")
     	->setOrder("m.referencedate", "desc")
     	->setFields(
 	    			array(
 	    					$this->get('translator')->trans('table.refdate')	=> 'm.referencedate',
-	    					$this->get('translator')->trans('table.value')		=> 'r.displayValue',	// TODO: don't use this extra field. Here just as workaround to allow display some additional character
+	    					$this->get('translator')->trans('table.limited')	=> 'r.limited',
+	    					$this->get('translator')->trans('table.value')		=> 'r.value',	
 	    					$this->get('translator')->trans('table.error')		=> 'r.error',
 	    					$this->get('translator')->trans('table.unit')		=> 'u.code',
 	    					$this->get('translator')->trans('table.station')	=> 'st.code',
@@ -675,6 +677,9 @@ class DefaultController extends Controller
     			->setRenderer(
     					function(&$data) use ($controller_instance)
     					{
+    						$nwg = false;
+    						$renderer = 'AppBundle:Renderers:_scinumber.html.twig';
+    			
     						foreach ($data as $key => $value)
     						{
     							if ($key == 0) // m.referencedate
@@ -686,16 +691,38 @@ class DefaultController extends Controller
     										array('data' => $value)
     										);
     							}
-    							
-    							if ($key == 2) // r.error
+    								
+    							if ($key == 1) // r.limited
     							{
     								if($value) {
-    								$data[$key] = $controller_instance
-    								->get('templating')
-    								->render(
-    										'AppBundle:Renderers:_scinumber.html.twig',
-    										array('data' => $value)
-    										);
+    									$renderer = 'AppBundle:Renderers:_nwg.html.twig';
+    								} else {
+    									$renderer = 'AppBundle:Renderers:_scinumber.html.twig';
+    								}
+    							}
+    								
+    							if ($key == 2) // r.value
+    							{
+    			
+    								if($value) {
+    									$data[$key] = $controller_instance
+    									->get('templating')
+    									->render(
+    											$renderer,
+    											array('data' => $value)
+    											);
+    								}
+    							}
+    								
+    							if ($key == 3) // r.error
+    							{
+    								if($value) {
+    									$data[$key] = $controller_instance
+    									->get('templating')
+    									->render(
+    											'AppBundle:Renderers:_scinumber.html.twig',
+    											array('data' => $value)
+    											);
     								}
     							}
     						}

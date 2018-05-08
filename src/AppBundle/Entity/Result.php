@@ -44,13 +44,6 @@ class Result
     private $error;
     
     /**
-     * @var string
-     *
-     * @ORM\Column(name="displayValue", type="string", length=20, nullable=true)
-     */
-    private $displayValue;
-
-    /**
      * @var Measurement
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Measurement", inversedBy="results")
@@ -154,30 +147,6 @@ class Result
         return $this;
     }
 
-    /**
-     * Get displayValue
-     *
-     * @return string
-     */
-    public function getDisplayValue()
-    {
-        return $this->displayValue;
-    }
-    
-    /**
-     * Set displayValue
-     *
-     * @param string $displayValue
-     *
-     * @return Result
-     */
-    public function setgetDisplayValue($displayValue)
-    {
-    	$this->displayValue = $displayValue;
-    
-    	return $this;
-    }
-    
     /**
      * Get error
      *
