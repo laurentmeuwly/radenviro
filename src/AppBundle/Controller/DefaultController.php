@@ -158,6 +158,22 @@ class DefaultController extends Controller
     }
     
     /**
+     * @Route("/maduk", name="maduk")
+     */
+    public function madukAction(Request $request)
+    {
+    	// Getting doctrine manager
+    	$em = $this->getDoctrine()->getManager();
+    	 
+    	// retrieve the page to display
+    	$page = $em->getRepository('AppBundle:Page')->findOneBy(array('code' => 'maduk'));
+    
+    	return $this->render('iframe.html.twig', array(
+    			'page' => $page,
+    	));
+    }
+    
+    /**
      * @Route("/radair", name="radair")
      */
     public function radairAction(Request $request)
