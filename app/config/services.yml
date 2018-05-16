@@ -50,3 +50,9 @@ services:
         class: Snilius\Twig\SortByFieldExtension
         tags:
             - { name: twig.extension }
+            
+    app.registration_completed:
+        class: AppBundle\EventListener\RegistrationCompletedListener
+        arguments: ['@mailer']
+        tags:
+            - { name: kernel.event_subscriber }
