@@ -117,11 +117,11 @@ table:
 search:
   field:
     network: Netzwerk
-    displaylist: Anzeigeliste
-    nuclide: Isotop
+    displaylist: Isotopenauswahl
+    nuclide: weiteres Isotop
   choose_network: Wählen Sie ein Netzwerk...
   choose_displaylist: Wählen Sie eine Anzeigeliste...
-  choose_nuclide: Wählen Sie ein Isotop...
+  choose_nuclide: zusätzliches Isotop (optional)
   
 
 label:
@@ -354,7 +354,7 @@ main:
 menus:
   automatic_networks: Automatische Netzwerke
   informations: Informationen
-  laboratories: Für Profi
+  laboratories: Espace pro
   map: Zugang zu den Daten 
   radair: RADAIR
   radon: RADON
