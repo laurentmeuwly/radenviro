@@ -58,7 +58,7 @@ security:
                 csrf_token_generator: security.csrf.token_manager
                 check_path:     fos_user_security_check
                 failure_path:   null
-                default_target_path: /fr/advanced
+                default_target_path: advanced
                 always_use_default_target_path: true
             logout:
                 path:           fos_user_security_logout
