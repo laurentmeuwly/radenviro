@@ -165,6 +165,13 @@ label:
     7d: 7T
     all: Alle
   search results: Ergebnis Ihrer Suche
+  
+  
+register:
+  request:
+    lastname: Name
+    firstname: Vorname
+    laboratory: Labor / Institution
         
 activerecord:
   models:

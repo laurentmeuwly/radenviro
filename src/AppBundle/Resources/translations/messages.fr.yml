@@ -167,7 +167,33 @@ label:
     all: Tout
     title: Zooms
   search results: Résultat de votre recherche
-  
+
+register:
+  request:
+    lastname: Nom
+    firstname: Prénom
+    laboratory: Laboratoire / institution
+  flash:
+    user_created: L'utilisateur a été créé avec succès.
+  waiting_validation: Un email sera envoyé lorsque le compte aura été activé par l’équipe Radenviro.
+
+registration:
+    check_email: 'Un email sera envoyé prochainement lorsque le compte aura été activé par l’équipe Radenviro.'
+    confirmed: 'Félicitations %username%, votre compte est maintenant activé.'
+    back: 'Retour à la page d''origine.'
+    submit: 'Créer un compte'
+    flash:
+        user_created: 'Votre compte utilisateur a été créé avec succès'
+    email:
+        subject: 'Radenviro: Bienvenue %username% !'
+        message: |
+            Bonjour %username% !
+
+            Votre compte utilisateur a été créé avec succès.
+            Un email sera envoyé lorsque le compte aura été activé par l’équipe Radenviro.
+
+            Cordialement,
+            L'équipe Radenviro
 
 activerecord:
   models:

@@ -3,11 +3,8 @@
 {% block fos_user_content %}
 
 
-
 <div class="col-sm-6">
 
-    <form class="fos_user_registration_register" action="{{ path('fos_user_registration_register') }}" method="POST">{{ form_widget(form) }}
-        <div><input class="btn btn-primary" type="submit" value="{{ 'registration.submit'|trans({}, 'FOSUserBundle') }}" /></div>
-    </form>
+   {% include "@FOSUser/Registration/register_content.html.twig" %}
 </div>
 {% endblock fos_user_content %}
