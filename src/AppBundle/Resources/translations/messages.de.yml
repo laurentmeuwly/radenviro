@@ -172,6 +172,9 @@ register:
     lastname: Name
     firstname: Vorname
     laboratory: Labor / Institution
+  flash:
+    user_created: Der Benutzer wurde erfolgreich erstellt.
+  waiting_validation: Ein E-Mail wird gesendet, wenn das Konto vom Radenviro-Team aktiviert wurde.
         
 activerecord:
   models:

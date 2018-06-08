@@ -37,12 +37,12 @@ class RegistrationCompletedListener implements EventSubscriberInterface
 
             $message = \Swift_Message::newInstance()
                 ->setSubject('Radenviro: ' . $user->getFirstname() . ' ' . $user->getLastname(). " vient de s'enregistrer")
-                //->setFrom('info@radenviro.ch')
-                ->setFrom('laurent+register@lmeuwly.ch')
-                //->setTo('info@radenviro.ch')
-            	->setTo('laurent+register@lmeuwly.ch')
+                ->setFrom('info@radenviro.ch')
+                //->setFrom('laurent+register@lmeuwly.ch')
+                ->setTo('info@radenviro.ch')
+            	//->setTo('laurent+register@lmeuwly.ch')
             	->setBody($user->getFirstname() . ' ' . $user->getLastname(). " vient de s'enregistrer sur www.radenviro.ch.\n
-                		N'oubliez pas d'aller activer son compte dans l'espace admin.")
+N'oubliez pas d'aller activer son compte dans l'espace admin.")
             ;
             $this->mailer->send($message);
     }
