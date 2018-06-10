@@ -13,6 +13,11 @@ default:
     resource: '@AppBundle/Controller/DefaultController.php'
     type: annotation
     prefix: /
+    
+radenviro:
+    resource: '@AppBundle/Controller/RadenviroController.php'
+    type: annotation
+    prefix: /
 
 advanced:
     resource: '@AppBundle/Controller/AdvancedController.php'

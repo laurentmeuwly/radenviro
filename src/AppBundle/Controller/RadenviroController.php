@@ -4,29 +4,45 @@ namespace AppBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\JsonResponse;
-
-use AppBundle\Datatables\SampleDatatable;
-
-//use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use APY\DataGridBundle\Grid\Source\Entity;
-use APY\DataGridBundle\Grid\Source\Vector;
-use AppBundle\Entity\Sample;
-use AppBundle\Entity\Station;
-use AppBundle\Entity\Network;
-use AppBundle\Form\NetworkSearchType;
-use AppBundle\Form\AdvancedSearchType;
 
 
-class AdvancedController extends Controller
-{    
+class RadenviroController extends Controller
+{
 	
-	public function form1Action(Request $request)
+	/**
+	 * @Route("/", name="radenviro")
+	 */
+	public function indexAction($_locale=NULL, Request $request)
 	{
+		if($_locale==NULL) {
+			$currentLocale = strtolower(str_split($_SERVER['HTTP_ACCEPT_LANGUAGE'], 2)[0]);
+		} else {
+			$currentLocale = $_locale;
+		}
+	
+		return $this->redirectToRoute('static', ['page'=>'news', '_locale' => $currentLocale]);
+	}
+	
+	/**
+	 * @Route("/s/{page}", name="static")
+	 * 
+	 */
+	public function wpPageAction($page, Request $request)
+	{
+		// Getting doctrine manager
+		$em = $this->getDoctrine()->getManager();
+		 
+		// retrieve the page to display
+		$wpURL = $em->getRepository('AppBundle:Page')->findOneBy(array('code' => $page));
+	
+		if($wpURL==NULL) {
+			return $this->redirectToRoute('homepage');
+		}
 		
+		return $this->render('iframe.html.twig', array(
+				'page' => $wpURL,
+		));
 	}
 	
 }

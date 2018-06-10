@@ -2,21 +2,18 @@
 _front:
     resource: routing_front.yml
     prefix:   /{_locale}
-    #requirements:
-    #    _locale: de|fr|it|en
+    requirements:
+        _locale: de|fr|it|en
 
 _admin:
     resource: routing_admin.yml
     prefix:   /admin
     
- 
-    
+
 home:
     path: /
     defaults:
-        _controller: FrameworkBundle:Redirect:redirect
-        route: news
-        permanent: true
+        _controller: AppBundle:Radenviro:index
 
 gallery:
     resource: '@SonataMediaBundle/Resources/config/routing/gallery.xml'
@@ -28,6 +25,3 @@ media:
     
 fos_js_routing:
     resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
-    
-    
-    

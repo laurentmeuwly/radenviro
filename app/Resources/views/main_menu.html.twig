@@ -1,7 +1,7 @@
 <div class="col-md-10">
-  <div class="col-md-3 menu-item"><a href="{{ path('news') }}">{{ 'menus.welcome'|trans }}</a></div>
+  <div class="col-md-3 menu-item"><a href="{{ path('static', {'page': 'news'}) }}">{{ 'menus.welcome'|trans }}</a></div>
   <div class="col-md-3 menu-item"><a href="{{ path('map') }}">{{ 'menus.map'|trans }}</a></div>
-  <div class="col-md-3 menu-item"><a href="{{ path('radair') }}">{{ 'menus.automatic_networks'|trans }}</a></div>
+  <div class="col-md-3 menu-item"><a href="{{ path('static', {'page': 'radair'}) }}">{{ 'menus.automatic_networks'|trans }}</a></div>
  <div class="col-md-3 menu-item"><a href="{{ path('advanced') }}">{{ 'menus.laboratories'|trans }}</a></div>
 </div>
 
