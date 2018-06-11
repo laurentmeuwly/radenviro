@@ -51,7 +51,7 @@ class Synchronizer
 		//$nb['laboratory'] = $this->syncLaboratory();
 		$nb['network'] = $this->syncNetwork();
 		$nb['station'] = $this->syncStation();
-		//$nb['sample'] = $this->syncSample();
+		$nb['sample'] = $this->syncSample();
 		return $nb;
 	}
 	
