@@ -49,9 +49,9 @@ class Synchronizer
 		//$nb['type'] = $this->syncType();
 		//$nb['bag_code'] = $this->syncBagCode();
 		//$nb['laboratory'] = $this->syncLaboratory();
-		//$nb['network'] = $this->syncNetwork();
-		//$nb['station'] = $this->syncStation();
-		$nb['sample'] = $this->syncSample();
+		$nb['network'] = $this->syncNetwork();
+		$nb['station'] = $this->syncStation();
+		//$nb['sample'] = $this->syncSample();
 		return $nb;
 	}
 	
