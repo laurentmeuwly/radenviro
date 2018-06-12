@@ -55,7 +55,7 @@ class AutomaticNetworkStationAdmin extends AbstractAdmin
 		->end()
 		->with('Attributs', array('class' => 'col-md-3', 'label' => 'admin.label.attributs'))
 		->add('latitude', null, array('scale' => 12, 'label' => 'admin.automatic_network_station.latitude'))
-		->add('longitude', null, array('label' => 'admin.automatic_network_station.longitude'))
+		->add('longitude', null, array('scale' => 12, 'label' => 'admin.automatic_network_station.longitude'))
 		->add('active', null, array('label' => 'admin.label.active'))
 		->end()
 		->with('History', array('class' => 'col-md-3', 'label' => 'admin.label.history'))

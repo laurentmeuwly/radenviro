@@ -57,7 +57,7 @@ class AutomaticNetworkStation
      *
      * @ORM\Column(name="active", type="boolean")
      */
-    private $active = '0';
+    private $active = false;
 
     
     /**
