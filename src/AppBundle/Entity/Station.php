@@ -104,10 +104,17 @@ class Station
      */
     private $legends;
     
+    /**
+     * @var Sample[]
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Sample", mappedBy="station", cascade={"remove"})
+     */
+    private $samples;
+    
     
     public function __construct()
     {
     	$this->sites = new ArrayCollection();
+    	$this->samples = new ArrayCollection();
     }
     
     /**

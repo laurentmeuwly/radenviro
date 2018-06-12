@@ -133,7 +133,7 @@ class Measurement
      * Results of the measurement.
      *
      * @var Result[]
-     * @ORM\OneToMany(targetEntity="Result", mappedBy="measurement")
+     * @ORM\OneToMany(targetEntity="Result", mappedBy="measurement", cascade={"remove"})
      **/
     private $results;
 

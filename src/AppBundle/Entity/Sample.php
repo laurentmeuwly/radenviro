@@ -320,7 +320,7 @@ class Sample
      * Measurements of the sample.
      *
      * @var Measurement[]
-     * @ORM\OneToMany(targetEntity="Measurement", mappedBy="sample")
+     * @ORM\OneToMany(targetEntity="Measurement", mappedBy="sample", cascade={"remove"})
      **/
     private $measurements;
 
