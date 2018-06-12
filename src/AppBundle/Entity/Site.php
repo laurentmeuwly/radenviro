@@ -49,7 +49,7 @@ class Site
      *
      * @ORM\Column(name="active", type="boolean")
      */
-    private $active = true;
+    private $active = false;
    
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\SiteType", inversedBy="sites")
@@ -226,7 +226,7 @@ class Site
      *
      * @param boolean $active
      *
-     * @return AutomaticNetwork
+     * @return Site
      */
     public function setActive($active)
     {
@@ -250,7 +250,7 @@ class Site
      *
      * @param integer $position
      *
-     * @return AutomaticNetwork
+     * @return Site
      */
     public function setPosition($position)
     {

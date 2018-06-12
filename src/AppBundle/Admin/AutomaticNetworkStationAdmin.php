@@ -75,6 +75,10 @@ class AutomaticNetworkStationAdmin extends AbstractAdmin
 	
 	protected function configureDatagridFilters(DatagridMapper $datagridMapper)
 	{
-		//$datagridMapper->add('name_fr');
+		$datagridMapper
+			->add('active', null, ['operator_type' => 'sonata_type_boolean', 'label' => 'admin.label.active'])
+			->add('translations.name', null, ['label' => 'admin.automatic_network_station.name'])
+			->add('automaticNetwork', null, ['label' => 'admin.automatic_network_station.network'])
+		;
 	}
 }

@@ -51,7 +51,7 @@ class SiteType
      *
      * @ORM\Column(name="active", type="boolean")
      */
-    private $active = true;
+    private $active = false;
 
     /**
      * @var string

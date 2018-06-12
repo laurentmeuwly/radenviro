@@ -50,7 +50,7 @@ class Station
      *
      * @ORM\Column(name="active", type="boolean")
      */
-    private $active=true;
+    private $active=false;
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\StationType")

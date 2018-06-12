@@ -8,11 +8,20 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use A2lix\TranslationFormBundle\Form\Type\TranslationsType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Sonata\AdminBundle\Route\RouteCollection;
 
 class SiteAdmin extends AbstractAdmin
 {	
+	protected $datagridValues = array(
+			'_sort_order' => 'ASC',
+			'_sort_by' => 'position'
+	);
+	
+	protected function configureRoutes(RouteCollection $collection)
+	{
+		$collection->add('move', $this->getRouterIdParameter().'/move/{position}');
+	}
+	
 	// Fields to be shown on lists
 	protected function configureListFields(ListMapper $listMapper)
 	{
@@ -24,7 +33,13 @@ class SiteAdmin extends AbstractAdmin
 				'header_style' => 'text-align: center',
 				'row_align' => 'center')
 				)
-		->add('position', 		null, array('label' => 'admin.label.sorting'))
+		->add('_position', 'actions', array(
+					'actions' => array(
+					'move' => array(
+							'template' => 'PixSortableBehaviorBundle:Default:_sort.html.twig'
+							)
+					)
+			))
 		;
 	}
 	

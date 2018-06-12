@@ -60,5 +60,10 @@ class PageAdmin extends AbstractAdmin
 		->end()
 		;
 	}
+	
+	public function postUpdate($objet){
+		var_dump($objet);
+		
+	}
 
 }

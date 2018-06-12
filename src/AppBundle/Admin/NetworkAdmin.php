@@ -65,4 +65,13 @@ class NetworkAdmin extends AbstractAdmin
 		->end()
 		;
 	}
+	
+	protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+	{
+		$datagridMapper
+		->add('active', null, ['operator_type' => 'sonata_type_boolean', 'label' => 'admin.label.active'])
+		->add('code', null, ['label' => 'Code'])
+		->add('translations.name', null, ['label' => 'admin.network.name'])
+		;
+	}
 }

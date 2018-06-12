@@ -42,7 +42,7 @@ class NetworkCategory
      *
      * @ORM\Column(name="active", type="boolean")
      */
-    private $active=true;
+    private $active=false;
 
 
     /**

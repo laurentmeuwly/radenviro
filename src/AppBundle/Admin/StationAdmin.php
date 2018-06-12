@@ -37,11 +37,13 @@ class StationAdmin extends AbstractAdmin
 	protected function configureDatagridFilters(DatagridMapper $datagridMapper)
 	{
 		$datagridMapper
-			->add('code')
-			->add('network', null, array(), 'entity', array(
+		->add('active', null, ['operator_type' => 'sonata_type_boolean', 'label' => 'admin.label.active'])
+		->add('code')
+		->add('translations.name', null, ['label' => 'admin.station.name'])
+		->add('network', null, ['label' => 'admin.network.name'], 'entity', [
 					'class' => 'AppBundle\Entity\Network',
 					'choice_label' => 'code',
-			))
+			])
 		;
 	}
 	

@@ -43,6 +43,7 @@ services:
         arguments:
             - ~
             - AppBundle\Entity\Site
+            - 'PixSortableBehaviorBundle:SortableAdmin'
             - ~
         calls:
             - [ setTranslationDomain, [messages]]

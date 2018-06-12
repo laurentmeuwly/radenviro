@@ -75,6 +75,10 @@ class AutomaticNetwork
     public function __construct() {
     	$this->stations = new ArrayCollection();
     }
+    
+    public function __toString() {
+    	return (string) $this->getName();
+    }
 
 
     /**
