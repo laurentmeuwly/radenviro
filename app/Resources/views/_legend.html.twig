@@ -90,7 +90,7 @@
                                         {% if result|default is not empty %}
                                       
                                         <li style="font-size: 0.8em;">
-                                        {{ result.measurement.referencedate|date('d.m.Y') }} : {{ nuclide.name }},  {% if result.limited==1 %} &lt;{{ result.value }} {% else %} {{ result.value }} {% if result.error|default is not empty %} &plusmn;{{ result.error }} {% endif %} {% endif %} {{ result.measurement.resultUnit.code }}
+                                        {{ result.measurement.referencedate|date('d.m.Y') }} : {{ nuclide.name }},  {% if result.limited==1 %} &lt;{{ "%.1e"|format(result.value) }} {% else %} {{ "%.1e"|format(result.value) }} {% if result.error|default is not empty %} &plusmn;{{ "%.1e"|format(result.error) }} {% endif %} {% endif %} {{ result.measurement.resultUnit.code }}
                                           
                                         </li>
                                       {% endif %}
