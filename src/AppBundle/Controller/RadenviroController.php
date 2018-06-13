@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class RadenviroController extends Controller
 {
-	use DataTablesTrait;
+	
 	
 	/**
 	 * @Route("/", name="radenviro")
