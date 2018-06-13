@@ -77,6 +77,8 @@ class AppKernel extends Kernel
         	new Ivory\GoogleMapBundle\IvoryGoogleMapBundle(),
         		
         	new JMose\CommandSchedulerBundle\JMoseCommandSchedulerBundle(),
+        		
+        	new \Omines\DataTablesBundle\DataTablesBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
