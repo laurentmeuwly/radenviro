@@ -66,7 +66,7 @@
               {% for siteType in siteTypes %}
                   <li>
                     <input type="radio" id="sitetype_{{ siteType.id }}" value="" name="sitetype" />
-                    <label for="sitetype_{{ siteType.id }}"><span class="icon sitetype" id="icon_sitetype_{{ siteType.id }}" style="color:{{ siteType.color }};"></span>{{ siteType.name }}</label>
+                    <label for="sitetype_{{ siteType.id }}"><span class="icon sitetype" id="icon_sitetype_{{ siteType.id }}" style="color:#{{ siteType.color }};"></span>{{ siteType.name }}</label>
                     
                     {% for site in siteType.sites %}    
                       <span class="location sites location_site_{{ site.id }}" id="location_site_{{ site.id }}" style="display:none;" data-icon="icon_sitetype_{{ siteType.id }}" data-parent="{{ siteType.id }}" data-id="{{ site.id }}" data-latitude="{{ site.latitude }}" data-nlatitude="{{ site.nlatitude }}" data-slatitude="{{ site.slatitude }}" data-longitude="{{ site.longitude }}" data-elongitude="{{ site.elongitude }}" data-wlongitude="{{ site.wlongitude }}" data-zoom="{{ site.zoom }}" >
