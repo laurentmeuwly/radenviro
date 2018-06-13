@@ -138,10 +138,9 @@ label:
   longitude: Longitude
   zoom: Zoom
   nuclide: Isotope
-  all: Tous
+  all: Tout
   graph: Graphique
   table: Tableau
-  all: Tous
   detection limit: Limite de détection
   download: Téléchargement
   export:

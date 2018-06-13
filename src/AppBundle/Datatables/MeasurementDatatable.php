@@ -123,7 +123,7 @@ class MeasurementDatatable extends AbstractDatatable
 
         $this->options->set(array(
         	'classes' => Style::BOOTSTRAP_3_STYLE,
-        	'length_menu' => array(10,25,50),
+        	'length_menu' => [[10, 25, 50, -1], [10, 25, 50, $this->translator->trans('label.all')]],
             'individual_filtering' => true,
             'individual_filtering_position' => 'head',
             'order_cells_top' => true,
