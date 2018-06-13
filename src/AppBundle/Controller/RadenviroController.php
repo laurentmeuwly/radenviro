@@ -60,7 +60,7 @@ class RadenviroController extends Controller
 		$session = $request->getSession();
 		 
 		$nuclide = $request->query->get('nuclide');
-		if($nuclide==null) $nuclide=54;
+		if($nuclide==null) $nuclide=21;
 		$session->set('nuclide', $nuclide);
 		 
 		$isAjax = $request->isXmlHttpRequest();
@@ -142,7 +142,7 @@ INNER JOIN
 FROM measurement m
 left join sample s on m.sample_id=s.id
 left join station st on s.station_id=st.id
-WHERE st.code LIKE "HV%"
+WHERE st.code LIKE "%"
 group by st.code) AS groupe1
   
 ON m.referenceDate=groupe1.maxdate
