@@ -325,3 +325,14 @@ apy_data_grid:
     
 fos_js_routing:
     routes_to_expose: [ adv, advlist, ... ]
+    
+    
+datatables:
+    language_from_cdn:  true
+    options:
+        paging: false
+        lengthChange: false
+        pageLength: "6"
+        lengthMenu: [ 6 ]
+        dom: '<"clearfix"lf>rtp'
+        
