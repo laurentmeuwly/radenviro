@@ -49,7 +49,7 @@ class Synchronizer
 		//$nb['type'] = $this->syncType();
 		//$nb['bag_code'] = $this->syncBagCode();
 		//$nb['laboratory'] = $this->syncLaboratory();
-		$nb['network'] = $this->syncNetwork();
+		//$nb['network'] = $this->syncNetwork();
 		$nb['station'] = $this->syncStation();
 		$nb['sample'] = $this->syncSample();
 		return $nb;
@@ -370,7 +370,7 @@ class Synchronizer
 		$res['added']=0;
 		$res['threated']=0;
 	
-		$result_src = $this->conn->query('SELECT * FROM station');
+		$result_src = $this->conn->query('SELECT distinct(station) as code, network FROM sample');
 		while($data_src = $result_src->fetch()) {
 			$data_dst = $this->em->getRepository("AppBundle:Station")->findOneByCode($data_src['code']);
 		
@@ -380,8 +380,8 @@ class Synchronizer
 				$data_dst->setActive(false);
 				$res['added']++;
 			}
-			$data_dst->translate('fr')->setName($data_src['name_fr']);
-			$data_dst->translate('de')->setName($data_src['name_de']);
+			//$data_dst->translate('fr')->setName($data_src['name_fr']);
+			//$data_dst->translate('de')->setName($data_src['name_de']);
 			
 			$network = $this->em->getRepository("AppBundle:Network")->findOneByCode($data_src['network']);
 			if(is_object($network)){
