@@ -1,0 +1,32 @@
+    <div class="table map-table" id="handler_last_result_per_station" style="visibility: visible; display: block;">
+      <div class="header">
+        {{ 'label.analyzed environments'|trans }}: <span id="nature_last_result_per_station"></span><br/>
+        {{ 'label.nuclide'|trans }}: <select class="nuclides" id="nuclides_last_result_per_station" data-refresh="{{ url('data', { type: 'nuclide', legends: '1' }) }}">
+          <option value=""></option>
+        </select>
+        
+      </div>
+      <div class="content">        
+        <div id="sg-datatables-lastresult_datatable">Loading...</div>
+      </div>
+    </div>
+    
+    
+
+    <script type="text/javascript">
+
+//var graphNuclides = $('select.nuclides-graph:first');
+//eval('var params = ' + (graphNuclides.attr('data-refresh') || '{}'));
+
+$('select.nuclides').change(function () {
+	//alert("Nuclide has been changed.");
+	$.getJSON('/fr/map?nuclide=21');
+});
+
+</script>
+
+
+    
+
+
+

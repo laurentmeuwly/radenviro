@@ -115,7 +115,7 @@ class RadenviroController extends Controller
 			return $table->getResponse();
 		}
 	
-		return $this->render('main_map.html.twig', array(
+		return $this->render('main_map2.html.twig', array(
 				'legends' => $legends,
 				'siteTypes' => $siteTypes,
 				'automaticNetworks' => $automaticNetworks,
