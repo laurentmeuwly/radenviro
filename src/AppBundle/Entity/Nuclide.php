@@ -98,6 +98,12 @@ class Nuclide
      */
     private $predefinedNuclideLists;
     
+    /**
+     * @var Legend[]
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\LegendNuclide", mappedBy="nuclide", fetch="EXTRA_LAZY")
+     */
+    private $legends;
+    
 
     /**
      * @param $method
@@ -339,6 +345,22 @@ class Nuclide
     public function getElement()
     {
         return $this->element;
+    }
+    
+    public function getLegends()
+    {
+    	return $this->legends;
+    }
+    
+    /**
+     * Set all legends in the station.
+     *
+     * @param Legend[] $legends
+     */
+    public function setLegends($legends)
+    {
+    	//$this->legends->clear();
+    	$this->legends = $legends;//new ArrayCollection($legends);
     }
 
     /**

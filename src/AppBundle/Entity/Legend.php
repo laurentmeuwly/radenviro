@@ -64,13 +64,15 @@ class Legend
     
     /**
      * @var Station[]
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\LegendStation", mappedBy="legend", fetch="EXTRA_LAZY")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\LegendStation", mappedBy="legend", cascade={"all"}, orphanRemoval=true)
+     * @ORM\OrderBy({"position" = "ASC"})
      */
     private $stations;
     
     /**
      * @var Nuclid[]
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\LegendNuclide", mappedBy="legend"))
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\LegendNuclide", mappedBy="legend", cascade={"all"}, orphanRemoval=true)
+     * @ORM\OrderBy({"position" = "ASC"})
      */
     private $nuclides;
     
@@ -100,6 +102,10 @@ class Legend
     	return $this->proxyCurrentLocaleTranslation($method, $args);
     }
 
+    public function __toString()
+    {
+    	return (string)$this->getName() ?: 'n/a';
+    }
     
     /**
      * Get id
@@ -211,12 +217,17 @@ class Legend
     /**
      * Set all stations in the legend.
      *
-     * @param Station[] $stations
+     * @param LegendStation[] $legendStations
      */
-    public function setStations($stations)
+    public function setStations($legendStations)
     {
-    	$this->stations->clear();
-    	$this->stations = new ArrayCollection($stations);
+    	//$this->stations->clear();
+    	//$this->stations = new ArrayCollection($legendStations);
+    	$this->stations = new ArrayCollection();
+    	
+    	foreach ($legendStations as $legendStation) {
+    		$this->addStation($legendStation);
+    	}
     }
 
     /**
@@ -250,32 +261,30 @@ class Legend
     /**
      * Add station
      *
-     * @param \AppBundle\Entity\Station $station
+     * @param \AppBundle\Entity\LegendStation $legendStation
      *
      * @return Legend
      */
-    public function addStation(\AppBundle\Entity\Station $station)
+    public function addLegendStations(\AppBundle\Entity\LegendStation $legendStation)
     {
-        $this->stations[] = $station;
+    	$legendStation->setLegend($this);
+        $this->stations[] = $legendStation;
 
         return $this;
     }
     
-    /**
-     * Remove station
-     *
-     * @param \AppBundle\Entity\Station $station
-     */
-    public function removeStation(\AppBundle\Entity\Station $station)
+    public function addStation($station)
     {
-    	$this->stations->removeElement($station);
+    	$station->setLegend($this);
+    	$this->stations[] = $station;
+    	return $this;	
     }
     
     
     /**
      * Return all nuclides associated to the legend.
      *
-     * @return Nuclide[]
+     * @return LegendNuclide[]
      */
     public function getNuclides()
     {
@@ -285,12 +294,44 @@ class Legend
     /**
      * Set all nuclides in the legend.
      *
-     * @param Nuclide[] $nuclides
+     * @param LegendNuclide[] $legendNuclides
      */
-    public function setNuclides($nuclides)
+    public function setNuclides($legendNuclides)
     {
-    	$this->nuclides->clear();
-    	$this->nuclides = new ArrayCollection($nuclides);
+    	$this->nuclides = new ArrayCollection();
+    	 
+    	foreach ($legendNuclides as $legendNuclide) {
+    		$this->addNuclide($legendNuclide);
+    	}
+    }
+    
+    /**
+     * @param LegendNuclide $legendNuclides
+     */
+    public function addLegendNuclides(LegendNuclide $legendNuclides)
+    {
+    	$legendNuclides->setLegend($this);
+    
+    	$this->$nuclides[] = $legendNuclides;
+    }
+    
+    /**
+     * @param LegendNuclide $nuclides
+     *
+     * @return $this
+     */
+   /* public function removeNuclides(LegendNuclide $nuclides)
+    {
+    	$this->nuclides->removeElement($nuclides);
+    
+    	return $this;
+    }*/
+    
+    public function addNuclide($nuclide)
+    {
+    	$nuclide->setLegend($this);
+    	$this->nuclides[] = $nuclide;
+    	return $this;
     }
     
      

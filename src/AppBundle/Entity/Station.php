@@ -134,7 +134,7 @@ class Station
     
     public function __toString()
     {
-    	return (string)($this->getName() . " (" . $this->getCode() . ")");
+    	return (string)($this->getName() . " (" . $this->getCode() . ")")  ?: 'n/a';;
     }
 
     /**

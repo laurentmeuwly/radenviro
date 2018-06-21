@@ -10,6 +10,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use A2lix\TranslationFormBundle\Form\Type\TranslationsType;
 use Xmon\ColorPickerTypeBundle\Form\Type\ColorPickerType;
 use Sonata\AdminBundle\Route\RouteCollection;
+use AppBundle\Form\DataTransformer\NuclideDataTransformer;
 
 class LegendAdmin extends AbstractAdmin
 {
@@ -17,6 +18,24 @@ class LegendAdmin extends AbstractAdmin
 			'_sort_order' => 'ASC',
 			'_sort_by' => 'position'
 	);
+	
+	public function preUpdate($object)
+	{
+		$this->prePersist($object);
+	}
+	
+	public function prePersist($object)
+	{
+		foreach ($object->getStations() as $legendStation) {
+			if($legendStation->getStation()!=null)
+				$legendStation->setLegend($object);
+		}
+		
+		foreach ($object->getNuclides() as $legendNuclide) {
+			if($legendNuclide->getNuclide()!=null)
+				$legendNuclide->setLegend($object);
+		}
+	}
 	
 	protected function configureRoutes(RouteCollection $collection)
 	{
@@ -81,6 +100,7 @@ class LegendAdmin extends AbstractAdmin
 	
 	protected function configureFormFields(FormMapper $formMapper)
 	{
+		
 		$formMapper
 		->with('General', array('class' => 'col-md-6', 'label' => 'admin.label.general'))
 		->add('translations', TranslationsType::class, array(
@@ -108,20 +128,68 @@ class LegendAdmin extends AbstractAdmin
 				))
 		->end()
 		->with('Stations', array('class' => 'col-md-6', 'label' => 'admin.legend.stations'))
-		//->add('stations.station', null, array('multiple'=>true, 'expanded'=>true, 'mapped'=>true))
-		/*->add('station', 'sonata_type_collection', array(
-              'by_reference' => false), array('label' => 'admin.label.position'))*/
+		->add('stations', 'sonata_type_collection', array(
+				//'cascade_validation' => true,
+				//'by_reference' => false,
+		), array(
+				'edit'              => 'inline',
+				'inline'            => 'table',
+				'sortable'          => 'position',
+				//'link_parameters'   => array('context' => $context),
+				'admin_code'        => 'app.admin.legendstation',
+		)
+				)
 		->end()
 		->with('Nuclides', array('class' => 'col-md-6', 'label' => 'admin.legend.nuclides'))
+		->add('nuclides', 'sonata_type_collection', array(), array(
+						'edit'              => 'inline',
+						'inline'            => 'table',
+						'sortable'          => 'position',
+						'admin_code'        => 'app.admin.legendnuclide',
+				)
+				)
+		/*->add('nuclides', 'sonata_type_model', [
+				'label'			=> 'Isotopes actifs',
+				'query'        	=> $this->modelManager->createQuery('AppBundle\Entity\Nuclide'),
+				'required'		=> false,
+				'multiple'		=> true,
+				'by_reference' 	=> false,
+				'sortable'		=> true,
+				
+				'expanded'		=> false,
+				//'class'         => LegendNuclideAdmin::class,
+				//'property'		=> 'code',
+				//'btn_add'       => true,
+				//'btn_list'      => true,
+				//'btn_delete'    => true,
+		])*/
 		->end()
 
-		//->add('station', 'sonata_type_model', array('multiple' => true, 'by_reference' => false))
 		;
+		
+		//$formMapper->get('nuclides')->addModelTransformer(new NuclideDataTransformer($this->getSubject(), $this->modelManager));
 	}
 	
 	protected function configureDatagridFilters(DatagridMapper $datagridMapper)
 	{
 		
 	}
-	
+	/*
+	protected function configureSideMenu(MenuItemInterface $menu, $action, AdminInterface $childAdmin = null)
+	{
+		if (!$childAdmin && !in_array($action, array('edit'))) {
+			return;
+		}
+		$admin = $this->isChild() ? $this->getParent() : $this;
+		$id = $admin->getRequest()->get('id');
+		$menu->addChild(
+				$this->trans('admin.sidemenu.link_view_A'),
+				array('uri' => $admin->generateUrl('edit', array('id' => $id)))
+				);
+		$menu->addChild(
+				$this->trans('admin.sidemenu.link_view_AB'),
+				array('uri' => $admin->generateUrl('app.admin.legendstation.list', array('id' => $id)))
+				);
+	}
+	*/
 }

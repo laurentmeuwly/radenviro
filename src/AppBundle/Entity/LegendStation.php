@@ -23,13 +23,13 @@ class LegendStation
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Legend", inversedBy="stations")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $legend;
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Station", inversedBy="legends")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $station;
 
@@ -42,6 +42,10 @@ class LegendStation
     
 
 
+    public function __toString()
+    {
+    	return (string)$this->getStation();
+    }
 
     /**
      * Get id
@@ -56,14 +60,13 @@ class LegendStation
     /**
      * Set legend
      *
-     * @param integer $legend
+     * @param Legend $legend
      *
      * @return LegendStation
      */
-    public function setLegend($legend)
+    public function setLegend($legend = null)
     {
     	$this->legend = $legend;
-    
     	return $this;
     }
     
@@ -81,11 +84,11 @@ class LegendStation
     /**
      * Set station
      *
-     * @param integer $station
+     * @param Station $station
      *
      * @return LegendStation
      */
-    public function setStation($station)
+    public function setStation($station = null)
     {
         $this->station = $station;
 

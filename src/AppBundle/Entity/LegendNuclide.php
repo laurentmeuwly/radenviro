@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * LegendNuclide
@@ -23,25 +24,28 @@ class LegendNuclide
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Legend", inversedBy="nuclides")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $legend;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Nuclide")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Nuclide", inversedBy="legends")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $nuclide;
 
     /**
      * @var integer
-     *
+     * @Gedmo\SortablePosition
      * @ORM\Column(name="position", type="integer", nullable=false)
      */
     private $position = '0';
     
 
-
+    public function __toString()
+    {
+    	return (string)$this->getNuclide();
+    }
 
     /**
      * Get id
@@ -56,11 +60,11 @@ class LegendNuclide
     /**
      * Set legend
      *
-     * @param integer $legend
+     * @param Legend $legend
      *
-     * @return LegendNuclide
+     * @return $this
      */
-    public function setLegend($legend)
+    public function setLegend(Legend $legend)
     {
     	$this->legend = $legend;
     
@@ -81,11 +85,11 @@ class LegendNuclide
     /**
      * Set nuclide
      *
-     * @param integer $nuclide
+     * @param Nuclide $nuclide
      *
-     * @return LegendNuclide
+     * @return $this
      */
-    public function setNuclide($nuclide)
+    public function setNuclide($nuclide = null)
     {
         $this->nuclide = $nuclide;
 
@@ -95,7 +99,7 @@ class LegendNuclide
     /**
      * Get nuclide
      *
-     * @return integer
+     * @return Nuclide
      */
     public function getNuclide()
     {
@@ -107,7 +111,7 @@ class LegendNuclide
      *
      * @param integer $position
      *
-     * @return LegendNuclide
+     * @return $this
      */
     public function setPosition($position)
     {

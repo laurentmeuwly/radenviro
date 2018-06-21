@@ -284,7 +284,7 @@ class Sample
     private $network;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Station")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Station", inversedBy="samples")
      * @ORM\JoinColumn(nullable=true)
      * @GRID\Column(field="station.id", title="station.id")
      */

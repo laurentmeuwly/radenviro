@@ -23,7 +23,32 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [messages]]
+            #- [ addChild, ['@app.admin.legendstation']]
+    
+    app.admin.legendstation:
+        class: AppBundle\Admin\LegendStationAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "admin.group.frontend", label: "admin.menu.legend_station" }
+        arguments:
+            - ~
+            - AppBundle\Entity\LegendStation
+            - 'PixSortableBehaviorBundle:SortableAdmin'
+            - ~
+        calls:
+            - [ setTranslationDomain, [messages]]
             
+    app.admin.legendnuclide:
+        class: AppBundle\Admin\LegendNuclideAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "admin.group.frontend", label: "admin.menu.legend_nuclide" }
+        arguments:
+            - ~
+            - AppBundle\Entity\LegendNuclide
+            - 'PixSortableBehaviorBundle:SortableAdmin'
+            - ~
+        calls:
+            - [ setTranslationDomain, [messages]]
+                    
     app.admin.siteType:
         class: AppBundle\Admin\SiteTypeAdmin
         tags:
