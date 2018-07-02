@@ -48,19 +48,19 @@ class LastResult
 		->select('r')
 		->from('AppBundle:Result', 'r')
 		->join('r.measurement', 'rm')
+		->join('rm.sample', 'ms')
 		;
 		
 		$qb
 		->andWhere('rm.referencedate = (' . $sub->getDQL() . ')')
 		->andWhere('r.nuclide = :nuclide')
+		->andWhere('ms.station = :station')
 		->setParameter('nuclide', $nuclide)
 		->setParameter('station', $station)
 		->setMaxResults(1)
 		;
 		
 		$result = $qb->getQuery()->getOneOrNullResult();
-		
-		//var_dump($result); die;
 
 		return $result;
 	}
