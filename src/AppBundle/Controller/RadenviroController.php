@@ -51,6 +51,30 @@ class RadenviroController extends Controller
 		));
 	}
 	
+	/**
+	 * @Route("/measures/{station}", name="measures")
+	 */
+	public function measuresAction($station, Request $request)
+	{
+		$em = $this->getDoctrine()->getManager();
+		$currentStation = $em->getRepository('AppBundle:Station')->findOneById(array('id'=>$station));
+		$legend = $em->getRepository('AppBundle:LegendStation')->findOneByStation(array('station'=>$station));
+		 
+		$availableNuclides = $em->getRepository('AppBundle:Nuclide')->getNuclidesList($station,$legend->getLegend());
+		foreach($availableNuclides as $nuclide) {
+			var_dump($nuclide->getCode());
+		}
+		 
+		// initiate the datatable result
+		$this->datatableResult();
+		 
+		return $this->render('measures/measures_history.html.twig', array(
+				'station' => $currentStation,
+				'nuclides' => $availableNuclides,
+		));
+		 
+	}
+	
 	
 	/**
 	 * @Route("/map2", name="map2")

@@ -19,7 +19,7 @@
         <select class="stations form-control">
     {% for legendstation in station.legends|first.legend.stations %}
       <option value="{{ legendstation.station.id }}" 
-              data-url="{{ url('measures', {'id': legendstation.station.id}) }}#measures-graph"
+              data-url="{{ url('measures', {'station': legendstation.station.id}) }}#measures-graph"
               {% if legendstation.station.id==station.id %} selected="selected" {% endif %} >{{  legendstation.station.name }} ({{  legendstation.station.code }})</option>
     {% endfor %}
   </select>
@@ -31,8 +31,8 @@
     <div class="col-sm-3 control-label">{{ 'label.isotope'|trans }}:</div>
 	  <div class="col-sm-6">
         <select class="nuclides nuclides-graph form-control">
-         {% for legendnuclide in station.legends|first.legend.nuclides %}
-        <option value="{{ legendnuclide.nuclide.id }}">{{ legendnuclide.nuclide.name }}</option>
+         {% for nuclide in nuclides %}
+        <option value="{{ nuclide.id }}">{{ nuclide.name }}</option>
       {% endfor %}
     </select>
       </div>

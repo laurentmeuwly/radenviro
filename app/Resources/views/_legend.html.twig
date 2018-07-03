@@ -18,7 +18,7 @@
                      {% for legendstation in legend.stations %}
                     
                      {% if legendstation.station.hasCoordinates() %}
-                        <span class="location samples" id="location_sample_{{ legendstation.station.id }}" style="display:none;" data-icon="icon_legend_{{ legend.id }}" data-latitude="{{ legendstation.station.latitude }}" data-longitude="{{ legendstation.station.longitude }}" data-link="{{ url('measures',{'id': legendstation.station.id}) }}">
+                        <span class="location samples" id="location_sample_{{ legendstation.station.id }}" style="display:none;" data-icon="icon_legend_{{ legend.id }}" data-latitude="{{ legendstation.station.latitude }}" data-longitude="{{ legendstation.station.longitude }}" data-link="{{ url('measures',{'station': legendstation.station.id }) }}">
                           <span class="title">{{ legendstation.station.name }}</span>
                           <span class="text">
                           	
@@ -77,7 +77,7 @@
                           {% for station in site.stations %}
                               {% if station.hasCoordinates() %}
                           
-                              <span class="sublocation sites" style="display:none;" data-icon="{% if station.legends|length>0 %}{{ 'icon_legend_' ~station.legends|first.legend.id }}{% else %}{{ 'icon_sitetype_' ~siteType.id }}{% endif %}" data-latitude="{{ station.latitude }}" data-longitude="{{ station.longitude }}" data-link="{{ url('measures',{'id': station.id}) }}">
+                              <span class="sublocation sites" style="display:none;" data-icon="{% if station.legends|length>0 %}{{ 'icon_legend_' ~station.legends|first.legend.id }}{% else %}{{ 'icon_sitetype_' ~siteType.id }}{% endif %}" data-latitude="{{ station.latitude }}" data-longitude="{{ station.longitude }}" data-link="{{ url('measures',{'station': station.id}) }}">
                                 <span class="title">{{ station.name }}</span>
                                 <span class="text">
                                   {% if station.legends|length>0 %}

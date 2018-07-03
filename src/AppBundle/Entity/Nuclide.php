@@ -10,7 +10,7 @@ use Knp\DoctrineBehaviors\Model as ORMBehaviors;
  * Nuclide
  *
  * @ORM\Table(name="nuclide")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\NuclideRepository")
  */
 class Nuclide
 {
