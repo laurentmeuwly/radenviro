@@ -61,9 +61,6 @@ class RadenviroController extends Controller
 		$legend = $em->getRepository('AppBundle:LegendStation')->findOneByStation(array('station'=>$station));
 		 
 		$availableNuclides = $em->getRepository('AppBundle:Nuclide')->getNuclidesList($station,$legend->getLegend());
-		foreach($availableNuclides as $nuclide) {
-			var_dump($nuclide->getCode());
-		}
 		 
 		// initiate the datatable result
 		$this->datatableResult();
