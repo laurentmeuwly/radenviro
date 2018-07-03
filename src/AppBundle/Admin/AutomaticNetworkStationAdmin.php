@@ -43,20 +43,12 @@ class AutomaticNetworkStationAdmin extends AbstractAdmin
 	{
 		$formMapper
 		->with('General', array('class' => 'col-md-6', 'label' => 'admin.label.general'))
-		->add('translations', TranslationsType::class, array(
-				'label' => false,
-				'fields' => array(
-						'name'=> array('label' => 'admin.automatic_network_station.name'),
-						'description'=> array('field_type' => 'ckeditor',
-								'label' => 'admin.automatic_network_station.description',
-								)
-				)
-		))
+		->add('active', null, array('label' => 'admin.label.active'))
+		->add('automaticNetwork', null, array('label' => 'admin.automatic_network_station.network'))
 		->end()
 		->with('Attributs', array('class' => 'col-md-3', 'label' => 'admin.label.attributs'))
 		->add('latitude', null, array('scale' => 12, 'label' => 'admin.automatic_network_station.latitude'))
 		->add('longitude', null, array('scale' => 12, 'label' => 'admin.automatic_network_station.longitude'))
-		->add('active', null, array('label' => 'admin.label.active'))
 		->end()
 		->with('History', array('class' => 'col-md-3', 'label' => 'admin.label.history'))
 		->add('createdAt', 'sonata_type_datetime_picker',  array('label' => 'admin.label.created_at',
@@ -67,6 +59,17 @@ class AutomaticNetworkStationAdmin extends AbstractAdmin
 		->add('updatedAt', 'sonata_type_datetime_picker', array('label' => 'admin.label.updated_at',
 				'attr' => array(
 						'readonly' => true
+				)
+		))
+		->end()
+		->with('Informations', array('class' => 'col-md-6', 'label' => 'admin.label.informations'))
+		->add('translations', TranslationsType::class, array(
+				'label' => false,
+				'fields' => array(
+						'name'=> array('label' => 'admin.automatic_network_station.name'),
+						'description'=> array('field_type' => 'ckeditor',
+								'label' => 'admin.automatic_network_station.description',
+						)
 				)
 		))
 		->end()
