@@ -34,6 +34,17 @@ class NuclideAdmin extends AbstractAdmin
 		;
 	}
 	
+	
+	protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+	{
+		$datagridMapper
+		->add('active', null, ['operator_type' => 'sonata_type_boolean', 'label' => 'admin.label.active'])
+		->add('code')
+		->add('translations.name', null, ['label' => 'admin.nuclide.name'])
+		;
+	}
+	
+	
 	/**
 	 * {@inheritdoc}
 	 */
