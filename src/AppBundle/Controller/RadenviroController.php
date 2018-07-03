@@ -174,4 +174,125 @@ WHERE r.nuclide_id=' . $nuclide
 	return $rawsql;
 	}
 	
+	
+	
+	/**
+	 * Grid action
+	 * @Route("/tableresult", name="tableresult")
+	 * @return Response
+	 */
+	public function datatableResultAction(Request $request)
+	{
+		$nuclide = $request->get('nuclide');
+		$station = $request->get('station');
+	
+		return $this->datatableResult($nuclide, $station)->execute();
+	}
+	
+	/**
+	 * set datatable configs
+	 * @return \Waldo\DatatableBundle\Util\Datatable
+	 */
+	private function datatableResult($nuclide=null, $station=null) {
+		 
+		// TODO: no specific test here, but just return empty array
+		if($nuclide==null) {
+			$nuclide=21;
+		}
+		if($station==null) {
+			$station=7;
+		}
+		 
+		// table heading
+		$date = $this->get('translator')->trans('table.refdate');
+		 
+		$controller_instance = $this;
+		return $this->get('datatable')
+		->setDatatableId('dta-tst2')
+		->setGlobalSearch(false)
+		->setSearch(false)
+		->setNotSortableFields(array(0,1,2,3,4,5))
+		->setHiddenFields(array(1))
+		->setEntity("AppBundle:Result", "r")
+		->setOrder("m.referencedate", "desc")
+		->setFields(
+				array(
+						$this->get('translator')->trans('table.refdate')	=> 'm.referencedate',
+						$this->get('translator')->trans('table.limited')	=> 'r.limited',
+						$this->get('translator')->trans('table.value')		=> 'r.value',
+						$this->get('translator')->trans('table.error')		=> 'r.error',
+						$this->get('translator')->trans('table.unit')		=> 'u.code',
+						$this->get('translator')->trans('table.station')	=> 'st.code',
+						"_identifier_"  => 'r.id'
+				)
+				)
+				->setRenderer(
+						function(&$data) use ($controller_instance)
+						{
+							$nwg = false;
+							$renderer = 'AppBundle:Renderers:_scinumber.html.twig';
+							 
+							foreach ($data as $key => $value)
+							{
+								if ($key == 0) // m.referencedate
+								{
+									$data[$key] = $controller_instance
+									->get('templating')
+									->render(
+											'AppBundle:Renderers:_date.html.twig',
+											array('data' => $value)
+											);
+								}
+	
+								if ($key == 1) // r.limited
+								{
+									if($value) {
+										$renderer = 'AppBundle:Renderers:_nwg.html.twig';
+									} else {
+										$renderer = 'AppBundle:Renderers:_scinumber.html.twig';
+									}
+								}
+	
+								if ($key == 2) // r.value
+								{
+									 
+									if($value) {
+										$data[$key] = $controller_instance
+										->get('templating')
+										->render(
+												$renderer,
+												array('data' => $value)
+												);
+									}
+								}
+	
+								if ($key == 3) // r.error
+								{
+									if($value) {
+										$data[$key] = $controller_instance
+										->get('templating')
+										->render(
+												'AppBundle:Renderers:_scinumber.html.twig',
+												array('data' => $value)
+												);
+									}
+								}
+							}
+		}
+		)
+		->addJoin('r.measurement', 'm', \Doctrine\ORM\Query\Expr\Join::LEFT_JOIN)
+		->addJoin('m.resultUnit', 'u', \Doctrine\ORM\Query\Expr\Join::LEFT_JOIN)
+		->addJoin('m.sample', 's', \Doctrine\ORM\Query\Expr\Join::LEFT_JOIN)
+		->addJoin('s.station', 'st', \Doctrine\ORM\Query\Expr\Join::LEFT_JOIN)
+		->addJoin('r.nuclide', 'n', \Doctrine\ORM\Query\Expr\Join::LEFT_JOIN)
+		 
+		->setWhere(                                                     // set your dql where statement
+				'st.id = :station AND n.id = :nuclide',
+				array('station' => $station,'nuclide' => $nuclide)
+				)
+	
+				//->setOrder("x.code", "desc")                               // it's also possible to set the default order
+		;
+	}
+	
 }
