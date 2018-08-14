@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+{% endblock %}
+
+{% block head_javascripts %}
+	<script type="text/javascript" charset="utf8" src="{{ asset('jquery/jquery-3.3.1.min.js') }}"></script>
+	<script type="text/javascript" charset="utf8" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+{% endblock %}
+
+{% block body %}
+<div class="jumbotron">
+<div class="container text-center">
+<h1>Oops</h1>
+<p><h2>{{ status_code }} - {{ status_text }}</h2></p>
+<p><a href="{{ path("radenviro") }}" class="btn btn-primary">Home</a></p>
+</div>
+</div>
+{% endblock %}
