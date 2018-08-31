@@ -175,6 +175,35 @@ register:
   flash:
     user_created: Der Benutzer wurde erfolgreich erstellt.
   waiting_validation: Ein E-Mail wird gesendet, wenn das Konto vom Radenviro-Team aktiviert wurde.
+  
+registration:
+    check_email: 'Ein E-Mail wird gesendet, wenn das Konto vom Radenviro-Team aktiviert wurde'
+    confirmed: 'Ihr Benutzerkonto ist jetzt bestätigt.'
+    back: 'Retour à la page d''origine.'
+    submit: 'Créer un compte'
+    flash:
+        user_created: 'Der Benutzer wurde erfolgreich erstellt.'
+    email:
+        subject: 'Radenviro : willkommen %username%!'
+        message: |
+            Bonjour %username% !
+
+            Der Benutzer wurde erfolgreich erstellt.
+            Eine E-Mail wird gesendet, nachdem das Benutzerkonto vom Radenviro-Team aktiviert wurde.
+
+            Mit besten Grüssen,
+            das Radenviro-Team. 
+
+    emailconfirmed:
+        subject: 'Radenviro : willkommen %username%!'
+        message: |
+            Guten Tag %username%!
+
+            Ihr Benutzerkonto ist jetzt bestätigt.
+            Sie können auf die erweiterte Suche unter http://www.radenviro.ch/de/advanced zugreifen.
+
+            Mit besten Grüssen,
+            das Radenviro-Team.  
         
 activerecord:
   models:

@@ -193,6 +193,16 @@ registration:
 
             Cordialement,
             L'équipe Radenviro
+    emailconfirmed:
+        subject: 'Radenviro: Bienvenue %username% !'
+        message: |
+            Bonjour %username% !
+
+            Félicitations, votre compte est maintenant activé.
+            Vous pouvez accéder http://www.radenviro.ch/fr/advanced
+
+            Cordialement,
+            L'équipe Radenviro
 
 activerecord:
   models:
@@ -354,7 +364,7 @@ authentication:
 main:
   map:
     advanced search: Recherche avancée
-    map legend: Légende de la carte
+    map legend: labe
     maps of radioactivity measurements: Cartes des mesures de la radioactivité
 menus:
   automatic_networks: Réseaux automatiques
