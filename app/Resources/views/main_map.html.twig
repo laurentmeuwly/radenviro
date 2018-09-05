@@ -9,27 +9,24 @@
 
 {% block javascripts %}
 
-
 <script type="text/javascript" charset="utf8" src="{{ asset('js/jquery.qtip.min.js') }}"></script>
 <script type="text/javascript" charset="utf8" src="{{ asset('js/jquery.cookie.js') }}"></script>
 <script type="text/javascript" charset="utf8" src="{{ asset('js/radenviro.js') }}"></script>
 <script type="text/javascript" charset="utf8" src="{{ asset('js/main_map.js') }}"></script>
+<script type="text/javascript" charset="utf8" src="{{ asset('bundles/datatables/js/datatables.js') }}"></script>
 
 {% endblock %}
-
-
 
 {% block content %}
 <div class="col-md-10">
   <div class="col-md-6">
     {% include '_map.html.twig' %}
-    
+    {% include '_table.html.twig' %}
     
   </div>
   <div class="col-md-6">
     {% include '_legend.html.twig' %}
   </div>
 </div>
-
            
 {% endblock %}

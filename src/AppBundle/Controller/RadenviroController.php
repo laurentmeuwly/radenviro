@@ -5,11 +5,14 @@ namespace AppBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 use Omines\DataTablesBundle\Adapter\ArrayAdapter;
 use Omines\DataTablesBundle\Column\TextColumn;
 use Omines\DataTablesBundle\Column\DateTimeColumn;
 use Omines\DataTablesBundle\Controller\DataTablesTrait;
+
+use AppBundle\Services\Formatter;
 
 
 class RadenviroController extends Controller
@@ -43,7 +46,7 @@ class RadenviroController extends Controller
 		$wpURL = $em->getRepository('AppBundle:Page')->findOneBy(array('code' => $page));
 	
 		if($wpURL==NULL) {
-			return $this->redirectToRoute('homepage');
+			return $this->redirectToRoute('home');
 		}
 		
 		return $this->render('iframe.html.twig', array(
@@ -74,85 +77,104 @@ class RadenviroController extends Controller
 	
 	
 	/**
-	 * @Route("/map2", name="map2")
-	 */
-	public function mapAction(Request $request)
-	{
-		$session = $request->getSession();
-		 
-		$nuclide = $request->query->get('nuclide');
-		if($nuclide==null) $nuclide=21;
-		$session->set('nuclide', $nuclide);
-		 
-		$isAjax = $request->isXmlHttpRequest();
+     * @Route("/map", name="map")
+     */
+    public function mapAction(Request $request)
+    {    	
+    	// Getting doctrine manager
+    	$em = $this->getDoctrine()->getManager();
+    	
+    	// retrieve all active legends
+    	$legends = $em->getRepository('AppBundle:Legend')->findBy(array('active' => 1), array('position' => 'ASC'));
+
+    	// retrieve all active site types
+    	$siteTypes = $em->getRepository('AppBundle:SiteType')->findBy(array('active' => 1), array('position' => 'ASC'));
+    	
+    	// retrieve all active automatic networks
+    	$automaticNetworks = $em->getRepository('AppBundle:AutomaticNetwork')->findBy(array('active' => 1), array('position' => 'ASC'));
+    	
+    	// retrieve all zoom areas
+    	$zooms = $em->getRepository('AppBundle:MapZoom')->findAll();
+    	
+    	return $this->render('main_map.html.twig', array(
+    			'legends' => $legends,
+    			'siteTypes' => $siteTypes,
+    			'automaticNetworks' => $automaticNetworks,
+    			'zooms' => $zooms,	
+    	));
+
+    }
 	
-		$nuclide = $session->get('nuclide');
-		//$session->get('station');
-		 
-	
-		 
-		// Getting doctrine manager
-		$em = $this->getDoctrine()->getManager();
-	
-		// retrieve all active legends
-		$legends = $em->getRepository('AppBundle:Legend')->findBy(array('active' => 1), array('position' => 'ASC'));
-	
-		// retrieve all active site types
-		$siteTypes = $em->getRepository('AppBundle:SiteType')->findBy(array('active' => 1), array('position' => 'ASC'));
-	
-		// retrieve all active automatic networks
-		$automaticNetworks = $em->getRepository('AppBundle:AutomaticNetwork')->findBy(array('active' => 1), array('position' => 'ASC'));
-	
-		// retrieve all zoom areas
-		$zooms = $em->getRepository('AppBundle:MapZoom')->findAll();
-	
-		// build the table for last measure per station
-		$rawsql = $this->getDtRequest($nuclide);
-		 
-		$statement1 = $this->getDoctrine()->getManager()->getConnection()->prepare($rawsql);
-		$statement1->execute();
-		$resultdb = $statement1->fetchAll();
-		$table = $this->createDataTable()
-		->add('referenceDate', DateTimeColumn::class, ['format' => 'd-m-Y', 'label' => 'table.refdate', 'className' => 'bold'])
-		->add('limited', TextColumn::class, ['label' => 'table.limited', 'visible' => false])
-		->add('value', TextColumn::class, ['label' => 'table.value', 'raw' => true, 'render' => function($value, $context) {
-			if($context['limited']==0) {
-				return sprintf('%.1e', $context['value']);
-			} else {
-				return sprintf('&lt; %.1e', $context['value']);
-			}
-	
-		}])
-		->add('error', TextColumn::class, ['label' => 'table.error', 'render' => function($value, $context) {
-			if($context['error']=='') return '';
-			else return sprintf('%.1e', $context['error']);
-		}])
-		->add('unit', TextColumn::class, ['label' => 'table.unit'])
-		->add('station', TextColumn::class, ['label' => 'table.station'])
-		->createAdapter(ArrayAdapter::class, $resultdb)
-		->handleRequest($request);
-	
-		if ($table->isCallback()) {
-			return $table->getResponse();
-		}
-	
-		return $this->render('main_map2.html.twig', array(
-				'legends' => $legends,
-				'siteTypes' => $siteTypes,
-				'automaticNetworks' => $automaticNetworks,
-				'zooms' => $zooms,
-				'datatable' => $table,
-		));
-	
-	}
-	
-	
-	public function getDtRequest($nuclide)
+	public function getDtResult($nuclide)
 	{
 		if($nuclide==NULL) $nuclide=21;
 		
+		// build the table for last measure per station
+		$rawsql = $this->getDtRequest($nuclide);
+			
+		$statement1 = $this->getDoctrine()->getManager()->getConnection()->prepare($rawsql);
+		$statement1->execute();
+		return $statement1->fetchAll();
+	}
+	
+	
+	/**
+	 * @Route("/tabdata/{nuclide}", name="tabdata")
+	 */
+	public function tabdataAction($nuclide=21, Request $request)
+	{
+		$isAjax = $request->isXmlHttpRequest();
+	
+		$legends = $request->get('legends');
+		// build the table for last measure per station
+		$rawsql = $this->getDtRequest($nuclide, $legends);
+		$statement1 = $this->getDoctrine()->getManager()->getConnection()->prepare($rawsql);
+		$statement1->execute();
+		$resultdb = $statement1->fetchAll();
+		 
+		$count = count($resultdb);
+		 
+		if ($count>0) {
+			foreach ($resultdb as $result)
+			{
+				$isLimited = $result['limited'];
+				if($isLimited==1) {
+					$dataItem['value'] = '<'.Formatter::formatScientific($result['value']);
+					$dataItem['error'] = '';
+				} else {
+					$dataItem['value'] = Formatter::formatScientific($result['value']);
+					$dataItem['error'] = Formatter::formatScientific($result['error']);
+				}
+				$dataItem['station'] = $result['station'];
+				$dataItem['unit'] = $result['unit'];
+				$dataItem['date'] = date_format(date_create($result['referenceDate']), 'd.m.Y');
+		   
+				$data[]=$dataItem;
+			}
+		} else {
+			$data = array();
+		}
+		 
+		$response = '{
+    		"draw": 0,
+    		"recordsTotal": ' . $count . ',
+            "recordsFiltered": ' . $count . ',
+            "data": ';
+		 
+		$response .= json_encode($data);
+		 
+		$response .= '}';
+		 
+		$returnResponse = new JsonResponse();
+		$returnResponse->setJson($response);
+		return $returnResponse;
+		 
+	}
+	
+	public function getDtRequest($nuclide=21, $legends=1)
+	{		
 		// query builder
-		$rawsql = 'SELECT r.limited, r.value, r.error, u.code as unit, r.nuclide_id, m.id, m.referenceDate, st.code as station, st.id
+		$rawsql = 'SELECT r.limited, r.value, r.error, u.code as unit, r.nuclide_id as nuclide, m.id, m.referenceDate, st.code as station, st.id
 FROM result r
 left join measurement m on r.measurement_id=m.id
 left join sample s on m.sample_id=s.id
@@ -163,18 +185,18 @@ INNER JOIN
 FROM measurement m
 left join sample s on m.sample_id=s.id
 left join station st on s.station_id=st.id
-WHERE st.code LIKE "%"
+WHERE 
+ st.active=1
+ AND st.id IN (SELECT station_id FROM legend_station WHERE legend_id IN ('.$legends.'))
 group by st.code) AS groupe1
   
 ON m.referenceDate=groupe1.maxdate
 and st.code=groupe1.st_code
 WHERE r.nuclide_id=' . $nuclide
-	. ' ORDER BY m.referenceDate DESC';
+	. ' ORDER BY m.referenceDate DESC LIMIT 6';
 	 
 	return $rawsql;
 	}
-	
-	
 	
 	/**
 	 * Grid action
