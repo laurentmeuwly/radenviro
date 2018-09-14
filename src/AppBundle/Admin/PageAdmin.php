@@ -61,9 +61,4 @@ class PageAdmin extends AbstractAdmin
 		;
 	}
 	
-	public function postUpdate($objet){
-		var_dump($objet);
-		
-	}
-
 }
