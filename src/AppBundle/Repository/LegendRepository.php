@@ -10,7 +10,7 @@ namespace AppBundle\Repository;
  */
 class LegendRepository extends \Doctrine\ORM\EntityRepository
 {
-	public function getNuclideByLegends($legends = array())
+	public function getNuclideByLegends(array $legends)
 	{
 		$qb = $this->_em->createQueryBuilder();
 
@@ -19,12 +19,13 @@ class LegendRepository extends \Doctrine\ORM\EntityRepository
 		->from('AppBundle:LegendNuclide', 'ln')
 		;
 
-		$qb
-		->where('ln.legend IN (:legends)')
-		->setParameter('legends', array_values($legends)) //, \Doctrine\DBAL\Connection::PARAM_STR_ARRAY)
-		->orderBy('ln.position', 'ASC')
-		;
-
+		if(null !== $legends) {
+			$qb
+			->where('ln.legend IN (:legends)')
+			->setParameter('legends', $legends, \Doctrine\DBAL\Connection::PARAM_STR_ARRAY)
+			->orderBy('ln.position', 'ASC')
+			;
+		}
 		return $qb->getQuery()->getResult();
 	}
 

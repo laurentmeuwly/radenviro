@@ -111,19 +111,7 @@ $('select.nuclides-graph').change(function () {
                 text: data['unit']
             },
             opposite: false,
-            plotBands: [{
-                color: '#ddd', // Color value
-                from: data['limit_low'], // Start of the plot band
-                to: data['limit_high'], // End of the plot band
-                label: {
-                    /*text: '{{ 'label.natural_fluctuation_margin'|trans }}',*/
-                    style: {
-                        color: '#333',
-                        fontWeight: 'normal'
-                    },
-            		align: 'center',
-                }
-              }],
+            
             labels: {
             	formatter: function() {
             	    return this.value.toExponential(2); // 2 digits of precision

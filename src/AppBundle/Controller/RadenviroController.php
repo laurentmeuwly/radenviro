@@ -119,6 +119,42 @@ class RadenviroController extends Controller
 	
 	
 	/**
+	 * @Route("/data/{type}", name="data")
+	 */
+	public function dataAction($type, Request $request)
+	{
+		$legends = array();
+		$data = array();
+		 
+		$id = $request->attributes->get('id');
+		$legends = $request->query->get('legends');
+		 
+		if(null !== $legends) {
+			// we expect an array, but who knows
+			$aLegends = is_array($legends) ? $legends : explode(',',$legends);
+	
+			// Getting doctrine manager
+			$em = $this->getDoctrine()->getManager();
+	
+			if($type=='nuclide') {
+				$results = $em->getRepository('AppBundle:Legend')->getNuclideByLegends($aLegends);
+				$i=0;
+				foreach($results as $result) {
+					if(!in_array($result->getNuclide()->getId(), array_column($data, 'value')))
+					{
+						$data[$i]['value'] = $result->getNuclide()->getId();
+						$data[$i]['label'] = $result->getNuclide()->getName();
+						$i++;
+					}
+				}
+			}
+		}
+		 
+		return new JsonResponse($data);
+	}
+	
+	
+	/**
 	 * @Route("/tabdata/{nuclide}", name="tabdata")
 	 */
 	public function tabdataAction($nuclide=21, Request $request)
