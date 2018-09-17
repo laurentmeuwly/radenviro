@@ -107,7 +107,7 @@ var mapDatatable = {
 	                
 	        return this;
 	    },
-	            
+	    
 	    /**
 	     * Refresh datatable based on nuclide
 	     */
@@ -115,12 +115,7 @@ var mapDatatable = {
 	        var legends = this.datatable.data('legends') || [];
 	        if(this.isVisible() && legends.length > 0 && nuclide){
 	            this.lastCallKey = legends.join(',');
-	            var nparams = {
-	                //'url': this.datatable.data('url') + '?legends[]=' + legends.join('&legends[]=') + '&nuclide=' + nuclide
-	                'url': 'http://localhost:8888/fr/map' + '?legends[]=' + legends.join('&legends[]=') + '&nuclide=' + nuclide
-	            } 
-	            //this.datatable.flexOptions(nparams);
-	            //this.datatable.flexReload();
+	            loadTable(nuclide,legends,this.lastCallKey);
 	        }
 	                
 	        return this;
@@ -145,7 +140,8 @@ var mapDatatable = {
 	                _self.nuclides.append(elements);
 	                        
 	                // TODO: Improve this call
-	                nuclides_change(_self.nuclides); // External global call
+	                //nuclides_change(_self.nuclides); // External global call
+	                _self.refreshDatatable('first'); 
 	                        
 	                _self.preventRefreshingFromInputs = false;
 	            };
