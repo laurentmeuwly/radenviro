@@ -19,191 +19,69 @@ use AppBundle\Datatables\LastResultDatatable;
 use AppBundle\Datatables\ResultDatatable;
 
 
+use Omines\DataTablesBundle\Adapter\ArrayAdapter;
+use Omines\DataTablesBundle\Column\TextColumn;
+use Omines\DataTablesBundle\Column\DateTimeColumn;
+use Omines\DataTablesBundle\Controller\DataTablesTrait;
+use Omines\DataTablesBundle\DataTableState;
+
+
+
+
+
 class DefaultController extends Controller
 {
-    /**
-     * @Route("/", name="homepage")
-     */
-    public function indexAction(Request $request)
-    {	
-    	return $this->render('radenviro.html.twig', [
-    			'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR,
-    	]);
-    }
+	use DataTablesTrait;
     
     /**
-     * appel principal du contrôleur
-     * @Route("/mainmap", name="mainmap")
+     * @Route("/tabmap/{nuclide}", defaults={"nuclide"=21}, name="tabmap")
      */
-    public function mainmapAction(Request $request)
+    public function tabmapAction($nuclide=21, Request $request)
     {
-    	$isAjax = $request->isXmlHttpRequest();
     	
-    	$datatable = null;
     	
-    		/** @var DatatableInterface $datatable */
-    		$datatable = $this->get('sg_datatables.factory')->create(LastResultDatatable::class);
-    		$datatable->buildDatatable();
-    			
-    		if ($isAjax) {
-    			$responseService = $this->get('sg_datatables.response');
-    			$responseService->setDatatable($datatable);
-    			$datatableQueryBuilder = $responseService->getDatatableQueryBuilder();
-    				
-    			return $responseService->getResponse();
+    	// build the table for last measure per station
+    	$rawsql = $this->getDtRequest($nuclide);
+    	$statement1 = $this->getDoctrine()->getManager()->getConnection()->prepare($rawsql);
+    	$statement1->execute();
+    	$resultdb = $statement1->fetchAll();
+    	
+    	$table = $this->createDataTable()
+    	->add('referenceDate', DateTimeColumn::class, ['format' => 'd-m-Y', 'label' => 'table.refdate', 'className' => 'bold'])
+    	->add('limited', TextColumn::class, ['label' => 'table.limited', 'visible' => false])
+    	->add('value', TextColumn::class, ['label' => 'table.value', 'raw' => true, 'render' => function($value, $context) {
+    		if($context['limited']==0) {
+    			return sprintf('%.1e', $context['value']);
+    		} else {
+    			return sprintf('&lt; %.1e', $context['value']);
     		}
     	
-    	
-    	return $this->render('AppBundle::mainmap.html.twig', array(
-    			'datatable' => $datatable
-    	));
-    	
-    }
-    
-    
-    /**
-     * @Route("/map", name="map")
-     */
-    public function mapAction(Request $request)
-    {    	
-    	$isAjax = $request->isXmlHttpRequest();
-    	
-    	// Getting doctrine manager
-    	$em = $this->getDoctrine()->getManager();
-    	
-    	// retrieve all active legends
-    	$legends = $em->getRepository('AppBundle:Legend')->findBy(array('active' => 1), array('position' => 'ASC'));
-    	//dump($legends);
-    	//die();
-    	// retrieve all active site types
-    	$siteTypes = $em->getRepository('AppBundle:SiteType')->findBy(array('active' => 1), array('position' => 'ASC'));
-    	
-    	// retrieve all active automatic networks
-    	$automaticNetworks = $em->getRepository('AppBundle:AutomaticNetwork')->findBy(array('active' => 1), array('position' => 'ASC'));
-    	
-    	// retrieve all zoom areas
-    	$zooms = $em->getRepository('AppBundle:MapZoom')->findAll();
-    	/*var_dump($zooms);
-    	die();*/
+    	}])
+    	->add('error', TextColumn::class, ['label' => 'table.error', 'render' => function($value, $context) {
+    		if($context['error']=='') return '';
+    		else return sprintf('%.1e', $context['error']);
+    	}])
+    	->add('unit', TextColumn::class, ['label' => 'table.unit'])
+    	->add('nuclide', TextColumn::class, ['label' => 'table.nuclide'])
+    	->add('station', TextColumn::class, ['label' => 'table.station'])
+    	->createAdapter(ArrayAdapter::class, $resultdb)
+    	->handleRequest($request);
     	
     	
-    	
-    	/*$datatable = null;
-    	
-    		
-    		$datatable = $this->get('sg_datatables.factory')->create(MeasurementDatatable::class);
-    		$datatable->buildDatatable();
-    			
-    		if ($isAjax) {
-    			$responseService = $this->get('sg_datatables.response');
-    			$responseService->setDatatable($datatable);
-    			$datatableQueryBuilder = $responseService->getDatatableQueryBuilder();
-    			$datatableQueryBuilder->buildQuery();
-    	
-    			
-    					
-    			$qb = $datatableQueryBuilder->getQb();
-    			$qb->andWhere('network.id = :network');
-    			$qb->setParameter('network', '10');
-    			
-    			return $responseService->getResponse();
-    		}*/
-    	
-    	
-    	$datatable=NULL;
-    	$datatable = $this->get('sg_datatables.factory')->create(LastResultDatatable::class);
-    	$datatable->buildDatatable();
-    	
-    	if ($isAjax) {
-    		$responseService = $this->get('sg_datatables.response');
-    		$responseService->setDatatable($datatable);
-    		$datatableQueryBuilder = $responseService->getDatatableQueryBuilder();
-    		$datatableQueryBuilder->buildQuery();
-    		
-    		$qb = $datatableQueryBuilder->getQb();
-    		$qb->andWhere($qb->expr()->gte('measurement.referencedate', ':date_min'));
-    		$qb->setParameter('date_min', '2018-01-01');
-    			
-    		return $responseService->getResponse();
+    	if ($table->isCallback()) {
+    		return $table->getResponse();
     	}
     	
-    	
-    	return $this->render('main_map.html.twig', array(
-    			'legends' => $legends,
-    			'siteTypes' => $siteTypes,
-    			'automaticNetworks' => $automaticNetworks,
-    			'zooms' => $zooms,
-    			'datatable' => $datatable,
+    	return $this->render('_tabtemp.html.twig', array(
+    		'datatable' => $table,
     	));
-    	/*
-    	return $this->render('default/radenviro.html.twig', [
-    			'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR,
-    	]);*/
+    	
     }
     
-    /**
-     * @Route("/news", name="news")
-     */
-    public function newsAction(Request $request)
-    {
-    	// Getting doctrine manager
-    	$em = $this->getDoctrine()->getManager();
-    	
-    	// retrieve the page to display
-    	$page = $em->getRepository('AppBundle:Page')->findOneBy(array('code' => 'news'));
+   
+    
+    
 
-    	return $this->render('iframe.html.twig', array(
-    			'page' => $page,
-    	));
-    }
-    
-    /**
-     * @Route("/maduk", name="maduk")
-     */
-    public function madukAction(Request $request)
-    {
-    	// Getting doctrine manager
-    	$em = $this->getDoctrine()->getManager();
-    	 
-    	// retrieve the page to display
-    	$page = $em->getRepository('AppBundle:Page')->findOneBy(array('code' => 'maduk'));
-    
-    	return $this->render('iframe.html.twig', array(
-    			'page' => $page,
-    	));
-    }
-    
-    /**
-     * @Route("/radair", name="radair")
-     */
-    public function radairAction(Request $request)
-    {
-    	// Getting doctrine manager
-    	$em = $this->getDoctrine()->getManager();
-    	 
-    	// retrieve the page to display
-    	$page = $em->getRepository('AppBundle:Page')->findOneBy(array('code' => 'radair'));
-
-    	return $this->render('iframe.html.twig', array(
-    			'page' => $page,
-    	));
-    }
-    
-    /**
-     * @Route("/information", name="information")
-     */
-    public function informationAction(Request $request)
-    {
-    	// Getting doctrine manager
-    	$em = $this->getDoctrine()->getManager();
-    	 
-    	// retrieve the page to display
-    	$page = $em->getRepository('AppBundle:Page')->findOneBy(array('code' => 'informations'));
-    	
-    	return $this->render('iframe.html.twig', array(
-    			'page' => $page,
-    	));
-    }
     
     /**
      * @Route("/convert", name="convert")
@@ -238,75 +116,6 @@ class DefaultController extends Controller
     	return $this->render('base.html.twig');
     }
     
-    
-    /**
-     * @Route("/measures/{id}", name="measures")
-     */
-    public function measuresAction($id, Request $request)
-    {
-    	// Getting doctrine manager
-    	$em = $this->getDoctrine()->getManager();
-    	$station = $em->getRepository('AppBundle:Station')->findOneById(array('id'=>$id));
-    	$nuclide = $em->getRepository('AppBundle:Nuclide')->findOneById(array('id'=>21));
-    	//$results = $em->getRepository('AppBundle:Measurement')->getAllByStationAndNuclide($station, $nuclide);
-    	
-    	// initiate the datatable result
-    	$this->datatableResult();
-    	
-    	return $this->render('measures/measures_history.html.twig', array(
-    			'station' => $station,
-    			'nuclide' => $nuclide,
-    	));
-    	
-    }
-    
-    /*
-     OLD VERSION 
-     * @Route("/measures/{id}", name="measures")
-     
-    public function measuresAction($id, Request $request)
-    {
-    	$isAjax = $request->isXmlHttpRequest();
-    	
-    	// Getting doctrine manager
-    	$em = $this->getDoctrine()->getManager();
-    	$station = $em->getRepository('AppBundle:Station')->findOneById(array('id'=>$id));
-    	$nuclide = $em->getRepository('AppBundle:Nuclide')->findOneById(array('id'=>21));
-    	//$results = $em->getRepository('AppBundle:Measurement')->getAllByStationAndNuclide($station, $nuclide);
-    	
-    	$datatable = $this->get('sg_datatables.factory')->create(ResultDatatable::class);
-    	$datatable->buildDatatable();
-    	
-    	if ($isAjax) {
-    		$station2 = $em->getRepository('AppBundle:Station')->findOneById(array('id'=>7));
-    		$meas = $em->getRepository('AppBundle:Mesurement')->findOneById(array('id'=>20158));
-    		$responseService = $this->get('sg_datatables.response');
-    		$responseService->setDatatable($datatable);
-    		$datatableQueryBuilder = $responseService->getDatatableQueryBuilder();
-    		$datatableQueryBuilder->buildQuery();
-    	
-    		//if($session->get('network')>0) {
-    		
-    			$qb = $datatableQueryBuilder->getQb();
-    			$qb->andWhere('measurement = :station');
-    			//$qb->andWhere('nuclide = :nuclide');
-    			$qb->setParameter('station', $meas);
-    			//$qb->setParameter('nuclide', 21);
-    		
-    		//}
-    		return $responseService->getResponse();
-    	}
-    	 
-    	$this->datatable2();
-    	
-    	return $this->render('measures/measures_history.html.twig', array(
-    			'station' => $station,
-    			'nuclide' => $nuclide,
-    			'datatable' => $datatable
-    	));
-    	
-    }
-    */
      
     
     /**
@@ -323,61 +132,14 @@ class DefaultController extends Controller
     	$station = $em->getRepository('AppBundle:Station')->findOneById(array('id'=>$id));
     	
     	$results = $station->resultsByNuclide(array('nuclide'=>$nuclide));
-    	/*echo $nuclide;
-    	echo $station;
-    	echo $type;
     	
-    	dump($request);
-    	die();*/
     	//return new JsonResponse($data);
     	return $this->render('measures/datas/graph.html.twig', array(
     			'results' => $result
     	));
     }
     
-    /**
-     * @Route("/data/{type}/{id}", defaults={"id" = 0}, name="data")
-     */
-    public function dataAction($type, Request $request)
-    {
-    	$legends = array();
-    	$data = array();
-    	
-    	$id = $request->attributes->get('id');
-    	    	
-    	$legends = $request->query->get('legends');
-    	
-    	// Getting doctrine manager
-    	$em = $this->getDoctrine()->getManager();
-    	 
-
-    	if($type=='nuclide') {
-    		$results = $em->getRepository('AppBundle:Legend')->getNuclideByLegends(array('legends'=>$legends));
-    		$i=0;
-    		foreach($results as $result) {
-    			$data[$i]['value'] = $result->getNuclide()->getId();
-    			$data[$i]['label'] = $result->getNuclide()->getName();
-    			$i++;
-    		}
-    	}
-    	if($type=='tab') {
-    		$data = [
-    				'0' => [
-    						'value' => 12,
-    						'label' => 'test',
-    				],
-    				'1' => [
-    						'value' => 24,
-    						'label' => 'autre',
-    				],
-    				'2' => [
-    						'value' => 56,
-    						'label' => 'blala',
-    				],
-    		];
-    	}
-    	return new JsonResponse($data);
-    }
+    
     
     /**
      * @return GridBuilder
@@ -518,6 +280,8 @@ class DefaultController extends Controller
      */
     public function graphAction(Request $request)
     {
+    	date_default_timezone_set("UTC");  // this is not the right place to keep...
+    	
     	$dataNwg = array();
     	$dataVal = array();
     	$unit = '';
@@ -760,5 +524,206 @@ class DefaultController extends Controller
     }
     
     
+    /**
+     * Grid action
+     * @Route("/dtlastresult", name="dtlastresult")
+     * @return Response
+     */
+    public function dtLastResultAction(Request $request)
+    {
+    	$nuclide = $request->get('nuclide');
+    	$legend = $request->get('legend');
     
+    	return $this->dtLastResult($nuclide, $legend)->execute();
+    }
+    
+    /**
+     * set datatable configs
+     * @return \Waldo\DatatableBundle\Util\Datatable
+     */
+    private function dtLastResult($nuclide=null, $legend=null) {
+    
+    	// TODO: no specific test here, but just return empty array
+    	if($nuclide==null) {
+    		$nuclide=21;
+    	}
+    	if($legend==null) {
+    		$legend=1;
+    	}
+    	$station=7;
+    	 
+    	// query builder
+    	$rawsql = 'SELECT r.limited, r.value, r.error, u.code as unit, r.nuclide_id as nuclide, m.id, m.referenceDate, st.code as station, st.id
+FROM result r
+left join measurement m on r.measurement_id=m.id
+left join sample s on m.sample_id=s.id
+left join station st on s.station_id=st.id
+left join result_unit u on m.result_unit_id=u.id
+INNER JOIN
+(SELECT max(m.referenceDate) as maxdate, st.code as st_code
+FROM measurement m
+left join sample s on m.sample_id=s.id
+left join station st on s.station_id=st.id
+WHERE st.code LIKE "HV%"
+group by st.code) AS groupe1
+    
+ON m.referenceDate=groupe1.maxdate
+and st.code=groupe1.st_code
+WHERE r.nuclide_id=21';
+    	 
+    	/*$statement1 = $this->getDoctrine()->getManager()->getConnection()->prepare($rawsql);
+    	$statement1->execute();
+    	 $resultdb = $statement1->fetchAll();
+    	  
+    	 var_dump($resultdb);
+    	 die();
+    	 */
+    	// build subquery
+    	$qb2 = $this->getDoctrine()->getManager()->createQueryBuilder();
+    	//$qb2->select('m', 'MAX(m.referenceDate AS maxdate)', 's', 'st')
+    	$qb2->select('m', $qb2->expr()->max('m.referenceDate'). ' AS maxdate', 's', 'st')
+    	->from("AppBundle:Measurement", "m")
+    	->leftJoin('m.sample', 's', \Doctrine\ORM\Query\Expr\Join::LEFT_JOIN)
+    	->leftJoin('s.station', 'st', \Doctrine\ORM\Query\Expr\Join::LEFT_JOIN)
+    	->where('st.code = :station')
+    	->setParameters(array('station' => 'HV-POS'))
+    	->groupBy('st.code')
+    	;
+    	 
+    	 
+    	$qb = $this->getDoctrine()->getManager()->createQueryBuilder();
+    	$qb->select('r','m','u','s','st')
+    	->from("AppBundle:Result", "r")
+    	->leftJoin('r.measurement', 'm', \Doctrine\ORM\Query\Expr\Join::LEFT_JOIN)
+    	->leftJoin('m.resultUnit', 'u', \Doctrine\ORM\Query\Expr\Join::LEFT_JOIN)
+    	->leftJoin('m.sample', 's', \Doctrine\ORM\Query\Expr\Join::LEFT_JOIN)
+    	->leftJoin('s.station', 'st', \Doctrine\ORM\Query\Expr\Join::LEFT_JOIN)
+    	->leftJoin('r.nuclide', 'n', \Doctrine\ORM\Query\Expr\Join::LEFT_JOIN)
+    	->innerJoin(sprintf('(%s)', $qb2->getDql()). ' AS groupe1', 'm.referenceDate = groupe1.maxdate')
+    	->where('st.id = :station AND n.id = :nuclide')
+    
+    	->setParameters(array('station' => $station,'nuclide' => $nuclide))
+    	->orderBy("m.referencedate", "desc")
+    	;
+    	 
+    
+    
+    	// table heading
+    	// $this;
+    	 
+    	$datatable = $this->get('datatable')
+    	->setDatatableId('dta-tst2')
+    	->setFields(
+    			array(
+    					$this->get('translator')->trans('table.refdate')	=> 'm.referencedate',
+    					$this->get('translator')->trans('table.limited')	=> 'r.limited',
+    					$this->get('translator')->trans('table.value')		=> 'r.value',
+    					$this->get('translator')->trans('table.error')		=> 'r.error',
+    					$this->get('translator')->trans('table.unit')		=> 'u.code',
+    					$this->get('translator')->trans('table.station')	=> 'st.code',
+    					"_identifier_"  => 'r.id'
+    			)
+    			);
+    	 
+    	/*
+    	 * Cette partie fonctionne mais ne permet pas de sous-requête complexe
+    	 *
+    	 $datatable = $this->get('datatable')
+    	 ->setDatatableId('dta-tst2')
+    	 ->setGlobalSearch(false)
+    	 ->setSearch(false)
+    	 ->setNotSortableFields(array(0,1,2,3,4))
+    	 ->setHiddenFields(array(1))
+    	 ->setEntity("AppBundle:Result", "r")
+    	 ->setOrder("m.referencedate", "desc")
+    	 ->addJoin('r.measurement', 'm', \Doctrine\ORM\Query\Expr\Join::LEFT_JOIN)
+    	 ->addJoin('m.resultUnit', 'u', \Doctrine\ORM\Query\Expr\Join::LEFT_JOIN)
+    	 ->addJoin('m.sample', 's', \Doctrine\ORM\Query\Expr\Join::LEFT_JOIN)
+    	 ->addJoin('s.station', 'st', \Doctrine\ORM\Query\Expr\Join::LEFT_JOIN)
+    	 ->addJoin('r.nuclide', 'n', \Doctrine\ORM\Query\Expr\Join::LEFT_JOIN)
+    	 ->setWhere(                                                     // set your dql where statement
+    	 'st.id = :station AND n.id = :nuclide',
+    	 array('station' => $station,'nuclide' => $nuclide)
+    	 )
+    	 ->setFields(
+    	 array(
+    	 $this->get('translator')->trans('table.refdate')	=> 'm.referencedate',
+    	 $this->get('translator')->trans('table.limited')	=> 'r.limited',
+    	 $this->get('translator')->trans('table.value')		=> 'r.value',
+    	 $this->get('translator')->trans('table.error')		=> 'r.error',
+    	 $this->get('translator')->trans('table.unit')		=> 'u.code',
+    	 $this->get('translator')->trans('table.station')	=> 'st.code',
+    	 "_identifier_"  => 'r.id'
+    	 )
+    	 )
+    	 ->setRenderer(
+    	 function(&$data) use ($controller_instance)
+    	 {
+    	 $nwg = false;
+    	 $renderer = 'AppBundle:Renderers:_scinumber.html.twig';
+    
+    	 foreach ($data as $key => $value)
+    	 {
+    	 if ($key == 0) // m.referencedate
+    	 {
+    	 $data[$key] = $controller_instance
+    	 ->get('templating')
+    	 ->render(
+    	 'AppBundle:Renderers:_date.html.twig',
+    	 array('data' => $value)
+    	 );
+    	 }
+    
+    	 if ($key == 1) // r.limited
+    	 {
+    	 if($value) {
+    	 $renderer = 'AppBundle:Renderers:_nwg.html.twig';
+    	 } else {
+    	 $renderer = 'AppBundle:Renderers:_scinumber.html.twig';
+    	 }
+    	 }
+    
+    	 if ($key == 2) // r.value
+    	 {
+    
+    	 if($value) {
+    	 $data[$key] = $controller_instance
+    	 ->get('templating')
+    	 ->render(
+    	 $renderer,
+    	 array('data' => $value)
+    	 );
+    	 }
+    	 }
+    
+    	 if ($key == 3) // r.error
+    	 {
+    	 if($value) {
+    	 $data[$key] = $controller_instance
+    	 ->get('templating')
+    	 ->render(
+    	 'AppBundle:Renderers:_scinumber.html.twig',
+    	 array('data' => $value)
+    	 );
+    	 }
+    	 }
+    	 }
+    	 }
+    	 )
+    	  
+    	 ;
+    	 */
+    	//$datatable->getQueryBuilder()->getDoctrineQueryBuilder()->setMaxResults(1);
+    	 
+    	$datatable->getQueryBuilder()->setDoctrineQueryBuilder($qb);
+    	 
+    	return $datatable;
+    }
+    
+    
+    
+    
+    
+    
+
 }
