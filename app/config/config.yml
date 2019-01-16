@@ -86,7 +86,6 @@ doctrine:
                 password: '%database_password%'
                 charset: UTF8
             envira:
-                server_version: 14.14
                 driver: pdo_mysql
                 host: '%db_envira_host%'
                 port: '%db_envira_port%'
