@@ -364,7 +364,7 @@ authentication:
 main:
   map:
     advanced search: Recherche avancée
-    map legend: labe
+    map legend: Légende de la carte
     maps of radioactivity measurements: Cartes des mesures de la radioactivité
 menus:
   automatic_networks: Réseaux automatiques
