@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+
+
+	<link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/radenviro.css') }}" /> 
+{% endblock %}
+
+{% block head_javascripts %}
+	<script type="text/javascript" charset="utf8" src="{{ asset('js/jquery.min.js') }}"></script>
+	<script type="text/javascript" charset="utf8" src="{{ asset('js/bootstrap.js') }}"></script>
+{% endblock %}
+  
+  
+{% block body %}
+
+<div id="page-margins">
+      <div id="page">       
+        
+        <div id="content">    
+     	{% block content %}
+    		This should not be displayed as all specific views should replace the content block.
+    	{% endblock %}
+       	</div>
+     </div>
+</div>
+
+{% endblock %}

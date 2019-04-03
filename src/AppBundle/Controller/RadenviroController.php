@@ -67,11 +67,17 @@ class RadenviroController extends Controller
 		 
 		// initiate the datatable result
 		$this->datatableResult();
-		 
-		return $this->render('measures/measures_history.html.twig', array(
-				'station' => $currentStation,
-				'nuclides' => $availableNuclides,
-		));
+		$header = $request->get('header');
+		if($header=='no')
+    		return $this->render('measures/measures_history_nh.html.twig', array(
+    				'station' => $currentStation,
+    				'nuclides' => $availableNuclides,
+    		));
+    	else 
+    	    return $this->render('measures/measures_history.html.twig', array(
+    		    'station' => $currentStation,
+    		    'nuclides' => $availableNuclides,
+    		));
 		 
 	}
 	
@@ -96,12 +102,22 @@ class RadenviroController extends Controller
     	// retrieve all zoom areas
     	$zooms = $em->getRepository('AppBundle:MapZoom')->findAll();
     	
-    	return $this->render('main_map.html.twig', array(
-    			'legends' => $legends,
-    			'siteTypes' => $siteTypes,
-    			'automaticNetworks' => $automaticNetworks,
-    			'zooms' => $zooms,	
-    	));
+    	$header = $request->get('header');
+    	if($header=='no')
+    	    return $this->render('main_map_nh.html.twig', array(
+    	        'legends' => $legends,
+    	        'siteTypes' => $siteTypes,
+    	        'automaticNetworks' => $automaticNetworks,
+    	        'zooms' => $zooms,
+    	    ));
+    	    
+        else    
+        	return $this->render('main_map.html.twig', array(
+        			'legends' => $legends,
+        			'siteTypes' => $siteTypes,
+        			'automaticNetworks' => $automaticNetworks,
+        			'zooms' => $zooms,	
+        	));
 
     }
 	

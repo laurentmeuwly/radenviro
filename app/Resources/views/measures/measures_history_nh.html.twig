@@ -1,0 +1,60 @@
+{% extends 'data_content_nh.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }} 
+	<!-- <link rel="stylesheet" type="text/css" href="{{ asset('css/measures.css') }}" /> -->
+{% endblock %}
+	
+{% block head_javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" charset="utf8" src="{{ asset('js/highstock.js') }}"></script>
+    
+	<script type="text/javascript" charset="utf8" src="{{ asset('js/radenviro.js') }}"></script>
+
+    <!--
+    <script type="text/javascript" charset="utf8" src="{{ asset('js/measures.js') }}"></script>
+     -->
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="box measures">
+  
+  <div class="content">
+  
+
+   
+      <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="pill" href="#measures-graph">{{ 'label.graph'|trans }}</a></li>
+        <li><a data-toggle="pill" href="#measures-table">{{ 'label.table'|trans }}</a></li>
+        <!-- <li><a data-toggle="pill" href="#measures-download">{{ 'label.download'|trans }}</a></li> -->
+      </ul>
+   
+    <div class="shortcuts">
+      <a href="{{ path('map') }}">{{ 'menus.back_to_map'|trans }}</a>
+    </div>
+  
+      
+      <div class="tab-content">
+          <div class="tab-pane fade in active" id="measures-graph">
+            {% include 'measures/_graph_filter.html.twig' %}
+            {% include 'measures/_graph.html.twig' %}
+            </br>
+          </div>
+          <div class="tab-pane fade" id="measures-table">
+            {% include 'measures/_table_filter.html.twig' %}
+            {% include 'measures/_table.html.twig' %}
+          </div>
+          <!-- <div class="tab-pane fade" id="measures-download">
+            {% include 'measures/_download.html.twig' %} -->
+          </div>
+      </div>
+  
+    
+ 
+ </div>
+</div>
+
+{% endblock %}
