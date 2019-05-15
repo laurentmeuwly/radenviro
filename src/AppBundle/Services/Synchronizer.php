@@ -440,7 +440,12 @@ class Synchronizer
 				$data_dst->setSamcountry($this->em->getRepository("AppBundle:Country")->findOneByCode($data_src['sam_country']));
 				
 				$data_dst->setSamcomment($data_src['sam_comment']);
-				$data_dst->setOrisame($data_src['ori_same']);
+				
+				if($data_src['ori_same']=='N' || $data_src['ori_same']==0 || !$data_src['ori_same']) {
+				    $data_dst->setOrisame(0);
+				} else {
+				    $data_dst->setOrisame(1);
+				}
 				
 				$ori_date = $data_src['ori_date']!='' ?
 					$ori_date = \DateTime::createFromFormat('Y-m-d H:i:s', $data_src['ori_date']) : null;
