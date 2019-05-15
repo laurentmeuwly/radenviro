@@ -441,10 +441,10 @@ class Synchronizer
 				
 				$data_dst->setSamcomment($data_src['sam_comment']);
 				
-				if($data_src['ori_same']=='N' || $data_src['ori_same']==0 || !$data_src['ori_same']) {
-				    $data_dst->setOrisame(0);
-				} else {
+				if($data_src['ori_same']=='Y') {
 				    $data_dst->setOrisame(1);
+				} else {
+				    $data_dst->setOrisame(0);
 				}
 				
 				$ori_date = $data_src['ori_date']!='' ?
@@ -515,7 +515,11 @@ class Synchronizer
 			$data_dst->setQuantity($data_src['quantity']);
 			$data_dst->setFreshDryRatio($data_src['fresh_dry_ratio']);
 			$data_dst->setComments($data_src['comments']);
-			$data_dst->setResultsFresh($data_src['results_fresh']);
+			if($data_src['results_fresh']=='Y') {
+			    $data_dst->setResultsFresh(1);
+			} else {
+			    $data_dst->setResultsFresh(0);
+			}
 			
 			$data_dst->setLaboratory($this->em->getRepository("AppBundle:Laboratory")->findOneByCode($data_src['labor']));
 			$data_dst->setMethod($this->em->getRepository("AppBundle:Method")->findOneByCode($data_src['method']));
