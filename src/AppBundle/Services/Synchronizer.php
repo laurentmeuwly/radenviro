@@ -370,7 +370,7 @@ class Synchronizer
 		$res['added']=0;
 		$res['threated']=0;
 	
-		$result_src = $this->conn->query('SELECT distinct(station) as code, network FROM sample');
+		$result_src = $this->conn->query('SELECT distinct(station) as code, network FROM sample WHERE station is not NULL');
 		while($data_src = $result_src->fetch()) {
 			$data_dst = $this->em->getRepository("AppBundle:Station")->findOneByCode($data_src['code']);
 		
@@ -440,7 +440,12 @@ class Synchronizer
 				$data_dst->setSamcountry($this->em->getRepository("AppBundle:Country")->findOneByCode($data_src['sam_country']));
 				
 				$data_dst->setSamcomment($data_src['sam_comment']);
-				$data_dst->setOrisame($data_src['ori_same']);
+				
+				if($data_src['ori_same']=='N' || $data_src['ori_same']==0 || !$data_src['ori_same']) {
+				    $data_dst->setOrisame(0);
+				} else {
+				    $data_dst->setOrisame(1);
+				}
 				
 				$ori_date = $data_src['ori_date']!='' ?
 					$ori_date = \DateTime::createFromFormat('Y-m-d H:i:s', $data_src['ori_date']) : null;
