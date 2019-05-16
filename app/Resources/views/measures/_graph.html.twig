@@ -42,7 +42,7 @@ $('select.nuclides-graph').change(function () {
     
     // Create the chart
     Highcharts.stockChart('container', {
-
+        
     	rangeSelector: {
     		buttons: [{
         	    type: 'month',
@@ -111,6 +111,21 @@ $('select.nuclides-graph').change(function () {
                 text: data['unit']
             },
             opposite: false,
+
+            
+            plotBands: [{
+                color: '#ddd', // Color value
+                from: data['limit_low'], // Start of the plot band
+                to: data['limit_high'], // End of the plot band
+                label: {
+                    /*text: '{{ 'label.natural_fluctuation_margin'|trans }}',*/
+                    style: {
+                        color: '#333',
+                        fontWeight: 'normal'
+                    },
+            		align: 'center',
+                }
+              }],
             
             labels: {
             	formatter: function() {
@@ -119,7 +134,47 @@ $('select.nuclides-graph').change(function () {
             }
         },
 
+        plotOptions: {
+            series: {
+              cursor: 'pointer',
+              stickyTracking: false,
+              allowPointSelect: true,
+              point: {
+                events: {
+                	
+                        click: function(e) {
+                          var $target = $(e.target)
+                          if (!$('<b></b>').addClass($target.attr('class')).is('.highcharts-point, .highcharts-halo')) {
+                            return
+                          }
+                            alert('ok');
+                            if (cloneToolTip) {
+                                chart.container.firstChild.removeChild(cloneToolTip);
+                              }
+                              cloneToolTip = this.series.chart.tooltip.label.element.cloneNode(true);
+                              chart.container.firstChild.appendChild(cloneToolTip);
+					    }
+                        
+                    
+                 /* click: function() {
+                    if (cloneToolTip) {
+                      chart.container.firstChild.removeChild(cloneToolTip);
+                    }
+                    cloneToolTip = this.series.chart.tooltip.label.element.cloneNode(true);
+                    chart.container.firstChild.appendChild(cloneToolTip);
+                  }*/
+                }
+              }
+            }
+          },
+          
         tooltip: {
+            useHTML: true,
+            hideDelay: 1500,
+            
+            style: {
+                pointerEvents: 'auto'
+              },
         	formatter: function() {
                 var s = '<b>'+  Highcharts.dateFormat('%d.%m.%Y',new Date(this.x)) +'</b><br/>';
 
@@ -145,6 +200,8 @@ $('select.nuclides-graph').change(function () {
                     }
                     
                 });
+
+                s += '<br/>Test texte information sur point.<br/><a href="http://www.bag.admin.ch" target="blank">lien</a>';
 
                 return s;
             },

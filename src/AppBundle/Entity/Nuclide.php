@@ -104,6 +104,12 @@ class Nuclide
      */
     private $legends;
     
+    
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\IsotopeStationFluctuation", mappedBy="nuclide")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $fluctuations;
 
     /**
      * @param $method

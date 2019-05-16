@@ -285,12 +285,28 @@ class DefaultController extends Controller
     	$dataNwg = array();
     	$dataVal = array();
     	$unit = '';
+    	$limit_low = 0;
+    	$limit_high = 0;
+    	$show_fluctuation = false;
     	
     	$em = $this->getDoctrine()->getManager();
     	$station = $em->getRepository('AppBundle:Station')->findOneById(array('id'=> $request->get('station')));
     	$nuclide = $em->getRepository('AppBundle:Nuclide')->findOneById(array('id'=> $request->get('nuclide') ));
     	$results = $em->getRepository('AppBundle:Measurement')->getAllByStationAndNuclide($station, $nuclide);
     	
+    	$fluctuations = $em->getRepository('AppBundle:IsotopeStationFluctuation')->findOneBy([
+    	    'station'=>$request->get('station'),
+    	    'nuclide'=>$request->get('nuclide')
+    	]);
+    	
+    	if($fluctuations) {
+    	    if($fluctuations->getActive()) {
+    	        $show_fluctuation = true;
+    	        $limit_low = $fluctuations->getFluctuationMin();
+    	        $limit_high = $fluctuations->getFluctuationMax();
+    	    }
+    	}
+    	    	
     	foreach($results as $result)
     	{
     		$unit = $em->getRepository('AppBundle:ResultUnit')->findOneById(array('id'=> $result['result_unit_id']))->getCode();
@@ -308,8 +324,9 @@ class DefaultController extends Controller
     	    	
     	$serie = [
     		'unit' => $unit,
-    		'limit_low' => 0.00000025,
-    		'limit_high'=> 0.00000060,
+    	    'limit_low' => $limit_low,
+    	    'limit_high'=> $limit_high,
+    	    'show_fluctuation'=>$show_fluctuation,
     		'data' => $data,
     			'data_nwg' => $dataNwg,
     			'data_val' => $dataVal,

@@ -110,6 +110,12 @@ class Station
      */
     private $samples;
     
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\IsotopeStationFluctuation", mappedBy="station")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $fluctuations;
+    
     
     public function __construct()
     {
