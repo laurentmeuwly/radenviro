@@ -60,6 +60,7 @@ sonata_admin:
                     - app.admin.station
                     - app.admin.siteType
                     - app.admin.site
+                    - app.admin.sample
                                         
                     
             sonata.admin.group.base:
@@ -71,6 +72,7 @@ sonata_admin:
                     #- app.admin.bagCode
                     - app.admin.nuclide
                     - app.admin.predefinednuclidelist
+                    - app.admin.isotopestationfluctuation
                         
             sonata.admin.group.administration:
                 label:           sonata_administration
@@ -87,6 +89,7 @@ sonata_admin:
                 label_catalogue: messages
                 icon:            '<i class="fa fa-cogs"></i>'
                 items:
+                    #- admin.trans
                     #- app.admin.sync    
                     
                     
