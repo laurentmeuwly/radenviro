@@ -61,7 +61,7 @@ services:
         calls:
             - [ setTranslationDomain, [messages]]
                     
-           
+         
     app.admin.siteType:
         class: AppBundle\Admin\SiteTypeAdmin
         tags:
@@ -86,17 +86,7 @@ services:
         calls:
             - [ setTranslationDomain, [messages]]
             
-    app.admin.sitestation:
-        class: AppBundle\Admin\SiteStationAdmin
-        tags:
-            - { name: sonata.admin, manager_type: orm, group: "admin.group.frontend", label: "admin.menu.site_station" }
-        arguments:
-            - ~
-            - AppBundle\Entity\SiteStation            
-            - ~
-        calls:
-            - [ setTranslationDomain, [messages]]
-            
+           
     app.admin.automaticNetwork:
         class: AppBundle\Admin\AutomaticNetworkAdmin
         tags:
