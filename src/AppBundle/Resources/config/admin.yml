@@ -61,18 +61,7 @@ services:
         calls:
             - [ setTranslationDomain, [messages]]
                     
-    app.admin.sample:
-        class: AppBundle\Admin\SampleAdmin
-        tags:
-            - { name: sonata.admin, manager_type: orm, group: "admin.group.frontend", label: "admin.menu.sample" }
-        arguments:
-            - ~
-            - AppBundle\Entity\Sample
-            - 'PixSortableBehaviorBundle:SortableAdmin'
-            - ~
-        calls:
-            - [ setTranslationDomain, [messages]]
-            
+           
     app.admin.siteType:
         class: AppBundle\Admin\SiteTypeAdmin
         tags:
