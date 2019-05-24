@@ -134,47 +134,10 @@ $('select.nuclides-graph').change(function () {
             }
         },
 
-        plotOptions: {
-            series: {
-              cursor: 'pointer',
-              stickyTracking: false,
-              allowPointSelect: true,
-              point: {
-                events: {
-                	
-                        click: function(e) {
-                          var $target = $(e.target)
-                          if (!$('<b></b>').addClass($target.attr('class')).is('.highcharts-point, .highcharts-halo')) {
-                            return
-                          }
-                            alert('ok');
-                            if (cloneToolTip) {
-                                chart.container.firstChild.removeChild(cloneToolTip);
-                              }
-                              cloneToolTip = this.series.chart.tooltip.label.element.cloneNode(true);
-                              chart.container.firstChild.appendChild(cloneToolTip);
-					    }
-                        
-                    
-                 /* click: function() {
-                    if (cloneToolTip) {
-                      chart.container.firstChild.removeChild(cloneToolTip);
-                    }
-                    cloneToolTip = this.series.chart.tooltip.label.element.cloneNode(true);
-                    chart.container.firstChild.appendChild(cloneToolTip);
-                  }*/
-                }
-              }
-            }
-          },
+        
           
         tooltip: {
-            useHTML: true,
-            hideDelay: 1500,
             
-            style: {
-                pointerEvents: 'auto'
-              },
         	formatter: function() {
                 var s = '<b>'+  Highcharts.dateFormat('%d.%m.%Y',new Date(this.x)) +'</b><br/>';
 
