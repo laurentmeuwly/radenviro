@@ -77,6 +77,13 @@ admin:
     name: Catégorie de réseaux
   network:
     name: Nom du réseau
+  sample:
+    number: No d'échantillon
+    description: Description
+    station: Station
+    network: Réseau
+    date: Date de prélèvement
+    modified: Dernière modification
   station_type:
     name: Type de station
   station:

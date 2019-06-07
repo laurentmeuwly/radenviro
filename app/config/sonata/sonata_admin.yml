@@ -60,8 +60,6 @@ sonata_admin:
                     - app.admin.station
                     - app.admin.siteType
                     - app.admin.site
-                    #- app.admin.sample
-                                        
                     
             sonata.admin.group.base:
                 label:           admin.group.base
