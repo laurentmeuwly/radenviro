@@ -139,7 +139,7 @@ $('select.nuclides-graph').change(function () {
         tooltip: {
             
         	formatter: function() {
-                var s = '<b>'+  Highcharts.dateFormat('%d.%m.%Y',new Date(this.x)) +'</b><br/>';
+                var s = '<b>'+  Highcharts.dateFormat('%d.%m.%Y (%H:%M)',new Date(this.x)) +'</b><br/>';
 
                 $.each(this.points, function(i, point) {
                 	var serie = this.series;
