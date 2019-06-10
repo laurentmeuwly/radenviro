@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Filesystem\Filesystem;
@@ -23,35 +24,40 @@ class SyncEnviraCommand extends ContainerAwareCommand
         $this
         ->setName('sync:envira')
         ->setDescription('Synchronize Envira into Radenviro')
-        ->addArgument('type');
+		->addArgument('startDate')
+		->addOption('type', null, InputOption::VALUE_OPTIONAL, 'Which data to be synchronized (all, new, mod).', 'all');
     }
     
     protected function execute(InputInterface $input, OutputInterface $output)
     {
     	$syncService = $this->getContainer()->get('app.synchronizer');
-    	
-    	$type = $input->getArgument('type');
+		
+		$startDate = $input->getArgument('startDate');
+		$regex='#^[0-9]{4}-[0-9]{2}-[0-9]{2}$#';
+		if (preg_match($regex, $startDate)) {
+			$startDate=$startDate;
+		} else {
+			$startDate=null;
+		}
+
+    	$type = $input->getOption('type');
     	switch ($type) {
     		// only new values will be imported
-    		case 'new':
-    			$result = $syncService->synchronize();
+			case 'new':
+			$text = 'Hello syncenvira(new):'.$startDate;
+        $output->writeln($text);
+    			//$result = $syncService->synchronize();
     			break;
     		
     		// only updated values will be imported
-    		case 'mod':
+			case 'mod':
+			$text = 'Hello syncenvira(mod):'.$startDate;
+        $output->writeln($text);
     			break;
     			
-    		// only values in destination and not more in source will be threated
-    		case 'del':
-    			break;
-    			
-    		// execution of the whole process
-    		case 'all':
-    			break;
-    			
-    		// by default, only new values will be imported
-    		default:
-    			$result = $syncService->synchronize();
+    		// by default, all values will be imported
+			default:
+    			$result = $syncService->synchronize($startDate);
     			break;
     	}
     }

@@ -76,7 +76,7 @@ class AppKernel extends Kernel
         		
         	new Ivory\GoogleMapBundle\IvoryGoogleMapBundle(),
         		
-        	new JMose\CommandSchedulerBundle\JMoseCommandSchedulerBundle(),
+			new Shapecode\Bundle\CronBundle\ShapecodeCronBundle(),
 
 			new Omines\DataTablesBundle\DataTablesBundle(),	
         	

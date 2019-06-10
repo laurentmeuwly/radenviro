@@ -12,7 +12,7 @@ class MenuBuilderListener
         $menu = $event->getMenu();
         
         $child = $menu->addChild('sync', [
-            'label' => 'Synchronisation',
+            'label' => 'menu.synchronisation',
             //'route' => 'admin_dashboard',
         	//'route' => 'app_reports_index',
         ])->setExtras([
@@ -34,10 +34,10 @@ class MenuBuilderListener
         		'label' => 'Envira',
         		'route' => 'syncenvira',
         ]);*/
-        
-        /*$child = $menu['sync']->addChild('cron', [
-        		'label' => 'Cron',
-        		'route' => 'jmose_command_scheduler_list',
-        ]);*/
+
+        $child = $menu['sync']->addChild('cron', [
+            'label' => 'cronJob',
+            'route' => 'admin_shapecode_cron_cronjob_list',
+        ]);
     }
 }

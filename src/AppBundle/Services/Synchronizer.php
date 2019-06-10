@@ -35,7 +35,7 @@ class Synchronizer
 	}
 	
 	
-	public function synchronize()
+	public function synchronize(String $startDate=null)
 	{
 		$nb = array();
 		//$nb['canton'] = $this->syncCanton();
@@ -50,8 +50,8 @@ class Synchronizer
 		//$nb['bag_code'] = $this->syncBagCode();
 		//$nb['laboratory'] = $this->syncLaboratory();
 		//$nb['network'] = $this->syncNetwork();
-		$nb['station'] = $this->syncStation();
-		$nb['sample'] = $this->syncSample();
+		//$nb['station'] = $this->syncStation();
+		$nb['sample'] = $this->syncSample($startDate);
 		return $nb;
 	}
 	
@@ -403,12 +403,17 @@ class Synchronizer
 	 * For performance purpose we synchronise only new element
 	 * Measurement and Result should only be sync after Sample was synced
 	 */
-	public function syncSample()
+	public function syncSample(String $startDate = null)
 	{
+		// TODO: validate input format for $startDate
 		$res['added']=0;
 		$res['threated']=0;
+		if($startDate) {
+			$result_src = $this->conn->query('SELECT * FROM sample WHERE mtime>="'.$startDate.'"');
+		} else {
+			$result_src = $this->conn->query('SELECT * FROM sample');
+		}
 		
-		$result_src = $this->conn->query('SELECT * FROM sample');
 		while($data_src = $result_src->fetch()) {
 			$data_dst = $this->em->getRepository("AppBundle:Sample")->findOneByNumber($data_src['num']);
 			if(!is_object($data_dst)){

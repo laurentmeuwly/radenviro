@@ -61,6 +61,18 @@ services:
         calls:
             - [ setTranslationDomain, [messages]]
                     
+    app.admin.result:
+        class: AppBundle\Admin\ResultAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "admin.group.frontend", label: "admin.menu.result" }
+        arguments:
+            - ~
+            - AppBundle\Entity\Result
+            - 'PixSortableBehaviorBundle:SortableAdmin'
+            - ~
+        calls:
+            - [ setTranslationDomain, [messages]]
+            
     app.admin.sample:
         class: AppBundle\Admin\SampleAdmin
         tags:
@@ -226,6 +238,18 @@ services:
         arguments:
             - ~
             - AppBundle\Entity\Country
+            - ~
+        calls:
+            - [ setTranslationDomain, [messages]]
+
+
+    app.admin.cronjob:
+        class: AppBundle\Admin\NewCronJobAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "admin.menu.cronjob" }
+        arguments:
+            - ~
+            - Shapecode\Cron\Entity\CronJob
             - ~
         calls:
             - [ setTranslationDomain, [messages]]
