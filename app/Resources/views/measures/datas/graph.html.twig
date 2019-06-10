@@ -6,7 +6,7 @@
       date: {{ result.referenceDate }}, 
       value: {{ result.value }},
       nvalue: '{{ result.value }}',
-      error: {%  if result.error %} {{ result.error }} {% else %} 0 {{ endif }},
+      error: {%  if result.error %} {{ result.error }} {% else %} 0 {% endif %},
       limited: {{ result.limited }},
       unit: '{{ result.unit }}'
     },
