@@ -50,7 +50,7 @@ class Synchronizer
 		//$nb['bag_code'] = $this->syncBagCode();
 		//$nb['laboratory'] = $this->syncLaboratory();
 		//$nb['network'] = $this->syncNetwork();
-		//$nb['station'] = $this->syncStation();
+		$nb['station'] = $this->syncStation();
 		$nb['sample'] = $this->syncSample($startDate);
 		return $nb;
 	}

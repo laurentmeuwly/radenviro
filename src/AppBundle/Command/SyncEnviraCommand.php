@@ -2,6 +2,7 @@
 
 namespace AppBundle\Command;
  
+use Shapecode\Bundle\CronBundle\Annotation\CronJob;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -13,7 +14,14 @@ use Symfony\Component\Filesystem\Filesystem;
 use XMLReader;
 use DOMDocument;
 
- 
+/**
+ * Class SyncEnviraCommand
+ * @package AppBundle\Command
+ * @author Laurent Meuwly
+ *
+ * @CronJob("*\/30 * * * *")
+ * Will be executed every 30 minutes
+ */
 class SyncEnviraCommand extends ContainerAwareCommand
 {
 	private $tabStats;
