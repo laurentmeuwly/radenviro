@@ -38,6 +38,7 @@
 		"knplabs/doctrine-behaviors": "~1.1",
 		"knplabs/knp-snappy-bundle": "^1.4",
 		"leafo/scssphp": "^0.6.7",
+		"omines/datatables-bundle": "^0.2.0",
 		"oyejorge/less.php": "v1.7.0.14",
 		"patchwork/jsqueeze": "^2.0",
 		"pixassociates/sortable-behavior-bundle": "^1.2",
