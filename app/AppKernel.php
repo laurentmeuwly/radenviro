@@ -41,8 +41,8 @@ class AppKernel extends Kernel
         	new Sonata\TranslationBundle\SonataTranslationBundle(),
         		     
         	new CoopTilleuls\Bundle\CKEditorSonataMediaBundle\CoopTilleulsCKEditorSonataMediaBundle(),
-        	new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
-        	
+            new FOS\CKEditorBundle\FOSCKEditorBundle(),
+            
         	new Sonata\AdminBundle\SonataAdminBundle(),
         	new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
         	
@@ -77,8 +77,9 @@ class AppKernel extends Kernel
         	new Ivory\GoogleMapBundle\IvoryGoogleMapBundle(),
         		
         	new JMose\CommandSchedulerBundle\JMoseCommandSchedulerBundle(),
-        		
-        	new \Omines\DataTablesBundle\DataTablesBundle(),
+
+			new Omines\DataTablesBundle\DataTablesBundle(),	
+        	
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

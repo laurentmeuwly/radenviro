@@ -3,8 +3,13 @@ imports:
     - { resource: security.yml }
     - { resource: services.yml }
     
+    
+    # Translation management
+    #- { resource: translation.yml }
+    
     # FOS Bundles
     - { resource: fos/fos_user.yml }
+    - { resource: fos/fos_ck_editor.yml }
     
     # Sonata Core Bundles
     
@@ -16,7 +21,7 @@ imports:
     - { resource: "@AppBundle/Resources/config/admin.yml" }
     
     # Ivory CKEditor
-    - { resource: ivory/ivory_ckeditor.yml }
+    #- { resource: ivory/ivory_ckeditor.yml }
     # Ivory Google Map
     - { resource: ivory/ivory_google_map.yml }
     
@@ -47,7 +52,7 @@ framework:
         engines: ['twig']
     default_locale: '%locale%'
     trusted_hosts: ~
-    trusted_proxies: ~
+    #trusted_proxies: ~
     session:
         # http://symfony.com/doc/current/reference/configuration/framework.html#handler-id
         handler_id:  session.handler.native_file
@@ -71,6 +76,8 @@ twig:
         - 'SonataFormatterBundle:Form:formatter.html.twig'
         - 'SonataCoreBundle:Form:colorpicker.html.twig'
         - 'XmonColorPickerTypeBundle:Form:fields.html.twig'
+        - 'SonataCoreBundle:Form:datepicker.html.twig'
+        
 
 # Doctrine Configuration
 doctrine:
@@ -134,7 +141,6 @@ doctrine:
                     ApplicationSonataMediaBundle: ~
                     SonataMediaBundle: ~
                     JMoseCommandSchedulerBundle: ~
-                    
 
         
 # Swiftmailer Configuration
@@ -267,14 +273,14 @@ stof_doctrine_extensions:
             timestampable: true
             sortable: true
 
-sonata_block:
-    default_contexts: [cms]
-    blocks:
+#sonata_block:
+#    default_contexts: [cms]
+#    blocks:
         # Enable the SonataAdminBundle block
-        sonata.admin.block.admin_list:
-            contexts:   [admin]
+#        sonata.admin.block.admin_list:
+#            contexts:   [admin]
          # Block Stat créé pour le DashBoard
-        sonata.block.service.stat: ~
+#        sonata.block.service.stat: ~
             
 sonata_media:
     # if you don't use default namespace configuration
@@ -334,4 +340,10 @@ datatables:
         pageLength: "6"
         lengthMenu: [ 6 ]
         dom: '<"clearfix"lf>rtp'
-        
+  
+monolog:
+    handlers:
+        console:
+            type: console
+            channels: ["!event"]
+
