@@ -62,6 +62,14 @@ class SampleAdmin extends AbstractAdmin
                 ]
             ]
         ])
+        ->add('mtime', 'doctrine_orm_datetime_range', [
+            'field_type'=>'sonata_type_datetime_range_picker',
+            'field_options' => [
+                'field_options' => [
+                    'format' => 'dd.MM.yyyy'
+                ]
+            ]
+        ])
         ;
     }
 }
