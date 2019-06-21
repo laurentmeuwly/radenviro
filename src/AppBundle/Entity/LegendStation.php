@@ -32,7 +32,7 @@ class LegendStation
      * @ORM\JoinColumn(nullable=true)
      */
     private $station;
-
+    
     /**
      * @var integer
      *
@@ -40,7 +40,6 @@ class LegendStation
      */
     private $position = '0';
     
-
 
     public function __toString()
     {
@@ -80,7 +79,6 @@ class LegendStation
     	return $this->legend;
     }
 
-
     /**
      * Set station
      *
@@ -91,7 +89,6 @@ class LegendStation
     public function setStation($station = null)
     {
         $this->station = $station;
-
         return $this;
     }
 
@@ -103,7 +100,7 @@ class LegendStation
     public function getStation()
     {
         return $this->station;
-    }
+    } 
 
     /**
      * Set position

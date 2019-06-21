@@ -3,7 +3,6 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * LegendNuclide
@@ -36,7 +35,7 @@ class LegendNuclide
 
     /**
      * @var integer
-     * @Gedmo\SortablePosition
+     * 
      * @ORM\Column(name="position", type="integer", nullable=false)
      */
     private $position = '0';
@@ -67,7 +66,6 @@ class LegendNuclide
     public function setLegend(Legend $legend)
     {
     	$this->legend = $legend;
-    
     	return $this;
     }
     
@@ -81,7 +79,6 @@ class LegendNuclide
     	return $this->legend;
     }
 
-
     /**
      * Set nuclide
      *
@@ -92,7 +89,6 @@ class LegendNuclide
     public function setNuclide($nuclide = null)
     {
         $this->nuclide = $nuclide;
-
         return $this;
     }
 
