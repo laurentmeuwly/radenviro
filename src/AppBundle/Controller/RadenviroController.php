@@ -199,7 +199,7 @@ class RadenviroController extends Controller
 				}
 				$dataItem['station'] = $result['station'];
 				$dataItem['unit'] = $result['unit'];
-				$dataItem['date'] = date_format(date_create($result['referenceDate']), 'd.m.Y');
+				$dataItem['date'] = date_format(date_create($result['referenceDate']), 'd.m.Y H:i');
 				$dataItem['nuclide'] = $result['nuclide'];
 				$data[]=$dataItem;
 			}
