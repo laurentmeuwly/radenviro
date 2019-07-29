@@ -19,8 +19,8 @@ class IsotopeStationFluctuationAdmin extends AbstractAdmin
 			->add('station.network')
 			->add('station')
 			->add('nuclide')
-			->add('fluctuationMin')
-			->add('fluctuation_max')
+			->add('fluctuationMin', NumberType::class, array('scale' => 4))
+			->add('fluctuationMax', NumberType::class)
 			->add('_active', 'boolean', array('label' => 'admin.label.active',
 			    'editable' => true,
 			    'header_style' => 'text-align: center',
@@ -62,11 +62,12 @@ class IsotopeStationFluctuationAdmin extends AbstractAdmin
 	protected function configureDatagridFilters(DatagridMapper $datagridMapper)
 	{
 	    $datagridMapper
-	    ->add('station.network')
-	    ->add('station', 'doctrine_orm_callback', array(
-	        'callback'   => array($this, 'callbackFilterStation'),
-	        'field_type' => 'checkbox'
-	    )
+	    ->add('station.network', null, ['show_filter'=>true])
+	    ->add('station', null, [
+			'show_filter'=>true,
+	        //'callback'   => array($this, 'callbackFilterStation'),
+	        //'field_type' => 'checkbox'
+	    ]
 	    )
 	    
 	    //->add('station')
@@ -78,19 +79,17 @@ class IsotopeStationFluctuationAdmin extends AbstractAdmin
 	
 	public function callbackFilterStation($queryBuilder, $alias, $field, $value)
 	{
-	    if(!is_array($value) or !array_key_exists('value', $value)
+	    /*if(!is_array($value) or !array_key_exists('value', $value)
 	        or empty($value['value'])){
 	            return;
-	    }
+	    }*/
 	    
 	    $queryBuilder
 	    ->leftJoin(sprintf('%s.station', $alias), 's')
-	    ->leftJoin('s.network', 'n')
-	    ->andWhere('n.id = :id')
-	    ->setParameter('id', $value['value'])
+	    ->andWhere('code like \'%POS%\'')
 	    ;
-	    var_dump($queryBuilder);
-	    die();
+	    /*var_dump($queryBuilder);
+	    die();*/
 	    return true;
 	}
 	
