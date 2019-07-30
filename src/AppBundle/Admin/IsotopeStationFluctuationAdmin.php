@@ -38,7 +38,7 @@ class IsotopeStationFluctuationAdmin extends AbstractAdmin
 	    $formMapper
 		->with('General', ['class' => 'col-md-3', 'label' => 'admin.label.general'])
 		//->add('translations.name', null, ['label' => 'admin.station.name'])
-		->add('station.network', null, ['label' => 'admin.network.name',
+		/*->add('station.network', null, ['label' => 'admin.network.name',
 			'attr' => [
 				'readonly' => true
 			]
@@ -52,7 +52,7 @@ class IsotopeStationFluctuationAdmin extends AbstractAdmin
 			'attr' => [
 				'readonly' => true
 			]
-		])
+		])*/
 		->end()
 	    ->with('Fluctuations', ['class' => 'col-md-3', 'label' => 'admin.label.values'])
 	    ->add('fluctuationMin', null, ['label' => 'admin.fluctuationmin'])
