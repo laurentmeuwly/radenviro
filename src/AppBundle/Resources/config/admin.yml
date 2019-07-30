@@ -12,18 +12,6 @@ services:
         calls:
             - [ setTranslationDomain, [messages]]
     
-    app.admin.isotopestationfluctuation:
-        class: AppBundle\Admin\IsotopeStationFluctuationAdmin
-        tags:
-            - { name: sonata.admin, manager_type: orm, group: "admin.group.frontend", label: "admin.menu.fluctuation" }
-        arguments:
-            - ~
-            - AppBundle\Entity\IsotopeStationFluctuation
-            - 'PixSortableBehaviorBundle:SortableAdmin'
-            - ~
-        calls:
-            - [ setTranslationDomain, [messages]]
-            
     app.admin.legend:
         class: AppBundle\Admin\LegendAdmin
         tags:
@@ -73,10 +61,22 @@ services:
         calls:
             - [ setTranslationDomain, [messages]]
      
+    app.admin.isotopestationfluctuation:
+        class: AppBundle\Admin\IsotopeStationFluctuationAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "content", label: "admin.menu.fluctuations" }
+        arguments:
+            - ~
+            - AppBundle\Entity\IsotopeStationFluctuation
+            - 'PixSortableBehaviorBundle:SortableAdmin'
+            - ~
+        calls:
+            - [ setTranslationDomain, [messages]]
+
     app.admin.resultcomment:
         class: AppBundle\Admin\ResultCommentAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: "admin.group.frontend", label: "admin.menu.resultcomment" }
+            - { name: sonata.admin, manager_type: orm, group: "admin.group.frontend", label: "admin.menu.result_comment" }
         arguments:
             - ~
             - AppBundle\Entity\ResultComment

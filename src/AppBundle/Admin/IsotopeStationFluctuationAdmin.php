@@ -15,46 +15,62 @@ class IsotopeStationFluctuationAdmin extends AbstractAdmin
 	protected function configureListFields(ListMapper $listMapper)
 	{
 		$listMapper
-			->addIdentifier('id')
 			->add('station.network')
 			->add('station')
 			->add('nuclide')
-			->add('fluctuationMin', NumberType::class, array('scale' => 4))
+			->add('fluctuationMin', NumberType::class, ['scale' => 4])
 			->add('fluctuationMax', NumberType::class)
-			->add('_active', 'boolean', array('label' => 'admin.label.active',
+			->add('_active', 'boolean', ['label' => 'admin.label.active',
 			    'editable' => true,
 			    'header_style' => 'text-align: center',
-			    'row_align' => 'center')
+			    'row_align' => 'center']
 			    )
-		    ->add('_action', 'actions', array(
-		        'actions' => array(
-		            'edit' => array(),
-		        )
-		    ))
+		    ->add('_action', 'actions', [
+		        'actions' => [
+					'edit' => [],
+					]
+				])
 		;
 	}
 	
 	protected function configureFormFields(FormMapper $formMapper)
 	{
 	    $formMapper
-	    ->with('General', array('class' => 'col-md-3', 'label' => 'admin.label.general'))
-	    ->add('id')
-	    //->add('networkCategory', null, array('label' => 'admin.network_category.name'))
-	    ->add('fluctuationMin')
-	    ->add('fluctuationMax')
+		->with('General', ['class' => 'col-md-3', 'label' => 'admin.label.general'])
+		//->add('translations.name', null, ['label' => 'admin.station.name'])
+		->add('station.network', null, ['label' => 'admin.network.name',
+			'attr' => [
+				'readonly' => true
+			]
+		])
+		->add('station.code', null, ['label' => 'admin.station.code',
+			'attr' => [
+				'readonly' => true
+			]
+		])
+		->add('nuclide.code', null, ['label' => 'admin.nuclide.code',
+			'attr' => [
+				'readonly' => true
+			]
+		])
+		->end()
+	    ->with('Fluctuations', ['class' => 'col-md-3', 'label' => 'admin.label.values'])
+	    ->add('fluctuationMin', null, ['label' => 'admin.fluctuationmin'])
+		->add('fluctuationMax', null, ['label' => 'admin.fluctuationmax'])
+		->add('active', null, array('label' => 'admin.label.active'))
 	    ->end()
 	    
-	    ->with('History', array('class' => 'col-md-3', 'label' => 'admin.label.history'))
-	    ->add('createdAt', 'sonata_type_datetime_picker',  array('label' => 'admin.label.created_at',
-	        'attr' => array(
+	    ->with('History', ['class' => 'col-md-3', 'label' => 'admin.label.history'])
+	    ->add('createdAt', 'sonata_type_datetime_picker',  ['label' => 'admin.label.created_at',
+	        'attr' => [
 	            'readonly' => true
-	        )
-	    ))
-	    ->add('updatedAt', 'sonata_type_datetime_picker', array('label' => 'admin.label.updated_at',
-	        'attr' => array(
+			]
+		])
+	    ->add('updatedAt', 'sonata_type_datetime_picker', ['label' => 'admin.label.updated_at',
+	        'attr' => [
 	            'readonly' => true
-	        )
-	    ))
+			]
+		])
 	    ->end()
 	    ;
 	}

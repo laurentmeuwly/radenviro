@@ -16,13 +16,10 @@ class ResultCommentAdmin extends AbstractAdmin
 	protected function configureListFields(ListMapper $listMapper)
 	{
 		$listMapper
-		->addIdentifier('id')
-		//->add('name', null, array('label' => 'admin.network.name'))
-		//->add('networkCategory.name')
-		->add('dateFrom')
-		->add('dateTo')
-		->add('station')
-		->add('network')
+		->add('dateFrom', null, ['label' => 'admin.resultcomment.datefrom'])
+		->add('dateTo', null, ['label' => 'admin.resultcomment.dateto'])
+		->add('station', null, ['label' => 'admin.resultcomment.station'])
+		->add('network', null, ['label' => 'admin.resultcomment.network'])
 		->add('_active', 'boolean', array('label' => 'admin.label.active',
 				'editable' => true,
 				'header_style' => 'text-align: center',
@@ -44,20 +41,24 @@ class ResultCommentAdmin extends AbstractAdmin
 	{
 		$formMapper
 		->with('General', array('class' => 'col-md-3', 'label' => 'admin.label.general'))
-			//->add('id')
-			->add('dateFrom')
-			->add('dateTo')
-			->add('station')
-			->add('network')
-			->add('active', null, array('label' => 'admin.label.active'))
+			->add('dateFrom', null, ['label' => 'admin.resultcomment.datefrom'])
+			->add('dateTo', null, ['label' => 'admin.resultcomment.dateto'])
+			->add('station', null, ['label' => 'admin.resultcomment.station'])
+			->add('network', null, ['label' => 'admin.resultcomment.network'])
+			->add('active', null, ['label' => 'admin.label.active'])
 		->end()
 		->with('Informations', array('class' => 'col-md-6', 'label' => 'admin.label.informations'))
-			->add('translations', TranslationsType::class, array(
-					'label' => false,
-					'fields' => array(
-							'comment'=> array('label' => 'admin.result.comment')
-					)
-			))
+			->add('translations', TranslationsType::class, [
+				'label' => false,
+				'fields' => [
+						'comment' => [
+								'field_type' => 'ckeditor',
+								'label' => 'admin.label.description',
+						]		
+				]
+				
+			])
+		->end()
 		->end()
 		->with('History', array('class' => 'col-md-3', 'label' => 'admin.label.history'))
 		->add('createdAt', 'sonata_type_datetime_picker',  array('label' => 'admin.label.created_at',

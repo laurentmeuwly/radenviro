@@ -25,7 +25,12 @@ admin:
     zoom: Zones zoomables
     nuclide: Isotopes
     predefinednuclidelist: Listes isotopes prédéfinies
+    fluctuations: Zones de plausabilité
+    result_comment: Commentaires sur valeurs
     country: Pays
+    synchronisation: Synchronisation des données
+    delete_data: Supprimer des données
+    cronjob: Automatisations
     
 ## Generic
   label:
@@ -101,6 +106,12 @@ admin:
   predefinednuclidelist:
     name: Nom de la liste
     nuclides: Isotopes disponibles
+  resultcomment:
+    datefrom: Date début
+    dateto: Date fin
+    station: Station concernée
+    network: Réseau concerné
+    comment: Commentaire
     
   
   
@@ -296,7 +307,7 @@ activerecord:
       edit: Edition d'utilisateur
       main: Gestion des utilisateurs
       datas: Données utilisateurs
-admin:
+admin_old:
   action:
     add: Ajouter
     apply: Appliquer

@@ -12,7 +12,7 @@ class MenuBuilderListener
         $menu = $event->getMenu();
         
         $child = $menu->addChild('sync', [
-            'label' => 'menu.synchronisation',
+            'label' => 'admin.menu.synchronisation',
             //'route' => 'admin_dashboard',
         	//'route' => 'app_reports_index',
         ])->setExtras([
@@ -25,7 +25,7 @@ class MenuBuilderListener
         ]);*/
         
         $child = $menu['sync']->addChild('clean', [
-        		'label' => 'Supprimer données',
+        		'label' => 'admin.menu.delete_data',
         		//'route' => 'clean_measurements',
         		'route' => 'admin_app_sample_list',
         ]);
@@ -36,7 +36,7 @@ class MenuBuilderListener
         ]);*/
 
         $child = $menu['sync']->addChild('cron', [
-            'label' => 'cronJob',
+            'label' => 'admin.menu.cronjob',
             'route' => 'admin_shapecode_cron_cronjob_list',
         ]);
     }
