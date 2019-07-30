@@ -107,7 +107,8 @@ class Site
     private $wlongitude = '0.000000000000000';
 
     /**
-     * @ORM\ManyToMany(targetEntity="Station", inversedBy="sites")
+     * @var Station[]
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\SiteStation", mappedBy="site", cascade={"all"}, orphanRemoval=true)
      */
     private $stations;
 

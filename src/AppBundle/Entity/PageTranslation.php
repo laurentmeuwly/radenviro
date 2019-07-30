@@ -15,7 +15,7 @@ class PageTranslation
     /**
      * @var string
      *
-     * @ORM\Column(name="title", type="string", length=65535, nullable=true)
+     * @ORM\Column(name="title", type="string", length=255, nullable=true)
      */
     private $title;
     

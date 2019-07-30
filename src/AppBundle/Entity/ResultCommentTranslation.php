@@ -15,7 +15,7 @@ class ResultCommentTranslation
     /**
      * @var string
      *
-     * @ORM\Column(name="comment", type="text")
+     * @ORM\Column(name="comment", type="text", length=65535)
      */
     private $comment;
 
