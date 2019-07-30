@@ -72,7 +72,19 @@ services:
             - ~
         calls:
             - [ setTranslationDomain, [messages]]
-            
+     
+    app.admin.resultcomment:
+        class: AppBundle\Admin\ResultCommentAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "admin.group.frontend", label: "admin.menu.resultcomment" }
+        arguments:
+            - ~
+            - AppBundle\Entity\ResultComment
+            - 'PixSortableBehaviorBundle:SortableAdmin'
+            - ~
+        calls:
+            - [ setTranslationDomain, [messages]]
+
     app.admin.sample:
         class: AppBundle\Admin\SampleAdmin
         tags:

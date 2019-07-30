@@ -119,6 +119,7 @@ sonata_admin:
                     - app.admin.nuclide
                     - app.admin.predefinednuclidelist
                     - app.admin.isotopestationfluctuation
+                    - app.admin.resultcomment
                         
             sonata.admin.group.administration:
                 label:           sonata_administration
