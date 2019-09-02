@@ -146,7 +146,7 @@ $('select.nuclides-graph').change(function () {
                 	var index = this.series.data.indexOf(this.point);
 
                 	if(this.series.index==2) {
-                			s += '<span style="color:#ff9933">\u25CF</span> '
+                			s += '<span style="color:#ff9933">\u25BC</span> '
                         		+ '\u003C ' + this.y.toExponential(2);
                 			s += ' ' + data['data_nwg'][index][4];
 
@@ -221,12 +221,9 @@ $('select.nuclides-graph').change(function () {
                 lineWidth: 0,
                 color: '#ff9933',
                 marker: {
-                	fillColor: '#ffffff',
-                	lineWidth: 1,
-                	lineColor: null,
                     enabled: true,
                     radius: 3,
-                    symbol: 'circle'
+                    symbol: 'triangle-down'
                 },
                 
                 states: {
