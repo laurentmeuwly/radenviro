@@ -74,7 +74,8 @@
                         <span class="text">{{ site.description|raw }}</span>
                         <span class="sublocations">
                           
-                          {% for station in site.stations %}
+                          {% for sitestation in site.stations %}
+                          	  {% set station = sitestation.station %}
                               {% if station.hasCoordinates() %}
                           
                               <span class="sublocation sites" style="display:none;" data-icon="{% if station.legends|length>0 %}{{ 'icon_legend_' ~station.legends|first.legend.id }}{% else %}{{ 'icon_sitetype_' ~siteType.id }}{% endif %}" data-latitude="{{ station.latitude }}" data-longitude="{{ station.longitude }}" data-link="{{ url('measures',{'station': station.id}) }}">
