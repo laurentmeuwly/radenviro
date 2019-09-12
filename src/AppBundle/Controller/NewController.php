@@ -31,6 +31,10 @@ class NewController extends Controller
         $mobileDetector = $this->get('mobile_detect.mobile_detector');
         if($mobileDetector->isMobile()) {
             return $this->render('new/data_content_mobile.html.twig');
+        } elseif($mobileDetector->isTablet()) {
+            return $this->render('new/data_content_tablet.html.twig');
+        } else {
+            return $this->render('new/data_content_pc.html.twig');
         }
 
 		$em = $this->getDoctrine()->getManager();
