@@ -19,10 +19,10 @@ radenviro:
     type: annotation
     prefix: /
 
-new:
-    resource: '@AppBundle/Controller/NewController.php'
-    type: annotation
-    prefix: /new
+#new:
+#    resource: '@AppBundle/Controller/NewController.php'
+#    type: annotation
+#    prefix: /new
 
 advanced:
     resource: '@AppBundle/Controller/AdvancedController.php'
