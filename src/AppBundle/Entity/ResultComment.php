@@ -40,16 +40,16 @@ class ResultComment
     private $dateTo;
 
     /**
-     * @var string|null
-     *
-     * @ORM\Column(name="station", type="string", length=255, nullable=true)
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Station")
+     * @ORM\JoinColumn(nullable=true)
+     * 
      */
     private $station;
 
     /**
-     * @var string|null
-     *
-     * @ORM\Column(name="network", type="string", length=255, nullable=true)
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Network")
+     * @ORM\JoinColumn(nullable=true)
+     * 
      */
     private $network;
 
@@ -148,7 +148,7 @@ class ResultComment
     /**
      * Set station.
      *
-     * @param string|null $station
+     * @param integer|null $station
      *
      * @return ResultComment
      */
@@ -162,7 +162,7 @@ class ResultComment
     /**
      * Get station.
      *
-     * @return string|null
+     * @return integer|null
      */
     public function getStation()
     {
@@ -172,7 +172,7 @@ class ResultComment
     /**
      * Set network.
      *
-     * @param string|null $network
+     * @param integer|null $network
      *
      * @return ResultComment
      */
@@ -186,7 +186,7 @@ class ResultComment
     /**
      * Get network.
      *
-     * @return string|null
+     * @return integer|null
      */
     public function getNetwork()
     {
