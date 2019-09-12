@@ -295,8 +295,9 @@ class DefaultController extends Controller
     	$nuclide = $em->getRepository('AppBundle:Nuclide')->findOneById(array('id'=> $request->get('nuclide') ));
 		$results = $em->getRepository('AppBundle:Measurement')->getAllByStationAndNuclide($station, $nuclide);
 		
-		$resultsComments = $em->getRepository('AppBundle:ResultComment')->findAll();
-		    	
+		$resultsCommentsStation = $em->getRepository('AppBundle:ResultComment')->findBy(['station'=>$station, 'active'=>true]);
+		$resultsCommentsNetwork = $em->getRepository('AppBundle:ResultComment')->findBy(['station'=>null, 'network'=>$station->getNetwork(), 'active'=>true]);
+		
     	$fluctuations = $em->getRepository('AppBundle:IsotopeStationFluctuation')->findOneBy([
     	    'station'=>$request->get('station'),
     	    'nuclide'=>$request->get('nuclide')
@@ -309,17 +310,27 @@ class DefaultController extends Controller
     	        $limit_high = $fluctuations->getFluctuationMax();
     	    }
     	}
-    	    	
+		
     	foreach($results as $result)
     	{
+			$message = '';
     		$unit = $em->getRepository('AppBundle:ResultUnit')->findOneById(array('id'=> $result['result_unit_id']))->getCode();
     		$date = \DateTime::createFromFormat('Y-m-d H:i:s', $result['referenceDate']);
     		$data[] = [ $date->getTimeStamp()*1000, (float)$result['value'], $result['limited'], (float)$result['error'], $unit ];
 			
-			if( $date >= $resultsComments[0]->getDateFrom() && $date <= $resultsComments[0]->getDateTo()) {
-				$message =  $resultsComments[0]->getComment();
-			} else {
-				$message = '';
+			// check if a message has to be displayed with the result
+			foreach($resultsCommentsNetwork as $resultsComments) {
+				if( $date >= $resultsComments->getDateFrom() && $date <= $resultsComments->getDateTo()) {
+					$message .=  $resultsComments->getComment();
+					$message .= '<br/>';
+				}
+			}
+			// check if a message has to be displayed with the result
+			foreach($resultsCommentsStation as $resultsComments) {
+				if( $date >= $resultsComments->getDateFrom() && $date <= $resultsComments->getDateTo()) {
+					$message .=  $resultsComments->getComment();
+					$message .= '<br/>';
+				}
 			}
 			
     		if($result['limited']=='1') {
