@@ -283,8 +283,9 @@ class DefaultController extends Controller
     	date_default_timezone_set("UTC");  // this is not the right place to keep...
     	
     	$dataNwg = array();
-    	$dataVal = array();
-    	$unit = '';
+		$dataVal = array();
+		$unit = '';
+		$message = '';
     	$limit_low = 0;
     	$limit_high = 0;
     	$show_fluctuation = false;
@@ -292,8 +293,10 @@ class DefaultController extends Controller
     	$em = $this->getDoctrine()->getManager();
     	$station = $em->getRepository('AppBundle:Station')->findOneById(array('id'=> $request->get('station')));
     	$nuclide = $em->getRepository('AppBundle:Nuclide')->findOneById(array('id'=> $request->get('nuclide') ));
-    	$results = $em->getRepository('AppBundle:Measurement')->getAllByStationAndNuclide($station, $nuclide);
-    	
+		$results = $em->getRepository('AppBundle:Measurement')->getAllByStationAndNuclide($station, $nuclide);
+		
+		$resultsComments = $em->getRepository('AppBundle:ResultComment')->findAll();
+		    	
     	$fluctuations = $em->getRepository('AppBundle:IsotopeStationFluctuation')->findOneBy([
     	    'station'=>$request->get('station'),
     	    'nuclide'=>$request->get('nuclide')
@@ -312,13 +315,19 @@ class DefaultController extends Controller
     		$unit = $em->getRepository('AppBundle:ResultUnit')->findOneById(array('id'=> $result['result_unit_id']))->getCode();
     		$date = \DateTime::createFromFormat('Y-m-d H:i:s', $result['referenceDate']);
     		$data[] = [ $date->getTimeStamp()*1000, (float)$result['value'], $result['limited'], (float)$result['error'], $unit ];
-    		
+			
+			if( $date >= $resultsComments[0]->getDateFrom() && $date <= $resultsComments[0]->getDateTo()) {
+				$message =  $resultsComments[0]->getComment();
+			} else {
+				$message = '';
+			}
+			
     		if($result['limited']=='1') {
     			$dataNwg[] = [$date->getTimeStamp()*1000, (float)$result['value'], $result['limited'], (float)$result['error'], 
-    				$unit ];
+					$unit, $message ];
     		} else {
     			$dataVal[] = [$date->getTimeStamp()*1000, (float)$result['value'], $result['limited'], (float)$result['error'],
-    					$unit ];
+						$unit, $message ];
     		}
     	}
     	    	
@@ -329,7 +338,7 @@ class DefaultController extends Controller
     	    'show_fluctuation'=>$show_fluctuation,
     		'data' => $data,
     			'data_nwg' => $dataNwg,
-    			'data_val' => $dataVal,
+				'data_val' => $dataVal,
     	];
     	 
     	 

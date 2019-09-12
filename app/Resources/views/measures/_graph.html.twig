@@ -146,10 +146,13 @@ $('select.nuclides-graph').change(function () {
                 	var index = this.series.data.indexOf(this.point);
 
                 	if(this.series.index==2) {
-                			s += '<span style="color:#ff9933">\u25BC</span> '
-                        		+ '\u003C ' + this.y.toExponential(2);
-                			s += ' ' + data['data_nwg'][index][4];
+                        s += '<span style="color:#ff9933">\u25BC</span> '
+                            + '\u003C ' + this.y.toExponential(2);
+                        s += ' ' + data['data_nwg'][index][4];
 
+                        if(data['data_nwg'][index][5]!='') {
+                            s += '<br/>' + data['data_nwg'][index][5];
+                        }
                     } else {
                     	s += '<span style="color:#008000">\u25CF</span> ' 
                     		+ this.y.toExponential(2);
@@ -157,9 +160,11 @@ $('select.nuclides-graph').change(function () {
                 		if(data['data_val'][index][3]) {
                     		s += ' \u00B1' + data['data_val'][index][3].toExponential(2);
                     	}
-                    		
                     	s += ' ' + data['data_val'][index][4];
 
+                        if(data['data_val'][index][5]!='') {
+                            s += '<br/>' + data['data_val'][index][5];
+                        }
                     }
                     
                 });
