@@ -8,6 +8,7 @@ use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use A2lix\TranslationFormBundle\Form\Type\TranslationsType;
 
 class ResultCommentAdmin extends AbstractAdmin
@@ -41,8 +42,16 @@ class ResultCommentAdmin extends AbstractAdmin
 	{
 		$formMapper
 		->with('General', array('class' => 'col-md-3', 'label' => 'admin.label.general'))
-			->add('dateFrom', null, ['label' => 'admin.resultcomment.datefrom'])
-			->add('dateTo', null, ['label' => 'admin.resultcomment.dateto'])
+			->add('dateFrom', DateType::Class, [
+				'label' => 'admin.resultcomment.datefrom',
+				'widget' => 'choice',
+				'years' => range(date('Y')-40, date('Y')+20),
+				])
+			->add('dateTo', DateType::Class, [
+				'label' => 'admin.resultcomment.dateto',
+				'widget' => 'choice',
+				'years' => range(date('Y')-40, date('Y')+20),
+				])
 			->add('station', null, ['label' => 'admin.resultcomment.station'])
 			->add('network', null, ['label' => 'admin.resultcomment.network'])
 			->add('active', null, ['label' => 'admin.label.active'])
