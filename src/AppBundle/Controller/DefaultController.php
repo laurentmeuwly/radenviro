@@ -321,14 +321,14 @@ class DefaultController extends Controller
 			// check if a message has to be displayed with the result
 			foreach($resultsCommentsNetwork as $resultsComments) {
 				if( $date >= $resultsComments->getDateFrom() && $date <= $resultsComments->getDateTo()) {
-					$message .=  $resultsComments->getComment();
+					$message .=  html_entity_decode($resultsComments->getComment());
 					$message .= '<br/>';
 				}
 			}
 			// check if a message has to be displayed with the result
 			foreach($resultsCommentsStation as $resultsComments) {
 				if( $date >= $resultsComments->getDateFrom() && $date <= $resultsComments->getDateTo()) {
-					$message .=  $resultsComments->getComment();
+					$message .=  html_entity_decode($resultsComments->getComment());
 					$message .= '<br/>';
 				}
 			}
