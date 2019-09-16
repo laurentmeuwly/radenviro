@@ -21,7 +21,7 @@ $('select.nuclides-graph').change(function () {
 	var stationSel = $('select.stations');
 	var station = stationSel.val();
 	
-	$.getJSON('/fr/graph?nuclide='+nuclide+'&station='+station,
+	$.getJSON('/{{ lang }}/graph?nuclide='+nuclide+'&station='+station,
 		function (data) {
 
 	var result = [],

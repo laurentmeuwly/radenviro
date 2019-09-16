@@ -70,13 +70,15 @@ class RadenviroController extends Controller
 		$header = $request->get('header');
 		if($header=='no')
     		return $this->render('measures/measures_history_nh.html.twig', array(
-    				'station' => $currentStation,
-    				'nuclides' => $availableNuclides,
+				'station' => $currentStation,
+				'nuclides' => $availableNuclides,
+				'lang' => $request->getLocale()
     		));
     	else 
     	    return $this->render('measures/measures_history.html.twig', array(
     		    'station' => $currentStation,
-    		    'nuclides' => $availableNuclides,
+				'nuclides' => $availableNuclides,
+				'lang' => $request->getLocale()
     		));
 		 
 	}
