@@ -54,6 +54,13 @@ class Legend
     private $active = true;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="show_description", type="boolean", nullable=false)
+     */
+    private $show_description = true;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="color", type="string", length=6, nullable=false)
@@ -183,6 +190,30 @@ class Legend
     public function getActive()
     {
     	return $this->active;
+    }
+
+    /**
+     * Set show_description
+     *
+     * @param boolean $show_description
+     *
+     * @return Legend
+     */
+    public function setShowDescription($show_description)
+    {
+    	$this->show_description = $show_description;
+    
+    	return $this;
+    }
+    
+    /**
+     * Get show_description
+     *
+     * @return boolean
+     */
+    public function getShowDescription()
+    {
+    	return $this->show_description;
     }
 
     /**

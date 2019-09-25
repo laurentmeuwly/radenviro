@@ -2,20 +2,27 @@
   <div class="col-sm-12">
    <div class="col-sm-12 well">
         
-    <div class="col-sm-3">
+    <div class="col-sm-4">
 		<span class="col-sm-12"><b>{{ 'label.analyzed environments'|trans }} :</b></span>
 		<br/><br/>
-		<span class="col-sm-12"><b>{{ station.legends|first.legend.name }}</b></span>	
+    {% if station.legends|first.legend.link!='' %}
+		<span class="col-sm-12"><b><a href="{{ station.legends|first.legend.link }}" target="_blank">{{ station.legends|first.legend.name }}</a></b></span>
+    {% else %}
+    <span class="col-sm-12"><b>{{ station.legends|first.legend.name }}</b></span>
+    {% endif %}
+    {% if station.legends|first.legend.showDescription %}<br/><br/>
+		<span class="col-sm-12">{{ station.legends|first.legend.description }}</span>
+    {% endif %}
 	</div>
     
-    <div class="col-sm-9">
+    <div class="col-sm-8">
     <form name="tab_search" method="post" class="form-horizontal">
     
    
 	
 	<div class="form-group">
-	  <label class="col-sm-3 control-label" for="station">{{ 'label.station'|trans }}:</label>
-	  <div class="col-sm-6">
+	  <label class="col-sm-2 control-label" for="station">{{ 'label.station'|trans }}:</label>
+	  <div class="col-sm-7">
         <select class="stations form-control">
     {% for legendstation in station.legends|first.legend.stations %}
       <option value="{{ legendstation.station.id }}" 
@@ -28,8 +35,8 @@
     </div>
 
     <div class="form-group">
-    <div class="col-sm-3 control-label">{{ 'label.isotope'|trans }}:</div>
-	  <div class="col-sm-6">
+    <div class="col-sm-2 control-label">{{ 'label.isotope'|trans }}:</div>
+	  <div class="col-sm-7">
         <select class="nuclides nuclides-graph form-control">
          {% for nuclide in nuclides %}
         <option value="{{ nuclide.id }}">{{ nuclide.name }}</option>

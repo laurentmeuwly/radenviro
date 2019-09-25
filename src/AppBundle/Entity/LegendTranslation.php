@@ -19,6 +19,20 @@ class LegendTranslation
      */
     private $name;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="string", length=255, nullable=true)
+     */
+    private $description;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="link", type="string", length=255, nullable=true)
+     */
+    private $link;
+
     
     /**
      * @return string
@@ -35,6 +49,40 @@ class LegendTranslation
     public function setName($name)
     {
     	$this->name = $name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+    	return $this->description;
+    }
+    
+    /**
+     * @param  string
+     * @return null
+     */
+    public function setDescription($description)
+    {
+    	$this->description = $description;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLink()
+    {
+    	return $this->link;
+    }
+    
+    /**
+     * @param  string
+     * @return null
+     */
+    public function setLink($link)
+    {
+    	$this->link = $link;
     }
     
 }

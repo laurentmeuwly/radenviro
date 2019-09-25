@@ -7,6 +7,7 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use A2lix\TranslationFormBundle\Form\Type\TranslationsType;
 use Xmon\ColorPickerTypeBundle\Form\Type\ColorPickerType;
 use Sonata\AdminBundle\Route\RouteCollection;
@@ -77,6 +78,11 @@ class LegendAdmin extends AbstractAdmin
             		'header_style' => 'text-align: center',
             		'row_align' => 'center')
 				)
+			->add('_showDescription', 'boolean', array('label' => 'admin.label.show_description',
+				'editable' => true,
+				'header_style' => 'text-align: center',
+				'row_align' => 'center')
+				)
 			->add('_active', 'boolean', array('label' => 'admin.label.active',
 					'editable' => true,
 					'header_style' => 'text-align: center',
@@ -106,13 +112,19 @@ class LegendAdmin extends AbstractAdmin
 		->add('translations', TranslationsType::class, array(
 				'label' => false,
 				'fields' => array(
-								'name'=> array('label' => 'admin.legend.name')
+								'name'=> array('label' => 'admin.legend.name'),
+								'link'=> array('label' => 'admin.legend.link'),
+								'description' => array(
+									'field_type' => TextareaType::class,
+									'label' => 'admin.label.description'
+								)
 							)
 				))
 		->end()
 		->with('Attributs', array('class' => 'col-md-3', 'label' => 'admin.label.attributs'))
 		->add('color', ColorPickerType::class,  array('label' => 'admin.label.color'))
 		->add('active', null, array('label' => 'admin.label.active'))
+		->add('show_description', null, array('label' => 'admin.label.show_description'))
 		->add('position', null, array('label' => 'admin.label.position'))
 		->end()
 		->with('History', array('class' => 'col-md-3', 'label' => 'admin.label.history'))
