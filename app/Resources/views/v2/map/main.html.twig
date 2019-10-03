@@ -1,0 +1,44 @@
+{% extends 'v2/data_content.html.twig' %}
+
+
+{% block stylesheets %}
+    {{  parent() }}
+    <link rel="stylesheet" href="{{ asset('css/jquery.qtip.min.css') }}">
+
+    <style type="text/css">
+    .map-container, .legend-container {
+        -ms-flex: 0 0 490px;
+        flex: 0 0 490px;
+    } 
+    
+    </style>
+{% endblock %}
+
+
+{% block javascripts %}
+
+<script type="text/javascript" charset="utf8" src="{{ asset('js/jquery.qtip.min.js') }}"></script>
+<script type="text/javascript" charset="utf8" src="{{ asset('js/jquery.cookie.js') }}"></script>
+<script type="text/javascript" charset="utf8" src="{{ asset('js/radenviro.js') }}"></script>
+<script type="text/javascript" charset="utf8" src="{{ asset('js/main_map.js') }}"></script>
+<script type="text/javascript" charset="utf8" src="{{ asset('bundles/datatables/js/datatables.js') }}"></script>
+
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+  <div class="row">
+
+    <div class="col map-container">
+      {% include 'v2/map/_map.html.twig' %}
+      {% include 'v2/map/_table.html.twig' %}
+    </div>
+    
+    <div class="col legend-container">
+      {% include 'v2/map/_legend.html.twig' %}
+    </div>
+
+  </div>
+</div>
+           
+{% endblock %}

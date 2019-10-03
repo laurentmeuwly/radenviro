@@ -1,0 +1,31 @@
+
+
+{{ datatable_html({
+            'id' : 'tableresult'
+        })
+}}
+
+
+{% block javascripts %}
+
+{{ 
+
+    datatable_js({
+        'id' : 'tableresult',
+        
+        'js' : {
+            'dom': '<"clearfix"lf>rtip',
+            'main_template': ':measures:datatableJs.html.twig',
+      },
+    })
+ 
+}}
+
+{% endblock javascripts %}
+
+
+
+
+
+
+

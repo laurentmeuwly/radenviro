@@ -23,19 +23,48 @@ use Omines\DataTablesBundle\DataTableState;
 
 class NewController extends Controller
 {
+	/**
+     * @Route("/map", name="v2-map")
+     */
+    public function mapAction(Request $request)
+    {    	
+    	// Getting doctrine manager
+    	$em = $this->getDoctrine()->getManager();
+    	
+    	// retrieve all active legends
+    	$legends = $em->getRepository('AppBundle:Legend')->findBy(array('active' => 1), array('position' => 'ASC'));
+
+    	// retrieve all active site types
+    	$siteTypes = $em->getRepository('AppBundle:SiteType')->findBy(array('active' => 1), array('position' => 'ASC'));
+    	
+    	// retrieve all active automatic networks
+    	$automaticNetworks = $em->getRepository('AppBundle:AutomaticNetwork')->findBy(array('active' => 1), array('position' => 'ASC'));
+    	
+    	// retrieve all zoom areas
+    	$zooms = $em->getRepository('AppBundle:MapZoom')->findAll();
+    	
+		return $this->render('v2/map/main.html.twig', array(
+				'legends' => $legends,
+				'siteTypes' => $siteTypes,
+				'automaticNetworks' => $automaticNetworks,
+				'zooms' => $zooms,	
+		));
+
+	}
+	
     /**
-	 * @Route("/measures/{station}", name="measures")
+	 * @Route("/measures/{station}", name="v2-measures")
 	 */
 	public function measuresAction($station, Request $request)
 	{
         $mobileDetector = $this->get('mobile_detect.mobile_detector');
         if($mobileDetector->isMobile()) {
-            return $this->render('new/data_content_mobile.html.twig');
+            return $this->render('v2/data_content_mobile.html.twig');
         } elseif($mobileDetector->isTablet()) {
-            return $this->render('new/data_content_tablet.html.twig');
+            return $this->render('v2/data_content_tablet.html.twig');
         } else {
-            return $this->render('new/data_content_pc.html.twig');
-        }
+            //return $this->render('v2/data_content_pc.html.twig');
+        //}
 
 		$em = $this->getDoctrine()->getManager();
 		$currentStation = $em->getRepository('AppBundle:Station')->findOneById(array('id'=>$station));
@@ -46,18 +75,18 @@ class NewController extends Controller
 		// initiate the datatable result
 		$this->datatableResult();
 		$header = $request->get('header');
-         
-        //return $this->render('new/measures/measures_history.html.twig');
         
-        return $this->render('new/measures/measures_history.html.twig', array(
+        return $this->render('v2/measures/measures_history.html.twig', array(
             'station' => $currentStation,
-            'nuclides' => $availableNuclides,
-        ));
+			'nuclides' => $availableNuclides,
+			'lang' => $request->getLocale()
+		));
+	}
     }
     
     /**
 	 * Grid action
-	 * @Route("/tableresult", name="tableresult")
+	 * @Route("/tableresult", name="v2-tableresult")
 	 * @return Response
 	 */
 	public function datatableResultAction(Request $request)

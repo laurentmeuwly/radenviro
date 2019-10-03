@@ -15,15 +15,14 @@
   
 {% block body %}
 
-<div id="page-margins">
-      <div id="page">       
-        
-        <div id="content">    
-     	{% block content %}
-    		NEW: This should not be displayed as all specific views should replace the content block.
-    	{% endblock %}
-       	</div>
-     </div>
-</div>
+    
+
+	<div id="content">    
+	{% block content %}
+		NEW: This should not be displayed as all specific views should replace the content block.
+	{% endblock %}
+	</div>
+
+
 
 {% endblock %}

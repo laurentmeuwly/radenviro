@@ -19,10 +19,10 @@ radenviro:
     type: annotation
     prefix: /
 
-#new:
-#    resource: '@AppBundle/Controller/NewController.php'
-#    type: annotation
-#    prefix: /new
+v2:
+    resource: '@AppBundle/Controller/NewController.php'
+    type: annotation
+    prefix: /v2
 
 advanced:
     resource: '@AppBundle/Controller/AdvancedController.php'
@@ -65,9 +65,4 @@ ajouterZonesConformites_process:
     defaults: { _controller: AppBundle:Advanced:ajouterTest }
     requirements:
     methods: POST
-    
-#detect:
-#    resource: '@AppBundle/Controller/DetectController.php'
-#    type: annotation
-#    prefix: /
  
