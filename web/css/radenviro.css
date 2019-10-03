@@ -62,7 +62,6 @@ b, strong {
 ******************************************************************************/
 
 body {
-  background: url("/images/bg-body.jpg") repeat-x;
   text-align: center;
   font-family: arial, verdana, sans-serif;
   font-size: 12px;
@@ -134,7 +133,18 @@ body p, body span, body div {
   margin-top: 5px;
 }
 
-#content {
+#wrapper-map {
+  display: table;
+  margin: auto;
+  width: 980px;
+}
+
+
+#wrapper-measure {
+  width: 1180px;
+}
+
+#content {  
   text-align: left;
 }
 
