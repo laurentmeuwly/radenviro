@@ -65,14 +65,14 @@ class NewController extends Controller
 	 */
 	public function measuresAction($station, Request $request)
 	{
-        $mobileDetector = $this->get('mobile_detect.mobile_detector');
+        /*$mobileDetector = $this->get('mobile_detect.mobile_detector');
         if($mobileDetector->isMobile()) {
             return $this->render('v2/data_content_mobile.html.twig');
         } elseif($mobileDetector->isTablet()) {
             return $this->render('v2/data_content_tablet.html.twig');
         } else {
-            //return $this->render('v2/data_content_pc.html.twig');
-        //}
+		}
+		*/
 
 		$em = $this->getDoctrine()->getManager();
 		$currentStation = $em->getRepository('AppBundle:Station')->findOneById(array('id'=>$station));
@@ -89,7 +89,7 @@ class NewController extends Controller
 			'nuclides' => $availableNuclides,
 			'lang' => $request->getLocale()
 		));
-	}
+	
     }
     
     /**
