@@ -1,0 +1,44 @@
+{% extends 'v2/data_content_mobile.html.twig' %}
+
+	
+{% block head_javascripts %}
+  {{ parent() }}
+	<script type="text/javascript" charset="utf8" src="{{ asset('js/radenviro.js') }}"></script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+      $('#legend').on('change', function(){
+        var legendID = $(this).val();
+        if(legendID){
+          $.ajax({
+            type:'POST',
+            url:'{{ url('v2-ajaxlegendstation') }}',
+            data:'legend_id='+legendID,
+            dataType: 'json',
+            success:function(response){
+              $('#station').empty();
+              $('#station').append('<option value="" selected="selected">Select a station... </option>');
+              $.each(response, function(index, element) {
+                let url = "{{ url('v2-measures', {'station': 'ReplaceMe' }) }}";
+                url = url.replace("ReplaceMe", element.id );
+                $('#station').append('<option value="'+ element.id +'" data-url="'+url+'#measures-table"> '+ element.name +' </option>');
+              });
+            }
+          });
+        }else {
+          $('#station').html('<option value="">Select legend first!!</option>');
+        }
+      });
+   });
+  </script>
+
+{% endblock %}
+
+
+{% block content %}
+
+
+  {% include 'v2/measures/legend_selector.html.twig' %}
+
+
+{% endblock %}

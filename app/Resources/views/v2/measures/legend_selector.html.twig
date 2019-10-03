@@ -1,0 +1,41 @@
+<div class="row">
+  <div class="col-sm-12">
+   <div class="col-sm-12 well">
+    
+
+      <div class="col-sm-8">
+      <form name="tab_search" method="post" class="form-horizontal">
+
+        <div class="form-group">
+          <div class="col-sm-4 control-label">{{ 'label.analyzed environments'|trans }} :</div>
+          <div class="col-sm-6">
+            <select id="legend" name="legend" class="legends form-control">
+              <option value="">Select a legend...</option>
+              {% for legend in legends %}
+              <option value="{{ legend.id }}">{{ legend.name }}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-4 control-label">{{ 'label.station'|trans }} :</div>
+          <div class="col-sm-6">
+            <select id="station" name="station" class="stations form-control">
+              <option value="">Select legend first</option>
+            </select>
+          </div>
+        </div>
+
+      </form>
+      </div>
+
+   </div>
+  </div>
+</div>
+
+
+
+  
+
+  

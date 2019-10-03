@@ -29,6 +29,25 @@ class LegendRepository extends \Doctrine\ORM\EntityRepository
 		return $qb->getQuery()->getResult();
 	}
 
+	public function getStationByLegend($legend)
+	{
+		$qb = $this->_em->createQueryBuilder();
+
+		$qb
+		->select('ls')
+		->from('AppBundle:LegendStation', 'ls')
+		;
+
+		if(null !== $legend) {
+			$qb
+			->where('ls.legend = (:legend)')
+			->setParameter('legend', $legend)
+			->orderBy('ls.position', 'ASC')
+			;
+		}
+		return $qb->getQuery()->getResult();
+	}
+
 	public function search($data, $page = 0, $max = NULL, $getResult = true)
 	{
 		$qb = $this->_em->createQueryBuilder();

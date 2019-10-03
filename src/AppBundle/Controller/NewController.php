@@ -28,19 +28,18 @@ class NewController extends Controller
      */
     public function mapAction(Request $request)
     {    	
+		// Getting doctrine manager
+		$em = $this->getDoctrine()->getManager();
+
+		// retrieve all active legends
+    	$legends = $em->getRepository('AppBundle:Legend')->findBy(array('active' => 1), array('position' => 'ASC'));
+
 		$mobileDetector = $this->get('mobile_detect.mobile_detector');
         if($mobileDetector->isMobile()) {
-            return $this->render('v2/data_content_mobile.html.twig');
+            return $this->render('v2/measures/selector_for_mobile.html.twig', ['legends' => $legends]);
         } elseif($mobileDetector->isTablet()) {
-            return $this->render('v2/data_content_tablet.html.twig');
+            return $this->render('v2/measures/selector_for_mobile.html.twig', ['legends' => $legends]);
         } else {
-            
-		
-    	// Getting doctrine manager
-    	$em = $this->getDoctrine()->getManager();
-    	
-    	// retrieve all active legends
-    	$legends = $em->getRepository('AppBundle:Legend')->findBy(array('active' => 1), array('position' => 'ASC'));
 
     	// retrieve all active site types
     	$siteTypes = $em->getRepository('AppBundle:SiteType')->findBy(array('active' => 1), array('position' => 'ASC'));
@@ -90,7 +89,32 @@ class NewController extends Controller
 			'lang' => $request->getLocale()
 		));
 	
-    }
+	}
+	
+	/**
+	 * @Route("/ajaxlegendstation", name="v2-ajaxlegendstation")
+	 */
+	public function ajaxLegendStation(Request $request) {
+		$data=null;	 
+		
+		$legend = $request->request->get('legend_id');
+		
+		if(null !== $legend) {
+			
+			$em = $this->getDoctrine()->getManager();
+			$results = $em->getRepository('AppBundle:Legend')->getStationByLegend($legend);
+			
+			$i=0;
+			foreach($results as $result) {
+				$data[$i]['id'] = $result->getStation()->getId();
+				$data[$i]['name'] = $result->getStation()->getName();
+				$i++;
+			}
+			return new JsonResponse($data);
+		}
+		return new Response("Nonnn ....");
+		
+	}
     
     /**
 	 * Grid action
