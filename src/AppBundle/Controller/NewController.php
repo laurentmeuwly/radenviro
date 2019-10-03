@@ -28,6 +28,14 @@ class NewController extends Controller
      */
     public function mapAction(Request $request)
     {    	
+		$mobileDetector = $this->get('mobile_detect.mobile_detector');
+        if($mobileDetector->isMobile()) {
+            return $this->render('v2/data_content_mobile.html.twig');
+        } elseif($mobileDetector->isTablet()) {
+            return $this->render('v2/data_content_tablet.html.twig');
+        } else {
+            
+		
     	// Getting doctrine manager
     	$em = $this->getDoctrine()->getManager();
     	
@@ -49,7 +57,7 @@ class NewController extends Controller
 				'automaticNetworks' => $automaticNetworks,
 				'zooms' => $zooms,	
 		));
-
+	}
 	}
 	
     /**
