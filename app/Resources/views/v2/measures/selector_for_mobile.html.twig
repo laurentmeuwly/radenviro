@@ -17,7 +17,7 @@
             dataType: 'json',
             success:function(response){
               $('#station').empty();
-              $('#station').append('<option value="" selected="selected">Select a station... </option>');
+              $('#station').append('<option value="" selected="selected">{{ 'choices.select_station'|trans}}</option>');
               $.each(response, function(index, element) {
                 let url = "{{ url('v2-measures', {'station': 'ReplaceMe' }) }}";
                 url = url.replace("ReplaceMe", element.id );
@@ -26,7 +26,7 @@
             }
           });
         }else {
-          $('#station').html('<option value="">Select legend first!!</option>');
+          $('#station').html('<option value="">{{ 'choices.select_legend_first'|trans}}</option>');
         }
       });
    });

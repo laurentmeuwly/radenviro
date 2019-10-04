@@ -203,3 +203,9 @@ menus:
   welcome: News
   who: Who
   back_to_map: Back to the map
+  back_to_selector: Back to selector
+
+choices:
+  select_legend: Select environment ...
+  select_legend_first: Select environment first
+  select_station: Select station ...

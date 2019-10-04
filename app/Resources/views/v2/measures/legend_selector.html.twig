@@ -10,7 +10,7 @@
           <div class="col-sm-4 control-label">{{ 'label.analyzed environments'|trans }} :</div>
           <div class="col-sm-6">
             <select id="legend" name="legend" class="legends form-control">
-              <option value="">Select a legend...</option>
+              <option value="">{{ 'choices.select_legend'|trans}}</option>
               {% for legend in legends %}
               <option value="{{ legend.id }}">{{ legend.name }}</option>
               {% endfor %}
@@ -22,7 +22,7 @@
           <div class="col-sm-4 control-label">{{ 'label.station'|trans }} :</div>
           <div class="col-sm-6">
             <select id="station" name="station" class="stations form-control">
-              <option value="">Select legend first</option>
+              <option value="">{{ 'choices.select_legend_first'|trans}}</option>
             </select>
           </div>
         </div>

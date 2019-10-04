@@ -1,0 +1,50 @@
+{% extends 'v2/data_content.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }} 
+	<!-- <link rel="stylesheet" type="text/css" href="{{ asset('css/measures.css') }}" /> -->
+{% endblock %}
+	
+{% block head_javascripts %}
+    {{ parent() }}
+  
+	<script type="text/javascript" charset="utf8" src="{{ asset('js/radenviro.js') }}"></script>
+
+    <!--
+    <script type="text/javascript" charset="utf8" src="{{ asset('js/measures.js') }}"></script>
+     -->
+
+{% endblock %}
+
+
+{% block content %}
+
+<div id="wrapper-measure">
+<div class="box measures">
+  
+  <div class="content">
+     
+      <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="pill" href="#measures-table">{{ 'label.table'|trans }}</a></li>
+      </ul>
+   
+    <div class="shortcuts">
+      <a href="{{ path('v2-map') }}">{{ 'menus.back_to_selector'|trans }}</a>
+    </div>
+
+      <div class="tab-content">
+          <div class="tab-pane fade in active" id="measures-table">
+            {% include 'v2/measures/_table_filter.html.twig' %}
+            {% include 'v2/measures/_table.html.twig' %}
+          </div>
+          
+      </div>
+  
+    
+ 
+ </div>
+</div>
+
+</div>
+
+{% endblock %}

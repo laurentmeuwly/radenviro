@@ -192,3 +192,9 @@ menus:
   welcome: Attualità 
   who: Chi misura
   back_to_map: Torna alla mappa
+  back_to_selector: Tornare
+
+choices:
+  select_legend: Selezionare ambiente ...
+  select_legend_first: Prima selezionare ambiente
+  select_station: Selezionare stazione ...

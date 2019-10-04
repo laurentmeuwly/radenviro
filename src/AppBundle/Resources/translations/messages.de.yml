@@ -400,3 +400,10 @@ menus:
   welcome: Aktuell
   who: Wer misst
   back_to_map: Zurück zur Karte
+  back_to_selector: Zurück
+
+choices:
+  select_legend: Umgebung auswählen ...
+  select_legend_first: Zuerst Umgebung auswählen
+  select_station: Station auswählen ...
+

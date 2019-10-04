@@ -394,6 +394,12 @@ menus:
   welcome: Actualités
   who: Qui mesure
   back_to_map: Retour à la carte
+  back_to_selector: Retour au sélecteur
+
+choices:
+  select_legend: Sélectionner un milieu ...
+  select_legend_first: Sélectionner d'abord un milieu
+  select_station: Sélectionner une station ...
 
 app:
   networkcategory:

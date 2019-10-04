@@ -64,32 +64,38 @@ class NewController extends Controller
 	 */
 	public function measuresAction($station, Request $request)
 	{
-        /*$mobileDetector = $this->get('mobile_detect.mobile_detector');
-        if($mobileDetector->isMobile()) {
-            return $this->render('v2/data_content_mobile.html.twig');
-        } elseif($mobileDetector->isTablet()) {
-            return $this->render('v2/data_content_tablet.html.twig');
-        } else {
-		}
-		*/
-
 		$em = $this->getDoctrine()->getManager();
 		$currentStation = $em->getRepository('AppBundle:Station')->findOneById(array('id'=>$station));
 		$legend = $em->getRepository('AppBundle:LegendStation')->findOneByStation(array('station'=>$station));
-		 
+		
 		$availableNuclides = $em->getRepository('AppBundle:Nuclide')->getNuclidesList($station,$legend->getLegend());
-		 
+		
 		// initiate the datatable result
 		$this->datatableResult();
 		$header = $request->get('header');
-        
-        return $this->render('v2/measures/measures_history.html.twig', array(
-            'station' => $currentStation,
-			'nuclides' => $availableNuclides,
-			'lang' => $request->getLocale()
-		));
-	
+
+        $mobileDetector = $this->get('mobile_detect.mobile_detector');
+        if($mobileDetector->isMobile()) {
+            return $this->render('v2/measures/measures_history_mobile.html.twig', array(
+				'station' => $currentStation,
+				'nuclides' => $availableNuclides,
+				'lang' => $request->getLocale()
+			));
+        } elseif($mobileDetector->isTablet()) {
+            return $this->render('v2/measures/measures_history_mobile.html.twig', array(
+				'station' => $currentStation,
+				'nuclides' => $availableNuclides,
+				'lang' => $request->getLocale()
+			));
+        } else {
+			return $this->render('v2/measures/measures_history.html.twig', array(
+				'station' => $currentStation,
+				'nuclides' => $availableNuclides,
+				'lang' => $request->getLocale()
+			));
+		}
 	}
+
 	
 	/**
 	 * @Route("/ajaxlegendstation", name="v2-ajaxlegendstation")
