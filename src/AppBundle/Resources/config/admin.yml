@@ -12,6 +12,17 @@ services:
         calls:
             - [ setTranslationDomain, [messages]]
     
+    app.admin.settings:
+        class: AppBundle\Admin\SettingsAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "admin.group.frontend", label: "admin.menu.settings" }
+        arguments:
+            - ~
+            - AppBundle\Entity\Settings
+            - ~
+        calls:
+            - [ setTranslationDomain, [messages]]
+
     app.admin.legend:
         class: AppBundle\Admin\LegendAdmin
         tags:

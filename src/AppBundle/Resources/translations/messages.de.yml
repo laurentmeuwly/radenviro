@@ -26,6 +26,7 @@ admin:
     nuclide: Isotopes
     predefinednuclidelist: Listes isotopes prédéfinies
     country: Pays
+    settings: Parameter
     
 ## Generic
   label:
@@ -94,6 +95,7 @@ admin:
   predefinednuclidelist:
     name: Name der Anzeigeliste
     nuclides: Isotope verfügbar
+    mobilemsg: Message pour le sélecteur mobile
     
   
   

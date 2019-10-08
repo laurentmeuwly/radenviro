@@ -94,6 +94,7 @@ sonata_admin:
                     - app.admin.legend
                     - app.admin.mapZoom
                     - app.admin.page
+                    - app.admin.settings
             
             sonata.admin.group.content:
                 label:           admin.group.content

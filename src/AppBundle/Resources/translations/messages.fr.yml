@@ -31,6 +31,7 @@ admin:
     synchronisation: Synchronisation des données
     delete_data: Supprimer des données
     cronjob: Automatisations
+    settings: Paramètres
     
 ## Generic
   label:
@@ -112,6 +113,8 @@ admin:
     station: Station concernée
     network: Réseau concerné
     comment: Commentaire
+  settings:
+    mobilemsg: Message pour le sélecteur mobile
     
   
   
