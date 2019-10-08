@@ -33,6 +33,7 @@ security:
             security: false
         
         admin:
+            logout_on_user_change: true
             pattern:            /admin(.*)
             context:            user
             form_login:
@@ -48,6 +49,7 @@ security:
             anonymous:          true
         
         main:
+            logout_on_user_change: true
             #pattern:            ^/
             pattern:            .*
             context:            user
@@ -58,13 +60,12 @@ security:
                 csrf_token_generator: security.csrf.token_manager
                 check_path:     fos_user_security_check
                 failure_path:   null
-                default_target_path: advanced
+                default_target_path: v2-advanced
                 always_use_default_target_path: true
             logout:
                 path:           fos_user_security_logout
                 target:         fos_user_security_login
             anonymous:    true
-
     
     access_control:
         # URL of FOSUserBundle which need to be available to anonymous users
