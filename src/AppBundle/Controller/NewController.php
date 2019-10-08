@@ -35,11 +35,14 @@ class NewController extends Controller
     	$legends = $em->getRepository('AppBundle:Legend')->findBy(array('active' => 1), array('position' => 'ASC'));
 
 		$mobileDetector = $this->get('mobile_detect.mobile_detector');
-        if(!$mobileDetector->isMobile()) {
+        if($mobileDetector->isMobile()) {
 			$settings = $em->getRepository('AppBundle:Settings')->findOneById('1');
-            return $this->render('v2/measures/selector_for_mobile.html.twig', ['legends' => $legends, 'message' => $settings->getMobileMsg()]);
+			return $this->render('v2/measures/selector_for_mobile.html.twig', ['legends' => $legends, 
+				'message' => $settings->getMobileMsg()]);
         } elseif($mobileDetector->isTablet()) {
-            return $this->render('v2/measures/selector_for_mobile.html.twig', ['legends' => $legends]);
+            $settings = $em->getRepository('AppBundle:Settings')->findOneById('1');
+			return $this->render('v2/measures/selector_for_mobile.html.twig', ['legends' => $legends, 
+				'message' => $settings->getMobileMsg()]);
         } else {
 
     	// retrieve all active site types
