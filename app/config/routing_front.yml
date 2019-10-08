@@ -29,6 +29,11 @@ advanced:
     type: annotation
     prefix: /
     
+newadvanced:
+    resource: '@AppBundle/Controller/NewAdvancedController.php'
+    type: annotation
+    prefix: /v2
+
 sonata_user:
     resource: '@SonataUserBundle/Resources/config/routing/admin_security.xml'
     prefix: /admin
