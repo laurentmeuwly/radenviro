@@ -36,7 +36,7 @@ class SettingsAdmin extends AbstractAdmin
 			->add('translations', TranslationsType::class, array(
 					'label' => false,
 					'fields' => array(
-							'mobileMsg'=> array('field_type' => 'ckeditor', 'label' => 'admin.network.mobilemsg')
+							'mobileMsg'=> array('field_type' => 'ckeditor', 'label' => 'admin.settings.mobilemsg')
 					)
 			))
 		->end()

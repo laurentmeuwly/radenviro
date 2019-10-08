@@ -35,8 +35,9 @@ class NewController extends Controller
     	$legends = $em->getRepository('AppBundle:Legend')->findBy(array('active' => 1), array('position' => 'ASC'));
 
 		$mobileDetector = $this->get('mobile_detect.mobile_detector');
-        if($mobileDetector->isMobile()) {
-            return $this->render('v2/measures/selector_for_mobile.html.twig', ['legends' => $legends]);
+        if(!$mobileDetector->isMobile()) {
+			$settings = $em->getRepository('AppBundle:Settings')->findOneById('1');
+            return $this->render('v2/measures/selector_for_mobile.html.twig', ['legends' => $legends, 'message' => $settings->getMobileMsg()]);
         } elseif($mobileDetector->isTablet()) {
             return $this->render('v2/measures/selector_for_mobile.html.twig', ['legends' => $legends]);
         } else {

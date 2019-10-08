@@ -4,10 +4,18 @@
     
 
       <div class="col-sm-8">
+      
+      <div class="col-sm-12">
+        {% autoescape false %}
+        {{ message }}
+        {% endautoescape %}
+      </div>
+      <div>&nbsp;</div>
+
       <form name="tab_search" method="post" class="form-horizontal">
 
         <div class="form-group">
-          <div class="col-sm-4 control-label">{{ 'label.analyzed environments'|trans }} :</div>
+          <div class="col-sm-4 control-label"><strong>{{ 'label.analyzed environments'|trans }} :</strong></div>
           <div class="col-sm-6">
             <select id="legend" name="legend" class="legends form-control">
               <option value="">{{ 'choices.select_legend'|trans}}</option>
@@ -19,7 +27,7 @@
         </div>
 
         <div class="form-group">
-          <div class="col-sm-4 control-label">{{ 'label.station'|trans }} :</div>
+          <div class="col-sm-4 control-label"><strong>{{ 'label.station'|trans }} :</strong></div>
           <div class="col-sm-6">
             <select id="station" name="station" class="stations form-control">
               <option value="">{{ 'choices.select_legend_first'|trans}}</option>
