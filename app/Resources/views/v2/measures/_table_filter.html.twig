@@ -38,7 +38,7 @@
     <div class="form-group">
     <div class="col-sm-2 control-label">{{ 'label.isotope'|trans }}:</div>
 	  <div class="col-sm-7">
-        <select class="nuclides nuclides-table form-control">
+        <select class="nuclide nuclides-table form-control">
          {% for nuclide in nuclides %}
         <option value="{{ nuclide.id }}">{{ nuclide.name }}</option>
       {% endfor %}
