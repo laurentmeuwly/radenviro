@@ -9,8 +9,8 @@
     
 {% block content %}
 
- <div class="row">
-                <div id="main" class="col-sm-9">
+<div class="row">
+  <div id="main" class="col-sm-9">
                 
 <div class="well">
 {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
@@ -50,11 +50,7 @@
 {{ form_end(form) }}
 </div>
 
-<div>
-{% if datatable %}
-    {{ sg_datatables_render(datatable) }}
-{% endif %}
-</div>
+
 
 </div>
 
@@ -65,5 +61,15 @@
 </div>
 </div>
                 
-            </div>
+</div>
+
+<div class="row">
+<div id="main" class="col-sm-12">
+<div>
+{% if datatable %}
+    {{ sg_datatables_render(datatable) }}
+{% endif %}
+</div>
+</div>
+</div>
 {% endblock %}
