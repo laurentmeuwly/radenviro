@@ -79,7 +79,7 @@ class NewController extends Controller
 		$header = $request->get('header');
 
         $mobileDetector = $this->get('mobile_detect.mobile_detector');
-        if(!$mobileDetector->isMobile()) {
+        if($mobileDetector->isMobile()) {
             return $this->render('v2/measures/measures_history_mobile.html.twig', array(
 				'station' => $currentStation,
 				'nuclides' => $availableNuclides,
