@@ -79,7 +79,7 @@ class NewController extends Controller
 		$header = $request->get('header');
 
         $mobileDetector = $this->get('mobile_detect.mobile_detector');
-        if($mobileDetector->isMobile()) {
+        if(!$mobileDetector->isMobile()) {
             return $this->render('v2/measures/measures_history_mobile.html.twig', array(
 				'station' => $currentStation,
 				'nuclides' => $availableNuclides,
@@ -161,7 +161,7 @@ class NewController extends Controller
 		->setDatatableId('dta-tst2')
 		->setGlobalSearch(false)
 		->setSearch(false)
-		->setNotSortableFields(array(0,1,2,3,4,5))
+		->setNotSortableFields(array(0,1,2,3,4))
 		->setHiddenFields(array(1))
 		->setEntity("AppBundle:Result", "r")
 		->setOrder("m.referencedate", "desc")
@@ -172,7 +172,7 @@ class NewController extends Controller
 						$this->get('translator')->trans('table.value')		=> 'r.value',
 						$this->get('translator')->trans('table.error')		=> 'r.error',
 						$this->get('translator')->trans('table.unit')		=> 'u.code',
-						$this->get('translator')->trans('table.station')	=> 'st.code',
+						
 						"_identifier_"  => 'r.id'
 				)
 				)
