@@ -63,6 +63,13 @@ class Legend
     /**
      * @var string
      *
+     * @ORM\Column(name="link_type", type="string", columnDefinition="enum('', '_self', '_parent', '_blank')")
+     */
+    private $link_type = true;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="color", type="string", length=6, nullable=false)
      * @XmonAssertColor\HexColor()
      */
@@ -214,6 +221,30 @@ class Legend
     public function getShowDescription()
     {
     	return $this->show_description;
+    }
+
+    /**
+     * Set link_type
+     *
+     * @param boolean $link_type
+     *
+     * @return Legend
+     */
+    public function setLinkType($link_type)
+    {
+    	$this->link_type = $link_type;
+    
+    	return $this;
+    }
+    
+    /**
+     * Get link_type
+     *
+     * @return boolean
+     */
+    public function getLinkType()
+    {
+    	return $this->link_type;
     }
 
     /**

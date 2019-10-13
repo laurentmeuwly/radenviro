@@ -89,6 +89,8 @@ doctrine:
                 user: '%database_user%'
                 password: '%database_password%'
                 charset: UTF8
+                mapping_types:
+                    enum: string
             envira:
                 driver: pdo_mysql
                 host: '%db_envira_host%'
@@ -100,7 +102,7 @@ doctrine:
              
         types:
             json: Sonata\Doctrine\Types\JsonType
-
+              
     orm:
         auto_generate_proxy_classes: '%kernel.debug%'
         entity_managers:

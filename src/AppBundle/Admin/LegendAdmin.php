@@ -125,6 +125,13 @@ class LegendAdmin extends AbstractAdmin
 		->add('color', ColorPickerType::class,  array('label' => 'admin.label.color'))
 		->add('active', null, array('label' => 'admin.label.active'))
 		->add('show_description', null, array('label' => 'admin.label.show_description'))
+		->add('link_type', 'choice', array('label' => 'admin.label.link_type',
+			'choices' => [
+				''	=> '',
+				'_self' => '_self',
+				'_parent' => '_parent',
+				'_blank' => '_blank'
+			]))
 		->add('position', null, array('label' => 'admin.label.position'))
 		->end()
 		->with('History', array('class' => 'col-md-3', 'label' => 'admin.label.history'))
