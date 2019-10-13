@@ -473,11 +473,7 @@ div.dataTables_wrapper div.dt-buttons {
 	float: right;
 	padding-bottom: 5px;
 }
-      
- 
-.legend_link {
 
-}
 .legend_link:before {
   font-family: 'FontAwesome';
   content: "\f08e  ";
