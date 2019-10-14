@@ -7,7 +7,7 @@
 		<span class="col-sm-12"><b>{{ 'label.analyzed environments'|trans }} :</b></span>
 		<br/><br/>
     {% if station.legends|first.legend.link!='' and station.legends|first.legend.link!='#' %}
-		<span class="col-sm-12"><b><a href="{{ station.legends|first.legend.link }}" target="_blank">{{ station.legends|first.legend.name }}</a></b></span>
+		<span class="col-sm-12"><b><a class="legend_link" href="{{ station.legends|first.legend.link }}" target="{{ station.legends|first.legend.linkType }}">{{ station.legends|first.legend.name }}</a></b></span>
     {% else %}
     <span class="col-sm-12"><b>{{ station.legends|first.legend.name }}</b></span>
     {% endif %}

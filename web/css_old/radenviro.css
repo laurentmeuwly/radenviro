@@ -1,0 +1,151 @@
+body {
+  background: url("/images/bg-body.jpg") repeat-x;
+  text-align: center;
+  font-family: arial, verdana, sans-serif;
+  font-size: 12px;
+}
+
+body.simple {
+    background: none;
+}
+
+body table,
+body input,
+body textarea,
+body p, body span, body div {
+    font-family: arial, verdana, sans-serif;
+    font-size: 12px;
+}
+    
+#page-margins {
+  margin: auto;
+  min-height: 500px;
+  text-align: left;
+  width: 1210px;
+}
+
+#page-margins #page {
+    padding: 0px 15px;
+}
+
+#page-margins #page #header {
+	background: white url(/images/bg-header.jpg) no-repeat;
+}
+#page-margins #page #header .right-top {
+  line-height: 25px;
+  padding-right: 10px;
+  text-align: right;
+}
+#page-margins #page #header .right-middle {
+  color: #ffffff;
+  line-height: 25px;
+  padding-right: 10px;
+  text-align: right;
+}
+#page-margins #page #header .right-bottom {
+  line-height: 25px;
+  padding-right: 10px;
+  text-align: right;
+}
+#page-margins #page #header .title {
+  float: right;
+  font-size: 24px;
+  height: 40px;
+  line-height: 0.55em;
+  margin-top: 35px;
+  padding-right: 10px;
+  text-align: center;
+}
+#page-margins #page #header .title .website a {
+  color: #000000;
+  font-size: 14px;
+  text-decoration: none;
+}
+#page-margins #page #header .bottom {
+  background-color: #016798;
+  color: white;
+  margin-top: 2px;
+  overflow: hidden;
+}
+#page-margins #page #content {
+  margin-top: 5px;
+}
+
+#content {
+  text-align: left;
+}
+
+h1 {
+  font-size: 2.0em;
+  font-weight: bold;
+  line-height: 1.2em;
+  margin-bottom: 1em; }
+
+h3 {
+  font-size: 1.3em;
+  font-weight: bold;
+  line-height: 1.2em;
+  margin-bottom: 0.5em; }
+
+h4 {
+  font-size: 1.3em;
+  font-style: italic;
+  line-height: 1.2em;
+  margin-bottom: 0.5em; }
+
+.td-right {
+  text-align: right; }
+  
+  
+/******************************************************************************
+*** Menu definition
+******************************************************************************/
+#menu {
+  clear: both;
+  margin-bottom: 20px; 
+  display: flex;
+  flex-direction: row;
+  align-content: flex-start; }
+  #menu .menu-item a {
+    background-color: #016798;
+    color: white;
+    display: block;
+    font-size: 1.4em;
+    font-weight: bold;
+    padding: 0.4em 0px;
+    text-align: center;
+    text-decoration: none; }
+    #menu .menu-item a:hover {
+      background-color: white;
+      border: 2px solid #016798;
+      color: #016798;
+      padding: 2px 0px; }
+
+/******************************************************************************
+*** Breadcrumb definition
+******************************************************************************/
+#breadcrumb {
+  float: left;
+  padding: 0.5em 1em; }
+  #breadcrumb a {
+    color: white;
+    text-decoration: none; }
+    #breadcrumb a:hover {
+      text-decoration: underline; }
+  #breadcrumb span {
+    padding: 0px 2px; }
+
+/******************************************************************************
+*** Language bar definition
+******************************************************************************/
+#lang {
+  float: right;
+  margin-top: 2px;
+  padding: 0.5em 1em 0.5em 0; }
+  #lang a {
+    color: #016798;
+    text-decoration: none; }
+    #lang a:hover, #lang a.active {
+      text-decoration: underline; }
+  
+  
