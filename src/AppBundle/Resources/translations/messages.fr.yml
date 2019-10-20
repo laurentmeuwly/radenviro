@@ -53,10 +53,13 @@ admin:
     zoom: Niveau de zoom
     default_zoom: Zoom par défaut
     map: Carte
+    link_type: Type de lien
+    graph_scale: Echelle graphique par défaut
 
 ## Entities specific
   legend:
     name: Titre de la légende
+    link: Lien (URL)
     total_stations: Nb stations liées
     total_nuclides: Nb isotopes liés
     stations: Stations liées
@@ -177,7 +180,7 @@ label:
   zooms:
     1d: 1j
     1m: 1m
-    1y: 1a
+    1year: 1a
     10y: 10a
     2w: 2s
     3m: 3m

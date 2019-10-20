@@ -2,7 +2,7 @@
     
 <div class="graph" id="measures-graph-dashboard" >
     
-  <div id="container" height: 520px; width: 100%; "></div>
+  <div id="container" height: 520px; width: 90%; "></div>
 
 </div>
 
@@ -51,7 +51,7 @@ $('select.nuclides-graph').change(function () {
         	}, {
         	    type: 'year',
         	    count: 1,
-        	    text: '{{ 'label.zooms.1y'|trans }}'
+        	    text: '{{ 'label.zooms.1year'|trans }}'
         	}, {
         	    type: 'all',
         	    text: '{{ 'label.zooms.all'|trans }}'
@@ -59,7 +59,7 @@ $('select.nuclides-graph').change(function () {
 
         	inputDateFormat: '%Y-%m-%d',
             	
-            selected: 2
+            selected: data['graph_scale']
         },
         
         chart: {

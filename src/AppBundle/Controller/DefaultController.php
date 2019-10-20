@@ -288,7 +288,8 @@ class DefaultController extends Controller
 		$message = '';
     	$limit_low = 0;
     	$limit_high = 0;
-    	$show_fluctuation = false;
+		$show_fluctuation = false;
+		$graph_scale = 2; // aka 'all'
     	
     	$em = $this->getDoctrine()->getManager();
     	$station = $em->getRepository('AppBundle:Station')->findOneById(array('id'=> $request->get('station')));
@@ -298,6 +299,12 @@ class DefaultController extends Controller
 		$resultsCommentsStation = $em->getRepository('AppBundle:ResultComment')->findBy(['station'=>$station, 'active'=>true]);
 		$resultsCommentsNetwork = $em->getRepository('AppBundle:ResultComment')->findBy(['station'=>null, 'network'=>$station->getNetwork(), 'active'=>true]);
 		
+		switch($station->getGraphScale()) {
+			case '1m': { $graph_scale = 0; break; }
+			case '1y': { $graph_scale = 1; break; }
+			case 'all': { $graph_scale = 2; break; }
+		}
+
     	$fluctuations = $em->getRepository('AppBundle:IsotopeStationFluctuation')->findOneBy([
     	    'station'=>$request->get('station'),
     	    'nuclide'=>$request->get('nuclide')
@@ -346,7 +353,8 @@ class DefaultController extends Controller
     		'unit' => $unit,
     	    'limit_low' => $limit_low,
     	    'limit_high'=> $limit_high,
-    	    'show_fluctuation'=>$show_fluctuation,
+			'show_fluctuation'=>$show_fluctuation,
+			'graph_scale'=>$graph_scale,
     		'data' => $data,
     			'data_nwg' => $dataNwg,
 				'data_val' => $dataVal,

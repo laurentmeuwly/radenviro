@@ -158,7 +158,7 @@ label:
   zooms:
     1d: 1T
     1m: 1M
-    1y: 1J
+    1year: 1J
     10y: 10J
     2w: 2W
     3m: 3M
@@ -378,7 +378,7 @@ label:
   zooms:
     1d: 1T
     1m: 1M
-    1y: 1J
+    1year: 1J
     10y: 10J
     2w: 2W
     3m: 3M
