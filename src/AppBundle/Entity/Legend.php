@@ -65,7 +65,7 @@ class Legend
      *
      * @ORM\Column(name="link_type", type="string", columnDefinition="enum('', '_self', '_parent', '_blank')")
      */
-    private $link_type = true;
+    private $link_type = '_blank';
 
     /**
      * @var string

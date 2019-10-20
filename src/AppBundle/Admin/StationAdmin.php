@@ -64,6 +64,13 @@ class StationAdmin extends AbstractAdmin
 		->add('longitude', 	null, [ 'label' => 'admin.label.longitude' ])
 		->add('zoom', 		null, [ 'label' => 'admin.label.zoom' ])
 		->add('defaultZoom',null, [ 'label' => 'admin.label.default_zoom' ])
+		->add('graph_scale', 'choice', array('label' => 'admin.label.graph_scale',
+			'choices' => [
+				'1 month' => '1m',
+				'1 year' => '1y',
+				'All' => 'all'
+			]))
+		
 		->end()
 		->with('History', array('class' => 'col-md-3', 'label' => 'admin.label.history'))
 			->add('createdAt', 'sonata_type_datetime_picker',  array('label' => 'admin.label.created_at',

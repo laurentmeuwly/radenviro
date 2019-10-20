@@ -92,6 +92,13 @@ class Station
      * @ORM\Column(name="latitude", type="float", precision=10, scale=0, nullable=true)
      */
     private $latitude = '0';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="graph_scale", type="string", columnDefinition="enum('1m', '1y', 'all')")
+     */
+    private $graph_scale = 'all';
     
     /**
      * @ORM\ManyToMany(targetEntity="Site", mappedBy="stations")
@@ -372,6 +379,30 @@ class Station
     public function hasCoordinates()
     {
     	return $this->getLatitude()!=0 && $this->getLongitude()!=0;
+    }
+
+    /**
+     * Set graph_scale
+     *
+     * @param boolean $graph_scale
+     *
+     * @return Station
+     */
+    public function setGraphScale($graph_scale)
+    {
+    	$this->graph_scale = $graph_scale;
+    
+    	return $this;
+    }
+    
+    /**
+     * Get graph_scale
+     *
+     * @return boolean
+     */
+    public function getGraphScale()
+    {
+    	return $this->graph_scale;
     }
     
     
