@@ -145,7 +145,7 @@ body p, body span, body div {
 }
 
 #wrapper-measure-mobile {
-  width: 600px;
+  width: 500px;
 }
 
 #content {  
@@ -474,8 +474,8 @@ div.dataTables_wrapper div.dt-buttons {
 	padding-bottom: 5px;
 }
 
-.legend_link:before {
+.legend_link:after {
   font-family: 'FontAwesome';
-  content: "\f08e  ";
+  content: "  \f08e";
 }
  
