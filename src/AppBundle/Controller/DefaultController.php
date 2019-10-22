@@ -303,6 +303,8 @@ class DefaultController extends Controller
 			case '1m': { $graph_scale = 0; break; }
 			case '1y': { $graph_scale = 1; break; }
 			case 'all': { $graph_scale = 2; break; }
+			case '3m': { $graph_scale = 3; break; }
+			case '2y': { $graph_scale = 4; break; }
 		}
 
     	$fluctuations = $em->getRepository('AppBundle:IsotopeStationFluctuation')->findOneBy([

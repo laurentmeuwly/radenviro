@@ -96,7 +96,7 @@ class Station
     /**
      * @var string
      *
-     * @ORM\Column(name="graph_scale", type="string", columnDefinition="enum('1m', '1y', 'all')")
+     * @ORM\Column(name="graph_scale", type="string", columnDefinition="enum('1m', '3m', '1y', '2y', 'all')")
      */
     private $graph_scale = 'all';
     

@@ -168,10 +168,11 @@ label:
   zooms:
     1d: 1g
     1m: 1m
+    3m: 3m
     1y: 1a
+    2y: 2a
     10y: 10a
     2w: 2s
-    3m: 3m
     5y: 5a
     6m: 6m
     7d: 7g

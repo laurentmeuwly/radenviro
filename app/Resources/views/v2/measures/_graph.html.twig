@@ -49,9 +49,17 @@ $('select.nuclides-graph').change(function () {
         	    count: 1,
         	    text: '{{ 'label.zooms.1m'|trans }}'
         	}, {
+        	    type: 'month',
+        	    count: 3,
+        	    text: '{{ 'label.zooms.3m'|trans }}'
+        	}, {
         	    type: 'year',
         	    count: 1,
         	    text: '{{ 'label.zooms.1year'|trans }}'
+        	}, {
+        	    type: 'year',
+        	    count: 2,
+        	    text: '{{ 'label.zooms.2y'|trans }}'
         	}, {
         	    type: 'all',
         	    text: '{{ 'label.zooms.all'|trans }}'
