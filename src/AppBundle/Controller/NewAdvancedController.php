@@ -179,9 +179,14 @@ class NewAdvancedController extends Controller
 				return $responseService->getResponse();
 			}
 		}
+
+		$em = $this->getDoctrine()->getManager();
+		$settings = $em->getRepository('AppBundle:Settings')->findOneById('2');
+		$samplingPlan = $settings->getMobileMsg();
 		
 		return $this->render('v2/advanced/myGrid.html.twig', array(
 				'datatable' => $datatable,
+				'specific' => $samplingPlan,
 				'form' => $form->createView(),
 		));
 	}
